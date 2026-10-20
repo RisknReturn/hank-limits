@@ -1,0 +1,46 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "hank-limits: analytic-limit and aggregate-identity tests for HANK codes"
+version: 0.2.1
+date-released: "YYYY-MM-DD"
+license: MIT
+type: software
+authors:
+  - family-names: "Han"
+    given-names: "Nari"
+    orcid: "https://orcid.org/0009-0008-7228-8740"
+    affiliation: "Risk & Return Co., Ltd."
+repository-code: "https://github.com/RisknReturn/hank-limits"
+abstract: >-
+  Tests that a HANK code must pass at limits with known answers or at exact identities (permanent-income
+  household-block limit, TANK benchmark with imposed incidence, Werning (2015) vanishing liquidity,
+  Aiyagari no-idiosyncratic-risk limit, intertemporal Keynesian cross consistency, HANK - RANK differencing
+  identity), reported as errors and observed convergence orders rather than single pass/fail checks. Reference implementation on sequence-jacobian 1.0.0, with minimal
+  reproductions of two observations about that library (F1, F2). Developed with extensive assistance
+  from Claude Opus 5.5 (Anthropic) and reviewed with GPT 6.1 Sol (OpenAI); the author directed and reviewed
+  the work and is responsible for the content. See the AI usage disclosure in the README.
+keywords:
+  - HANK
+  - heterogeneous agents
+  - sequence-space Jacobian
+  - numerical verification
+  - test suite
+references:
+  - type: article
+    authors:
+      - family-names: Auclert
+        given-names: Adrien
+      - family-names: Bardóczy
+        given-names: Bence
+      - family-names: Rognlie
+        given-names: Matthew
+      - family-names: Straub
+        given-names: Ludwig
+    title: "Using the Sequence-Space Jacobian to Solve and Estimate Heterogeneous-Agent Models"
+    journal: Econometrica
+    volume: 89
+    issue: 5
+    start: 2375
+    end: 2408
+    year: 2021
+    doi: 10.3982/ECTA17434

@@ -1,0 +1,240 @@
+test,limit_param,limit_value,n_a,a_max,fd_h,fd_twosided,window,horizon_T,solver,metric,value
+T1,eps,0.0,4800,250.0,0.0001,True,200,200,none (PE),err_M,1.6536251969017066e-09
+T1,eps,0.0,4800,250.0,0.0001,True,200,200,none (PE),err_Jr,2.913377155580459e-09
+T1,eps,0.0,4800,250.0,0.0001,True,200,200,none (PE),kappa,0.0
+T1,eps,0.0,4800,250.0,0.0001,True,200,200,none (PE),mass_constrained,0.0
+T1,eps,0.0,4800,250.0,0.0001,True,50,200,none (PE),err_M,8.410562784416657e-10
+T1,eps,0.0,4800,250.0,0.0001,True,50,200,none (PE),err_Jr,3.5183681859543607e-09
+T1,eps,0.0,4800,250.0,0.0001,True,100,200,none (PE),err_M,9.619359904976259e-10
+T1,eps,0.0,4800,250.0,0.0001,True,100,200,none (PE),err_Jr,3.0272917824079073e-09
+T1,eps,0.2,4800,250.0,0.0001,True,200,200,none (PE),err_M,0.20847432667883714
+T1,eps,0.2,4800,250.0,0.0001,True,200,200,none (PE),err_Jr,0.11165466894401481
+T1,eps,0.2,4800,250.0,0.0001,True,200,200,none (PE),kappa,0.0011390104101932264
+T1,eps,0.2,4800,250.0,0.0001,True,200,200,none (PE),mass_constrained,2.8758988889669682e-06
+T1,eps,0.2,4800,250.0,0.0001,True,50,200,none (PE),err_M,0.05080844318199357
+T1,eps,0.2,4800,250.0,0.0001,True,50,200,none (PE),err_Jr,0.0229919963660679
+T1,eps,0.2,4800,250.0,0.0001,True,100,200,none (PE),err_M,0.09234060570548107
+T1,eps,0.2,4800,250.0,0.0001,True,100,200,none (PE),err_Jr,0.03149492772315264
+T1,eps,0.1,4800,250.0,0.0001,True,200,200,none (PE),err_M,0.05516257549065518
+T1,eps,0.1,4800,250.0,0.0001,True,200,200,none (PE),err_Jr,0.026302572684358504
+T1,eps,0.1,4800,250.0,0.0001,True,200,200,none (PE),kappa,0.0002738673601242052
+T1,eps,0.1,4800,250.0,0.0001,True,200,200,none (PE),mass_constrained,8.540114414786742e-07
+T1,eps,0.1,4800,250.0,0.0001,True,50,200,none (PE),err_M,0.01187319217781944
+T1,eps,0.1,4800,250.0,0.0001,True,50,200,none (PE),err_Jr,0.005767938566229665
+T1,eps,0.1,4800,250.0,0.0001,True,100,200,none (PE),err_M,0.022716636925689808
+T1,eps,0.1,4800,250.0,0.0001,True,100,200,none (PE),err_Jr,0.006863432720338505
+T1,eps,0.05,4800,250.0,0.0001,True,200,200,none (PE),err_M,0.013985259824235046
+T1,eps,0.05,4800,250.0,0.0001,True,200,200,none (PE),err_Jr,0.006442906342273105
+T1,eps,0.05,4800,250.0,0.0001,True,200,200,none (PE),kappa,6.785797856327103e-05
+T1,eps,0.05,4800,250.0,0.0001,True,200,200,none (PE),mass_constrained,2.7178543279120503e-07
+T1,eps,0.05,4800,250.0,0.0001,True,50,200,none (PE),err_M,0.0028837226818199564
+T1,eps,0.05,4800,250.0,0.0001,True,50,200,none (PE),err_Jr,0.0014347898204935157
+T1,eps,0.05,4800,250.0,0.0001,True,100,200,none (PE),err_M,0.005613476773124019
+T1,eps,0.05,4800,250.0,0.0001,True,100,200,none (PE),err_Jr,0.001670183215284018
+T1,eps,0.025,4800,250.0,0.0001,True,200,200,none (PE),err_M,0.003601547232611845
+T1,eps,0.025,4800,250.0,0.0001,True,200,200,none (PE),err_Jr,0.0015980239678753487
+T1,eps,0.025,4800,250.0,0.0001,True,200,200,none (PE),kappa,1.708112261981114e-05
+T1,eps,0.025,4800,250.0,0.0001,True,200,200,none (PE),mass_constrained,1.2673328445401908e-07
+T1,eps,0.025,4800,250.0,0.0001,True,50,200,none (PE),err_M,0.0007354056883612714
+T1,eps,0.025,4800,250.0,0.0001,True,50,200,none (PE),err_Jr,0.00036225109978065754
+T1,eps,0.025,4800,250.0,0.0001,True,100,200,none (PE),err_M,0.0014348227233163726
+T1,eps,0.025,4800,250.0,0.0001,True,100,200,none (PE),err_Jr,0.00040377834606544104
+T1,eps,0.0125,4800,250.0,0.0001,True,200,200,none (PE),err_M,0.0009527900910497443
+T1,eps,0.0125,4800,250.0,0.0001,True,200,200,none (PE),err_Jr,0.0003956887863158094
+T1,eps,0.0125,4800,250.0,0.0001,True,200,200,none (PE),kappa,4.345225634277017e-06
+T1,eps,0.0125,4800,250.0,0.0001,True,200,200,none (PE),mass_constrained,9.829642339391762e-08
+T1,eps,0.0125,4800,250.0,0.0001,True,50,200,none (PE),err_M,0.00019625109548770725
+T1,eps,0.0125,4800,250.0,0.0001,True,50,200,none (PE),err_Jr,9.249333374492274e-05
+T1,eps,0.0125,4800,250.0,0.0001,True,100,200,none (PE),err_M,0.00037897553743878476
+T1,eps,0.0125,4800,250.0,0.0001,True,100,200,none (PE),err_Jr,9.601835757912446e-05
+T1_grid,eps,0.025,1200,250.0,0.0001,True,200,200,none (PE),err_M,0.004282315767551893
+T1_grid,eps,0.025,1200,250.0,0.0001,True,200,200,none (PE),err_Jr,0.0015529736758562642
+T1_grid,eps,0.0125,1200,250.0,0.0001,True,200,200,none (PE),err_M,0.0014106579357445245
+T1_grid,eps,0.0125,1200,250.0,0.0001,True,200,200,none (PE),err_Jr,0.0008515279022014415
+T1_grid,eps,0.025,2400,250.0,0.0001,True,200,200,none (PE),err_M,0.003807376464388779
+T1_grid,eps,0.025,2400,250.0,0.0001,True,200,200,none (PE),err_Jr,0.001586518064273599
+T1_grid,eps,0.0125,2400,250.0,0.0001,True,200,200,none (PE),err_M,0.0010758381400021784
+T1_grid,eps,0.0125,2400,250.0,0.0001,True,200,200,none (PE),err_Jr,0.000385957989192528
+T1_grid,eps,0.025,4800,250.0,0.0001,True,200,200,none (PE),err_M,0.003601547232611845
+T1_grid,eps,0.025,4800,250.0,0.0001,True,200,200,none (PE),err_Jr,0.0015980239678753487
+T1_grid,eps,0.0125,4800,250.0,0.0001,True,200,200,none (PE),err_M,0.0009527900910497443
+T1_grid,eps,0.0125,4800,250.0,0.0001,True,200,200,none (PE),err_Jr,0.0003956887863158094
+T1_grid,eps,0.025,9600,250.0,0.0001,True,200,200,none (PE),err_M,0.003505985412519846
+T1_grid,eps,0.025,9600,250.0,0.0001,True,200,200,none (PE),err_Jr,0.001602453574733465
+T1_grid,eps,0.0125,9600,250.0,0.0001,True,200,200,none (PE),err_M,0.0009008731426101751
+T1_grid,eps,0.0125,9600,250.0,0.0001,True,200,200,none (PE),err_Jr,0.00039890130577309826
+T2,eps,0.2,4800,250.0,0.0001,True,200,200,none (PE),err_MH_vs_I,0.5960807626083381
+T2,eps,0.2,4800,250.0,0.0001,True,200,200,none (PE),err_MS_vs_MRA,0.2753785607572346
+T2,eps,0.2,4800,250.0,0.0001,True,200,200,none (PE),err_Magg_vs_TANK,0.5563307287313658
+T2,eps,0.2,4800,250.0,0.0001,True,200,200,SSJ solve_impulse_linear,err_IRF_vs_TANK_chi1.0,0.11857003441056169
+T2,eps,0.2,4800,250.0,0.0001,True,200,200,none (PE),err_Magg_lamchi_vs_TANK_chi1.0,0.5563307287313658
+T2,eps,0.2,4800,250.0,0.0001,True,200,200,SSJ solve_impulse_linear,err_IRF_vs_TANK_chi1.5,0.13123016650498037
+T2,eps,0.2,4800,250.0,0.0001,True,200,200,none (PE),err_Magg_lamchi_vs_TANK_chi1.5,0.5745983708724459
+T2,eps,0.1,4800,250.0,0.0001,True,200,200,none (PE),err_MH_vs_I,0.342489174602134
+T2,eps,0.1,4800,250.0,0.0001,True,200,200,none (PE),err_MS_vs_MRA,0.07290358791029576
+T2,eps,0.1,4800,250.0,0.0001,True,200,200,none (PE),err_Magg_vs_TANK,0.3202719405685403
+T2,eps,0.1,4800,250.0,0.0001,True,200,200,SSJ solve_impulse_linear,err_IRF_vs_TANK_chi1.0,0.04385650089950475
+T2,eps,0.1,4800,250.0,0.0001,True,200,200,none (PE),err_Magg_lamchi_vs_TANK_chi1.0,0.3202719405685403
+T2,eps,0.1,4800,250.0,0.0001,True,200,200,SSJ solve_impulse_linear,err_IRF_vs_TANK_chi1.5,0.05440933581904722
+T2,eps,0.1,4800,250.0,0.0001,True,200,200,none (PE),err_Magg_lamchi_vs_TANK_chi1.5,0.3304878893160343
+T2,eps,0.05,4800,250.0,0.0001,True,200,200,none (PE),err_MH_vs_I,3.8757885789664215e-13
+T2,eps,0.05,4800,250.0,0.0001,True,200,200,none (PE),err_MS_vs_MRA,0.018495803864692142
+T2,eps,0.05,4800,250.0,0.0001,True,200,200,none (PE),err_Magg_vs_TANK,0.0011770057004804107
+T2,eps,0.05,4800,250.0,0.0001,True,200,200,SSJ solve_impulse_linear,err_IRF_vs_TANK_chi1.0,0.012437367750815456
+T2,eps,0.05,4800,250.0,0.0001,True,200,200,none (PE),err_Magg_lamchi_vs_TANK_chi1.0,0.0011770057004804107
+T2,eps,0.05,4800,250.0,0.0001,True,200,200,SSJ solve_impulse_linear,err_IRF_vs_TANK_chi1.5,0.012437367742744067
+T2,eps,0.05,4800,250.0,0.0001,True,200,200,none (PE),err_Magg_lamchi_vs_TANK_chi1.5,0.0006357932578487907
+T2,eps,0.025,4800,250.0,0.0001,True,200,200,none (PE),err_MH_vs_I,1.674216321134736e-13
+T2,eps,0.025,4800,250.0,0.0001,True,200,200,none (PE),err_MS_vs_MRA,0.004764045569629273
+T2,eps,0.025,4800,250.0,0.0001,True,200,200,none (PE),err_Magg_vs_TANK,0.00030316653624913766
+T2,eps,0.025,4800,250.0,0.0001,True,200,200,SSJ solve_impulse_linear,err_IRF_vs_TANK_chi1.0,0.003456459211569382
+T2,eps,0.025,4800,250.0,0.0001,True,200,200,none (PE),err_Magg_lamchi_vs_TANK_chi1.0,0.00030316653624913766
+T2,eps,0.025,4800,250.0,0.0001,True,200,200,SSJ solve_impulse_linear,err_IRF_vs_TANK_chi1.5,0.0034564592148616257
+T2,eps,0.025,4800,250.0,0.0001,True,200,200,none (PE),err_Magg_lamchi_vs_TANK_chi1.5,0.00016376406645600845
+T2,eps,0.0125,4800,250.0,0.0001,True,200,200,none (PE),err_MH_vs_I,3.8757885789664215e-13
+T2,eps,0.0125,4800,250.0,0.0001,True,200,200,none (PE),err_MS_vs_MRA,0.0012605254872211525
+T2,eps,0.0125,4800,250.0,0.0001,True,200,200,none (PE),err_Magg_vs_TANK,8.021525827770642e-05
+T2,eps,0.0125,4800,250.0,0.0001,True,200,200,SSJ solve_impulse_linear,err_IRF_vs_TANK_chi1.0,0.0010499787437950078
+T2,eps,0.0125,4800,250.0,0.0001,True,200,200,none (PE),err_Magg_lamchi_vs_TANK_chi1.0,8.021525827770642e-05
+T2,eps,0.0125,4800,250.0,0.0001,True,200,200,SSJ solve_impulse_linear,err_IRF_vs_TANK_chi1.5,0.0010499787363232027
+T2,eps,0.0125,4800,250.0,0.0001,True,200,200,none (PE),err_Magg_lamchi_vs_TANK_chi1.5,4.333056362322375e-05
+T2_grid,eps,0.025,2400,250.0,0.0001,True,200,200,SSJ solve_impulse_linear,err_IRF_vs_TANK_chi1.5,0.004154355847070863
+T2_grid,eps,0.0125,2400,250.0,0.0001,True,200,200,SSJ solve_impulse_linear,err_IRF_vs_TANK_chi1.5,0.0014981497982430694
+T2_grid,eps,0.025,4800,250.0,0.0001,True,200,200,SSJ solve_impulse_linear,err_IRF_vs_TANK_chi1.5,0.0034564592148616257
+T2_grid,eps,0.0125,4800,250.0,0.0001,True,200,200,SSJ solve_impulse_linear,err_IRF_vs_TANK_chi1.5,0.0010499787363232027
+T2_grid,eps,0.025,9600,250.0,0.0001,True,200,200,SSJ solve_impulse_linear,err_IRF_vs_TANK_chi1.5,0.003143188984624592
+T2_grid,eps,0.0125,9600,250.0,0.0001,True,200,200,SSJ solve_impulse_linear,err_IRF_vs_TANK_chi1.5,0.0008697828582072631
+T3,b,0.1,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_acyc_vs_RANK,0.060118908982377865
+T3,b,0.1,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_cyc_vs_ZL,0.10046774594908645
+T3,b,0.1,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,dev_cyc_vs_RANK,0.4523208687353463
+T3,b,0.1,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,r_gap_over_b_acyc,0.5845609040748843
+T3,b,0.03,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_acyc_vs_RANK,0.0065534857121937375
+T3,b,0.03,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_cyc_vs_ZL,0.02298969502432827
+T3,b,0.03,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,dev_cyc_vs_RANK,0.3500707204314335
+T3,b,0.03,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,r_gap_over_b_acyc,1.153666550196785
+T3,b,0.01,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_acyc_vs_RANK,0.012899119846875915
+T3,b,0.01,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_cyc_vs_ZL,0.00972210603403304
+T3,b,0.01,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,dev_cyc_vs_RANK,0.33256107833666126
+T3,b,0.01,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,r_gap_over_b_acyc,1.849469380932639
+T3,b,0.003,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_acyc_vs_RANK,0.012257678536354389
+T3,b,0.003,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_cyc_vs_ZL,0.01703083036717464
+T3,b,0.003,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,dev_cyc_vs_RANK,0.2972544117138117
+T3,b,0.003,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,r_gap_over_b_acyc,2.066182600701947
+T3,b,0.001,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_acyc_vs_RANK,0.004233499981478262
+T3,b,0.001,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_cyc_vs_ZL,0.005891204645519913
+T3,b,0.001,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,dev_cyc_vs_RANK,0.3119557157411343
+T3,b,0.001,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,r_gap_over_b_acyc,2.0813840422278918
+T3,b,0.0003,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_acyc_vs_RANK,0.001286005785199929
+T3,b,0.0003,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_cyc_vs_ZL,0.0017906618558290034
+T3,b,0.0003,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,dev_cyc_vs_RANK,0.31736732720229066
+T3,b,0.0003,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,r_gap_over_b_acyc,2.086718075851515
+T3,b,0.0001,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_acyc_vs_RANK,0.00043015477121614566
+T3,b,0.0001,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_cyc_vs_ZL,0.0005991118444473201
+T3,b,0.0001,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,dev_cyc_vs_RANK,0.31893985211639303
+T3,b,0.0001,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,r_gap_over_b_acyc,2.088243324732796
+T3_grid,b,0.001,200,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_acyc,0.004233502024352249
+T3_grid,b,0.001,200,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_cyc,0.005891205331984833
+T3_grid,b,0.0001,200,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_acyc,0.00043020559601182466
+T3_grid,b,0.0001,200,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_cyc,0.0005991339516753435
+T3_grid,b,0.001,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_acyc,0.004233499981478262
+T3_grid,b,0.001,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_cyc,0.005891204645519913
+T3_grid,b,0.0001,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_acyc,0.00043015477121614566
+T3_grid,b,0.0001,400,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_cyc,0.0005991118444473201
+T3_grid,b,0.001,800,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_acyc,0.004233271760974369
+T3_grid,b,0.001,800,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_cyc,0.005890984171119835
+T3_grid,b,0.0001,800,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_acyc,0.00043020073749069074
+T3_grid,b,0.0001,800,-b + 20 b,1e-3 b,True,150,150,SSJ solve_impulse_linear,err_cyc,0.0005991301564286149
+T4,sd_log_income,0.4,1000,200.0,,,,,brentq on A(r) - K(r),r,0.028820827876066397
+T4,sd_log_income,0.4,1000,200.0,,,,,brentq on A(r) - K(r),gap,0.012845838790600344
+T4,sd_log_income,0.4,1000,200.0,,,,,brentq on A(r) - K(r),capital_market_resid_rel,1.3433100829457795e-12
+T4,sd_log_income,0.4,1000,200.0,,,,,brentq on A(r) - K(r),euler_err_mean_weighted,4.331310700336127e-08
+T4,sd_log_income,0.4,1000,200.0,,,,,brentq on A(r) - K(r),euler_err_max_with_mass,2.499522011589761e-06
+T4,sd_log_income,0.4,1000,200.0,,,,,brentq on A(r) - K(r),kkt_violation_max_with_mass,0.0
+T4,sd_log_income,0.4,1000,200.0,,,,,brentq on A(r) - K(r),mass_top_5pts,7.129672789241265e-33
+T4,sd_log_income,0.2,1000,200.0,,,,,brentq on A(r) - K(r),r,0.038119459083392405
+T4,sd_log_income,0.2,1000,200.0,,,,,brentq on A(r) - K(r),gap,0.0035472075832743352
+T4,sd_log_income,0.2,1000,200.0,,,,,brentq on A(r) - K(r),capital_market_resid_rel,4.625909089074258e-12
+T4,sd_log_income,0.2,1000,200.0,,,,,brentq on A(r) - K(r),euler_err_mean_weighted,1.1358778036172749e-08
+T4,sd_log_income,0.2,1000,200.0,,,,,brentq on A(r) - K(r),euler_err_max_with_mass,5.341546605031056e-07
+T4,sd_log_income,0.2,1000,200.0,,,,,brentq on A(r) - K(r),kkt_violation_max_with_mass,0.0
+T4,sd_log_income,0.2,1000,200.0,,,,,brentq on A(r) - K(r),mass_top_5pts,6.143992096735971e-31
+T4,sd_log_income,0.1,1000,200.0,,,,,brentq on A(r) - K(r),r,0.040742202266443935
+T4,sd_log_income,0.1,1000,200.0,,,,,brentq on A(r) - K(r),gap,0.0009244644002228061
+T4,sd_log_income,0.1,1000,200.0,,,,,brentq on A(r) - K(r),capital_market_resid_rel,7.38468966507848e-12
+T4,sd_log_income,0.1,1000,200.0,,,,,brentq on A(r) - K(r),euler_err_mean_weighted,2.814736974970446e-09
+T4,sd_log_income,0.1,1000,200.0,,,,,brentq on A(r) - K(r),euler_err_max_with_mass,2.2559304224678556e-07
+T4,sd_log_income,0.1,1000,200.0,,,,,brentq on A(r) - K(r),kkt_violation_max_with_mass,0.0
+T4,sd_log_income,0.1,1000,200.0,,,,,brentq on A(r) - K(r),mass_top_5pts,4.414446871213049e-29
+T4,sd_log_income,0.05,1000,200.0,,,,,brentq on A(r) - K(r),r,0.04142899752617623
+T4,sd_log_income,0.05,1000,200.0,,,,,brentq on A(r) - K(r),gap,0.00023766914049051097
+T4,sd_log_income,0.05,1000,200.0,,,,,brentq on A(r) - K(r),capital_market_resid_rel,8.708253865527427e-11
+T4,sd_log_income,0.05,1000,200.0,,,,,brentq on A(r) - K(r),euler_err_mean_weighted,5.694700996372851e-10
+T4,sd_log_income,0.05,1000,200.0,,,,,brentq on A(r) - K(r),euler_err_max_with_mass,1.1564929414120684e-07
+T4,sd_log_income,0.05,1000,200.0,,,,,brentq on A(r) - K(r),kkt_violation_max_with_mass,0.0
+T4,sd_log_income,0.05,1000,200.0,,,,,brentq on A(r) - K(r),mass_top_5pts,3.4520490763648906e-35
+T4,sd_log_income,0.025,1000,200.0,,,,,brentq on A(r) - K(r),r,0.041605005951257365
+T4,sd_log_income,0.025,1000,200.0,,,,,brentq on A(r) - K(r),gap,6.166071540937568e-05
+T4,sd_log_income,0.025,1000,200.0,,,,,brentq on A(r) - K(r),capital_market_resid_rel,5.177785391100039e-10
+T4,sd_log_income,0.025,1000,200.0,,,,,brentq on A(r) - K(r),euler_err_mean_weighted,1.6447658823519304e-10
+T4,sd_log_income,0.025,1000,200.0,,,,,brentq on A(r) - K(r),euler_err_max_with_mass,2.8264381057852006e-08
+T4,sd_log_income,0.025,1000,200.0,,,,,brentq on A(r) - K(r),kkt_violation_max_with_mass,0.0
+T4,sd_log_income,0.025,1000,200.0,,,,,brentq on A(r) - K(r),mass_top_5pts,1.4704400281400278e-32
+T4_grid,sd_log_income,0.025,500,200.0,,,,,brentq on A(r) - K(r),gap,6.553844161050898e-05
+T4_grid,sd_log_income,0.025,1000,200.0,,,,,brentq on A(r) - K(r),gap,6.166071540937568e-05
+T4_grid,sd_log_income,0.025,2000,200.0,,,,,brentq on A(r) - K(r),gap,6.004062256543402e-05
+T5,identity,,500,60.0,0.0001,True,100,100,ssj_consistent,ikc_err_G_debt_fixed_r,1.5511467760377053e-15
+T5,identity,,500,60.0,0.0001,True,200,200,ssj_consistent,ikc_err_G_debt_fixed_r,1.477100431976615e-14
+T5,identity,,500,60.0,0.0001,True,300,300,ssj_consistent,ikc_err_G_debt_fixed_r,9.549008323127403e-14
+T5,identity,,500,60.0,0.0001,True,100,100,ssj_consistent,ikc_err_r_fixed_r,3.91378974557388e-15
+T5,identity,,500,60.0,0.0001,True,200,200,ssj_consistent,ikc_err_r_fixed_r,4.839439125095207e-14
+T5,identity,,500,60.0,0.0001,True,300,300,ssj_consistent,ikc_err_r_fixed_r,3.0618820580675903e-13
+T5,identity,,500,60.0,0.0001,True,100,100,ssj_consistent,ikc_err_G_debt_r_rule,5.04428635585007e-13
+T5,identity,,500,60.0,0.0001,True,200,200,ssj_consistent,ikc_err_G_debt_r_rule,2.1746392833981816e-09
+T5,identity,,500,60.0,0.0001,True,300,300,ssj_consistent,ikc_err_G_debt_r_rule,5.947743341830928e-07
+T5,identity,,500,60.0,0.0001,True,100,100,ssj_consistent,ikc_err_rshock_r_rule,4.798184976500684e-13
+T5,identity,,500,60.0,0.0001,True,200,200,ssj_consistent,ikc_err_rshock_r_rule,2.338073528069853e-09
+T5,identity,,500,60.0,0.0001,True,300,300,ssj_consistent,ikc_err_rshock_r_rule,3.3050919064379664e-07
+T5,identity,,500,60.0,0.0001,True,100,100,ssj_consistent_refined,ikc_err_G_debt_fixed_r,5.258864540537551e-16
+T5,identity,,500,60.0,0.0001,True,200,200,ssj_consistent_refined,ikc_err_G_debt_fixed_r,9.653863993822112e-15
+T5,identity,,500,60.0,0.0001,True,300,300,ssj_consistent_refined,ikc_err_G_debt_fixed_r,1.872860965099486e-15
+T5,identity,,500,60.0,0.0001,True,100,100,ssj_consistent_refined,ikc_err_r_fixed_r,8.493947656396213e-16
+T5,identity,,500,60.0,0.0001,True,200,200,ssj_consistent_refined,ikc_err_r_fixed_r,1.6900939989361438e-14
+T5,identity,,500,60.0,0.0001,True,300,300,ssj_consistent_refined,ikc_err_r_fixed_r,1.3887550949215465e-13
+T5,identity,,500,60.0,0.0001,True,100,100,ssj_consistent_refined,ikc_err_G_debt_r_rule,2.034785678831314e-15
+T5,identity,,500,60.0,0.0001,True,200,200,ssj_consistent_refined,ikc_err_G_debt_r_rule,3.2438402982734712e-15
+T5,identity,,500,60.0,0.0001,True,300,300,ssj_consistent_refined,ikc_err_G_debt_r_rule,2.9749683330980435e-15
+T5,identity,,500,60.0,0.0001,True,100,100,ssj_consistent_refined,ikc_err_rshock_r_rule,3.1463871027255753e-13
+T5,identity,,500,60.0,0.0001,True,200,200,ssj_consistent_refined,ikc_err_rshock_r_rule,1.3434381774460905e-12
+T5,identity,,500,60.0,0.0001,True,300,300,ssj_consistent_refined,ikc_err_rshock_r_rule,9.754814429091636e-12
+T5,identity,,500,60.0,0.0001,True,100,100,ssj_inconsistent_options,ikc_err_G_debt_fixed_r,1.5511467760377053e-15
+T5,identity,,500,60.0,0.0001,True,200,200,ssj_inconsistent_options,ikc_err_G_debt_fixed_r,1.477100431976615e-14
+T5,identity,,500,60.0,0.0001,True,300,300,ssj_inconsistent_options,ikc_err_G_debt_fixed_r,9.549008323127403e-14
+T5,identity,,500,60.0,0.0001,True,100,100,ssj_inconsistent_options,ikc_err_r_fixed_r,9.878990249495329e-05
+T5,identity,,500,60.0,0.0001,True,200,200,ssj_inconsistent_options,ikc_err_r_fixed_r,9.879075791221359e-05
+T5,identity,,500,60.0,0.0001,True,300,300,ssj_inconsistent_options,ikc_err_r_fixed_r,9.879075785445101e-05
+T5,identity,,500,60.0,0.0001,True,100,100,ssj_inconsistent_options,ikc_err_G_debt_r_rule,5.04428635585007e-13
+T5,identity,,500,60.0,0.0001,True,200,200,ssj_inconsistent_options,ikc_err_G_debt_r_rule,2.1746392833981816e-09
+T5,identity,,500,60.0,0.0001,True,300,300,ssj_inconsistent_options,ikc_err_G_debt_r_rule,5.947743341830928e-07
+T5,identity,,500,60.0,0.0001,True,100,100,ssj_inconsistent_options,ikc_err_rshock_r_rule,9.033369030846484e-05
+T5,identity,,500,60.0,0.0001,True,200,200,ssj_inconsistent_options,ikc_err_rshock_r_rule,9.033369398028902e-05
+T5,identity,,500,60.0,0.0001,True,300,300,ssj_inconsistent_options,ikc_err_rshock_r_rule,9.033241190654078e-05
+T5_F2,identity,,500,60.0,0.0001,True,100,100,scipy.linalg.lu (partial pivoting),growth_rule,18.927009487164998
+T5_F2,identity,,500,60.0,0.0001,True,100,100,scipy.linalg.lu (partial pivoting),cond_rule,359.7778872892095
+T5_F2,identity,,500,60.0,0.0001,True,100,100,scipy.linalg.lu (partial pivoting),growth_fixed,1.0
+T5_F2,identity,,500,60.0,0.0001,True,100,100,scipy.linalg.lu (partial pivoting),cond_fixed,282.9545706042596
+T5_F2,identity,,500,60.0,0.0001,True,200,200,scipy.linalg.lu (partial pivoting),growth_rule,36652.93176314243
+T5_F2,identity,,500,60.0,0.0001,True,200,200,scipy.linalg.lu (partial pivoting),cond_rule,2916.453342738484
+T5_F2,identity,,500,60.0,0.0001,True,200,200,scipy.linalg.lu (partial pivoting),growth_fixed,1.0
+T5_F2,identity,,500,60.0,0.0001,True,200,200,scipy.linalg.lu (partial pivoting),cond_fixed,2402.3529613265805
+T5_F2,identity,,500,60.0,0.0001,True,300,300,scipy.linalg.lu (partial pivoting),growth_rule,10521732.003843758
+T5_F2,identity,,500,60.0,0.0001,True,300,300,scipy.linalg.lu (partial pivoting),cond_rule,21227.43644031533
+T5_F2,identity,,500,60.0,0.0001,True,300,300,scipy.linalg.lu (partial pivoting),growth_fixed,4.156295972815602
+T5_F2,identity,,500,60.0,0.0001,True,300,300,scipy.linalg.lu (partial pivoting),cond_fixed,17557.11059225138
+T6,identity,,500,60.0,0.0001,True,150,150,refined LU,G_identity_err,3.805986420663526e-15
+T6,identity,,500,60.0,0.0001,True,150,150,refined LU,G_decomposition_err,9.84675545779664e-12
+T6,identity,,500,60.0,0.0001,True,150,150,refined LU,G_cum_multiplier_HA,3.3827798487278713
+T6,identity,,500,60.0,0.0001,True,150,150,refined LU,G_cum_multiplier_RA,1.0000064350536828
+T6,identity,,500,60.0,0.0001,True,300,300,refined LU,G_identity_err,2.2418135505038908e-14
+T6,identity,,500,60.0,0.0001,True,300,300,refined LU,G_decomposition_err,1.910995407176949e-10
+T6,identity,,500,60.0,0.0001,True,300,300,refined LU,G_cum_multiplier_HA,3.3827814606387863
+T6,identity,,500,60.0,0.0001,True,300,300,refined LU,G_cum_multiplier_RA,1.0000000000253109

@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hank-limits"
+version = "0.2.1"
+description = "Analytic-limit and aggregate-identity tests for HANK codes, with a reference implementation on sequence-jacobian 1.0.0"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "Nari Han" }]
+keywords = ["HANK", "heterogeneous agents", "sequence-space Jacobian", "numerical verification", "test suite"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering",
+  "Intended Audience :: Science/Research",
+]
+dependencies = [
+  "sequence-jacobian==1.0.0",
+  "numpy>=1.24",
+  "scipy>=1.10",
+  "numba>=0.58",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+plots = ["matplotlib>=3.7"]
+
+[project.urls]
+Repository = "https://github.com/RisknReturn/hank-limits"
+
+[tool.setuptools]
+packages = ["hank_limits"]

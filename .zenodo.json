@@ -1,0 +1,28 @@
+{
+  "title": "hank-limits: analytic-limit and aggregate-identity tests for HANK codes",
+  "upload_type": "software",
+  "version": "0.2.1",
+  "license": "MIT",
+  "creators": [
+    {
+      "name": "Han, Nari",
+      "orcid": "0009-0008-7228-8740",
+      "affiliation": "Risk & Return Co., Ltd."
+    }
+  ],
+  "description": "<p>Tests that a HANK code must pass at limits with known answers, reported as errors and observed convergence orders. Reference implementation on sequence-jacobian 1.0.0, with minimal reproductions of two observations about that library (F1, F2). Not peer reviewed.</p><p>AI use: Developed with extensive assistance from Claude Opus 5.5 (Anthropic) and reviewed with GPT 6.1 Sol (OpenAI); the author directed and reviewed the work and is responsible for the content.</p>",
+  "keywords": [
+    "HANK",
+    "heterogeneous agents",
+    "sequence-space Jacobian",
+    "numerical verification",
+    "test suite"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.3982/ECTA17434",
+      "relation": "references",
+      "scheme": "doi"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+ "rows": [
+  {
+   "T": 100,
+   "cond2": 359.7778899704682,
+   "lu_growth": 18.927010252649527,
+   "np_linalg_solve": {
+    "residual_inf": 3.783722909308615e-15,
+    "backward_eta": 3.686152761759153e-14,
+    "rel_diff_from_qr": 2.6825911392967875e-13
+   },
+   "lu_refined_2": {
+    "residual_inf": 5.800481622797449e-18,
+    "backward_eta": 5.650905699464925e-17,
+    "rel_diff_from_qr": 5.796284938800885e-15
+   },
+   "pivoted_qr": {
+    "residual_inf": 3.469446951953614e-17,
+    "backward_eta": 3.3799809791192055e-16,
+    "rel_diff_from_qr": 0.0
+   }
+  },
+  {
+   "T": 200,
+   "cond2": 2916.453375497115,
+   "lu_growth": 36652.94734946771,
+   "np_linalg_solve": {
+    "residual_inf": 1.659774417478006e-11,
+    "backward_eta": 1.6169742031897868e-10,
+    "rel_diff_from_qr": 4.2248691589852066e-10
+   },
+   "lu_refined_2": {
+    "residual_inf": 7.806255641895632e-18,
+    "backward_eta": 7.604957555394554e-17,
+    "rel_diff_from_qr": 5.059707797253338e-14
+   },
+   "pivoted_qr": {
+    "residual_inf": 3.5561831257524545e-17,
+    "backward_eta": 3.464480664124185e-16,
+    "rel_diff_from_qr": 0.0
+   }
+  },
+  {
+   "T": 300,
+   "cond2": 21227.436766452527,
+   "lu_growth": 10521920.211590966,
+   "np_linalg_solve": {
+    "residual_inf": 3.218723177007512e-09,
+    "backward_eta": 3.135722716065568e-08,
+    "rel_diff_from_qr": 9.975692275117834e-08
+   },
+   "lu_refined_2": {
+    "residual_inf": 1.0245710529988017e-17,
+    "backward_eta": 9.981506791455464e-17,
+    "rel_diff_from_qr": 4.2073820219108507e-13
+   },
+   "pivoted_qr": {
+    "residual_inf": 4.7271214720367993e-17,
+    "backward_eta": 4.605224297433419e-16,
+    "rel_diff_from_qr": 0.0
+   },
+   "orderings": {
+    "interleaved_by_date": {
+     "lu_growth": 1.0225313269398624,
+     "residual_inf": 4.434386885465713e-17,
+     "backward_eta": 4.320038389106121e-16,
+     "rel_diff_from_qr": 4.723361349532103e-13
+    },
+    "reversed_variable_blocks": {
+     "lu_growth": 1.0,
+     "residual_inf": 9.540979117872439e-18,
+     "backward_eta": 9.294948123260115e-17,
+     "rel_diff_from_qr": 3.858864703775672e-13
+    }
+   }
+  }
+ ],
+ "versions": {
+  "python": "3.13.16",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "sequence_jacobian": "1.0.0",
+  "blas": {
+   "name": "scipy-openblas",
+   "found": true,
+   "version": "0.3.34.106.0",
+   "detection method": "pkgconfig",
+   "include directory": "/opt/_internal/cpython-3.13.14/lib/python3.13/site-packages/scipy_openblas64/include",
+   "lib directory": "/opt/_internal/cpython-3.13.14/lib/python3.13/site-packages/scipy_openblas64/lib",
+   "openblas configuration": "OpenBLAS 0.3.34.106.0  USE64BITINT DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=64",
+   "pc file directory": "/project/.openblas"
+  }
+ },
+ "setup": {
+  "beta": 0.9105100061914045,
+  "n_e": 7,
+  "n_a": 500,
+  "rho_e": 0.92,
+  "sd_e": 0.6,
+  "r": 0.02,
+  "B": 1.0,
+  "G": 0.2,
+  "phi_B": 0.1,
+  "phi_y": 0.25,
+  "shock": "G_t = 0.01 * 0.8^t (debt financed)",
+  "h": 0.0001,
+  "twosided": true,
+  "ss_goods_mkt": -5.147874904132266e-10,
+  "ss_fiscal_res": -2.7755575615628914e-17
+ }
+}

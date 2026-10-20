@@ -1,0 +1,267 @@
+{
+ "rows": [
+  {
+   "sigma": 0.2,
+   "rho": 0.6,
+   "mu": 3,
+   "chain": "tauchen",
+   "sigma_reading": "sd_log",
+   "sd_log_input": 0.2,
+   "chain_moments": {
+    "sd_log": 0.21202085094502643,
+    "autocorr_log": 0.5988166090716089,
+    "cv_level": 0.2141989429368657,
+    "autocorr_level": 0.5934777042407149
+   },
+   "r_pct": 3.878238348125225,
+   "saving_rate_pct": 24.246019616659385,
+   "ref_r_pct": 3.8767,
+   "ref_saving_pct": 24.25,
+   "ref_saving_from_r": 24.249160120235416,
+   "diff_r_pp": 0.0015383481252251308,
+   "euler_err_mean": 1.7020214440800434e-08,
+   "mass_top_5pts": 2.481851069334537e-32,
+   "seconds": 2.2422633171081543
+  },
+  {
+   "sigma": 0.2,
+   "rho": 0.6,
+   "mu": 3,
+   "chain": "tauchen",
+   "sigma_reading": "cv",
+   "sd_log_input": 0.1980422004353651,
+   "chain_moments": {
+    "sd_log": 0.2099453792966579,
+    "autocorr_log": 0.598816609071609,
+    "cv_level": 0.2120599834722356,
+    "autocorr_level": 0.5935813780871307
+   },
+   "r_pct": 3.88423324055863,
+   "saving_rate_pct": 24.233788934494378,
+   "ref_r_pct": 3.8767,
+   "ref_saving_pct": 24.25,
+   "ref_saving_from_r": 24.249160120235416,
+   "diff_r_pp": 0.007533240558629917,
+   "euler_err_mean": 1.6517341990628723e-08,
+   "mass_top_5pts": 2.685186190055135e-32,
+   "seconds": 1.3650920391082764
+  },
+  {
+   "sigma": 0.2,
+   "rho": 0.6,
+   "mu": 3,
+   "chain": "rouwenhorst",
+   "sigma_reading": "sd_log",
+   "sd_log_input": 0.2,
+   "chain_moments": {
+    "sd_log": 0.1999999999986529,
+    "autocorr_log": 0.6000000000000001,
+    "cv_level": 0.20122013906695121,
+    "autocorr_level": 0.5960274814914405
+   },
+   "r_pct": 3.912667414053493,
+   "saving_rate_pct": 24.175945654307743,
+   "ref_r_pct": 3.8767,
+   "ref_saving_pct": 24.25,
+   "ref_saving_from_r": 24.249160120235416,
+   "diff_r_pp": 0.03596741405349313,
+   "euler_err_mean": 1.56256501355795e-08,
+   "mass_top_5pts": 3.71512854967876e-32,
+   "seconds": 1.301558494567871
+  },
+  {
+   "sigma": 0.2,
+   "rho": 0.6,
+   "mu": 3,
+   "chain": "rouwenhorst",
+   "sigma_reading": "cv",
+   "sd_log_input": 0.1980422004353651,
+   "chain_moments": {
+    "sd_log": 0.19804220043403117,
+    "autocorr_log": 0.6000000000000002,
+    "cv_level": 0.19922689721099995,
+    "autocorr_level": 0.5961043512170459
+   },
+   "r_pct": 3.917919024073893,
+   "saving_rate_pct": 24.165292566449505,
+   "ref_r_pct": 3.8767,
+   "ref_saving_pct": 24.25,
+   "ref_saving_from_r": 24.249160120235416,
+   "diff_r_pp": 0.041219024073892996,
+   "euler_err_mean": 1.508842909592995e-08,
+   "mass_top_5pts": 4.083776840921243e-32,
+   "seconds": 1.253270149230957
+  },
+  {
+   "sigma": 0.4,
+   "rho": 0.9,
+   "mu": 5,
+   "chain": "tauchen",
+   "sigma_reading": "sd_log",
+   "sd_log_input": 0.4,
+   "chain_moments": {
+    "sd_log": 0.46831564138629234,
+    "autocorr_log": 0.9016256238283404,
+    "cv_level": 0.48854981590634466,
+    "autocorr_level": 0.8913128979289259
+   },
+   "r_pct": -0.08563195039393418,
+   "saving_rate_pct": 36.389513122824134,
+   "ref_r_pct": -0.3456,
+   "ref_saving_pct": 37.63,
+   "ref_saving_from_r": 37.625418060200666,
+   "diff_r_pp": 0.25996804960606584,
+   "euler_err_mean": 3.188685779407268e-08,
+   "mass_top_5pts": 0.0,
+   "seconds": 1.665393352508545
+  },
+  {
+   "sigma": 0.4,
+   "rho": 0.9,
+   "mu": 5,
+   "chain": "tauchen",
+   "sigma_reading": "cv",
+   "sd_log_input": 0.38525317015992666,
+   "chain_moments": {
+    "sd_log": 0.4510502136988708,
+    "autocorr_log": 0.9016256238283403,
+    "cv_level": 0.4691340420966357,
+    "autocorr_level": 0.8920530816366109
+   },
+   "r_pct": 0.10406929314585515,
+   "saving_rate_pct": 35.537702058345005,
+   "ref_r_pct": -0.3456,
+   "ref_saving_pct": 37.63,
+   "ref_saving_from_r": 37.625418060200666,
+   "diff_r_pp": 0.4496692931458552,
+   "euler_err_mean": 3.070346066892015e-08,
+   "mass_top_5pts": 0.0,
+   "seconds": 1.734943151473999
+  },
+  {
+   "sigma": 0.4,
+   "rho": 0.9,
+   "mu": 5,
+   "chain": "rouwenhorst",
+   "sigma_reading": "sd_log",
+   "sd_log_input": 0.4,
+   "chain_moments": {
+    "sd_log": 0.3999999999564181,
+    "autocorr_log": 0.9,
+    "cv_level": 0.4097085581786089,
+    "autocorr_level": 0.8941027313520726
+   },
+   "r_pct": 0.7265043392752283,
+   "saving_rate_pct": 33.00290572294834,
+   "ref_r_pct": -0.3456,
+   "ref_saving_pct": 37.63,
+   "ref_saving_from_r": 37.625418060200666,
+   "diff_r_pp": 1.0721043392752283,
+   "euler_err_mean": 2.212549305756151e-08,
+   "mass_top_5pts": 0.0,
+   "seconds": 1.786330223083496
+  },
+  {
+   "sigma": 0.4,
+   "rho": 0.9,
+   "mu": 5,
+   "chain": "rouwenhorst",
+   "sigma_reading": "cv",
+   "sd_log_input": 0.38525317015992666,
+   "chain_moments": {
+    "sd_log": 0.38525317011795146,
+    "autocorr_log": 0.8999999999999998,
+    "cv_level": 0.39393172612483784,
+    "autocorr_level": 0.8945225726697098
+   },
+   "r_pct": 0.9006757162705985,
+   "saving_rate_pct": 32.357093908446835,
+   "ref_r_pct": -0.3456,
+   "ref_saving_pct": 37.63,
+   "ref_saving_from_r": 37.625418060200666,
+   "diff_r_pp": 1.2462757162705986,
+   "euler_err_mean": 2.0809633418184273e-08,
+   "mass_top_5pts": 0.0,
+   "seconds": 1.5955803394317627
+  }
+ ],
+ "note": "Aiyagari (1994) Table II: two cells, with the input definitions made explicit.\n\nReference values (net return to capital, %, and saving rate, %) as transcribed by the R4\nreviewer from the original Table II (QJE 109(3), printed p. 678):\n    sigma=0.2, rho=0.6, mu=3:  3.8767 / 24.25\n    sigma=0.4, rho=0.9, mu=5: -0.3456 / 37.63\nWe could not open the scanned original ourselves (no machine-readable text); the R4 follow-up\nreviewer checked Tables I and II visually. s = delta*alpha/(r + delta) is a function of r, so a matching\nsaving rate is not a second, independent check.\nStatus (v0.2.1): cell 1 is close (Tauchen 3 sd: 3.8782 vs 3.8767). Cell 2 is NOT reproduced (-0.086 vs -0.3456);\nthe Tauchen 3 sd chain's level CV and level autocorrelation already match Table I to two decimals, so the gap is\nnot explained by the chain's risk; the cause is unresolved (candidates: Aiyagari's simulation-based solution,\nthe exact transition matrix, other implementation details - none verified).\n\nWhat differs from T4 of the suite: risk aversion mu = 3 and 5 (T4 uses EIS 0.5, i.e. mu = 2);\nAiyagari's sigma is described as the coefficient of variation of earnings and his inputs are\nthose of the AR(1) for log labour endowment, approximated by a 7-state Markov chain whose\nactual moments differ from the inputs (his Table I, footnote 38, per the reviewer).\nWe therefore report a small grid of readings:\n    chain  in {Tauchen (1986), m = 3 sd; Rouwenhorst},\n    sigma  read as {sd of log endowment; coefficient of variation => sd_log = sqrt(log(1+sigma^2))},\nwith beta=0.96, alpha=0.36, delta=0.08, zero borrowing limit, mean endowment normalised to 1\n(with a zero limit the household problem is homogeneous in the endowment level, so the\nnormalisation does not move r). The point is to explain the gap, not to tune to it.\nUsage: python3 scripts/aiyagari_table2_v0_2.py   Writes out/aiyagari_table2_v0_2.json\n",
+ "tauchen_width_sensitivity_sigma04_rho09_mu5": [
+  {
+   "m": 2.0,
+   "sd_log_chain": 0.3989373629446255,
+   "cv_level": 0.40362337620761657,
+   "r_pct": 0.915383043572382
+  },
+  {
+   "m": 2.5,
+   "sd_log_chain": 0.4397212089587518,
+   "cv_level": 0.4518894083741368,
+   "r_pct": 0.33416151758221335
+  },
+  {
+   "m": 3.0,
+   "sd_log_chain": 0.46831564138629234,
+   "cv_level": 0.48854981590634466,
+   "r_pct": -0.08563195039393418
+  },
+  {
+   "m": 3.5,
+   "sd_log_chain": 0.48824773923146747,
+   "cv_level": 0.5153236502435283,
+   "error": "No convergence of policy functions after 100000 backward iterations!"
+  }
+ ],
+ "grid_audit_sigma04_rho09_mu5": [
+  {
+   "n_a": 1000,
+   "a_max": 400.0,
+   "r_pct": -0.08620849537682684,
+   "mass_top_5pts": 0.0,
+   "mass_policy_off_grid": 0.0
+  },
+  {
+   "n_a": 2000,
+   "a_max": 400.0,
+   "r_pct": -0.08563195039393418,
+   "mass_top_5pts": 0.0,
+   "mass_policy_off_grid": 0.0
+  },
+  {
+   "n_a": 4000,
+   "a_max": 400.0,
+   "r_pct": -0.08549684698235059,
+   "mass_top_5pts": 0.0,
+   "mass_policy_off_grid": 0.0
+  },
+  {
+   "n_a": 2000,
+   "a_max": 800.0,
+   "r_pct": -0.0857632005755072,
+   "mass_top_5pts": 0.0,
+   "mass_policy_off_grid": 0.0
+  }
+ ],
+ "table_I_level_cv_corr": {
+  "(0.2, 0.6)": [
+   0.21,
+   0.59
+  ],
+  "(0.4, 0.9)": [
+   0.49,
+   0.89
+  ]
+ },
+ "status_cell2": "not reproduced; cause unresolved (chain level CV/corr match Table I to two decimals)",
+ "settings": {
+  "n_a": 2000,
+  "a_max": 400.0,
+  "grid": "a_max u^2",
+  "borrowing_limit": 0.0,
+  "beta": 0.96,
+  "alpha": 0.36,
+  "delta": 0.08,
+  "n_e": 7,
+  "tauchen_width_sd": 3.0
+ }
+}

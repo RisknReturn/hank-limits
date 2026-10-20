@@ -1,0 +1,99 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.16, pytest-9.1.1, pluggy-1.7.0 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: .
+configfile: pytest.ini
+testpaths: tests
+plugins: anyio-4.15.1
+collecting ... collected 43 items
+
+tests/test_diagnostics_v0_2.py::test_inverse_iteration_report[audit_t4] PASSED
+tests/test_diagnostics_v0_2.py::test_inverse_iteration_report[audit_t1_mid] PASSED
+tests/test_diagnostics_v0_2.py::test_ssj_forward_iteration_converges_to_it[audit_t4] PASSED
+tests/test_diagnostics_v0_2.py::test_ssj_forward_iteration_converges_to_it[audit_t1_mid] PASSED
+tests/test_diagnostics_v0_2.py::test_ssj_stopping_rule_is_not_an_accuracy_bound PASSED
+tests/test_t1_rank_limit.py::test_exact_at_eps_zero 
+[T1] runtime 10.8s
+  eps: 0.000e+00, 2.000e-01, 1.000e-01, 5.000e-02, 2.500e-02, 1.250e-02
+  err_M: 1.654e-09, 2.085e-01, 5.516e-02, 1.399e-02, 3.602e-03, 9.528e-04
+  err_Jr: 2.913e-09, 1.117e-01, 2.630e-02, 6.443e-03, 1.598e-03, 3.957e-04
+  fitted_rate_err_M: 1.948
+  fitted_rate_err_Jr: 2.032
+  mass_constrained: 0.000e+00, 2.876e-06, 8.540e-07, 2.718e-07, 1.267e-07, 9.830e-08
+PASSED
+tests/test_t1_rank_limit.py::test_errors_decrease_monotonically PASSED
+tests/test_t1_rank_limit.py::test_second_order_convergence PASSED
+tests/test_t1_rank_limit.py::test_tightest_setting_accuracy PASSED
+tests/test_t1_rank_limit.py::test_impatience_vanishes_like_eps2 PASSED
+tests/test_t1_rank_limit.py::test_borrowing_constraint_slack PASSED
+tests/test_t1_rank_limit.py::test_error_grows_with_observation_window PASSED
+tests/test_t1_rank_limit.py::test_household_jacobian_independent_of_computing_horizon PASSED
+tests/test_t2_tank_limit.py::test_htm_type_exact_below_threshold 
+[T2] runtime 15.4s
+  eps: 2.000e-01, 1.000e-01, 5.000e-02, 2.500e-02, 1.250e-02
+  err_MH_vs_I: 5.961e-01, 3.425e-01, 3.876e-13, 1.674e-13, 3.876e-13
+  err_MS_vs_MRA: 2.754e-01, 7.290e-02, 1.850e-02, 4.764e-03, 1.261e-03
+  err_Magg_vs_TANK: 5.563e-01, 3.203e-01, 1.177e-03, 3.032e-04, 8.022e-05
+  err_IRF_vs_TANK.1.5: 1.312e-01, 5.441e-02, 1.244e-02, 3.456e-03, 1.050e-03
+  fitted_rate_err_MS_vs_MRA: 1.948
+  fitted_rate_err_IRF_chi1.5: 1.791
+PASSED
+tests/test_t2_tank_limit.py::test_saver_type_converges_to_RA PASSED
+tests/test_t2_tank_limit.py::test_aggregate_impc_is_tank PASSED
+tests/test_t2_tank_limit.py::test_ge_irf_converges_to_bilbiie PASSED
+tests/test_t2_tank_limit.py::test_amplification_factor PASSED
+tests/test_t2_tank_limit.py::test_ge_solution_residual PASSED
+tests/test_t3_werning.py::test_acyclical_converges_to_rank 
+[T3] runtime 1.9s
+  b: 1.000e-01, 3.000e-02, 1.000e-02, 3.000e-03, 1.000e-03, 3.000e-04, 1.000e-04
+  err_acyc_vs_RANK: 6.012e-02, 6.553e-03, 1.290e-02, 1.226e-02, 4.233e-03, 1.286e-03, 4.302e-04
+  err_cyc_vs_ZL: 1.005e-01, 2.299e-02, 9.722e-03, 1.703e-02, 5.891e-03, 1.791e-03, 5.991e-04
+  dev_cyc_vs_RANK: 4.523e-01, 3.501e-01, 3.326e-01, 2.973e-01, 3.120e-01, 3.174e-01, 3.189e-01
+  fitted_rate_err_acyc_vs_RANK_asymptotic: 0.993
+  fitted_rate_err_cyc_vs_ZL_asymptotic: 0.9926
+PASSED
+tests/test_t3_werning.py::test_countercyclical_converges_to_zero_liquidity_solution PASSED
+tests/test_t3_werning.py::test_countercyclical_deviates_from_rank PASSED
+tests/test_t3_werning.py::test_asymptotic_monotone PASSED
+tests/test_t3_werning.py::test_steady_state_rate_converges PASSED
+tests/test_t4_aiyagari.py::test_no_idiosyncratic_risk_limit 
+[T4] runtime 10.8s
+  eps: 4.000e-01, 2.000e-01, 1.000e-01, 5.000e-02, 2.500e-02
+  gap: 1.285e-02, 3.547e-03, 9.245e-04, 2.377e-04, 6.166e-05
+  fitted_rate_gap: 1.931
+  r_by_sd.r: 4.074e-02, 3.812e-02, 3.404e-02, 2.882e-02
+  r_by_rho.r: 3.956e-02, 3.792e-02, 3.475e-02, 2.882e-02
+PASSED
+tests/test_t4_aiyagari.py::test_r_below_discount_rate_sanity_only PASSED
+tests/test_t4_aiyagari.py::test_market_clearing_residual PASSED
+tests/test_t4_aiyagari.py::test_euler_and_kkt_residuals PASSED
+tests/test_t4_aiyagari.py::test_top_grid_mass_negligible PASSED
+tests/test_t4_aiyagari.py::test_monotone_in_risk_size_regression PASSED
+tests/test_t4_aiyagari.py::test_monotone_in_persistence_regression PASSED
+tests/test_t5_ikc.py::test_ikc_identity_refined_solve 
+[T5:ssj_consistent] max err 5.95e-07; G_debt_fixed_r: 1.6e-15, 1.5e-14, 9.5e-14; r_fixed_r: 3.9e-15, 4.8e-14, 3.1e-13; G_debt_r_rule: 5.0e-13, 2.2e-09, 5.9e-07; rshock_r_rule: 4.8e-13, 2.3e-09, 3.3e-07
+
+[T5:ssj_consistent_refined] max err 9.75e-12; G_debt_fixed_r: 5.3e-16, 9.7e-15, 1.9e-15; r_fixed_r: 8.5e-16, 1.7e-14, 1.4e-13; G_debt_r_rule: 2.0e-15, 3.2e-15, 3.0e-15; rshock_r_rule: 3.1e-13, 1.3e-12, 9.8e-12
+
+[T5:ssj_inconsistent_options] max err 9.88e-05; G_debt_fixed_r: 1.6e-15, 1.5e-14, 9.5e-14; r_fixed_r: 9.9e-05, 9.9e-05, 9.9e-05; G_debt_r_rule: 5.0e-13, 2.2e-09, 5.9e-07; rshock_r_rule: 9.0e-05, 9.0e-05, 9.0e-05
+PASSED
+tests/test_t5_ikc.py::test_ikc_identity_ssj_solver_fixed_rate PASSED
+tests/test_t5_ikc.py::test_ikc_identity_ssj_solver_rule_short_horizon PASSED
+tests/test_t5_ikc.py::test_ikc_identity_ssj_solver_rule_long_horizon XFAIL
+tests/test_t5_ikc.py::test_ikc_identity_with_mismatched_options XFAIL
+tests/test_t5_ikc.py::test_walras_law PASSED
+tests/test_t6_differencing.py::test_matrix_identity 
+[T6:T=150] identity err 3.81e-15, decomposition err 9.85e-12, cum multiplier HA 3.383 RA 1.000
+
+[T6:T=300] identity err 2.24e-14, decomposition err 1.91e-10, cum multiplier HA 3.383 RA 1.000
+PASSED
+tests/test_t6_differencing.py::test_decomposition_fiscal_shock PASSED
+tests/test_t6_differencing.py::test_decomposition_rate_shock PASSED
+tests/test_t6_differencing.py::test_rank_benchmark_is_ricardian PASSED
+tests/test_t6_differencing.py::test_wealth_group_split_adds_up PASSED
+tests/test_t6_differencing.py::test_first_round_split_independent_of_T PASSED
+
+=========================== short test summary info ============================
+XFAIL tests/test_t5_ikc.py::test_ikc_identity_ssj_solver_rule_long_horizon - Finding F2 (SSJ 1.0.0): partial-pivoting LU on H_U packed in variable-block order shows element growth ~1e7 at T=300 (cond ~2e4); date-interleaved ordering or iterative refinement removes it.
+XFAIL tests/test_t5_ikc.py::test_ikc_identity_with_mismatched_options - Finding F1 (SSJ 1.0.0): HetBlock linear impulses recompute Jacobians despite supplied Js (own options, default one-sided h=1e-4); with two-sided Js the r-shock IKC holds only to ~1e-4.
+=================== 41 passed, 2 xfailed in 65.36s (0:01:05) ===================

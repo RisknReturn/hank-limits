@@ -1,0 +1,29 @@
+{
+ "a_impulse_with_J2_vs_J2_dr": 9.347867788755303e-05,
+ "b_impulse_with_J2_vs_J1_dr": 0.0,
+ "c_impulse_with_2xJ2_vs_impulse_with_J2": 0.0,
+ "c_impulse_with_2xJ2_vs_2xJ2_dr": 0.5000467393389437,
+ "d_impulse_with_J2_twosided_vs_J2_dr": 0.0,
+ "seconds": {
+  "impulse_with_Js": 0.05325484275817871,
+  "impulse_with_poisoned_Js": 0.055634498596191406,
+  "impulse_twosided": 0.07028603553771973
+ },
+ "versions": {
+  "python": "3.13.16",
+  "numpy": "2.5.3",
+  "sequence_jacobian": "1.0.0"
+ },
+ "setup": {
+  "T": 300,
+  "block": "sequence_jacobian.hetblocks.hh_sim.hh",
+  "n_e": 7,
+  "n_a": 300,
+  "r": 0.01,
+  "beta": 0.96,
+  "eis": 0.5,
+  "rho_e": 0.9,
+  "sd_e": 0.5,
+  "h": 0.0001
+ }
+}
