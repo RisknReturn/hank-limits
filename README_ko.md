@@ -1,5 +1,9 @@
 # HANK 해석적 극한·집계 항등식 검증 세트 v0.2.1 (analytic-limit and aggregate-identity test suite)
 
+[![DOI](https://zenodo.org/badge/1426447298.svg)](https://doi.org/10.5281/zenodo.23489176)
+
+모든 판을 인용할 때는 concept DOI [10.5281/zenodo.23489176](https://doi.org/10.5281/zenodo.23489176), 이 판(v0.2.1)은 [10.5281/zenodo.23489177](https://doi.org/10.5281/zenodo.23489177) 입니다. GitHub 의 "Cite this repository" 버튼은 `CITATION.cff` 를 씁니다.
+
 이 저장소는 이질적 경제주체 뉴케인지언 모형(heterogeneous-agent New Keynesian, HANK) 코드가 답이 알려진 극한(limit)과 집계 항등식(aggregate identity)에서 통과해야 하는 시험 모음입니다. 공개 패키지 `sequence-jacobian`(이하 SSJ) 1.0.0 위에서 구현했고, 각 시험은 한 지점의 통과/실패(pass/fail)만이 아니라 **극한 모수가 극한으로 갈 때의 오차와 관찰된 수렴 차수(observed order of convergence)** 를 함께 보고합니다.
 
 - 공개 목적: Zenodo 등록, MIT 라이선스(`LICENSE`).

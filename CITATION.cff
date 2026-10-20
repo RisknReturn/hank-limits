@@ -2,8 +2,16 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 title: "hank-limits: analytic-limit and aggregate-identity tests for HANK codes"
 version: 0.2.1
-date-released: "YYYY-MM-DD"
+date-released: "2026-10-20"
 license: MIT
+doi: 10.5281/zenodo.23489176
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23489176
+    description: "Concept DOI (all versions)"
+  - type: doi
+    value: 10.5281/zenodo.23489177
+    description: "Version 0.2.1"
 type: software
 authors:
   - family-names: "Han"

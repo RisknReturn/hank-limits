@@ -1,5 +1,9 @@
 # hank-limits v0.2.1: analytic-limit and aggregate-identity tests for HANK codes
 
+[![DOI](https://zenodo.org/badge/1426447298.svg)](https://doi.org/10.5281/zenodo.23489176)
+
+Cite all versions with the concept DOI [10.5281/zenodo.23489176](https://doi.org/10.5281/zenodo.23489176); this release (v0.2.1) is [10.5281/zenodo.23489177](https://doi.org/10.5281/zenodo.23489177). GitHub's "Cite this repository" button uses `CITATION.cff`.
+
 This repository collects tests that a heterogeneous-agent New Keynesian (HANK) code should pass at limits with known answers and at exact aggregate identities. It is implemented on the public package `sequence-jacobian` (SSJ) 1.0.0. Each test reports not only pass/fail at one point but **the error as the limit parameter goes to its limit and the observed order of convergence**.
 
 - Licence: MIT (`LICENSE`). Intended for a Zenodo deposit. **Not peer reviewed.**
