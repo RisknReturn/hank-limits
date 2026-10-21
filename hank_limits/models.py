@@ -50,6 +50,19 @@ def solve_impulse_linear_refined(model, ss, unknowns, targets, inputs, Js, optio
     return (inputs | dU) | model.impulse_linear(ss, dU | inputs, None, Js, options)
 
 
+# v0.3: steady-state primitives for the checks in `hank_limits.checks` (optional provider
+# fields `ss_detail`; read from SSJ's steady-state dict, nothing is recomputed).
+
+def _household_detail(ss, name='hh', suffix=''):
+    """C, A, beta, borrowing limit, income chain and income by state of one household block."""
+    inter = ss.internals[name]
+    d = dict(C=float(ss['C' + suffix]), A=float(ss['A' + suffix]),
+             beta=float(ss['beta' + suffix]), a_min=float(np.asarray(ss['a_grid' + suffix])[0]),
+             e_grid=np.asarray(ss['e_grid' + suffix]), Pi=np.asarray(inter['Pi']),
+             y=np.asarray(inter['y']))
+    return {k + suffix: v for k, v in d.items()}
+
+
 # ---------------------------------------------------------------------------
 # Income hetinputs
 # ---------------------------------------------------------------------------
@@ -136,6 +149,8 @@ def ssj_rank_limit_provider(eps, T, h=1e-4, **kw):
     J = household_jacobians(m['block'], ss, T, ['Y', 'r'], ['C'], h=h)
     return dict(J=J, ss=dict(C=float(ss['C']), A=float(ss['A']), r=float(ss['r']),
                              eis=float(ss['eis']), beta=float(ss['beta'])),
+                ss_detail=dict(_household_detail(ss, m['block'].name), Y=float(ss['Y']),
+                               r=float(ss['r']), eis=float(ss['eis'])),
                 diag=dict(kappa=m['kappa'], **m['diag']))
 
 
@@ -223,6 +238,10 @@ def ssj_tank_provider(eps, T, dr, chis=(1.0, 1.5), **kw):
                 Jr_S=np.asarray(J_S['C_S']['r']), dY=dY, lam=m['lam'],
                 ss=dict(r=float(ss['r']), eis=float(ss['eis']), C_S=float(ss['C_S']),
                         A_S=float(ss['A_S']), Y=1.0),
+                ss_detail=dict(lam=float(ss['lam']), r=float(ss['r']), eis=float(ss['eis']),
+                               Y=float(ss['Y']), Y_H=float(ss['Y_H']), Y_S=float(ss['Y_S']),
+                               **_household_detail(ss, 'hh_H', '_H'),
+                               **_household_detail(ss, 'hh_S', '_S')),
                 diag={**m['diag'], 'ge_target_resid': ge_resid})
 
 
@@ -297,6 +316,9 @@ def ssj_werning_provider(b, T, dr, cyclical=False, **kw):
     prim = m['prim']
     return dict(dY=np.asarray(irf['Y']), r_ss=float(ss['r']), eis=prim['eis'],
                 e_grid=prim['e'], Pi=prim['Pi'], zeta=prim['zeta'], beta=prim['beta'],
+                ss_detail=dict(_household_detail(ss), b=float(b), Y=float(ss['Y']),
+                               r=float(ss['r']), eis=float(ss['eis'])),
+                J_A={'Y': np.asarray(J['A']['Y']), 'r': np.asarray(J['A']['r'])},
                 diag={**m['diag'],
                       'ge_target_resid': float(np.max(np.abs(irf['asset_mkt'])))})
 
@@ -355,7 +377,10 @@ def ssj_aiyagari_r(sd, rho, chain=None, **kw):
                 root_distance_to_upper_bracket=float(hi - r),
                 euler=ee, K=float(K), saving_rate=float(de * al / (r + de)),
                 a_max=float(p['a_max']), n_a=int(p['n_a']))
-    return dict(r=float(r), rho_disc=rho_disc, diag=diag, _model=dict(block=blk, ss=ss))
+    return dict(r=float(r), rho_disc=rho_disc, diag=diag, _model=dict(block=blk, ss=ss),
+                ss_detail=dict(_household_detail(ss), r=float(ss['r']), w=float(ss['w']),
+                               K=float(K), eis=float(ss['eis'])),
+                policy=dict(a_grid=a_grid, a=st['a'], c=st['c'], D=st['D']))
 
 
 # ---------------------------------------------------------------------------
@@ -439,9 +464,13 @@ def ssj_fiscal_provider(T, shocks, ssj_consistent=True, solver='ssj', **kw):
             return np.asarray(irf.toplevel[k]) if k in irf.toplevel else np.zeros(T_)
         out[label] = dict(dY=get('Y'), dC=get('C'), dG=get('G'), dTax=get('Tax'),
                           dr=get('r'), dB=get('B'), dA=get('A'),
+                          drshock=get('rshock'),
                           asset_mkt=get('asset_mkt'), goods_mkt=get('goods_mkt'))
     return dict(J=J, ss=dict(C=float(ss['C']), A=float(ss['A']), r=float(ss['r']),
                              eis=float(ss['eis']), Y=float(ss['Y']), G=float(ss['G'])),
+                ss_detail=dict(_household_detail(ss), Y=float(ss['Y']), B=float(ss['B']),
+                               G=float(ss['G']), Tax=float(ss['Tax']), r=float(ss['r']),
+                               eis=float(ss['eis']), phi_B=float(ss['phi_B'])),
                 irfs=out, model=m)
 
 

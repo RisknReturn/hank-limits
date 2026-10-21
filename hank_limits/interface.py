@@ -36,6 +36,27 @@ IKCProvider(T, shocks) -> dict(
 
 The T6 decomposition (`checks.check_differencing`) needs only the IKC provider output.
 
+v0.3: optional fields for the steady-state, normalisation and specification checks (V1-V4,
+docs/CHECKS_PLAN_v0_3.md). The checks compute their residuals from these primitive quantities
+themselves; a provider that does not report a field gets those checks skipped (the reason is
+recorded in the result under 'v0_3' -> 'skipped'). y = income by income state at the steady
+state, Pi = the income transition matrix (rows = current state), a_min = borrowing limit.
+
+RankLimitProvider: ss_detail = {'Y', 'C', 'A', 'r', 'eis', 'beta', 'a_min', 'e_grid', 'Pi', 'y'}
+TankProvider:      ss_detail = {'lam', 'r', 'eis', 'Y', 'Y_H', 'Y_S',
+                                'C_t', 'A_t', 'beta_t', 'a_min_t', 'e_grid_t', 'Pi_t', 'y_t'
+                                for t in (H, S)}
+WerningProvider:   ss_detail = {'b', 'Y', 'C', 'A', 'r', 'eis', 'beta', 'a_min', 'e_grid', 'Pi', 'y'},
+                   J_A = {'Y': J^{A,Y}, 'r': J^{A,r}}   (T x T, the Jacobians used in the solve)
+AiyagariProvider:  ss_detail = {'r', 'w', 'K', 'A', 'C', 'beta', 'eis', 'a_min', 'e_grid', 'Pi', 'y'},
+                   policy = {'a_grid', 'a', 'c', 'D'}   (policies and distribution, n_e x n_a)
+IKCProvider:       ss_detail = {'Y', 'C', 'A', 'B', 'G', 'Tax', 'r', 'eis', 'beta', 'phi_B',
+                                'a_min', 'e_grid', 'Pi', 'y'},
+                   irfs[label] also 'dC', 'dB', 'drshock' (exogenous rate-shock path, zeros if none)
+
+The documented values the checks compare with are in `hank_limits.spec` (passed as `spec=`);
+another code with another calibration passes its own.
+
 Minimal example for a user code `mycode` (pseudo-code):
 
     from hank_limits.checks import check_rank_limit

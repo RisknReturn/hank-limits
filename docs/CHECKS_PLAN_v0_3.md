@@ -84,9 +84,102 @@ Documented values in `spec.py` (from the README "Exact setting" paragraphs): T1/
 
 The values of b_max, τ and the thresholds are written into the table below and into `tests/test_v0_3_checks.py` in commit T. Existing tests keep their tolerances.
 
-| Quantity | b_max (run 1, run 2) | τ | Threshold |
-|---|---|---|---|
-| (filled in by T) | | | |
+Filled in by commit T. b_max from two runs of the unmodified v0.3 suite at the T candidate (2026-10-21, same environment as v0.1; the two runs gave identical numbers). T5 quantities are those of the setting with matched options and refinement; path quantities are the maximum over the four shocks and three horizons. Threshold rounding: up to one significant digit.
+
+| Model | Quantity | b_max (run 1, run 2) | τ (source) | Threshold |
+|---|---|---|---|---|
+| T3 | `ge_target_resid_reported_acyc` | 1.08e-14, 1.08e-14 | 1e-14 (exact up to rounding) | 2e-12 |
+| T3 | `ge_target_resid_reported_cyc` | 1.52e-14, 1.52e-14 | 1e-14 (exact up to rounding) | 2e-12 |
+| T3 | `ge_target_resid_direct_acyc` | 1.08e-14, 1.08e-14 | 1e-14 (exact up to rounding) | 2e-12 |
+| T3 | `ge_target_resid_direct_cyc` | 1.52e-14, 1.52e-14 | 1e-14 (exact up to rounding) | 2e-12 |
+| T3 | `ss_assets_acyc` | 1.81e-10, 1.81e-10 | 1e-15 (brentq xtol on r) | 2e-08 |
+| T3 | `ss_assets_cyc` | 1.81e-10, 1.81e-10 | 1e-15 (brentq xtol on r) | 2e-08 |
+| T3 | `ss_goods_acyc` | 3.59e-12, 3.59e-12 | 1e-14 (steady-state aggregate) | 4e-10 |
+| T3 | `ss_goods_cyc` | 3.59e-12, 3.59e-12 | 1e-14 (steady-state aggregate) | 4e-10 |
+| T3 | `hh_budget_acyc` | 7.77e-16, 7.77e-16 | 1e-14 (steady-state aggregate) | 1e-13 |
+| T3 | `hh_budget_cyc` | 7.77e-16, 7.77e-16 | 1e-14 (steady-state aggregate) | 1e-13 |
+| T3 | `pi_row_sum_err_acyc` | 2.22e-16, 2.22e-16 | 1e-14 (exact up to rounding) | 1e-13 |
+| T3 | `pi_negative_acyc` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T3 | `mean_e_err_acyc` | 3.59e-12, 3.59e-12 | 1e-14 (exact up to rounding) | 4e-10 |
+| T3 | `agg_income_err_acyc` | 3.59e-12, 3.59e-12 | 1e-14 (steady-state aggregate) | 4e-10 |
+| T3 | `pi_row_sum_err_cyc` | 2.22e-16, 2.22e-16 | 1e-14 (exact up to rounding) | 1e-13 |
+| T3 | `pi_negative_cyc` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T3 | `mean_e_err_cyc` | 3.59e-12, 3.59e-12 | 1e-14 (exact up to rounding) | 4e-10 |
+| T3 | `agg_income_err_cyc` | 3.59e-12, 3.59e-12 | 1e-14 (steady-state aggregate) | 4e-10 |
+| T3 | `incidence_err_cyc` | 1.45e-11, 1.45e-11 | 1e-14 (exact up to rounding) | 2e-09 |
+| T3 | `spec_eis_acyc` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T3 | `spec_eis_cyc` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T3 | `spec_a_min_acyc` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T3 | `spec_a_min_cyc` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T3 | `spec_zeta_acyc` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T3 | `spec_zeta_low_cyc` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T3 | `spec_rstar_acyc` | 2.13e-16, 2.13e-16 | 1e-14 (exact up to rounding) | 1e-13 |
+| T3 | `spec_rstar_cyc` | 2.13e-16, 2.13e-16 | 1e-14 (exact up to rounding) | 1e-13 |
+| T5 | `ss_government_budget` | 1.04e-17, 1.04e-17 | 1e-14 (exact up to rounding) | 1e-13 |
+| T5 | `ss_goods` | 3.76e-11, 3.76e-11 | 1e-14 (steady-state aggregate) | 4e-09 |
+| T5 | `ss_assets` | 1.89e-14, 1.89e-14 | 1e-14 (brentq xtol on beta) | 2e-12 |
+| T5 | `hh_budget` | 5.55e-15, 5.55e-15 | 1e-14 (steady-state aggregate) | 6e-13 |
+| T5 | `pi_row_sum_err` | 2.22e-16, 2.22e-16 | 1e-14 (exact up to rounding) | 1e-13 |
+| T5 | `pi_negative` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T5 | `mean_e_err` | 4.82e-11, 4.82e-11 | 1e-14 (exact up to rounding) | 5e-09 |
+| T5 | `agg_income_err` | 4.82e-11, 4.82e-11 | 1e-14 (steady-state aggregate) | 5e-09 |
+| T5 | `spec_r` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T5 | `spec_eis` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T5 | `spec_B` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T5 | `spec_G` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T5 | `spec_phi_B` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T5 | `spec_a_min` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T2 | `ss_goods` | 6.59e-09, 6.59e-09 | 1e-14 (steady-state aggregate) | 7e-07 |
+| T2 | `ss_assets` | 2.20e-07, 2.20e-07 | 1e-13 (brentq xtol on log kappa) | 3e-05 |
+| T2 | `hh_budget_H` | 4.39e-16, 4.39e-16 | 1e-14 (steady-state aggregate) | 1e-13 |
+| T2 | `hh_budget_S` | 4.46e-16, 4.46e-16 | 1e-14 (steady-state aggregate) | 1e-13 |
+| T2 | `pi_row_sum_err_H` | 2.22e-16, 2.22e-16 | 1e-14 (exact up to rounding) | 1e-13 |
+| T2 | `pi_negative_H` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T2 | `mean_e_err_H` | 1.63e-12, 1.63e-12 | 1e-14 (exact up to rounding) | 2e-10 |
+| T2 | `agg_income_err_H` | 1.63e-12, 1.63e-12 | 1e-14 (steady-state aggregate) | 2e-10 |
+| T2 | `pi_row_sum_err_S` | 2.22e-16, 2.22e-16 | 1e-14 (exact up to rounding) | 1e-13 |
+| T2 | `pi_negative_S` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T2 | `mean_e_err_S` | 1.63e-12, 1.63e-12 | 1e-14 (exact up to rounding) | 2e-10 |
+| T2 | `agg_income_err_S` | 1.63e-12, 1.63e-12 | 1e-14 (steady-state aggregate) | 2e-10 |
+| T2 | `incidence_err` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T2 | `spec_lam` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T2 | `spec_beta_H` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T2 | `spec_r` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T2 | `spec_eis` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T2 | `spec_a_min_H` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T2 | `spec_a_min_S` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T4 | `ss_capital` | 5.18e-10, 5.18e-10 | 1e-14 (brentq xtol on r) | 6e-08 |
+| T4 | `foc_r` | 1.19e-12, 1.19e-12 | 1e-14 (exact up to rounding) | 2e-10 |
+| T4 | `foc_w` | 6.17e-12, 6.17e-12 | 1e-14 (exact up to rounding) | 7e-10 |
+| T4 | `ss_goods` | 6.38e-11, 6.38e-11 | 1e-14 (steady-state aggregate) | 7e-09 |
+| T4 | `hh_budget` | 1.85e-15, 1.85e-15 | 1e-14 (steady-state aggregate) | 2e-13 |
+| T4 | `pi_row_sum_err` | 2.22e-16, 2.22e-16 | 1e-14 (exact up to rounding) | 1e-13 |
+| T4 | `pi_negative` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T4 | `mean_e_err` | 1.71e-11, 1.71e-11 | 1e-14 (exact up to rounding) | 2e-09 |
+| T4 | `agg_income_err` | 1.71e-11, 1.71e-11 | 1e-14 (steady-state aggregate) | 2e-09 |
+| T4 | `spec_beta` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T4 | `spec_eis` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T4 | `spec_a_min` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T4 | `spec_euler_err_mean_weighted` | 4.33e-08, 4.33e-08 | 1e-12 (backward tol (SS_OPTS)) | 5e-06 |
+| T4 | `spec_euler_err_max_with_mass` | 2.50e-06, 2.50e-06 | 1e-12 (backward tol (SS_OPTS)) | 3e-04 |
+| T4 | `spec_kkt_violation_max_with_mass` | 0, 0 | 1e-12 (backward tol (SS_OPTS)) | 1e-11 |
+| T1 | `hh_budget` | 3.10e-12, 3.10e-12 | 1e-14 (steady-state aggregate) | 4e-10 |
+| T1 | `pi_row_sum_err` | 2.22e-16, 2.22e-16 | 1e-14 (exact up to rounding) | 1e-13 |
+| T1 | `pi_negative` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T1 | `mean_e_err` | 1.63e-12, 1.63e-12 | 1e-14 (exact up to rounding) | 2e-10 |
+| T1 | `agg_income_err` | 1.63e-12, 1.63e-12 | 1e-14 (steady-state aggregate) | 2e-10 |
+| T1 | `spec_r` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T1 | `spec_eis` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T1 | `spec_A` | 5.72e-08, 5.72e-08 | 1e-13 (brentq xtol on log kappa) | 6e-06 |
+| T1 | `spec_a_min` | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T5 | `fiscal_rule` (path, max over labels) | 0, 0 | 1e-14 (exact up to rounding (linear solve)) | 1e-13 |
+| T5 | `government_budget` (path, max over labels) | 8.67e-16, 8.67e-16 | 1e-14 (exact up to rounding (linear solve)) | 1e-13 |
+| T5 | `rate_rule` (path, max over labels) | 8.67e-17, 8.67e-17 | 1e-14 (exact up to rounding (linear solve)) | 1e-13 |
+| T5 | `goods_market` (path, max over labels) | 3.12e-13, 3.12e-13 | 1e-14 (exact up to rounding (linear solve)) | 4e-11 |
+
+State at T: the unmodified v0.3 suite gives **74 passed, 3 xfailed** (F1, F2, F3; 70 s). Rule 2: in both runs all 276 numbers of the v0.1 summaries equal those of run B0 of `out/mutation_v0_1.json`; against run B1 the one known two-valued number differs (1.4e-11 relative), as in the smoke test of the v0.2.1 tree. All 28 v0.1 patches and all 23 v0.2 patches apply unchanged to the v0.3 tree (no re-anchoring needed).
+
+Implementation notes at T (no change to the registered design): (1) new fields are inserted as new lines, except in `ssj_aiyagari_r`, whose one-line `return` was extended (no v0.1 or v0.2 patch anchors on that line); (2) each v0.3 computation in `checks.py` runs under a guard: an exception is recorded under `v0_3` → `errors` and fails the V tests, but never stops the v0.1 part of a check, so that groups T1–T6 behave as in v0.2.1 under every mutant; (3) thresholds are keyed by model, because the same quantity name (e.g. `ss_goods`) has different thresholds in different models. The guard (2) was added after the two threshold runs. A third run on the final code reproduced every number the V tests use. Two v0.3 quantities of T5 settings that no V test uses (the SSJ solve without refinement, and the mismatched-options solve) differed at rounding level (1.2195580e-15 vs 1.2193886e-15; 3.64682243275e-06 vs 3.64682243292e-06), and the known two-valued v0.1 number took its other value; these come from the same run-to-run rounding as in v0.1.
 
 ## 5. New provider fields (all optional)
 

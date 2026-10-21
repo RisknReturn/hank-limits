@@ -1,5 +1,7 @@
 # hank-limits v0.2.1: analytic-limit and aggregate-identity tests for HANK codes
 
+**This branch: v0.3 (unreleased)** on top of release v0.2.1; see "v0.3 (unreleased)" below.
+
 [![DOI](https://zenodo.org/badge/1426447298.svg)](https://doi.org/10.5281/zenodo.23489176)
 
 Cite all versions with the concept DOI [10.5281/zenodo.23489176](https://doi.org/10.5281/zenodo.23489176); this release (v0.2.1) is [10.5281/zenodo.23489177](https://doi.org/10.5281/zenodo.23489177). GitHub's "Cite this repository" button uses `CITATION.cff`.
@@ -25,6 +27,23 @@ This repository collects tests that a heterogeneous-agent New Keynesian (HANK) c
 | Tables | The numbers of the main tests and grid studies (239 rows) are exported as CSV with columns for limit parameter, grid, difference step, observation window and solver (`out/tables_v0_2/`). Diagnostics, difference steps, Aiyagari, F1 and F2 results are in their JSON files. |
 
 **v0.2 → v0.2.1 (R4 follow-up review, same reviewer):** (1) removed the diagnostic field `normalisation_err_last_sweep`, which was always zero by construction; (2) the second Aiyagari cell is now reported as "not reproduced, cause unresolved", with a comparison against the level CV and autocorrelation of the original Table I and a grid audit; (3) the practical impact of F2 is limited to this example; (4) horizon independence in T1 is limited to the linear household Jacobian at a fixed steady state; (5) revised wording of the SSJ issue drafts. Test results are unchanged.
+
+### v0.3 (unreleased): steady-state, normalisation and specification checks
+
+Not released: the version in `pyproject.toml`, the tags and the citation metadata are still those of v0.2.1. Plan and pre-registration: `docs/CHECKS_PLAN_v0_3.md`; mutation tests: `docs/MUTATION_v0_1.md` (v0.2.1 suite) and `docs/MUTATION_v0_2.md` (v0.2.1 against v0.3 on independently generated mutants).
+
+| Item | v0.3 change |
+|---|---|
+| V1 | T3 records and tests the GE target (asset-market) residual, both as reported by the solver and computed directly from the reported Jacobians. |
+| V2 | Steady-state residuals computed in the checks from reported primitive quantities: government budget, goods and asset markets (fiscal HANK, TANK, Huggett), capital market, firm first-order conditions and goods market (Aiyagari), and the aggregate household budget in every model. |
+| V3 | Income normalisation: Π row-stochastic, E[e] = 1 under the stationary distribution of the reported Π, aggregate income = Y (Y − Tax in the fiscal model), and Σ π e ζ = 0 for the countercyclical incidence. |
+| V4 | Specification pins against the documented values in `hank_limits/spec.py` (not read from `models.py`): reported parameters, the Aiyagari Euler equation at the documented β and EIS, and the fiscal rule, government budget, real-rate rule and goods market along the T5 paths. |
+| V5 | `test_rank_benchmark_is_ricardian` now holds only the closed-form RA assertion; the HA assertion is `test_ha_multiplier_exceeds_one`. |
+| V6 | F3 pin (strict xfail, SSJ code only), in the same form as the F1 and F2 pins. |
+| Providers | New **optional** fields `ss_detail`, `J_A`, `policy` and `irfs[...]['drshock']` (`hank_limits/interface.py`); checks whose fields are missing are skipped, with the reason recorded. No computation in `models.py` or `core.py` changed: the summaries of the existing checks are bit-identical to v0.2.1. |
+| T4, T6 | Two clarifications from mutation testing v0.1: T4's error-detection value lies in its diagnostics (sections 7 and 9); the T6 matrix identity is a linear-algebra check. |
+
+Full pytest run with v0.3: **74 passed, 3 xfailed** (F1, F2, F3).
 
 ---
 
@@ -55,6 +74,7 @@ Full pytest run: **41 passed, 2 xfailed, about 65–75 s** (section 11). Report 
 4. **F2: LU stability that depends on equation ordering.** In a fiscal HANK with an interest-rate rule, partial-pivoting LU on H_U as SSJ stacks it (blocks by variable) shows element growth of 19, 3.7e4 and 1.1e7 at T = 100, 200, 300 (condition numbers 3.6e2, 2.9e3, 2.1e4). **Reordering the same system by date gives growth 1.02; reversing the block order gives 1.00**, and the normalised backward error falls from 3e-8 to about 1e-16. The condition number alone does not explain the problem: LU element growth in this ordering causes the loss of accuracy. So the statement is not "SSJ solves are inaccurate at long T" but **"element growth arises for this block ordering combined with partial-pivoting LU"**. We do not claim that reordering, iterative refinement or QR fixes every model. In this example the IKC error at T = 200 and 300 is 2.2e-9 to 5.9e-7, and the relative difference from a pivoted-QR solution is about 1e-7 (1.0e-7 here, 1.2e-7 in the reviewing model's environment). This matters for strict identity checks (1e-10). The practical importance depends on the model, target and tolerance and is not compared here. Reported upstream as [#40](https://github.com/shade-econ/sequence-jacobian/issues/40).
 5. **T6: scope of group-wise GE attribution.** First-round gaps by wealth quartile are well defined and independent of T. But the group-wise forcing has non-zero present value (income is (Y − Tax) × e and the composition of e differs by group), so passing each group's forcing through the infinite-horizon consumption multiplier excites a mode that is inconsistent with the budget constraint and diverges with T. The mode cancels in the total. This is not a theorem that group-wise attribution is impossible. Group-wise GE attribution requires additional choices of terminal conditions, fiscal incidence and present-value compensation paths, and the attribution depends on those choices. Zero present value is a necessary compatibility condition only; it does not guarantee stability or uniqueness.
 6. **A small stationarity residual does not guarantee distributional accuracy (an observation, not an SSJ defect).** In a slowly mixing chain the inverse operator on the zero-mass subspace is large, so a small residual does not imply a small distribution error. For the medium-risk PIH household (eps = 0.1), SSJ's original forward iteration with its default stopping rule (every 10 iterations, max|ΔDbeg| < 1e-10) stops after 37,910 iterations, and the mean assets of that distribution differ from the inverse-iteration solution by **1.7e-3 (relative)**. Tightening the tolerance to 1e-12 stops after 54,590 iterations with a difference of 1.7e-5, converging to the same solution. At eps = 0.0125 it does not stop within 600,000 iterations. In the fast-mixing T4 and T5 models the differences are 1e-6 and 5e-9 (section 12).
+7. **F3 (v0.3): one-sided differences of hetinputs and hetoutputs (SSJ 1.0.0).** `HetBlock.jac_backward_prelim` asks for two-sided differentiation of hetinputs ("always use two-sided differentiation for hetinputs"), but `DifferentiableCombinedExtendedFunction.diff` has the default `twosided=False` instead of `None`, so the stored setting is never used when the caller omits the argument. Two consequences: hetinputs are always differentiated one-sided, and hetoutputs are differentiated one-sided even with `jacobian(..., twosided=True)`. `stage_block.py` has the same pattern. The error is O(h); it matters only for nonlinear hetinputs and hetoutputs (in this suite, the countercyclical income of T3, where it explains the O(h) budget-identity residual found in mutation testing v0.1, section 8 of that report). Reproductions with SSJ code only: section 14. Upstream report pending.
 
 ---
 
@@ -69,6 +89,8 @@ python3 scripts/diagnostics_v0_2.py        # about 80 s: out/diagnostics_v0_2.js
 python3 scripts/aiyagari_table2_v0_2.py    # about 20 s: out/aiyagari_table2_v0_2.json (section 7)
 python3 scripts/repro_F1_v0_2.py           # SSJ code only: out/repro_F1_v0_2.json
 python3 scripts/repro_F2_v0_2.py           # SSJ code only: out/repro_F2_v0_2.json, out/F2_HU_T300_v0_2.npz
+python3 scripts/repro_F3_v0_1.py           # v0.3, SSJ code only: hetinput derivative (section 14)
+python3 scripts/repro_F3_hetblock_v0_1.py  # v0.3, SSJ code only: HetBlock.jacobian, hetinput and hetoutput
 ```
 
 - Every entry point limits threads to one (`OMP_NUM_THREADS=1` etc.).
@@ -87,7 +109,8 @@ hank_limits/
   interface.py    provider conventions
   metrics.py      error metrics, convergence orders, mixed absolute/relative tolerance
   suite.py        standard settings (shared by tests and scripts)
-tests/            test_t1 ... test_t6, test_diagnostics_v0_2
+  spec.py         v0.3: documented specification values for the V checks
+tests/            test_t1 ... test_t6, test_diagnostics_v0_2, test_v0_3_checks (v0.3)
 scripts/          convergence_report.py, diagnostics_v0_2.py, aiyagari_table2_v0_2.py,
                   repro_F1_v0_2.py, repro_F2_v0_2.py, a1_markov_checks_v0_2.py (for the design note, section 13)
 out/              JSON, PNG, tables_v0_2/*.csv, pytest output
@@ -236,6 +259,8 @@ The Euler error is unit-free, c_impl/c − 1, with c(e', ·) linearly interpolat
 | 200 (default) | 2.8813 | 2.8821 | 2.8823 |
 | 400 | 2.8801 | 2.8818 | 2.8822 |
 
+**Where T4 detects errors (v0.3 note).** In mutation testing v0.1 the analytic limit (r → 1/β − 1, O(eps²)) and the monotonicity regressions caught none of the seven mutants that reach T4; all four T4 catches came from the diagnostics above (capital-market residual, Euler/KKT residuals, top-of-grid mass). The limit holds for any fixed δ, borrowing limit or grid, so errors in those are found by the diagnostics and, from v0.3, by the V2/V4 checks (firm first-order conditions at the documented α and δ, the documented borrowing limit, the Euler equation at the documented β and EIS).
+
 **Source.** Aiyagari (1994), QJE 109(3), 659-684.
 
 **Exact setting.** β = 0.96, α = 0.36, δ = 0.08, σ (EIS) = 0.5 (risk aversion 2), borrowing limit 0, labour 1, Rouwenhorst 7 states, 1000 points on [0, 200] (u² spacing).
@@ -302,6 +327,8 @@ r by standard deviation (persistence 0.9): 4.074, 3.812, 3.404, 2.882%. r by per
 
 **Scope.** Verifies the finite-T resolvent identity and the differencing decomposition along the same paths. It does not verify a unique group-wise GE attribution at an infinite horizon (key finding 5 in section 1).
 
+**What each T6 test checks (v0.3 note).** The matrix identity holds for any invertible matrices, so it is a linear-algebra check, not a check of the model; in mutation testing v0.1 it caught nothing. The decomposition tests check consistency of the paths with the Jacobians. The closed-form RA benchmark (Ricardian multiplier 1) and the HA multiplier condition (> 1) were one test until v0.2.1 and are separate tests from v0.3. The cohort simulation and the T-independence of the first round are separate computation paths, but they use the same household code, policies and distribution, so they are not external references.
+
 **Exact setting.** The fixed-real-rate fiscal HANK of T5. The RA is the closed form with the same r, σ, C, A (= B) (β_RA = 1/(1+r)). Shocks: debt-financed G (0.01 × 0.8^t) and rate −0.01 × 0.8^t. T = 150, 300.
 
 **Results.**
@@ -331,6 +358,8 @@ The check functions (`hank_limits/checks.py`) do not depend on SSJ; they take pr
 | `check_werning` | `f(b, T, dr, cyclical)` | `dY, r_ss, eis, e_grid, Pi, zeta`, `diag` |
 | `check_aiyagari` | `f(sd, rho)` | `r, rho_disc`, optional `diag` (residuals) |
 | `check_ikc`, `check_differencing` | `f(T, shocks)` | `J`, `ss`, `irfs` |
+
+v0.3: providers may also report the optional fields `ss_detail`, `J_A`, `policy` and `irfs[label]['drshock']` (`hank_limits/interface.py`). The V checks compute steady-state residuals, income normalisation and specification pins from them, against the values passed as `spec=` (the suite passes `hank_limits/spec.py`; pass your own calibration's values). If a field is missing, the checks that need it are skipped and the reason is recorded under `v0_3` → `skipped`.
 
 Recommendations: use T1 and T4 as single-type household-block unit tests, T2 in a form generalised to any number of types, and T5 and T6 as regression tests of your own GE solver. The numerical tolerances are values for this calibration, so reset them for your own calibration. Differences in timing convention or units usually show up at once in the eps = 0 exactness test (T1, at the 1e-9 level).
 
@@ -383,7 +412,7 @@ XFAIL tests/test_t5_ikc.py::test_ikc_identity_with_mismatched_options - Finding 
 
 ---
 
-## 14. Minimal reproductions of F1 and F2
+## 14. Minimal reproductions of F1, F2 and F3
 
 **F1** (`scripts/repro_F1_v0_2.py`, SSJ code only): one block `sequence_jacobian.hetblocks.hh_sim.hh`, T = 300.
 
@@ -403,6 +432,23 @@ XFAIL tests/test_t5_ikc.py::test_ikc_identity_with_mismatched_options - Finding 
 | 300 | 2.1e4 | 1.1e7 | 3.1e-8 | 1.0e-16 |
 
 η = ‖H_U x − b‖_∞ / (‖H_U‖_∞ ‖x‖_∞ + ‖b‖_∞). At T = 300, reordering by date gives growth 1.02 and η 4.3e-16; reversing the block order gives growth 1.00 and η 9.3e-17. H_U and b are in `out/F2_HU_T300_v0_2.npz`.
+
+**F3** (v0.3; SSJ code only). `scripts/repro_F3_v0_1.py` calls the hetinput derivative as `HetBlock` does (`CombinedExtendedFunction([income]).differentiable(ss, h, True).diff({'Y': 1})`) for y = e Y^(1+ζ): the derivative used equals the forward difference exactly, and its error against the analytic derivative is O(h); with `twosided=None` the stored setting is used and the error is O(h²):
+
+```
+h=0.01: |used-forward| 0.0e+00  |used-central| 2.4e-03  |used-analytic| 2.4e-03  |twosided=None - analytic| 8.4e-06
+h=0.001: |used-forward| 0.0e+00  |used-central| 2.4e-04  |used-analytic| 2.4e-04  |twosided=None - analytic| 8.4e-08
+h=0.0001: |used-forward| 0.0e+00  |used-central| 2.4e-05  |used-analytic| 2.4e-05  |twosided=None - analytic| 8.4e-10
+```
+
+`scripts/repro_F3_hetblock_v0_1.py` shows the effect end to end in `HetBlock.jacobian(..., twosided=True)` on SSJ's example block `hh_sim`: (H) a nonlinear hetinput y = w^(1+ζ_e) e, Jacobian of A with respect to w; (O) a linear hetinput plus the hetoutput c², Jacobian of C2 with respect to r. "Stored default" = `diff` called with `twosided=None`. The difference is O(h) in both cases:
+
+```
+H hetinput  max|J_original - J_stored_default| / max|J_stored_default|: h=1e-03 5.06e-05  h=1e-04 5.05e-06  h=1e-05 5.05e-07
+O hetoutput max|J_original - J_stored_default| / max|J_stored_default|: h=1e-03 4.22e-04  h=1e-04 4.22e-05  h=1e-05 4.22e-06
+```
+
+Code path (sequence-jacobian 1.0.0 wheel): `blocks/het_block.py` lines 400–401 (hetinputs made differentiable with `True`) and 405 (hetoutputs with the caller's `twosided`), `utilities/function.py` line 233 (`diff(..., twosided=False)`), `het_block.py` line 302 (hetinputs: `.diff({input_shocked: 1})`) and line 378 (hetoutputs: `.diff(..., outputs=...)`), both without `twosided`; `stage_block.py` lines 422–423 and 287. GitHub master `eb4ac4c` has the same code according to the research session's check (not re-checked in the v0.3 environment). Upstream report pending.
 
 Reports to the SSJ maintainers (2026-10-20): F1 [shade-econ/sequence-jacobian#39](https://github.com/shade-econ/sequence-jacobian/issues/39), F2 [shade-econ/sequence-jacobian#40](https://github.com/shade-econ/sequence-jacobian/issues/40). Titles describe the observed behaviour ("HetBlock linear impulses recompute Jacobians despite supplied Js").
 

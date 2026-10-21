@@ -1,4 +1,5 @@
-"""Canonical settings of the suite (v0.2; unchanged from v0.1), shared by tests/ and scripts/convergence_report.py."""
+"""Canonical settings of the suite (v0.2; unchanged from v0.1), shared by tests/ and scripts/convergence_report.py.
+v0.3: the checks also receive the documented specification (`hank_limits.spec`) for the V checks."""
 from __future__ import annotations
 
 import time
@@ -6,6 +7,7 @@ import numpy as np
 
 from . import models as M
 from . import checks as C
+from . import spec as SPEC
 
 T1 = dict(eps=[0.0, 0.2, 0.1, 0.05, 0.025, 0.0125], T=200, T_sub=(50, 100))
 T2 = dict(eps=[0.2, 0.1, 0.05, 0.025, 0.0125], T=200, chis=(1.0, 1.5), rho_r=0.8, dr0=-0.01)
@@ -23,24 +25,25 @@ def real_rate_path(T, dr0, rho):
 
 def run_t1(**kw):
     return C.check_rank_limit(M.ssj_rank_limit_provider, T1['eps'], T1['T'],
-                              T_sub=T1['T_sub'], **kw)
+                              T_sub=T1['T_sub'], spec=SPEC.T1, **kw)
 
 
 def run_t2(**kw):
     dr = real_rate_path(T2['T'], T2['dr0'], T2['rho_r'])
     return C.check_tank_limit(M.ssj_tank_provider, T2['eps'], T2['T'], dr,
-                              chis=T2['chis'], **kw)
+                              chis=T2['chis'], spec=SPEC.T2, **kw)
 
 
 def run_t3(**kw):
     dr = real_rate_path(T3['T'], T3['dr0'], T3['rho_r'])
     return C.check_werning(M.ssj_werning_provider, T3['b'], T3['T'], dr,
-                           asymptotic_from=T3['asymptotic_from'], **kw)
+                           asymptotic_from=T3['asymptotic_from'], spec=SPEC.T3, **kw)
 
 
 def run_t4(**kw):
     return C.check_aiyagari(M.ssj_aiyagari_r, T4['eps'], T4['rho_limit'], T4['sd_list'],
-                            T4['rho_list'], T4['sd_for_rho'], T4['rho_for_sd'], **kw)
+                            T4['rho_list'], T4['sd_for_rho'], T4['rho_for_sd'], spec=SPEC.T4,
+                            **kw)
 
 
 def fiscal_shocks(T):
@@ -59,7 +62,8 @@ def run_t5():
     for label, kw in [('ssj_consistent', dict()),
                       ('ssj_consistent_refined', dict(solver='refined')),
                       ('ssj_inconsistent_options', dict(ssj_consistent=False))]:
-        out[label] = C.check_ikc(M.ssj_fiscal_provider, T5['T_list'], fiscal_shocks, **kw)
+        out[label] = C.check_ikc(M.ssj_fiscal_provider, T5['T_list'], fiscal_shocks,
+                                 spec=SPEC.T5, **kw)
     return out
 
 

@@ -25,10 +25,18 @@ def test_rank_benchmark_is_ricardian(t6):
     # same policy path in RANK: deficit-financed G has (PV) multiplier exactly 1, up to the
     # part of the debt path cut off at T, which decays like (1 + r - phi_B)^T = 0.92^T
     # (about 4e-6 at T = 150 and 1e-11 at T = 300)
+    # v0.3: the closed-form RA assertion only; the HA assertion is test_ha_multiplier_exceeds_one
+    # (until v0.2.1 both were one test; docs/MUTATION_v0_1.md, section 6)
     for T, v in t6['by_T'].items():
         tail = (1 + 0.02 - 0.1) ** int(T)
         assert abs(v['G']['cum_multiplier_RA'] - 1) < 5 * tail, (T, v['G']['cum_multiplier_RA'])
-        assert v['G']['cum_multiplier_HA'] > 1
+
+
+def test_ha_multiplier_exceeds_one(t6):
+    # a property of the HA solution in this calibration, not a closed form (split from
+    # test_rank_benchmark_is_ricardian in v0.3)
+    for T, v in t6['by_T'].items():
+        assert v['G']['cum_multiplier_HA'] > 1, (T, v['G']['cum_multiplier_HA'])
 
 
 def test_wealth_group_split_adds_up(t6):
