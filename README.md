@@ -452,7 +452,7 @@ O hetoutput max|J_original - J_stored_default| / max|J_stored_default|: h=1e-03 
 
 Code path (sequence-jacobian 1.0.0 wheel): `blocks/het_block.py` lines 400–401 (hetinputs made differentiable with `True`) and 405 (hetoutputs with the caller's `twosided`), `utilities/function.py` line 233 (`diff(..., twosided=False)`), `het_block.py` line 302 (hetinputs: `.diff({input_shocked: 1})`) and line 378 (hetoutputs: `.diff(..., outputs=...)`), both without `twosided`; `stage_block.py` lines 422–423 and 287. GitHub master `eb4ac4c` has the same code according to the research session's check (not re-checked in the v0.3 environment). Reported upstream as [shade-econ/sequence-jacobian#41](https://github.com/shade-econ/sequence-jacobian/issues/41).
 
-Reports to the SSJ maintainers (2026-10-20): F1 [shade-econ/sequence-jacobian#39](https://github.com/shade-econ/sequence-jacobian/issues/39), F2 [shade-econ/sequence-jacobian#40](https://github.com/shade-econ/sequence-jacobian/issues/40). Titles describe the observed behaviour ("HetBlock linear impulses recompute Jacobians despite supplied Js").
+Reports to the SSJ maintainers: F1 [shade-econ/sequence-jacobian#39](https://github.com/shade-econ/sequence-jacobian/issues/39) and F2 [shade-econ/sequence-jacobian#40](https://github.com/shade-econ/sequence-jacobian/issues/40) (2026-10-20), F3 [shade-econ/sequence-jacobian#41](https://github.com/shade-econ/sequence-jacobian/issues/41) (2026-10-21 UTC). Titles describe the observed behaviour ("HetBlock linear impulses recompute Jacobians despite supplied Js").
 
 ---
 

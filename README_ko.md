@@ -451,7 +451,7 @@ O hetoutput max|J_original - J_stored_default| / max|J_stored_default|: h=1e-03 
 
 코드 경로(sequence-jacobian 1.0.0 wheel): `blocks/het_block.py` 400–401행(hetinput 을 `True` 로 미분 가능하게 만듦)과 405행(hetoutput 은 호출자의 `twosided`), `utilities/function.py` 233행(`diff(..., twosided=False)`), `het_block.py` 302행(hetinput: `.diff({input_shocked: 1})`)과 378행(hetoutput: `.diff(..., outputs=...)`)은 모두 `twosided` 없이 부릅니다. `stage_block.py` 422–423행과 287행도 같습니다. GitHub master `eb4ac4c` 도 같은 코드라는 것은 연구 세션의 확인이며, v0.3 환경에서 다시 확인하지는 않았습니다. SSJ 에 [shade-econ/sequence-jacobian#41](https://github.com/shade-econ/sequence-jacobian/issues/41) 로 보고했습니다.
 
-SSJ 관리자에게 보낸 보고(2026-10-20): F1 [shade-econ/sequence-jacobian#39](https://github.com/shade-econ/sequence-jacobian/issues/39), F2 [shade-econ/sequence-jacobian#40](https://github.com/shade-econ/sequence-jacobian/issues/40). 제목은 관측된 동작으로 씁니다 ("HetBlock linear impulses recompute Jacobians despite supplied Js").
+SSJ 관리자에게 보낸 보고: F1 [shade-econ/sequence-jacobian#39](https://github.com/shade-econ/sequence-jacobian/issues/39)·F2 [shade-econ/sequence-jacobian#40](https://github.com/shade-econ/sequence-jacobian/issues/40) (2026-10-20), F3 [shade-econ/sequence-jacobian#41](https://github.com/shade-econ/sequence-jacobian/issues/41) (2026-10-21 UTC). 제목은 관측된 동작으로 씁니다 ("HetBlock linear impulses recompute Jacobians despite supplied Js").
 
 ---
 
