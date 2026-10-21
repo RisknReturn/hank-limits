@@ -1,0 +1,7 @@
+..................................xx.................................... [ 93%]
+....x                                                                    [100%]
+=========================== short test summary info ============================
+XFAIL tests/test_t5_ikc.py::test_ikc_identity_ssj_solver_rule_long_horizon - Finding F2 (SSJ 1.0.0): partial-pivoting LU on H_U packed in variable-block order shows element growth ~1e7 at T=300 (cond ~2e4); date-interleaved ordering or iterative refinement removes it.
+XFAIL tests/test_t5_ikc.py::test_ikc_identity_with_mismatched_options - Finding F1 (SSJ 1.0.0): HetBlock linear impulses recompute Jacobians despite supplied Js (own options, default one-sided h=1e-4); with two-sided Js the r-shock IKC holds only to ~1e-4.
+XFAIL tests/test_v0_3_checks.py::test_v6_f3_hetinput_hetoutput_two_sided - Finding F3 (SSJ 1.0.0): DifferentiableCombinedExtendedFunction.diff defaults to twosided=False, so HetBlock differentiates hetinputs one-sided although it asks for two-sided differences, and hetoutputs one-sided even with jacobian(..., twosided=True).
+74 passed, 3 xfailed in 70.52s (0:01:10)

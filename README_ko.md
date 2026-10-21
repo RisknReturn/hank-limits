@@ -1,5 +1,7 @@
 # HANK 해석적 극한·집계 항등식 검증 세트 v0.2.1 (analytic-limit and aggregate-identity test suite)
 
+**이 브랜치: v0.3 (unreleased)**, 릴리스 v0.2.1 위의 변경입니다. 아래 "v0.3 (unreleased)" 를 보십시오.
+
 [![DOI](https://zenodo.org/badge/1426447298.svg)](https://doi.org/10.5281/zenodo.23489176)
 
 모든 판을 인용할 때는 concept DOI [10.5281/zenodo.23489176](https://doi.org/10.5281/zenodo.23489176), 이 판(v0.2.1)은 [10.5281/zenodo.23489177](https://doi.org/10.5281/zenodo.23489177) 입니다. GitHub 의 "Cite this repository" 버튼은 `CITATION.cff` 를 씁니다.
@@ -24,6 +26,25 @@
 | 표 | 주 시험과 격자 연구의 수치(239행)를 극한 모수·격자·차분 간격·관측창·풀이기 열로 나눈 CSV 로 내보냅니다(`out/tables_v0_2/`). 진단·차분 간격·Aiyagari·F1·F2 결과는 각 JSON 에 있습니다. |
 
 **v0.2 → v0.2.1 (R4 후속 검토 반영):** ① 구성상 항상 0 이던 진단 필드 `normalisation_err_last_sweep` 삭제, ② Aiyagari 둘째 셀을 "미재현·원인 미해결"로 고치고 원문 Table I 의 수준 CV·자기상관 대조와 격자 감사를 추가, ③ F2 의 실무 영향 서술을 이 예제로 한정, ④ T1 계산 시계 무관성을 고정 정상상태의 선형 가계 야코비안으로 한정, ⑤ SSJ 이슈 초안 문구 수정. 시험 결과는 같습니다.
+
+### v0.3 (unreleased): 정상상태·소득 정규화·명세 검사
+
+릴리스하지 않은 판입니다. `pyproject.toml` 의 버전, 태그, 인용 메타데이터는 v0.2.1 그대로입니다. 계획과 사전 등록은 `docs/CHECKS_PLAN_v0_3.md`, 오류 주입 시험(mutation testing)은 `docs/MUTATION_v0_1.md`(v0.2.1 묶음)와 `docs/MUTATION_v0_2.md`(독립 생성 변형으로 v0.2.1 과 v0.3 비교)에 있습니다.
+
+| 항목 | v0.3 변경 |
+|---|---|
+| V1 | T3 의 일반균형 목표(자산시장) 잔차를 기록하고 시험합니다. 풀이기가 보고한 값과, 보고된 야코비안으로 직접 계산한 값을 모두 봅니다. V1 은 T3 를 자산시장 목표로 푼다고 전제합니다. 임계값(잔차를 b 로 나눈 값에 대해 2e-12)은 자산시장 풀이 자신의 잔차에서 나왔습니다. 정확한 산술에서는 같은 해를 주는 재화시장 목표로 풀면, 자산시장 잔차가 이보다 훨씬 큽니다. 비례 소득에서는 F3 와 무관하게 최대 3.0e-6·b, 경기역행 소득에서는 F3 의 O(h) 오차가 더해져 최대 2.4e-3·b 입니다. 따라서 V1 은 그런 풀이에 경보를 냅니다(대조군 C03; `docs/MUTATION_v0_2.md` 8절). |
+| V2 | 공급자(provider)가 보고한 기본 수량으로 검사 쪽에서 직접 계산하는 정상상태 잔차: 정부 예산, 재화·자산시장(재정 HANK, TANK, Huggett), 자본시장·기업 1계 조건·재화시장(Aiyagari), 모든 모형의 집계 가계 예산. |
+| V3 | 소득 정규화: Π 의 행 합이 1, 보고된 Π 의 정상분포에서 E[e] = 1, 총소득 = Y(재정 모형은 Y − Tax), 경기역행 귀착에서 Σ π e ζ = 0. |
+| V4 | `hank_limits/spec.py` 의 문서화된 값으로 명세 고정(specification pins). `models.py` 에서 읽지 않습니다. 보고된 모수, 문서화된 β·EIS 에서의 Aiyagari 오일러 식, T5 경로에서의 재정 준칙·정부 예산·실질금리 준칙·재화시장을 확인합니다. |
+| V5 | `test_rank_benchmark_is_ricardian` 에는 RA 닫힌 해 assert 만 남기고, HA 조건은 `test_ha_multiplier_exceeds_one` 으로 나눴습니다. |
+| V6 | F3 고정 시험(strict xfail, SSJ 코드만). F1·F2 고정과 같은 형식입니다. |
+| 공급자 | **선택** 필드 `ss_detail`, `J_A`, `policy`, `irfs[...]['drshock']` 추가(`hank_limits/interface.py`). 필드가 없으면 해당 검사를 skip 하고 이유를 결과에 남깁니다. `models.py`·`core.py` 의 계산은 바꾸지 않았으므로 기존 검사의 요약 수치는 v0.2.1 과 비트 단위로 같습니다. |
+| T4·T6 | 오류 주입 시험 v0.1 에서 나온 두 가지 설명: T4 의 오류 검출력은 진단에서 나오고(7·9절), T6 행렬 항등식은 선형대수 검사입니다. |
+
+v0.3 의 pytest 전체: **74 passed, 3 xfailed** (F1, F2, F3).
+
+오류 주입 시험 v0.2(`docs/MUTATION_v0_2.md`): 새 검사를 모르는 별도 에이전트가 만든 변형 20개 가운데 v0.2.1 묶음은 14개, v0.3 묶음은 19개를 잡았습니다. 대조군 3개에서는 두 묶음 모두 경보를 내지 않았습니다. 두 묶음 모두 놓친 N20 은 어떤 시험도 엄격히 확인하지 않는 진단 값의 오류입니다. v0.1 변형 25개는 v0.3 묶음이 모두 잡지만, 그 검사들은 v0.1 결과를 본 뒤 설계했으므로 독립 결과가 아닙니다.
 
 ---
 
@@ -54,6 +75,7 @@ pytest 전체: **41 passed, 2 xfailed, 약 65 ~ 75초** (11절). 보고서 스�
 4. **F2: 방정식 배열에 민감한 LU 안정성.** 금리 준칙을 더한 재정 HANK 에서, SSJ 가 변수별 블록으로 쌓은 H_U 에 대한 부분 피벗팅 LU 의 원소 성장률이 T=100, 200, 300 에서 19, 3.7e4, 1.1e7 입니다(조건수 3.6e2, 2.9e3, 2.1e4). 같은 시스템을 **날짜별로 재배열하면 성장률 1.02, 블록 순서를 뒤집으면 1.00** 이 되고 정규화 역오차가 3e-8 에서 1e-16 수준으로 내려갑니다. 조건수만으로 설명되는 문제가 아니라, 이 배열에서의 LU 원소 성장이 정확도 저하를 만듭니다. 따라서 "T 가 길면 SSJ 풀이가 부정확하다"가 아니라 **"이 블록 배열과 부분 피벗팅 LU 의 조합에서 원소 성장이 생긴다"** 입니다. 재배열·반복 정제·QR 중 어느 하나가 모든 모형을 해결한다고 일반화하지 않습니다. 이 예제에서 IKC 오차는 T=200·300 에서 2.2e-9 ~ 5.9e-7, pivoted QR 해와의 상대 차이는 약 1e-7 (이 환경 1.0e-7, 검토자 환경 1.2e-7) 입니다. 엄격한 항등식 검사(1e-10)에는 의미가 있습니다. 실무에서의 중요도는 모형·목표·허용치에 달리며 여기서는 비교하지 않았습니다. SSJ 에 [#40](https://github.com/shade-econ/sequence-jacobian/issues/40) 로 보고했습니다.
 5. **T6: 집단별 일반균형 귀속의 범위.** 부 사분위별 첫 단계(first round) 격차는 잘 정의되고 T 와 무관합니다. 하지만 집단별 forcing 의 현재가치가 0 이 아니므로(소득이 (Y − Tax) × e 이고 집단마다 e 구성이 다름), 이를 무한 시계 소비 승수에 각각 통과시키면 예산제약과 맞지 않는 모드를 자극해 T 에 따라 발산합니다. 합계에서는 이 모드가 상쇄됩니다. 이것은 "집단별 귀속은 불가능하다"는 정리가 아닙니다. 집단별 일반균형 귀속에는 종단조건, 재정 귀착, 현재가치 보상 경로를 추가로 정해야 하고, 그 선택에 따라 귀속이 달라집니다. 현재가치 0 은 필요한 적합성 조건일 뿐 안정성·유일성을 보장하지 않습니다.
 6. **분포 정확도는 정상성 잔차만으로 보장되지 않음(관찰, SSJ 결함 아님).** 느리게 혼합하는 사슬에서는 질량 0 부분공간에서의 역연산자가 커지므로, 작은 잔차가 작은 분포 오차를 뜻하지 않습니다. 중간 위험 PIH 가계(eps=0.1)에서 SSJ 원래 전진 반복의 기본 정지 규칙(10회마다 max|ΔDbeg| < 1e-10)은 37,910회에 멈추며, 그 분포의 평균 자산은 역반복 해와 **1.7e-3 (상대)** 다릅니다. 허용치를 1e-12 로 조이면 54,590회에 1.7e-5 로 줄어 같은 해로 수렴합니다. eps=0.0125 에서는 600,000회 안에 정지하지 않습니다. 빠르게 혼합하는 T4·T5 모형에서는 차이가 1e-6, 5e-9 입니다 (12절).
+7. **F3 (v0.3): hetinput·hetoutput 의 단측 차분 (SSJ 1.0.0).** `HetBlock.jac_backward_prelim` 은 hetinput 에 양측 차분을 요청합니다("always use two-sided differentiation for hetinputs"). 그러나 `DifferentiableCombinedExtendedFunction.diff` 의 기본값이 `None` 이 아니라 `twosided=False` 라서, 호출할 때 인자를 생략하면 저장된 설정이 쓰이지 않습니다. 결과는 두 가지입니다. hetinput 은 항상 단측 차분으로, hetoutput 은 `jacobian(..., twosided=True)` 로 요청해도 단측 차분으로 계산됩니다. `stage_block.py` 도 같은 방식입니다. 오차는 O(h) 이고, 비선형 hetinput·hetoutput 에서만 의미가 있습니다. 이 세트에서는 T3 의 경기역행 소득이 해당하며, 오류 주입 시험 v0.1 에서 찾은 O(h) 예산 항등식 잔차의 원인입니다(그 보고서 8절). SSJ 코드만 쓰는 재현은 14절에 있습니다. SSJ 에 [#41](https://github.com/shade-econ/sequence-jacobian/issues/41) 로 보고했습니다.
 
 ---
 
@@ -68,6 +90,8 @@ python3 scripts/diagnostics_v0_2.py        # 약 80초: out/diagnostics_v0_2.jso
 python3 scripts/aiyagari_table2_v0_2.py    # 약 20초: out/aiyagari_table2_v0_2.json (7절)
 python3 scripts/repro_F1_v0_2.py           # SSJ 코드만 사용: out/repro_F1_v0_2.json
 python3 scripts/repro_F2_v0_2.py           # SSJ 코드만 사용: out/repro_F2_v0_2.json, out/F2_HU_T300_v0_2.npz
+python3 scripts/repro_F3_v0_1.py           # v0.3, SSJ 코드만 사용: hetinput 미분 (14절)
+python3 scripts/repro_F3_hetblock_v0_1.py  # v0.3, SSJ 코드만 사용: HetBlock.jacobian 의 hetinput·hetoutput
 ```
 
 - 모든 진입점에서 스레드를 1개로 제한합니다(`OMP_NUM_THREADS=1` 등).
@@ -86,7 +110,8 @@ hank_limits/
   interface.py    provider 규약
   metrics.py      오차 척도, 수렴 차수, 절대·상대 혼합 허용치
   suite.py        표준 설정 (tests 와 스크립트가 공유)
-tests/            test_t1 ... test_t6, test_diagnostics_v0_2
+  spec.py         v0.3: V 검사에 쓰는 문서화된 명세 값
+tests/            test_t1 ... test_t6, test_diagnostics_v0_2, test_v0_3_checks (v0.3)
 scripts/          convergence_report.py, diagnostics_v0_2.py, aiyagari_table2_v0_2.py,
                   repro_F1_v0_2.py, repro_F2_v0_2.py, a1_markov_checks_v0_2.py (설계 노트용, 13절)
 out/              JSON, PNG, tables_v0_2/*.csv, pytest 출력
@@ -235,6 +260,8 @@ Euler 오차는 단위 없는(unit-free) c_impl/c − 1 이고, c(e', ·) 는 �
 | 200 (기본) | 2.8813 | 2.8821 | 2.8823 |
 | 400 | 2.8801 | 2.8818 | 2.8822 |
 
+**T4 가 오류를 잡는 곳 (v0.3 설명).** 오류 주입 시험 v0.1 에서 해석적 극한(r → 1/β − 1, O(eps²))과 단조성 회귀 검사는 T4 에 도달한 변형 7개를 하나도 잡지 못했습니다. T4 의 검출 4개는 모두 위의 진단(자본시장 잔차, Euler/KKT 잔차, 상단 격자 질량)에서 나왔습니다. 극한은 δ, 차입한도, 격자를 어떻게 고정해도 성립하므로, 그런 오류는 진단과 v0.3 의 V2·V4 검사(문서화된 α·δ 에서의 기업 1계 조건, 문서화된 차입한도, 문서화된 β·EIS 에서의 오일러 식)가 잡습니다.
+
 **출처.** Aiyagari (1994), QJE 109(3), 659-684.
 
 **정확한 조건.** β = 0.96, α = 0.36, δ = 0.08, σ(EIS) = 0.5 (위험회피 2), 차입한도 0, 노동 1, Rouwenhorst 7상태, [0, 200] 에 1000 점(u² 간격).
@@ -301,6 +328,8 @@ Euler 오차는 단위 없는(unit-free) c_impl/c − 1 이고, c(e', ·) 는 �
 
 **범위.** 유한 T 의 리졸벤트 항등식과 같은 경로에 대한 차분 분해를 검증합니다. 무한 시계에서의 유일한 집단별 일반균형 귀속을 검증한 것이 아닙니다(1절 주요 발견 5).
 
+**T6 시험이 각각 확인하는 것 (v0.3 설명).** 행렬 항등식은 가역 행렬이면 언제나 성립하므로 모형이 아니라 선형대수를 확인하는 검사입니다. 오류 주입 시험 v0.1 에서도 아무것도 잡지 않았습니다. 분해 시험은 경로와 야코비안의 일관성을 확인합니다. RA 닫힌 해(Ricardian 승수 1)와 HA 승수 조건(> 1)은 v0.2.1 까지 한 시험이었고 v0.3 부터 별도 시험입니다. cohort 시뮬레이션과 첫 라운드의 T 무관성은 별도 계산 경로지만 같은 가계 코드·정책·분포를 쓰므로 외부 기준이 아닙니다.
+
 **정확한 조건.** T5 의 고정 실질금리 재정 HANK. RA 는 같은 r, σ, C, A(= B) 의 닫힌 해(β_RA = 1/(1+r)). 충격은 부채 조달 G(0.01 × 0.8^t)와 금리 −0.01 × 0.8^t. T = 150, 300.
 
 **수치 결과.**
@@ -330,6 +359,8 @@ Euler 오차는 단위 없는(unit-free) c_impl/c − 1 이고, c(e', ·) 는 �
 | `check_werning` | `f(b, T, dr, cyclical)` | `dY, r_ss, eis, e_grid, Pi, zeta`, `diag` |
 | `check_aiyagari` | `f(sd, rho)` | `r, rho_disc`, 선택 `diag` (잔차) |
 | `check_ikc`, `check_differencing` | `f(T, shocks)` | `J`, `ss`, `irfs` |
+
+v0.3: 공급자는 선택 필드 `ss_detail`, `J_A`, `policy`, `irfs[label]['drshock']` 도 보고할 수 있습니다(`hank_limits/interface.py`). V 검사는 이 값들로 정상상태 잔차, 소득 정규화, 명세 고정을 계산하고 `spec=` 로 받은 값과 비교합니다(이 세트는 `hank_limits/spec.py` 를 넘깁니다. 다른 보정이면 그 보정의 값을 넘기십시오). 필드가 없으면 해당 검사를 skip 하고, 이유를 `v0_3` → `skipped` 에 남깁니다.
 
 권장 사항: T1·T4 는 단일 유형 가계 블록 단위 시험으로, T2 는 유형 수를 일반화한 형태로, T5·T6 은 자신의 일반균형 풀이기의 회귀 시험으로 쓰십시오. 숫자 허용치는 이 보정의 값이므로 자신의 보정에 맞춰 다시 정하십시오. 시점 규약이나 단위가 다르면 대부분 eps = 0 정확도 시험(T1, 1e-9 수준)에서 바로 드러납니다.
 
@@ -382,7 +413,7 @@ XFAIL tests/test_t5_ikc.py::test_ikc_identity_with_mismatched_options - Finding 
 
 ---
 
-## 14. F1·F2 최소 재현 (minimal reproductions)
+## 14. F1·F2·F3 최소 재현 (minimal reproductions)
 
 **F1** (`scripts/repro_F1_v0_2.py`, SSJ 코드만): `sequence_jacobian.hetblocks.hh_sim.hh` 한 블록, T = 300.
 
@@ -403,7 +434,24 @@ XFAIL tests/test_t5_ikc.py::test_ikc_identity_with_mismatched_options - Finding 
 
 η = ‖H_U x − b‖_∞ / (‖H_U‖_∞ ‖x‖_∞ + ‖b‖_∞). T = 300 에서 날짜별 재배열 시 성장률 1.02, η 4.3e-16; 블록 순서 반전 시 성장률 1.00, η 9.3e-17. H_U 와 b 는 `out/F2_HU_T300_v0_2.npz` 에 있습니다.
 
-SSJ 관리자에게 보낸 보고(2026-10-20): F1 [shade-econ/sequence-jacobian#39](https://github.com/shade-econ/sequence-jacobian/issues/39), F2 [shade-econ/sequence-jacobian#40](https://github.com/shade-econ/sequence-jacobian/issues/40). 제목은 관측된 동작으로 씁니다 ("HetBlock linear impulses recompute Jacobians despite supplied Js").
+**F3** (v0.3, SSJ 코드만). `scripts/repro_F3_v0_1.py` 는 y = e Y^(1+ζ) 에 대해 hetinput 미분을 `HetBlock` 과 같은 방식(`CombinedExtendedFunction([income]).differentiable(ss, h, True).diff({'Y': 1})`)으로 부릅니다. 실제로 쓰이는 미분은 전방 차분과 정확히 같고, 해석 미분과의 오차는 O(h) 입니다. `twosided=None` 으로 부르면 저장된 설정이 쓰여 오차가 O(h²) 가 됩니다.
+
+```
+h=0.01: |used-forward| 0.0e+00  |used-central| 2.4e-03  |used-analytic| 2.4e-03  |twosided=None - analytic| 8.4e-06
+h=0.001: |used-forward| 0.0e+00  |used-central| 2.4e-04  |used-analytic| 2.4e-04  |twosided=None - analytic| 8.4e-08
+h=0.0001: |used-forward| 0.0e+00  |used-central| 2.4e-05  |used-analytic| 2.4e-05  |twosided=None - analytic| 8.4e-10
+```
+
+`scripts/repro_F3_hetblock_v0_1.py` 는 SSJ 예제 블록 `hh_sim` 의 `HetBlock.jacobian(..., twosided=True)` 에서 효과를 끝까지 보여 줍니다. (H) 비선형 hetinput y = w^(1+ζ_e) e 에서 w 에 대한 A 의 야코비안, (O) 선형 hetinput 과 hetoutput c² 에서 r 에 대한 C2 의 야코비안입니다. "stored default" 는 `diff` 를 `twosided=None` 으로 부른 경우입니다. 두 경우 모두 차이가 O(h) 입니다.
+
+```
+H hetinput  max|J_original - J_stored_default| / max|J_stored_default|: h=1e-03 5.06e-05  h=1e-04 5.05e-06  h=1e-05 5.05e-07
+O hetoutput max|J_original - J_stored_default| / max|J_stored_default|: h=1e-03 4.22e-04  h=1e-04 4.22e-05  h=1e-05 4.22e-06
+```
+
+코드 경로(sequence-jacobian 1.0.0 wheel): `blocks/het_block.py` 400–401행(hetinput 을 `True` 로 미분 가능하게 만듦)과 405행(hetoutput 은 호출자의 `twosided`), `utilities/function.py` 233행(`diff(..., twosided=False)`), `het_block.py` 302행(hetinput: `.diff({input_shocked: 1})`)과 378행(hetoutput: `.diff(..., outputs=...)`)은 모두 `twosided` 없이 부릅니다. `stage_block.py` 422–423행과 287행도 같습니다. GitHub master `eb4ac4c` 도 같은 코드라는 것은 연구 세션의 확인이며, v0.3 환경에서 다시 확인하지는 않았습니다. SSJ 에 [shade-econ/sequence-jacobian#41](https://github.com/shade-econ/sequence-jacobian/issues/41) 로 보고했습니다.
+
+SSJ 관리자에게 보낸 보고: F1 [shade-econ/sequence-jacobian#39](https://github.com/shade-econ/sequence-jacobian/issues/39)·F2 [shade-econ/sequence-jacobian#40](https://github.com/shade-econ/sequence-jacobian/issues/40) (2026-10-20), F3 [shade-econ/sequence-jacobian#41](https://github.com/shade-econ/sequence-jacobian/issues/41) (2026-10-21 UTC). 제목은 관측된 동작으로 씁니다 ("HetBlock linear impulses recompute Jacobians despite supplied Js").
 
 ---
 

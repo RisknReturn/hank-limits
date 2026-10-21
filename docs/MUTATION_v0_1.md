@@ -346,6 +346,8 @@ All 24 rows, including the other proportional-income rows (max |R_Y| 1.8e-12 to 
 
 **5. Status of the registered result.** Unchanged. In the registered measurement C03 changed no test outcome; at b = 1e-4, where the T3 tests judge, the probe gives a dY gap of 1.3e-4 (relative), as reported above. The follow-up explains the O(h) residual at large b. It does not show that C03 is numerically equivalent at every b.
 
+Addendum (2026-10-22): because of the same default, SSJ also differentiates the hetoutputs of a `HetBlock` one-sided even when `jacobian(..., twosided=True)` is requested, and this suite uses no hetoutputs.
+
 ## 9. Limitations
 
 - **A sample, not the error space.** The 25 mutants were chosen by hand, by the same author who wrote the predictions and who knew the suite. They are not drawn from any distribution of real errors. Detection rates are descriptive of this sample and must not be read as a general guarantee, for example "the suite catches 84% of HANK implementation errors".
