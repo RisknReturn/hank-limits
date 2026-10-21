@@ -41,7 +41,7 @@ The error metric is the **relative max-entry error** `max|x − ref| / max|ref|`
 | T5 IKC consistency | SSJ general equilibrium dY = (I − M)^{-1} dC_partial (consistency test built from the same block Jacobians) | identity (T = 100, 200, 300) | refined solve 9.8e-12; SSJ default solve 5.9e-7 | n/a | pass + 2 expected failures (F1, F2) |
 | T6 HANK − RANK decomposition | finite-T resolvent identity and differencing decomposition along the same paths | identity (T = 150, 300) | identity 2.2e-14, decomposition 1.9e-10 (G) / 2.2e-10 (rate) | n/a | pass |
 
-**Interpreting the orders.** The O(eps²) in T1, T2 and T4 is the order of a **model path** along which risk shrinks while β is recalibrated. It is not evidence that the spatial discretisation is second-order accurate. The O(b) in T3 is also the approximation order of the liquidity limit. Do not read T1 as saying that every model with vanishing risk and a fixed β converges to the PIH solution.
+**Interpreting the orders.** The O(eps²) in T1 and T2 is the order along a model path on which risk shrinks while β is recalibrated; in T4, β is fixed at 0.96 and O(eps²) is the order of the gap 1/β − 1 − r as risk shrinks. Neither is evidence that the spatial discretisation is second-order accurate. The O(b) in T3 is also the approximation order of the liquidity limit. Do not read T1 as saying that every model with vanishing risk and a fixed β converges to the PIH solution.
 
 **Status of the tolerances.** Test tolerances are **regression-check thresholds for this calibration**. They are not a conformance specification requiring other implementations to show the same slopes or the same 1e-10 threshold.
 
