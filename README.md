@@ -34,7 +34,7 @@ Not released: the version in `pyproject.toml`, the tags and the citation metadat
 
 | Item | v0.3 change |
 |---|---|
-| V1 | T3 records and tests the GE target (asset-market) residual, both as reported by the solver and computed directly from the reported Jacobians. |
+| V1 | T3 records and tests the GE target (asset-market) residual, both as reported by the solver and computed directly from the reported Jacobians. V1 assumes that T3 is solved on the asset-market target: its threshold (2e-12, on the residual divided by b) comes from the asset-market solve's own residual. A solve on the goods-market target, equivalent in exact arithmetic, leaves an asset-market residual far above it: up to 3.0e-6·b with proportional income, where F3 plays no role, and up to 2.4e-3·b with countercyclical income, where F3 adds an O(h) error. V1 therefore alarms on such a solve (control C03; `docs/MUTATION_v0_2.md`, section 8). |
 | V2 | Steady-state residuals computed in the checks from reported primitive quantities: government budget, goods and asset markets (fiscal HANK, TANK, Huggett), capital market, firm first-order conditions and goods market (Aiyagari), and the aggregate household budget in every model. |
 | V3 | Income normalisation: Π row-stochastic, E[e] = 1 under the stationary distribution of the reported Π, aggregate income = Y (Y − Tax in the fiscal model), and Σ π e ζ = 0 for the countercyclical incidence. |
 | V4 | Specification pins against the documented values in `hank_limits/spec.py` (not read from `models.py`): reported parameters, the Aiyagari Euler equation at the documented β and EIS, and the fiscal rule, government budget, real-rate rule and goods market along the T5 paths. |
