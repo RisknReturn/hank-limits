@@ -2,9 +2,10 @@
 record which tests of the suite catch them (docs/MUTATION_PLAN_v0_1.md, docs/MUTATION_v0_1.md).
 
 PRE-REGISTRATION. The mutant list and the predictions below (and in `MUTANTS`) were committed
-before any mutant was run. The only thing done before that commit was `--check`, which applies
-each patch to a copy of the package and byte-compiles it; it runs no tests. Changes made after
-seeing results are logged in docs/MUTATION_PLAN_v0_1.md, section "Amendments".
+before any mutant was run. Two things were done before that commit: `--check`, which applies
+each patch to a copy of the package and byte-compiles it and runs no tests, and a smoke test of
+the harness on the unmutated copy only (two baseline runs; plan, section 2, rule 4). Changes made
+after seeing results are logged in docs/MUTATION_PLAN_v0_1.md, section "Amendments".
 
 Rules. Mutations touch only the model side: copies of `hank_limits/models.py` (providers and
 their model blocks) and `hank_limits/core.py` (the household block and stationary distribution

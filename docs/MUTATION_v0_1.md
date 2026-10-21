@@ -1,6 +1,8 @@
 # Mutation testing v0.1: what the hank-limits suite catches and what it misses
 
-Branch `mutation-v0_1` (not merged into `main`; no tag, no release). Plan and predictions: `docs/MUTATION_PLAN_v0_1.md`, committed and pushed (`ccb7e38`) before any mutant was run. Runner: `scripts/mutation_v0_1.py`. Data: `out/mutation_v0_1.json` (every run's test outcomes and check summaries), `out/mutation_v0_1.csv` (one row per mutant × test group).
+Measured on branch `mutation-v0_1` (no tag, no release). Plan and predictions: `docs/MUTATION_PLAN_v0_1.md`, committed and pushed (`ccb7e38`) before any mutant was run. Runner: `scripts/mutation_v0_1.py`. Data: `out/mutation_v0_1.json` (every run's test outcomes and check summaries), `out/mutation_v0_1.csv` (one row per mutant × test group).
+
+**Revision, 2026-10-22.** An independent review of commit `65f8f6d` found no discrepancy in the patches, the detection counts or the frozen checker, and asked for wording corrections. They are made here: the scope of the identity-test counts (sections 1 and 6); the split of the composite Ricardian test into its RA and HA assertions, and the description of the cohort and first-round checks (sections 1, 6 and 10); the classification of M21 (section 1); the execution record (sections 2 and 11). Section 8 adds a follow-up diagnosis of the C03 residual, run after and outside the registered measurement, and section 9 is updated to match. Patches, tolerances, test outcomes, the tables in sections 3–4 and `out/mutation_v0_1.{json,csv}` are unchanged. The unmodified suite still gives 41 passed, 2 xfailed (74 s, same environment as section 9).
 
 ## 1. Summary
 
@@ -9,10 +11,10 @@ Branch `mutation-v0_1` (not merged into `main`; no tag, no release). Plan and pr
 - **Controls:** no false alarms (0 of 3 changed any outcome).
 - **Pre-registered predictions:** 18 mutants were predicted to be caught and 21 were. Of 170 firm group-level predictions, 163 held. The 7 that failed: M08 caught by T2, T5 and T6 (predicted missed); M09 caught by T1 (predicted missed); M12 missed by T3 (predicted caught); M13 caught by T5 (predicted missed); M15 caught by T3 (predicted missed). Section 7 explains each.
 - **T5 and T6 as internal-consistency checks.** The review's concern holds for the identity parts:
-  - The IKC identity tests (T5) and the decomposition tests (T6) caught the same three mutants and no others: M09 (finite-difference step mismatch), M11 (transposed Jacobians) and M18 (goods-market sign).
+  - The normally passing identity tests, that is the three IKC tests of T5 that pass on the baseline and the two decomposition tests of T6, caught three mutants between them and no others: M09 (finite-difference step mismatch), M11 (transposed Jacobians) and M18 (goods-market sign). This count excludes the two strict-xfail regression pins of T5 (F1, F2). Under the registered rule their XPASS also counts as a catch; with them, the union over all five IKC test functions is seven mutants: M05, M08, M09, M11, M18, M20, M25 (section 6).
   - The T6 matrix identity caught nothing.
-  - Errors in the household block passed both T5 and T6 although their model executes that code: Euler timing (M01), the constraint at the wrong grid point (M16), steady-state taxes (M21).
-  - Most T5/T6 catches came from the checks in those files that are **not** built from the same Jacobians. T5's Walras test caught 9 mutants; 6 of them (M02, M05, M08, M13, M20, M25) no IKC test caught, and for 4 of those the only other T5 signal was an xfail test turning XPASS. In T6, the closed-form RA Ricardian benchmark caught 6 and the nonlinear cohort simulation caught 5.
+  - Two household-block errors, Euler timing (M01) and the constraint at the wrong grid point (M16), and one fiscal steady-state error, steady-state taxes without debt service (M21), passed both T5 and T6 although their model executes the changed code.
+  - Most T5/T6 catches came from checks other than the identities. T5's Walras test caught 9 mutants; 6 of them (M02, M05, M08, M13, M20, M25) no normally passing IKC test caught, and for 4 of those (M05, M08, M20, M25) the only other T5 signal was a strict-xfail pin turning XPASS. In T6, the test named `test_rank_benchmark_is_ricardian` caught 6 through two different assertions: the RA PV multiplier equal to 1, a closed form, caught M03, M05 and M20; the HA PV multiplier above 1 caught M08, M11 and M18. The nonlinear cohort simulation caught 5; it is a separate computation path on the same household code, policies and distribution, not an external reference.
 - **T4:** the limit test itself (`r → 1/β − 1`, O(eps²)) and the monotonicity regressions caught nothing. All four T4 catches came from the v0.2 diagnostics: capital-market residual, Euler/KKT residuals, top-of-grid mass.
 - **The baseline still passes:** the unmodified code gives 41 passed, 2 xfailed (75 s) on this machine, as in the README.
 
@@ -26,7 +28,7 @@ Full details in the plan, sections 2–4.
 - **Detection.** A test catches a mutant if its outcome differs from the baseline: passed → failed or error, or xfailed → failed or XPASS(strict). A group catches a mutant if any of its tests does. Groups: T1–T6 = `tests/test_t1…t6`, D = `tests/test_diagnostics_v0_2.py`. This rule was pre-registered and was applied without change.
 - **Reach.** "Reached" means the group's providers execute the changed lines. It was determined statically from the code map (plan, section 3) and confirmed dynamically: every group listed as not reached gave summaries identical to the baseline, apart from the one rounding-level number described below.
 - **Runs.** 30 runs (2 baselines, 25 mutants, 3 controls), single-threaded, 4 in parallel, 300 s limit per fixture or test (never reached). About 75–150 s per run, 10.5 minutes in total.
-- **Reproducibility.** The whole set was run twice: the first run and a repeat after amendment A1, which only added storage of every run's check summaries. Test outcomes and headline numbers are identical between the two. Within the repeat, B0 and B1 are bit-identical except one number: T5's Walras residual in the deliberately mismatched-options solve, which differs by a relative 1.4e-11. That number lives on the ill-conditioned F2 path (LU element growth ~1e7), which amplifies rounding. The same 1.4e-11 shows up as "affected" for three mutants that do not reach T5 (M15, M19, C03); it is noise, not reach.
+- **Reproducibility.** The whole set was run twice: the first run, and a repeat with the runner as amended by A1, which only added storage of every run's check summaries. By the author's comparison, test outcomes and headline numbers are identical between the two; the first run's raw outputs were not kept, so this cannot be checked independently (section 11). Within the repeat, B0 and B1 are bit-identical except one number: T5's Walras residual in the deliberately mismatched-options solve, which differs by a relative 1.4e-11. That number lives on the ill-conditioned F2 path (LU element growth ~1e7), which amplifies rounding. The same 1.4e-11 shows up as "affected" for three mutants that do not reach T5 (M15, M19, C03); it is noise, not reach.
 
 ## 3. Mutant × test results
 
@@ -215,13 +217,22 @@ Categories have 3–5 members each; a single mutant moves a category rate by 20�
 
 The external review's point was that T5 and T6 compare quantities built from the same Jacobians, so an error that enters both sides passes. The sample confirms this for the identity parts, and shows that most T5/T6 catches came from the other checks in those files.
 
-1. **The identity tests caught only inconsistencies between the cached Jacobians and the solver, and GE-structure errors.** The three IKC tests (T5) and the two decomposition tests (T6) caught exactly M09 (Jacobians at h = 1e-2, solver at 1e-4), M11 (transposed Jacobians handed to the solver) and M18 (goods-market sign). They caught none of the household-block errors that reach their model (M01, M08, M13, M16), none of the fiscal-block errors (M02, M03, M05, M20, M21), and not the calibration error M25.
+1. **The identity tests caught only inconsistencies between the cached Jacobians and the solver, and GE-structure errors.** The three normally passing IKC tests (T5) and the two decomposition tests (T6) caught exactly M09 (Jacobians at h = 1e-2, solver at 1e-4), M11 (transposed Jacobians handed to the solver) and M18 (goods-market sign). They caught none of the household-block errors that reach their model (M01, M08, M13, M16), none of the fiscal-block errors (M02, M03, M05, M20, M21), and not the calibration error M25.
+
+   Scope: this excludes the two strict-xfail regression pins, `test_ikc_identity_ssj_solver_rule_long_horizon` (F2) and `test_ikc_identity_with_mismatched_options` (F1). The registered rule counts their XPASS as a catch, and the per-test table in section 4 does so: the F2 pin turned XPASS under M05, M08, M20 and M25, the F1 pin under M05. Over all five IKC test functions the union is therefore seven mutants: M05, M08, M09, M11, M18, M20, M25. An XPASS means that the known F1/F2 failure did not appear on the mutated system (section 3); it is not an identity violation caused by the error.
 2. **The T6 matrix identity caught nothing.** (I − M_HA)^{-1} − (I − M_RA)^{-1} = (I − M_HA)^{-1}(M_HA − M_RA)(I − M_RA)^{-1} holds for any invertible matrices. It checks linear algebra, not the model.
-3. **T5's Walras test is the most productive single test in the suite: 9 catches** (M02, M05, M08, M09, M11, M13, M18, M20, M25). Six of these no IKC test caught. M02 and M13 were caught by nothing else in T5; M05, M08, M20 and M25 otherwise only turned an xfail test into XPASS. It is not internal in the same sense: it compares the household budget (inside the HA block) with the government budget (a separately coded simple block). A timing, unit or calibration error on one side shows up as a residual (A_ss − B_ss) dr, B (dr_t − dr_{t−1}), r dB, … under rate shocks.
-4. **T6's catches came from its external parts:**
-   - the closed-form RA Ricardian benchmark (M03, M05, M08, M11, M18, M20);
-   - the nonlinear cohort simulation, which does not use the fake-news Jacobian (M05, M09, M11, M13, M14);
-   - the T-independence of the first round (M05, M20).
+3. **T5's Walras test is the most productive single test in the suite: 9 catches** (M02, M05, M08, M09, M11, M13, M18, M20, M25). Six of these no normally passing IKC test caught (excluding the two strict-xfail pins). M02 and M13 were caught by nothing else in T5; M05, M08, M20 and M25 otherwise only turned an xfail test into XPASS. It is not internal in the same sense: it compares the household budget (inside the HA block) with the government budget (a separately coded simple block). A timing, unit or calibration error on one side shows up as a residual (A_ss − B_ss) dr, B (dr_t − dr_{t−1}), r dB, … under rate shocks.
+4. **T6's catches came from the checks other than the decomposition identities: one closed-form benchmark, one condition on the HA solution, and separate computation paths.**
+   - `test_rank_benchmark_is_ricardian` (6 catches) is a composite test with two assertions, and they caught different mutants:
+
+     | Assertion that failed | Mutants | Failing value (T) |
+     |---|---|---|
+     | RA PV multiplier = 1 within the tail bound (closed form) | M03, M05, M20 | 1.00000000023 (300), 4.4e103 (150), 4.08 (150) |
+     | HA PV multiplier > 1 | M08, M11, M18 | −1.83, −33.2, −393 (150) |
+
+     In the stored summaries of M03, M05 and M20 the HA multiplier is above 1 (3.46, 4.9e103, 35.3 at T = 150), so only the RA assertion fails there. In those of M08, M11 and M18 the RA multiplier equals the baseline (1.0000064 at T = 150), so only the HA assertion fails. The closed-form RA benchmark therefore caught three mutants; the other three were caught by a sign-and-size condition computed from the same HA solution as the rest of T6.
+   - The nonlinear cohort simulation (M05, M09, M11, M13, M14) does not use the fake-news Jacobian, so it is a separate computation path. It runs on the same household code, policies and steady-state distribution, so it is not an external reference in the sense of T1–T3.
+   - The T-independence of the first round (M05, M20) is a numerical-consistency condition on the same model.
 5. **Errors that pass every T5/T6 test, although the code runs in their model:** M01 (Euler timing), M16 (borrowing constraint), M21 (steady-state taxes); and M03 for T5. These are the cases the review anticipated.
 
 ## 7. Pre-registered predictions versus results
@@ -264,7 +275,76 @@ No control changed any test outcome.
   - In the countercyclical model the linearised aggregate budget identity dC + dA = (1+r) dA_{−1} + dY holds in the household Jacobians only to 9.3e-6 at b = 0.1 and 9.5e-9 at b = 1e-4 (proportional income: 3.7e-12 and 5.4e-10). That is roughly proportional to the difference step h = 1e-3 b.
   - The goods-market system is badly conditioned: cond(J^{C,Y} − I) = 4.9e4.
 
-  **Not known:** why the identity holds only to O(h) there. An O(h) error from two-sided differences suggests that a kink, such as the borrowing constraint, is crossed. This was not investigated further; it does not affect any test outcome.
+  **Cause: not known at the time of the measurement.** The report then suggested that a kink, such as the borrowing constraint, is crossed. The follow-up below identifies the cause: SSJ differentiates the income hetinput one-sided, although it asks for two-sided differences. No kink is needed to explain the residual. Neither the residual nor its cause changes a test outcome.
+
+### Follow-up diagnosis, 2026-10-22, outside the registered measurement
+
+This was run after the registered measurement and after the review, on the unmodified branch. It does not change the registered patches, tolerances or outcomes, and it is not one of the 30 registered runs. The C03 result above stands: no outcome change.
+
+Scripts: `scripts/c03_probe_v0_1.py` is the reviewer's probe (received file SHA-256 `c7926f8883bb2762f71e6dbacbb03de7f90c1a7a3ba9121910f6bb90be4956a9`); the only change is its output path, now `out/c03_probe_v0_1.json`. `scripts/repro_F3_v0_1.py` uses SSJ code only (received file, unchanged; SHA-256 `f220d369088c94c64a7701bbc617e2a87c9db958b353ea2945112e7f7bb9ebe2`). Environment as in section 9, one thread; the probe takes about 5 s.
+
+**1. Cause: the hetinput derivative is one-sided.** In sequence-jacobian 1.0.0 (the PyPI wheel; SHA-256 `40715634…ef01` checked again here):
+
+- `blocks/het_block.py`, `HetBlock.jac_backward_prelim`, lines 400–401: the comment "always use two-sided differentiation for hetinputs", then `self.hetinputs.differentiable(ss, h, True)`. This stores `default_twosided = True` (`utilities/function.py`, line 231).
+- `utilities/function.py`, line 233: `DifferentiableCombinedExtendedFunction.diff(self, shock_dict, h=None, outputs=None, hide_zeros=False, twosided=False)`. The default is `False`, not `None`, so the branch `if twosided is None: twosided = self.default_twosided` (lines 234–235) is never taken when the caller omits the argument. The single-function class `DifferentiableExtendedFunction.diff` (line 97) has the default `None`, which that branch expects.
+- `blocks/het_block.py`, `HetBlock.backward_fakenews`, line 302: `differentiable_hetinput.diff({input_shocked: 1})`, without `twosided`. The contemporaneous income response that enters the fake-news algorithm is therefore a forward difference.
+- `blocks/stage_block.py` follows the same pattern: lines 422–423 (`differentiable(ss, h, True)`, same comment) and line 287 (`.diff(din_dict)`). The suite does not use `StageBlock`.
+- GitHub master `eb4ac4c` has the same code according to the research session's check; this was not re-checked here.
+
+This concerns the hetinput only. The household backward function is differentiated two-sided as requested (`het_block.py`, line 410). In this suite only T3's `income_cyclical` with ζ ≠ 0 is a nonlinear hetinput. `income_basic`, `income_wage`, `income_aftertax` and `income_cyclical` with ζ = 0 are linear in their inputs, so forward and central differences agree for them up to rounding.
+
+`scripts/repro_F3_v0_1.py` builds the T3 income function with three income states and calls SSJ as `HetBlock` does. Output here:
+
+```
+h=0.01: |used-forward| 0.0e+00  |used-central| 2.4e-03  |used-analytic| 2.4e-03  |twosided=None - analytic| 8.4e-06
+h=0.001: |used-forward| 0.0e+00  |used-central| 2.4e-04  |used-analytic| 2.4e-04  |twosided=None - analytic| 8.4e-08
+h=0.0001: |used-forward| 0.0e+00  |used-central| 2.4e-05  |used-analytic| 2.4e-05  |twosided=None - analytic| 8.4e-10
+```
+
+The derivative SSJ uses is exactly the forward difference, with an O(h) error. Passing `twosided=None` applies the stored default and gives an O(h²) error.
+
+**2. Size of the term.** With Yss = 1 the countercyclical income is y_i(Y) = e_i Y^(1+ζ_i), and the calibration gives Σ_i π_i e_i (1+ζ_i) = 1 (aggregate income equals Y). The forward difference of aggregate income is
+
+    Σ_i π_i [y_i(1+h) − y_i(1)] / h = 1 + (h/2) Σ_i π_i e_i ζ_i (1+ζ_i) + O(h²) = 1 + 0.0927104 h + O(h²).
+
+For proportional income (ζ = 0) the h term is zero. T3 uses h = 1e-3 b, so the term is 9.27e-5 b: 9.27e-6 at b = 0.1 and 9.27e-9 at b = 1e-4. These match the residuals reported above (9.3e-6 at b = 0.1; 9.5e-9 at b = 1e-4). At b = 1e-4 the term (9.27e-9) is of the same order as the rounding error of a forward difference with step 1e-7 (a few times 1e-9), and the residual no longer halves with h (table below).
+
+The residual is R_Y = J^{C,Y} + J^{A,Y} − (1+r) L J^{A,Y} − I, with L the one-period lag matrix. At b = 0.1 and h = 1e-4 its diagonal is 9.27128e-6 and its largest off-diagonal element 4.9e-14. The aggregate income derivative that SSJ uses, measured directly, is 1 + 9.27129e-6; the formula gives 1 + 9.27104e-6, and the difference of 2.5e-10 is the O(h²) term. Subtracting (Σ_i π_i dy_i/dY − 1) I from R_Y leaves 1.81e-11.
+
+**3. Results.** max |R_Y| and the dY gap = max |dY_goods − dY_assets| / max |dY_assets|, for the same steady state, T = 150 and dr_t = −0.01 · 0.8^t. Hetinput derivative: "original" = SSJ as installed; "two-sided" = the stored default applied; "analytic" = e_i(1+ζ_i). The two controls replace `DifferentiableCombinedExtendedFunction.diff` inside the probe process only. Review values: Windows, Python 3.13.3, the same package versions (review, section 6); "here": the environment of section 9. Rows without a review value were not in the review table. Countercyclical income unless stated otherwise.
+
+| b | Hetinput derivative | h | max \|R_Y\|, review | max \|R_Y\|, here | dY gap, review | dY gap, here | cond(J^{C,Y} − I), here |
+|---|---|---|---|---|---|---|---|
+| 0.1, proportional | original | 1e-4 | – | 3.71e-12 | – | 0.000152% | 3.60e5 |
+| 0.1 | original | 1e-4 | 9.27128e-6 | 9.27128e-6 | 35.1944% | 35.1944% | 4.86e4 |
+| 0.1 | original | 5e-5 | 4.63557e-6 | 4.63557e-6 | 35.4089% | 35.4089% | 9.77e4 |
+| 0.1 | original | 2.5e-5 | 2.31775e-6 | 2.31775e-6 | 35.8377% | 35.8377% | 1.98e5 |
+| 0.1 | two-sided | 1e-4 | 2.33624e-10 | 2.32476e-10 | 0.145606% | 0.144877% | 8.21e6 |
+| 0.1 | two-sided | 5e-5 | 4.49112e-11 | 4.48541e-11 | 0.0243933% | 0.0243017% | 8.19e6 |
+| 0.1 | analytic | 1e-4 | 1.78646e-11 | 1.78848e-11 | 0.0157501% | 0.0157473% | 8.17e6 |
+| 0.01 | original | 1e-5 | 9.27087e-7 | 9.27087e-7 | 10.6714% | 10.6715% | 1.82e5 |
+| 0.01 | original | 5e-6 | – | 4.63542e-7 | – | 4.25136% | 1.45e5 |
+| 0.01 | original | 2.5e-6 | – | 2.31687e-7 | – | 1.92890% | 1.31e5 |
+| 0.01 | two-sided | 1e-5 | 2.33202e-11 | 2.32121e-11 | 0.000175713% | 0.000175170% | 1.20e5 |
+| 0.01 | two-sided | 5e-6 | – | 2.78932e-12 | – | 0.0000172919% | 1.20e5 |
+| 0.01 | analytic | 1e-5 | – | 1.76599e-11 | – | 0.000134687% | 1.20e5 |
+| 1e-4 | original | 1e-7 | 9.41889e-9 | 9.54517e-9 | 0.0126776% | 0.0127509% | 3.05e4 |
+| 1e-4 | original | 5e-8 | – | 3.86951e-9 | – | 0.00558774% | 3.05e4 |
+| 1e-4 | original | 2.5e-8 | – | 6.97757e-9 | – | 0.00946485% | 3.05e4 |
+| 1e-4 | two-sided | 1e-7 | – | 1.47269e-10 | – | 0.0000164992% | 3.05e4 |
+| 1e-4 | two-sided | 5e-8 | – | 1.09690e-10 | – | 0.000402365% | 3.05e4 |
+| 1e-4 | analytic | 1e-7 | – | 4.10195e-10 | – | 0.000733917% | 3.05e4 |
+
+All 24 rows, including the other proportional-income rows (max |R_Y| 1.8e-12 to 6.8e-12 in every mode), are in `out/c03_probe_v0_1.json`. The original rows at b = 0.1 and 0.01 agree with the review to the printed digits, apart from the last digit of one dY gap. The two-sided and analytic rows agree to two to four digits; these are residuals of 1e-10 to 1e-11 in a system with condition number about 8e6. At b = 1e-4 the original row differs by about 1%, where the difference is dominated by rounding.
+
+**4. What remains.**
+
+- Two-sided differences alone do not make the two targets numerically equivalent at b = 0.1. The dY gap is 0.145% at h = 1e-4 and 0.024% at h = 5e-5, and 0.016% with the analytic derivative, where max |R_Y| = 1.8e-11 remains. cond(J^{C,Y} − I) rises from 4.9e4 to 8.2e6, while cond(J^{A,Y}) stays at about 174.
+- In the countercyclical rows with b ≥ 0.01, the dY gap is 0.5 to 1.1 times cond(J^{C,Y} − I) · max |R_Y|. So the gap has the size of the budget-identity residual amplified by the goods-market condition number. With the original derivative at b = 0.1, cond(J^{C,Y} − I) doubles each time h is halved, so the product and the gap stay at 35–36% although R_Y halves. This describes the 24 rows; it is not a separate proof.
+- A small residual in a solve's own target does not show that the two solves agree. With the original derivative at b = 0.1, the asset-market solution leaves a goods-market residual of 2.5e-7, and the goods-market solution leaves an asset-market residual of 1.1e-4.
+- The sources of the 1.8e-11 floor and of the remaining 0.016% gap (other differentiation residuals, steady-state residuals, the sensitivity of the goods-market solve) have not been separated.
+
+**5. Status of the registered result.** Unchanged. In the registered measurement C03 changed no test outcome; at b = 1e-4, where the T3 tests judge, the probe gives a dY gap of 1.3e-4 (relative), as reported above. The follow-up explains the O(h) residual at large b. It does not show that C03 is numerically equivalent at every b.
 
 ## 9. Limitations
 
@@ -275,7 +355,8 @@ No control changed any test outcome.
 - **One environment.** Python 3.13.16, sequence-jacobian 1.0.0, numpy 2.5.3, scipy 1.18.1, numba 0.68.0 (llvmlite 0.50.0), scipy-openblas 0.3.34, pytest 9.1.1, Linux 6.18 x86_64, 4 CPUs, one thread per run. One rounding-level number (1.4e-11 relative) differed between runs.
 - **Three controls only.** They show that the tests do not alarm on three equivalent changes. That is not a false-alarm rate.
 - **Scope of "model side".** `core.py` was mutated as part of the model side (section 2). A reader who counts it as infrastructure should discount M01, M08, M13, M16 and C02.
-- **Not known.** Whether M12-type mismatches are caught at other option settings; the cause of the O(h) budget-identity residual in the countercyclical T3 Jacobians (section 8); whether the M13 mechanism in T5 is exactly as described in section 7.
+- **Not known.** Whether M12-type mismatches are caught at other option settings; whether the M13 mechanism in T5 is exactly as described in section 7.
+- **Identified after the measurement (follow-up diagnosis, section 8).** The cause of the O(h) budget-identity residual in the countercyclical T3 Jacobians: SSJ 1.0.0 differentiates the income hetinput one-sided. Still open: the 0.15% C03 dY gap at b = 0.1 that remains with the two-sided hetinput derivative.
 
 ## 10. What the misses suggest (not implemented here)
 
@@ -285,7 +366,7 @@ The checker is frozen on this branch, so these are notes for the author, not cha
 2. **Steady-state residuals:** government budget, goods market and asset market at the steady state. These would catch M21 directly, and M08 more directly than now.
 3. **An explicit income-normalisation check** (E[e] = 1, aggregate income = Y).
 4. **T4:** the analytic limit caught none of the seven mutants that reach it, while the diagnostics caught four. The README could say that T4's error-detection value lies in the diagnostics.
-5. **T6:** describe the matrix identity as a linear-algebra check. The RA Ricardian benchmark and the cohort simulation are the parts that detected errors.
+5. **T6:** describe the matrix identity as a linear-algebra check. The parts that detected errors are the test named `test_rank_benchmark_is_ricardian`, whose RA assertion (a closed form) caught three mutants and whose HA-multiplier assertion caught three, and the cohort simulation and first-round T-independence, which are separate computation paths on the same household code, policies and distribution rather than external references. Splitting the Ricardian test into its two assertions would make this attribution visible in the test outcomes.
 6. **Specification pins.** M03 (fiscal rule), M07 (δ) and M24 (borrowing limit) are deviations from the documented model that no limit test can see by construction. Only direct checks of the specification, such as asserting calibration constants or policy-rule coefficients, would catch them.
 
 ## 11. Reproduction
@@ -295,6 +376,15 @@ pip install sequence-jacobian==1.0.0 pytest          # numpy, scipy, numba as in
 python3 -m pytest                                    # unmodified suite: 41 passed, 2 xfailed
 python3 scripts/mutation_v0_1.py --check             # apply and compile every patch, no tests
 python3 scripts/mutation_v0_1.py --jobs 4            # baselines + 28 runs -> out/mutation_v0_1.{json,csv}
+python3 scripts/c03_probe_v0_1.py .                  # follow-up C03 diagnosis (section 8) -> out/c03_probe_v0_1.json
+python3 scripts/repro_F3_v0_1.py                     # one-sided hetinput derivative, SSJ code only
 ```
 
-The published outputs come from the repeat run. The script was as in commit `d311711`; the JSON records HEAD `e51d7b8` because amendment A1 was committed while the run was in progress, and the A1 change only affects output storage. In the JSON, `settings.workdir` is the temporary directory used on the run machine. The `scratch` diagnostics cited in sections 5 and 8 (T3 provider calls under M12, C03 and M15, and the budget identity in the T3 Jacobians) were run outside the registered measurement and are not part of the outputs.
+**Execution record.**
+
+- Order (2026-10-21, Korea time): pre-registration `ccb7e38` 19:32:35; README correction `e51d7b8` 19:32:55; start of the repeat run 19:45:13 (`environment.utc` in the JSON, 10:45:13 UTC); amendment A1 `d311711` 19:48:26; results `65f8f6d` 20:00:44.
+- The published outputs come from the repeat run. It started before A1 was committed, so it ran the A1 change as an uncommitted working copy of the runner. The JSON therefore records HEAD `e51d7b8`, and that record is left as it is. The A1 change only affects output storage.
+- The runner as committed in `d311711` (unchanged in `65f8f6d`) is git blob `c78fcb88abc00b9663b52f2fc0d0e8713e6b89c6`. That the working copy used for the repeat had exactly this content is the author's statement. The runner's docstring was corrected later (amendment A2 in the plan; text only), so the current file is a different blob.
+- `model_or_tests_dirty = false` in the JSON comes from `git status --porcelain hank_limits tests`. It covers `hank_limits/` and `tests/` only and says nothing about whether the runner itself was committed.
+- The first full run's raw outputs, push times and run logs were not kept. Two statements are therefore the author's and have not been verified independently: that the pre-registration was pushed before the first run, and that the first run and the repeat gave identical test outcomes and headline numbers (section 2). What git shows is the commit order above.
+- In the JSON, `settings.workdir` is the temporary directory used on the run machine. The `scratch` diagnostics cited in sections 5 and 8 (T3 provider calls under M12, C03 and M15, and the budget identity in the T3 Jacobians) were run outside the registered measurement and are not part of the outputs. The follow-up C03 diagnosis of section 8 is stored separately in `out/c03_probe_v0_1.json`.

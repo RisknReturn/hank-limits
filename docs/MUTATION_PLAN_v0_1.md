@@ -119,7 +119,12 @@ Categories as in the request: timing, units, Jacobian, distribution, equilibrium
 None at the time of the pre-registration commit. Any later change to the mutant list, the predictions, the detection rule or the harness will be listed here with date, reason and whether results had been seen.
 
 - **A1 (2026-10-21, after the first full run; results seen).** The output JSON stored the check summaries of the two baseline runs only; for mutant runs it kept test outcomes and two headline numbers per group. Changed `write_outputs` to store every run's outcomes and check summaries (key `runs`, which replaces `baselines`), so that error sizes can be reported in full. Mutant list, patches, predictions, detection rule and plugin code are unchanged. All 30 runs were repeated with the amended script; the published `out/mutation_v0_1.{json,csv}` are from the repeat, and test outcomes and headline numbers were compared with the first run (result stated in `docs/MUTATION_v0_1.md`).
+- **A2 (2026-10-22, after the results and an external review; results seen).** The runner docstring said that only `--check` was run before the pre-registration commit; rule 4 above also lists the two baseline smoke runs on the unmutated copy. The docstring now says both. Text only: mutant list, patches, predictions, detection rule, plugin and output code are unchanged, and nothing was re-run. The published repeat run used the runner content committed in `d311711` (git blob `c78fcb88abc00b9663b52f2fc0d0e8713e6b89c6`), by the author's statement; see the execution record in `docs/MUTATION_v0_1.md`, section 11.
 
 ## 7. Environment at pre-registration
 
 Linux 6.18 x86_64, Python 3.13.16, sequence-jacobian 1.0.0, numpy 2.5.3, scipy 1.18.1, numba 0.68.0 (llvmlite 0.50.0), scipy-openblas 0.3.34, pytest 9.1.1; 4 CPUs, one thread per run. Unmodified suite on this machine: 41 passed, 2 xfailed in 75 s.
+
+## 8. Completion note (2026-10-22)
+
+The measurement is complete; results are in `docs/MUTATION_v0_1.md`, corrected after an independent review. The "no merge into `main`" in rule 1 was a constraint for the period in which the experiment was carried out. The branch can now be merged into `main` as a documentation and research-output change. The other parts of rule 1 still hold: no tag and no GitHub Release (the Zenodo integration would mint a DOI); version 0.2.1, the existing tags and the citation metadata are unchanged. Sections 1–5 and 7 are as registered; section 6 lists every later change.
