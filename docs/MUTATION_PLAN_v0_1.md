@@ -118,6 +118,8 @@ Categories as in the request: timing, units, Jacobian, distribution, equilibrium
 
 None at the time of the pre-registration commit. Any later change to the mutant list, the predictions, the detection rule or the harness will be listed here with date, reason and whether results had been seen.
 
+- **A1 (2026-10-21, after the first full run; results seen).** The output JSON stored the check summaries of the two baseline runs only; for mutant runs it kept test outcomes and two headline numbers per group. Changed `write_outputs` to store every run's outcomes and check summaries (key `runs`, which replaces `baselines`), so that error sizes can be reported in full. Mutant list, patches, predictions, detection rule and plugin code are unchanged. All 30 runs were repeated with the amended script; the published `out/mutation_v0_1.{json,csv}` are from the repeat, and test outcomes and headline numbers were compared with the first run (result stated in `docs/MUTATION_v0_1.md`).
+
 ## 7. Environment at pre-registration
 
 Linux 6.18 x86_64, Python 3.13.16, sequence-jacobian 1.0.0, numpy 2.5.3, scipy 1.18.1, numba 0.68.0 (llvmlite 0.50.0), scipy-openblas 0.3.34, pytest 9.1.1; 4 CPUs, one thread per run. Unmodified suite on this machine: 41 passed, 2 xfailed in 75 s.

@@ -758,15 +758,16 @@ def write_outputs(prefix, env, runs, res, args):
             w = csv.DictWriter(f, fieldnames=list(rows[0]))
             w.writeheader()
             w.writerows(rows)
+    # every run's outcomes and check summaries (v0.1 amendment A1: mutant runs were not stored)
     base = {k: dict(pytest_summary=runs[k].get('pytest_summary'), wall_s=runs[k].get('wall_s'),
                     fixtures=runs[k]['fixtures'], outcomes=runs[k]['outcomes'])
-            for k in runs if k.startswith('B')}
+            for k in runs}
     with open(prefix + '.json', 'w') as f:
         json.dump(_clean(dict(environment=env, settings=vars(args),
                               mutants=[{k: v for k, v in m.items() if k != 'patches'} | dict(
                                   patches=[dict(file=p[0], old=p[1], new=p[2]) for p in m['patches']])
                                        for m in MUTANTS],
-                              baselines=base, baseline_deterministic=res.get('baseline_deterministic'),
+                              runs=base, baseline_deterministic=res.get('baseline_deterministic'),
                               results=res)), f, indent=1)
 
 
