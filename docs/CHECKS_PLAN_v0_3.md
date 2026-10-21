@@ -330,7 +330,7 @@ Summary: V is predicted to catch 18 of the 25 v0.1 mutants (M17 unsure), to miss
 
 ## 10. Amendments
 
-None at the time of the pre-registration commit.
+None at the time of the pre-registration commit. None after it either: the mutants, patches, predictions, detection rule and runner were used as committed in P, and the thresholds as committed in T (the implementation notes in section 4 do not change the registered design). Results: `docs/MUTATION_v0_2.md`.
 
 ## Appendix A. Mutant generation: prompt, inputs and complete output
 
