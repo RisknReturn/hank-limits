@@ -1,17 +1,14 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 title: "hank-limits: analytic-limit and aggregate-identity tests for HANK codes"
-version: 0.2.1
-date-released: "2026-10-20"
+version: 0.3.0
+date-released: "2026-10-24"
 license: MIT
 doi: 10.5281/zenodo.23489176
 identifiers:
   - type: doi
     value: 10.5281/zenodo.23489176
     description: "Concept DOI (all versions)"
-  - type: doi
-    value: 10.5281/zenodo.23489177
-    description: "Version 0.2.1"
 type: software
 authors:
   - family-names: "Han"
@@ -23,8 +20,13 @@ abstract: >-
   Tests that a HANK code must pass at limits with known answers or at exact identities (permanent-income
   household-block limit, TANK benchmark with imposed incidence, Werning (2015) vanishing liquidity,
   Aiyagari no-idiosyncratic-risk limit, intertemporal Keynesian cross consistency, HANK - RANK differencing
-  identity), reported as errors and observed convergence orders rather than single pass/fail checks. Reference implementation on sequence-jacobian 1.0.0, with minimal
-  reproductions of two observations about that library (F1, F2). Developed with extensive assistance
+  identity), reported as errors and observed convergence orders rather than single pass/fail checks. Version 0.3.0
+  adds checks V1-V6 computed from primitive quantities the code reports (GE target residual of the vanishing-liquidity
+  solve, steady-state market-clearing and budget residuals, income normalisation, the documented specification along
+  equilibrium paths, and the solved exogenous paths against the requested ones), with a verdict that missing or
+  non-finite values cannot hide, and mutation tests of the suite on hand-made and independently generated errors.
+  Reference implementation on sequence-jacobian 1.0.0, with minimal reproductions of three observations about that
+  library (F1, F2, F3). Developed with extensive assistance
   from Claude Opus 5.5 (Anthropic) and reviewed with GPT 6.1 Sol (OpenAI); the author directed and reviewed
   the work and is responsible for the content. See the AI usage disclosure in the README.
 keywords:

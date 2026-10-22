@@ -1,10 +1,8 @@
-# hank-limits v0.2.1: analytic-limit and aggregate-identity tests for HANK codes
-
-**This branch: v0.3 (unreleased)** on top of release v0.2.1; see "v0.3 (unreleased)" below.
+# hank-limits v0.3.0: analytic-limit and aggregate-identity tests for HANK codes
 
 [![DOI](https://zenodo.org/badge/1426447298.svg)](https://doi.org/10.5281/zenodo.23489176)
 
-Cite all versions with the concept DOI [10.5281/zenodo.23489176](https://doi.org/10.5281/zenodo.23489176); this release (v0.2.1) is [10.5281/zenodo.23489177](https://doi.org/10.5281/zenodo.23489177). GitHub's "Cite this repository" button uses `CITATION.cff`.
+Cite all versions with the concept DOI [10.5281/zenodo.23489176](https://doi.org/10.5281/zenodo.23489176). The DOI of this release (v0.3.0) will be added here and in `CITATION.cff` after it is archived on Zenodo. The previous release, v0.2.1, is [10.5281/zenodo.23489177](https://doi.org/10.5281/zenodo.23489177). GitHub's "Cite this repository" button uses `CITATION.cff`.
 
 This repository collects tests that a heterogeneous-agent New Keynesian (HANK) code should pass at limits with known answers and at exact aggregate identities. It is implemented on the public package `sequence-jacobian` (SSJ) 1.0.0. Each test reports not only pass/fail at one point but **the error as the limit parameter goes to its limit and the observed order of convergence**.
 
@@ -28,24 +26,30 @@ This repository collects tests that a heterogeneous-agent New Keynesian (HANK) c
 
 **v0.2 → v0.2.1 (R4 follow-up review, same reviewer):** (1) removed the diagnostic field `normalisation_err_last_sweep`, which was always zero by construction; (2) the second Aiyagari cell is now reported as "not reproduced, cause unresolved", with a comparison against the level CV and autocorrelation of the original Table I and a grid audit; (3) the practical impact of F2 is limited to this example; (4) horizon independence in T1 is limited to the linear household Jacobian at a fixed steady state; (5) revised wording of the SSJ issue drafts. Test results are unchanged.
 
-### v0.3 (unreleased): steady-state, normalisation and specification checks
+### Changes v0.2.1 → v0.3.0: steady-state, normalisation and specification checks
 
-Not released: the version in `pyproject.toml`, the tags and the citation metadata are still those of v0.2.1. Plan and pre-registration: `docs/CHECKS_PLAN_v0_3.md`; mutation tests: `docs/MUTATION_v0_1.md` (v0.2.1 suite) and `docs/MUTATION_v0_2.md` (v0.2.1 against v0.3 on independently generated mutants).
+Plan and pre-registration: `docs/CHECKS_PLAN_v0_3.md`. Changes after the pre-release review, and their re-run: `docs/CHECKS_v0_3_0_AMENDMENT.md`. Mutation tests: `docs/MUTATION_v0_1.md` (v0.2.1 suite) and `docs/MUTATION_v0_2.md` (v0.2.1 against v0.3 on independently generated mutants).
 
-| Item | v0.3 change |
+| Item | v0.3.0 change |
 |---|---|
 | V1 | T3 records and tests the residual of the GE target that the provider reports in `ge_target` (`'asset_mkt'` or `'goods_mkt'`; if absent, `'asset_mkt'` is assumed and recorded as assumed), divided by b: as reported by the solver, and computed directly from the reported Jacobians and the rate path the check passed (asset market J^{A,Y} dY + J^{A,r} dr from `J_A`; goods market dY − J^{C,Y} dY − J^{C,r} dr from `J_C`). Thresholds: 2e-12 for the asset market, from the asset-market solve's own residual (unchanged); 9e-12 (proportional income) and 2e-11 (countercyclical income) for the goods market, from the reference provider solved on the goods market (v0.3.0). The other market's residual is recorded without a threshold. Scope: V1 applies to a T3 solve on one of these two markets; for any other reported target it is skipped as not applicable. Until v0.3.0, V1 assumed the asset-market target and alarmed on an equivalent goods-market solve (control C03): its asset-market residual is up to 3.0e-6·b with proportional income, where F3 plays no role, and up to 2.4e-3·b with countercyclical income, where F3 adds an O(h) error (`docs/MUTATION_v0_2.md`, section 8; `docs/CHECKS_v0_3_0_AMENDMENT.md`). |
 | V2 | Steady-state residuals computed in the checks from reported primitive quantities: government budget, goods and asset markets (fiscal HANK, TANK, Huggett), capital market, firm first-order conditions and goods market (Aiyagari), and the aggregate household budget in every model. |
-| V3 | Income normalisation: Π row-stochastic, E[e] = 1 under the stationary distribution of the reported Π, aggregate income = Y (Y − Tax in the fiscal model), and Σ π e ζ = 0 for the countercyclical incidence. |
-| V4 | Specification pins against the documented values in `hank_limits/spec.py` (not read from `models.py`): reported parameters, the Aiyagari Euler equation at the documented β and EIS, and the fiscal rule, government budget, real-rate rule and goods market along the T5 paths. |
+| V3 | Income normalisation: Π row-stochastic, E[e] = 1 under the stationary distribution of the reported Π, and aggregate income Σ π y equal to the model's reference: Y (T1, T3); the type's income Y_H or Y_S, with the weighted sum λ Y_H + (1 − λ) Y_S = Y (T2); w L with the documented labour L = 1 (T4); Y − Tax (T5). Countercyclical incidence (T3): Σ π e ζ = 0. |
+| V4 | Specification pins against the documented values in `hank_limits/spec.py` (not read from `models.py`): reported parameters, the Aiyagari Euler equation at the documented β and EIS, and the fiscal rule, government budget, real-rate rule and goods market along the T5 paths. v0.3.0: the solved exogenous paths are compared with the requested ones (`exog_G`, `exog_r`, `exog_rshock`), and the real-rate rule uses the requested rate shock. |
 | V5 | `test_rank_benchmark_is_ricardian` now holds only the closed-form RA assertion; the HA assertion is `test_ha_multiplier_exceeds_one`. |
-| V6 | F3 pin (strict xfail, SSJ code only), in the same form as the F1 and F2 pins. |
-| Providers | New **optional** fields `ss_detail`, `J_A`, `policy` and `irfs[...]['drshock']` (`hank_limits/interface.py`); checks whose fields are missing are skipped, with the reason recorded. No computation in `models.py` or `core.py` changed: the summaries of the existing checks are bit-identical to v0.2.1. |
+| V6 | F3 pins (strict xfail, SSJ code only), in the same form as the F1 and F2 pins. v0.3.0: two tests, V6a (hetinputs differentiated one-sided) and V6b (hetoutputs one-sided even with `twosided=True`), so that an upstream fix of one part shows as XPASS of that test only. |
+| Providers | New **optional** fields `ss_detail`, `J_A`, `J_C`, `ge_target`, `policy` and `irfs[...]` `dC`, `dB`, `drshock`; `hank_limits/interface.py` lists, per provider, every field the checks read and whether it is required or optional. Each V quantity is computed from the fields of its own equation; a missing field leaves that quantity missing, with the reason recorded. No computation in `models.py` or `core.py` changed; the Werning provider gained an optional argument `ge_target` whose default is the previous behaviour. In the baseline runs of the mutation reports (four in v0.2, two in the v0.3.0 re-run), the 276 summary numbers of the existing checks were exactly equal to those of v0.1 run B0. |
+| Verdict | v0.3.0. A V test fails if any value is non-finite, negative or not below its threshold, whatever else is missing. Without a failure, it is skipped as **incomplete** (never passed) if expected values are missing, and skipped with the reason if the provider reports none of its quantities. The check declares the expected values per setting, income type and requested shock (`res['v0_3']` → `status`; `checks.v03_verdict`). |
+| Review | Pre-release review of 2026-10-22 (no P0 or P1 findings): the verdict above (R1); one field convention in documentation and code, with fields per equation and T3 β read from `ss_detail` (R2); solved against requested exogenous paths (R3); V1 judged on the reported GE target (R4); V6 split. Regression tests of the checker with fake providers: `tests/test_v0_3_0_checker.py`. Design, predictions, thresholds and re-run: `docs/CHECKS_v0_3_0_AMENDMENT.md`. |
 | T4, T6 | Two clarifications from mutation testing v0.1: T4's error-detection value lies in its diagnostics (sections 7 and 9); the T6 matrix identity is a linear-algebra check. |
 
-Full pytest run with v0.3: **74 passed, 3 xfailed** (F1, F2, F3).
+Full pytest run with v0.3.0: **107 passed, 4 xfailed** (F1, F2, V6a, V6b). The 107 passed are 77 tests of groups T1–T6, D and V and the 30 checker regression tests. Output: `out/pytest_output_v0_3_0.txt`.
 
 Mutation testing v0.2 (`docs/MUTATION_v0_2.md`): on 20 mutants generated by a separate agent without knowledge of the new checks, the v0.2.1 suite caught 14 and the v0.3 suite 19; neither suite alarmed on the 3 controls. Both missed N20, an error in a diagnostic that no test asserts tightly. On the 25 v0.1 mutants the v0.3 suite catches all 25, but those checks were designed after the v0.1 results, so that is not an independent result.
+
+Re-run after the pre-release review (`docs/CHECKS_v0_3_0_AMENDMENT.md`, section 10): the suite as revised for v0.3.0 was run again on the same mutants, designs (ii) and (iii). In (ii) no result changed: 19 of 20 caught, N20 missed, no alarm on the controls. In (iii) the only change is control C03, which no longer alarms because V1 now judges the GE target that the provider reports. That holds by construction and is not independent evidence. The v0.2 results above remain the record for the checks as they were.
+
+Where to start reading the mutation tests: the reports `docs/MUTATION_v0_1.md`, `docs/MUTATION_v0_2.md` and `docs/CHECKS_v0_3_0_AMENDMENT.md`, and the CSV files with one row per design × mutant × test group (`out/mutation_v0_1.csv`, `out/mutation_v0_2.csv`, `out/mutation_v0_3_0_rerun.csv`). The JSON files `out/mutation_v0_*.json` keep every run's test outcomes and check summaries.
 
 ---
 
@@ -66,7 +70,7 @@ The error metric is the **relative max-entry error** `max|x − ref| / max|ref|`
 
 **Status of the tolerances.** Test tolerances are **regression-check thresholds for this calibration**. They are not a conformance specification requiring other implementations to show the same slopes or the same 1e-10 threshold.
 
-Full pytest run: **41 passed, 2 xfailed, about 65–75 s** (section 11). Report script about 110 s, diagnostics script about 80 s.
+Full pytest run of v0.2.1, for which this summary was written: **41 passed, 2 xfailed, about 65–75 s** (section 11). The T1–T6 results above are unchanged in v0.3.0, whose full run gives 107 passed, 4 xfailed, about 75 s (`out/pytest_output_v0_3_0.txt`). Report script about 110 s, diagnostics script about 80 s.
 
 ### Key findings
 
@@ -85,7 +89,7 @@ Full pytest run: **41 passed, 2 xfailed, about 65–75 s** (section 11). Report 
 ```bash
 pip install sequence-jacobian==1.0.0 pytest matplotlib   # needs numpy, scipy, numba
 cd hank-limits
-python3 -m pytest                          # about 74 s; summary output with python3 -m pytest -s
+python3 -m pytest                          # about 75 s; summary output with python3 -m pytest -s
 python3 scripts/convergence_report.py      # about 110 s: out/convergence_v0_2.json, 6 PNGs, out/tables_v0_2/*.csv
 python3 scripts/diagnostics_v0_2.py        # about 80 s: out/diagnostics_v0_2.json (section 12)
 python3 scripts/aiyagari_table2_v0_2.py    # about 20 s: out/aiyagari_table2_v0_2.json (section 7)
@@ -93,6 +97,7 @@ python3 scripts/repro_F1_v0_2.py           # SSJ code only: out/repro_F1_v0_2.js
 python3 scripts/repro_F2_v0_2.py           # SSJ code only: out/repro_F2_v0_2.json, out/F2_HU_T300_v0_2.npz
 python3 scripts/repro_F3_v0_1.py           # v0.3, SSJ code only: hetinput derivative (section 14)
 python3 scripts/repro_F3_hetblock_v0_1.py  # v0.3, SSJ code only: HetBlock.jacobian, hetinput and hetoutput
+python3 scripts/mutation_v0_3_0.py --v03-ref <commit> --design ii iii   # about 18 min: mutation re-run (v0.3.0)
 ```
 
 - Every entry point limits threads to one (`OMP_NUM_THREADS=1` etc.).
@@ -112,9 +117,12 @@ hank_limits/
   metrics.py      error metrics, convergence orders, mixed absolute/relative tolerance
   suite.py        standard settings (shared by tests and scripts)
   spec.py         v0.3: documented specification values for the V checks
-tests/            test_t1 ... test_t6, test_diagnostics_v0_2, test_v0_3_checks (v0.3)
+tests/            test_t1 ... test_t6, test_diagnostics_v0_2, test_v0_3_checks (v0.3),
+                  test_v0_3_0_checker (v0.3.0: the checker on fake providers)
 scripts/          convergence_report.py, diagnostics_v0_2.py, aiyagari_table2_v0_2.py,
-                  repro_F1_v0_2.py, repro_F2_v0_2.py, a1_markov_checks_v0_2.py (for the design note, section 13)
+                  repro_F1_v0_2.py, repro_F2_v0_2.py, repro_F3_*.py, a1_markov_checks_v0_2.py (for the design note, section 13),
+                  mutation_v0_1.py, mutation_v0_2.py, mutation_v0_3_0.py (mutation runners), thresholds_v0_3_0.py,
+                  rerun_v0_3_0_compare.py
 out/              JSON, PNG, tables_v0_2/*.csv, pytest output
 ```
 
@@ -361,7 +369,7 @@ The check functions (`hank_limits/checks.py`) do not depend on SSJ; they take pr
 | `check_aiyagari` | `f(sd, rho)` | `r, rho_disc`, optional `diag` (residuals) |
 | `check_ikc`, `check_differencing` | `f(T, shocks)` | `J`, `ss`, `irfs` |
 
-v0.3: providers may also report the optional fields `ss_detail`, `J_A`, `policy` and `irfs[label]['drshock']` (`hank_limits/interface.py`). The V checks compute steady-state residuals, income normalisation and specification pins from them, against the values passed as `spec=` (the suite passes `hank_limits/spec.py`; pass your own calibration's values). If a field is missing, the checks that need it are skipped and the reason is recorded under `v0_3` → `skipped`.
+v0.3.0: providers may also report the optional fields `ss_detail`, `J_A`, `J_C`, `ge_target`, `policy` and `irfs[label]` `dC`, `dB`, `drshock`. `hank_limits/interface.py` lists, per provider, every field the checks read and the V quantities each optional field feeds. The V checks compute steady-state residuals, income normalisation and specification pins from them, against the values passed as `spec=` (the suite passes `hank_limits/spec.py`; pass your own calibration's values), and compare the solved exogenous paths with those your code was asked to solve. Each V quantity is computed from the fields of its own equation; if a field is missing, that quantity is missing and the reason is recorded under `v0_3` → `skipped`. A V test fails on any non-finite, negative or too large value; it is skipped as incomplete if values are missing without a failure, and skipped with the reason if your provider reports none of its quantities (`checks.v03_verdict`). For T3, report in `ge_target` the market whose clearing your solve imposes (`'asset_mkt'` or `'goods_mkt'`).
 
 Recommendations: use T1 and T4 as single-type household-block unit tests, T2 in a form generalised to any number of types, and T5 and T6 as regression tests of your own GE solver. The numerical tolerances are values for this calibration, so reset them for your own calibration. Differences in timing convention or units usually show up at once in the eps = 0 exactness test (T1, at the 1e-9 level).
 
@@ -369,7 +377,7 @@ Recommendations: use T1 and T4 as single-type household-block unit tests, T2 in 
 
 ## 11. pytest output (actual)
 
-The full output is in `out/pytest_output_v0_2_1.txt`.
+The output below is that of v0.2.1 (41 passed, 2 xfailed), kept as recorded; its full output is in `out/pytest_output_v0_2_1.txt`. The T1–T6 and D tests and their results are unchanged since. The current output, v0.3.0 (107 passed, 4 xfailed: these tests, the V checks and the checker regression tests), is in `out/pytest_output_v0_3_0.txt`.
 
 ```
 tests/test_t5_ikc.py::test_ikc_identity_ssj_solver_rule_long_horizon XFAIL
