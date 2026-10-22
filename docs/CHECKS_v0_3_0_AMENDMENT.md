@@ -343,6 +343,7 @@ Cells as in `docs/MUTATION_v0_2.md`, sections 3 and 9: per group, whether the mu
   - In the two settings that no V test uses: up to 5.8e-9 in absolute terms, but at most 4.5e-12 relative (M08, whose residuals there are of order 1e3).
 - **Cause.** This is the run-to-run rounding of dC described in the plan (section 4), which also shows in the v0.1 two-valued number. The prediction exempted only the two unused settings, and was wrong for the refined one.
 - **No test outcome changed because of it.** Section 5 had flagged this risk before any mutant was run.
+- *(2026-10-23: the clause "none in the v0.1 summaries apart from the known two-valued number" above holds for the baselines only; see the correction in section 11.7.)*
 
 **C03 is not independent evidence.** Its V1 thresholds come from unmodified runs of the same setting (section 3.4), so its pass holds by construction. It shows that the target convention works as built: a goods-market solve is judged on the goods market, and its asset-market residual is kept as a diagnostic.
 
@@ -462,5 +463,65 @@ Full pytest after the fix: **114 passed, 4 xfailed** (F1, F2, V6a, V6b). That is
   - If any test outcome, group cell or other summarised number differs, the raw outputs are committed as `out/mutation_v0_3_0_rerun_F.{json,csv}`, and every differing cell is reported here.
   - `out/mutation_v0_3_0_rerun.*` (commit C) are not overwritten in either case.
 
-**Results.** *(added after the run)*
+**Results** (added after the run, commit F2).
+
+**Execution record.**
+
+- Commit `361143c` (the fix, pushed 2026-10-22 23:21:05 UTC, which is 2026-10-23 in Korea).
+- Run started 23:21:14 UTC: 53 runs, 4 in parallel, 1,007 s, 64–139 s per run.
+- Runner `scripts/mutation_v0_3_0.py`, blob `67dea61` (unchanged since B; `runner_committed = true`), clean worktree, same environment as before.
+- Comparison: `out/rerun_v0_3_0_F_compare.json`, which holds every differing number with both values and the execution record.
+
+**The registered rule applied.** Some summarised numbers differ outside the two exempted kinds (see below), so the raw outputs are committed as `out/mutation_v0_3_0_rerun_F.json` and `out/mutation_v0_3_0_rerun_F.csv`. Their SHA-256, also in the comparison file:
+
+- `mutation_v0_3_0_rerun_F.json`: `3d97e3a8034dc32e7cd23bcf8bca463190430f165109f4d8157cda1cb297af33`;
+- `mutation_v0_3_0_rerun_F.csv`: `a8f15a4562dd18ebb9b61869e481cda3973b88353a57efbbd8503d091c272b41`.
+
+Commit C's `out/mutation_v0_3_0_rerun.*` are unchanged.
+
+**Test outcomes and cells: the same as commit C in every run.**
+
+- All 111 tests that exist in both runs have the same outcome in all 53 runs.
+- The 7 new checker tests passed in all 53 runs.
+- Every group cell (detected, and the set of changed tests) is the same in all 51 mutant and control runs.
+- Suite level, as at commit C: (ii) 19 of 20 caught, N20 missed, no alarm on K01–K03; (iii) 25 of 25 caught, no alarm on C01–C03.
+
+**Baselines.**
+
+- Both baselines: 114 passed, 4 xfailed.
+- In B1, all 276 v0.1 numbers equal v0.1 run B0 bit for bit.
+- In B0, 275 equal v0.1 run B0. The known two-valued number (`t5.ssj_inconsistent_options.walras_max.rshock_r_rule`) took its other value, that of v0.1 run B1 (relative 1.4e-11).
+- So every number equals its value in v0.1 B0 or B1, the plan's rule 2. The prediction "in both baselines all 276 equal v0.1 B0" failed in this one number.
+- The two baselines differ from each other only in that number and in rounding-level goods-market path residuals; the runner reports `deterministic = false`.
+
+**Summarised numbers.** 182 numbers in 31 runs differ from commit C:
+
+| Kind | Count | Size | Registered as |
+|---|---|---|---|
+| T5 goods-market path residuals | 138 | refined setting: 35 values in 23 runs, at most 5.7e-12 absolute (M05, values of order 4); all settings: at most 1.3e-7 relative among values above 1e-10 | exempted |
+| the known two-valued v0.1 number | 20 | 1.4e-11 relative | exempted |
+| T5 `walras_max` (v0.1 summary, max \|asset_mkt\| on the path), all three settings | 24, in 9 mutant runs (K03, M01, M02, M09, M16, M21, M25, N12, N19) | at most 3.4e-11 relative; none in a baseline | **not exempted** |
+
+The third kind is the same run-to-run rounding as the other two: the asset-market path depends on the same propagated household paths as dC. It was already present between v0.2 and commit C (11.7). It changed no test outcome. The prediction did not exempt it, so for these 24 numbers it failed.
+
+**Predictions of 11.6, scored.**
+
+| Prediction | Result |
+|---|---|
+| every test outcome and group cell as at commit C; new tests pass in every run | **held** |
+| 276 v0.1 numbers equal v0.1 B0 in both baselines | **failed in one number in B0**: the known two-valued number took its v0.1-B1 value; B1 held in all 276 |
+| summarised numbers as at commit C, apart from goods-market path residuals and the two-valued number | **failed for 24 numbers**: T5 `walras_max` in 9 mutant runs, at most 3.4e-11 relative |
+
+**What this shows.** The fix changed no test outcome and no detection result on either sample, as predicted: neither the reference provider nor any mutant changes the objects it is given. Its evidence is the seven regression tests (11.4). The differing numbers are run-to-run rounding of the same kind that sections 5 and 10.4 describe, in one more quantity than was predicted.
+
+### 11.7 Correction to section 10.4
+
+Section 10.4, "P4 in detail", says that comparing the v0.2 data with commit C there are "no differences in any other quantity, and none in the v0.1 summaries apart from the known two-valued number". The comparison behind it (`scripts/rerun_v0_3_0_compare.py`, `value_diffs`) covered the v0.3 quantities of every run, but the v0.1 summaries only through the 276 numbers of the baselines. For the baselines the statement holds.
+
+In the mutant runs, the v0.1 summaries differ between v0.2 and commit C in 34 numbers in 21 runs:
+
+- 16 are the known two-valued number;
+- 18 are other T5 `walras_max` values, in 9 runs, at most 3.4e-11 relative. This is the same kind as in 11.6.
+
+No test outcome changed. Section 10 is left as it was, apart from a pointer to this correction.
 
