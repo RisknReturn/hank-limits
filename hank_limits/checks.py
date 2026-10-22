@@ -7,6 +7,7 @@ script call these with the SSJ providers from `hank_limits.models`.
 """
 from __future__ import annotations
 
+import copy
 import time
 import numpy as np
 
@@ -17,6 +18,16 @@ from .ra import (ra_jacobians, ra_output_fixed_real_rate, tank_output_fixed_real
 
 def _tolist(x):
     return [float(v) for v in np.asarray(x).ravel()]
+
+
+def _request(x):
+    """An independent deep copy of what a check asks a provider for (requested experiments, rate
+    paths, chi values). Pre-merge check of v0.3.0 (docs/CHECKS_v0_3_0_AMENDMENT.md, section 11):
+    each check keeps its own copy, declares the expected coverage and computes the reference
+    paths and residuals from it, and gives every provider call a fresh copy. A provider that
+    changes the objects it is given (drops an experiment, scales a path in place) then changes
+    neither what the check compares with nor the caller's objects."""
+    return copy.deepcopy(x)
 
 
 # ---------------------------------------------------------------------------
@@ -351,10 +362,17 @@ def _ge_target(out):
     return ('asset_mkt', True) if t is None else (t, False)
 
 
+def _known_target(t):
+    # a string naming one of the two markets; anything else (another string, a number, a list)
+    # is outside the convention and V1 does not apply
+    return isinstance(t, str) and t in _V1
+
+
 def _keys_werning(out, cyc, spec):
     tag = 'cyc' if cyc else 'acyc'
     # an unknown target keeps the asset-market placeholders missing (V1 not applicable there)
-    ks = [k.format(tag) for k in _V1.get(_ge_target(out)[0], _V1['asset_mkt'])]
+    t = _ge_target(out)[0]
+    ks = [k.format(tag) for k in _V1[t if _known_target(t) else 'asset_mkt']]
     ks += [f'{k}_{tag}' for k in ('ss_assets', 'ss_goods', 'hh_budget', *_V3)]
     if cyc:
         ks.append('incidence_err_cyc')
@@ -368,8 +386,10 @@ def _v03_werning(v, out, b, dr, cyc, spec, where):
     tag = 'cyc' if cyc else 'acyc'
     T = f'T3 {tag}'
     target, assumed = _ge_target(out)
-    v.setdefault('ge_target', {}).setdefault(tag, []).append(target + (' (assumed)' if assumed else ''))
-    if target not in _V1:
+    v.setdefault('ge_target', {}).setdefault(tag, []).append(
+        target + (' (assumed)' if assumed else '') if isinstance(target, str) else
+        f'{target!r} (not a string)')
+    if not _known_target(target):
         msg = (f"V1 ({T}, {where}): applicability condition not met: GE target {target!r} is "
                f"neither 'asset_mkt' nor 'goods_mkt'")
         if msg not in v['skipped']:
@@ -607,9 +627,10 @@ def check_tank_limit(provider, eps_list, T, dr, chis=(1.0, 1.5), spec=None, **kw
                kappa_S=[], mass_constrained_S=[], ge_target_resid=[],
                amplification_HA={str(c): [] for c in chis})
     I = np.eye(T)
+    dr, chis = _request(dr), _request(chis)       # the check's copies (section 11)
     v03 = _new_v03()
     for eps in eps_list:
-        out = provider(eps, T, dr, chis=chis, **kw)
+        out = provider(eps, T, _request(dr), chis=_request(chis), **kw)
         where = f'eps={eps:g}'
         v03['settings'].append(where)
         _expect(v03, _keys_tank(spec), where)
@@ -668,10 +689,11 @@ def check_werning(provider, b_list, T, dr, asymptotic_from=1e-3, spec=None, **kw
                zl_cyc_vs_RANK=[], r_gap_over_b_acyc=[], r_gap_over_b_cyc=[],
                mass_constrained=[], max_wealth_over_b=[])
     info_cyc = None
+    dr = _request(dr)                             # the check's copy (section 11)
     v03 = _new_v03()
     for b in b_list:
-        a = provider(b, T, dr, cyclical=False, **kw)
-        c = provider(b, T, dr, cyclical=True, **kw)
+        a = provider(b, T, _request(dr), cyclical=False, **kw)
+        c = provider(b, T, _request(dr), cyclical=True, **kw)
         where = f'b={b:g}'
         v03['settings'].append(where)
         for out, cyc in ((a, False), (c, True)):
@@ -778,14 +800,16 @@ def check_ikc(provider, T_list, shocks_fn, spec=None, **kw):
     res = dict(T=[], err={}, walras_asset_mkt={})
     v03 = _new_v03()
     for T in T_list:
-        shocks = shocks_fn(T)
-        out = provider(T, shocks, **kw)
+        # the check's copy of the request: expected coverage first, then the provider gets its
+        # own copy, and residuals and exogenous paths are computed from this one (section 11)
+        shocks = _request(shocks_fn(T))
         where = f'T={T}'
         v03['settings'].append(where)
         _expect(v03, _keys_fiscal(spec), where)
         if spec:      # path quantities: every experiment the caller requested
             for label, (kind, _) in shocks.items():
                 _expect(v03.setdefault('paths', {}).setdefault(label, {}), _path_keys(kind), where)
+        out = provider(T, _request(shocks), **kw)
         _guard(v03, _v03_fiscal, out, shocks, spec, where)
         res['T'].append(int(T))
         for label, irf in out['irfs'].items():

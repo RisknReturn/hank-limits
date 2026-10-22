@@ -42,7 +42,8 @@ WerningProvider(b, T, dr, cyclical) -> dict(
            diag['ge_target_resid']: optional, max |residual of the GE target the solve imposed|,
     ge_target : optional, 'asset_mkt' or 'goods_mkt': the market whose clearing the solve
                 imposed (v0.3.0). Absent: 'asset_mkt' is assumed and recorded as assumed. Any
-                other value: V1 does not apply ("applicability condition not met", skipped).
+                other value, another string or a value that is not a string (a number, a
+                list, ...): V1 does not apply ("applicability condition not met", skipped).
     J_A, J_C, ss_detail : optional (V checks))
 
 AiyagariProvider(sd, rho) -> dict(
@@ -64,6 +65,12 @@ requested paths from `shocks` and compare the returned dG, dr, drshock with them
 an input that an experiment does not request is a zero path.
 
 The T6 decomposition (`checks.check_differencing`) needs only the IKC provider output.
+
+Request objects (v0.3.0). Each check gives every provider call its own deep copy of what it
+requests (the rate path dr, the chi values, the `shocks` of each T) and keeps another copy, from
+which it takes the expected experiments, the reference paths and the requested exogenous paths.
+A provider may change the objects it is given; that changes neither the comparison nor the
+caller's objects.
 
 Optional fields of the V checks, and the V quantities each one feeds (v0.3.0). Fields in
 ss_detail are floats unless noted (e_grid, Pi, y: arrays of the income chain).

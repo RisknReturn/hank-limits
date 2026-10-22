@@ -8,7 +8,13 @@ R2  a provider with exactly the documented fields (`hank_limits.interface`) gets
     every V test without error; one with the required fields only gets skips with reasons;
 R3  the solved exogenous paths are compared with the requested ones;
 R4  V1 is judged on the GE target the provider reports.
+
+Pre-merge check (2026-10-23): a provider that changes the objects it is given (the requested
+experiments, the rate path) changes neither the check's expected coverage nor its reference
+paths, nor the caller's objects.
 """
+import copy
+
 import numpy as np
 import pytest
 
@@ -366,3 +372,94 @@ def test_r4_unknown_target_not_applicable():
     mixed = run_fake('t3', target=('asset_mkt', 'bond_mkt'))
     with pytest.raises(pytest.skip.Exception, match='^incomplete'):
         V._judge('test_v1_werning_ge_target_resid_direct', mixed)
+
+
+# ---------------------------------------------------------------------------
+# Request objects (pre-merge check, 2026-10-23; amendment, section 11). The check keeps its own
+# deep copy of what it requested and gives the provider another one, so a provider that drops an
+# experiment or scales a path in place is judged against the original request.
+# ---------------------------------------------------------------------------
+
+def _stored_shocks():
+    """A shocks_fn that returns the same stored objects at every call, and a deep copy of them."""
+    store = {T: _fiscal_shocks(T) for T in (8, 12)}
+    return store, copy.deepcopy(store), lambda T: store[T]
+
+
+def _same_shocks(a, b):
+    return a.keys() == b.keys() and all(
+        a[k][0] == b[k][0] and a[k][1].keys() == b[k][1].keys()
+        and all(np.array_equal(a[k][1][x], b[k][1][x]) for x in a[k][1]) for k in a)
+
+
+def test_request_t5_provider_drops_an_experiment():
+    store, orig, shocks_fn = _stored_shocks()
+
+    def provider(T, shocks):
+        shocks.pop('rshock_r_rule')
+        return fake_fiscal(T, shocks)
+
+    res = {V.FISCAL: C.check_ikc(provider, [8, 12], shocks_fn, spec=SPEC.T5)}
+    for key in ('fiscal_rule', 'government_budget', 'goods_market', 'rate_rule', 'exog_G',
+                'exog_rshock'):
+        with pytest.raises(pytest.skip.Exception, match='^incomplete'):
+            V._assert_paths(res, key)
+    assert all(_same_shocks(store[T], orig[T]) for T in store)
+
+
+def test_request_t5_provider_doubles_paths_in_place():
+    store, orig, shocks_fn = _stored_shocks()
+
+    def provider(T, shocks):
+        for kind, inputs in shocks.values():
+            for path in inputs.values():
+                path *= 2
+        return fake_fiscal(T, shocks)
+
+    res = {V.FISCAL: C.check_ikc(provider, [8, 12], shocks_fn, spec=SPEC.T5)}
+    assert res[V.FISCAL]['max_err'] < 1e-10
+    for key in ('exog_G', 'exog_r', 'exog_rshock', 'rate_rule'):
+        with pytest.raises(AssertionError):
+            V._assert_paths(res, key)
+    assert all(_same_shocks(store[T], orig[T]) for T in store)
+
+
+def test_request_t3_provider_doubles_dr_in_place():
+    dr = DR.copy()
+
+    def provider(b, T, dr_given, cyclical):
+        if not cyclical:
+            dr_given *= 2
+        return fake_werning(b, T, dr_given, cyclical)
+
+    res = C.check_werning(provider, [1e-2, 1e-3], 8, dr, asymptotic_from=1e-2, spec=SPEC.T3)
+    assert np.array_equal(dr, DR)
+    with pytest.raises(AssertionError):
+        V._judge('test_v1_werning_ge_target_resid_direct', res)
+    assert min(res['err_acyc_vs_RANK']) > 0.5      # reference from the requested path
+    assert max(res['err_cyc_vs_ZL']) < 2e-2         # the countercyclical call got its own copy
+
+
+def test_request_t2_provider_changes_dr_and_chis():
+    dr, chis = DR.copy(), [1.0, 1.5]
+
+    def provider(eps, T, dr_given, chis):
+        dr_given *= 2
+        out = fake_tank(eps, T, dr_given, chis)
+        chis.append(9.0)
+        return out
+
+    res = C.check_tank_limit(provider, [0.2, 0.1], 8, dr, chis=chis, spec=SPEC.T2)
+    assert np.array_equal(dr, DR) and chis == [1.0, 1.5]
+    assert sorted(res['err_IRF_vs_TANK']) == ['1.0', '1.5']
+    assert min(min(e) for e in res['err_IRF_vs_TANK'].values()) > 0.5   # reference from the request
+
+
+@pytest.mark.parametrize('bad', [3, ['asset_mkt'], b'asset_mkt'])
+def test_r4_non_string_target_not_applicable(bad):
+    res = run_fake('t3', target=(bad, bad))
+    v = res['v0_3']
+    assert not v.get('errors'), v.get('errors')
+    assert any('applicability condition not met' in s for s in v['skipped'])
+    with pytest.raises(pytest.skip.Exception, match='^not reported'):
+        V._judge('test_v1_werning_ge_target_resid_direct', res)

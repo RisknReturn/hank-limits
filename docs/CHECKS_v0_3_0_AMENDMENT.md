@@ -1,6 +1,6 @@
 # v0.3.0 release candidate: review-driven changes to the v0.3 checks, and their re-run
 
-Status: **design and predictions** committed as A (`471fc47`) on branch `v0_3_0-rc`, before any code of this amendment and before any re-run (sections 1–9 as committed then). The thresholds of the new quantities (section 5) were filled in by commit B (`a290c75`, code, tests and thresholds), before any mutant was run. The re-run outputs are commit C (`ad1857d`), the results (section 10) commit D. Release metadata (version 0.3.0) is commit E.
+Status: **design and predictions** committed as A (`471fc47`) on branch `v0_3_0-rc`, before any code of this amendment and before any re-run (sections 1–9 as committed then). The thresholds of the new quantities (section 5) were filled in by commit B (`a290c75`, code, tests and thresholds), before any mutant was run. The re-run outputs are commit C (`ad1857d`), the results (section 10) commit D. Release metadata (version 0.3.0) is commit E (`ee16305`). Section 11 records the changes after the pre-merge check of 2026-10-23, made after these results were seen.
 
 Starting point: `main` at `281de19` (v0.3, unreleased; the last release is v0.2.1, concept DOI 10.5281/zenodo.23489176). Pre-registration of v0.3: `docs/CHECKS_PLAN_v0_3.md` ("the plan"); its results: `docs/MUTATION_v0_2.md`.
 
@@ -183,7 +183,7 @@ Rule and τ classes: plan, section 4. The table is filled in by commit B from tw
 - **Residuals of the other market,** recorded without threshold. Divided by b and maximised over the seven b:
   - the asset-market solve of the reference provider leaves a goods-market residual of 1.36e-7 (proportional income) and 2.52e-6 (countercyclical income);
   - the goods-market solve leaves an asset-market residual of 2.96e-6 and 2.44e-3. These equal, bit for bit, the V1 values with which C03 alarmed in v0.2.
-- **The 88 existing quantities** have, in these runs, the b_max of the plan's table to three significant digits, except the T5 path `goods_market`: 3.11e-13 here, 3.12e-13 in the plan. This is the run-to-run rounding variation described below. Their thresholds are unchanged.
+- **The 88 existing quantities** have, in both runs, the b_max of the plan's table to three significant digits; the T5 path `goods_market` has b_max 3.115563e-13 (3.12e-13, as in the plan). Their thresholds are unchanged. (Corrected 2026-10-23, section 11: this said "3.11e-13 here". That value, 3.113829e-13, is the same path quantity, `G_debt_r_rule` at T = 300, in an earlier trial run of the script that was not kept, not the maximum of the two runs in the table. It is the run-to-run rounding variation described below.)
 
 **Observations at B, before any mutant was run**
 
@@ -192,7 +192,7 @@ Rule and τ classes: plan, section 4. The table is filled in by commit B from tw
 - **Rounding-level differences between B0 and B1.** The two baselines differed in five T5 goods-market path residuals (dY − dC − dG; values between 1e-15 and 4e-6):
   - one is in the refined setting that the V tests use: `G_debt_r_rule` at T = 300, 3.11556e-13 in one run and 3.11383e-13 in the other, against a threshold of 4e-11;
   - the other four are in the two settings that no V test uses; two of them are the quantities that the plan (section 4) already saw vary between runs.
-  - The refined-setting quantity also took the value 3.11383e-13 in the threshold runs, and 3.11556e-13 (the v0.2 value) in a pytest run in the repository. This is the run-to-run rounding variation of dC that the plan describes. No number of the v0.1 summaries and no test outcome is affected.
+  - The refined-setting quantity took the value 3.11556e-13 (the v0.2 value) in the two threshold runs and in a pytest run in the repository, and 3.11383e-13 in a trial run of the threshold script that was not kept. (Corrected 2026-10-23, section 11: this said that the threshold runs gave 3.11383e-13.) This is the run-to-run rounding variation of dC that the plan describes. No number of the v0.1 summaries and no test outcome is affected.
 - **Effect on the predictions.** Prediction P1 ("B0 and B1 identical in every summarised number") and prediction P4 ("equal to the v0.2 value", where the refined setting is not exempted) are therefore expected to fail at rounding level for these quantities. The predictions stay as registered, and the outcome is reported in section 10.
 
 ## 6. Re-run design
@@ -365,7 +365,7 @@ Cells as in `docs/MUTATION_v0_2.md`, sections 3 and 9: per group, whether the mu
 ### 10.7 Margins
 
 - The margins of the V catches are the same as in v0.2. The values are bit-identical, apart from the rounding-level goods-market path residuals of section 10.4, none of which is a catching value.
-- In (ii), every caught mutant has a failing V test above its threshold by a factor of 9.7e3 or more (N18). By individual failing test, the smallest factor is 526 (N12, TANK goods market).
+- In (ii), every mutant caught by V (13 of the 19 caught) has a failing V test above its threshold by a factor of 9.7e3 or more (N18). (Wording corrected 2026-10-23, section 11: this said "every caught mutant".) By individual failing test, the smallest factor is 526 (N12, TANK goods market).
 - In (iii), the smallest of the largest factors per mutant is 274 (M16). By individual failing test, the smallest factor is 1.3 (M15, V1).
 - These figures correct a statement in `docs/MUTATION_v0_2.md`, section 1; its dated correction is part of this commit.
 
@@ -374,3 +374,93 @@ Cells as in `docs/MUTATION_v0_2.md`, sections 3 and 9: per group, whether the mu
 - The revision changed one detection outcome on the two samples, the one it was designed to change (C03). The 19 of 20 and 25 of 25 of v0.2 hold for the revised suite as well.
 - The evidence for R1–R3 is in the regression tests with fake providers: missing, non-finite and wrongly sized exogenous values. Neither the reference provider nor any mutant produced such a case.
 - The statements of `docs/CHECKS_PLAN_v0_3.md`, section 9, and of `docs/MUTATION_v0_2.md`, section 10, hold unchanged: two hand-picked samples, design (iii) not independent, one environment.
+
+## 11. Changes after the pre-merge check (2026-10-23)
+
+**These changes were made after the results of sections 5 and 10 were seen**, in response to a pre-merge check of the release candidate `ee16305` (GPT, 2026-10-23). Section 10 stays as the record of the re-run at `a290c75`; only its wording in 10.7 was narrowed (P3 below), and no result in it changed.
+
+### 11.1 What the check found
+
+The check confirmed that the six reproductions of the first review are handled as intended, and reproduced 107 passed, 4 xfailed. It also confirmed that the seven new thresholds follow the rule, the 88 old ones are unchanged, the 276 summary numbers are bit-identical, and the counts and metadata of the 53 re-run runs agree. It found one P2 defect, two P3 wording errors and one follow-up item.
+
+**P2: the provider and the checker shared the request objects.** The checks read the objects they had passed to the provider again after the call:
+
+- `check_ikc` (T5) took the expected experiments and the requested exogenous paths from the `shocks` dict it had given the provider;
+- `check_werning` (T3) gave both incidences the caller's `dr` array, and used it for the reference paths and the V1 residual;
+- `check_tank_limit` (T2) did the same with `dr`, and with `chis`.
+
+A provider that changed those objects therefore changed what it was compared with. The check reproduced three cases:
+
+| What the provider did | Result at `ee16305` |
+|---|---|
+| `shocks.pop('rshock_r_rule')`, then solved the rest | the dropped experiment also left the expected coverage; all 13 fiscal V tests passed, with no skip reason |
+| `path *= 2` on every path it was given, then solved | the reference paths doubled as well; all 13 passed, `exog_*` and the rate rule included |
+| T3 proportional-income provider: `dr *= 2` | all 7 T3 V tests passed, and the caller's array was four times its value after two b |
+
+So the claim of section 3.1, that coverage "is declared by the check, not inferred from what the provider returned", did not hold when a provider changed its arguments in place. The same channel let the doubled shock of R3 pass again. Neither the reference provider nor any mutant changes its arguments, so no result of sections 5 and 10 is affected; the prediction in 11.5 tests this.
+
+### 11.2 Fix
+
+`checks._request` makes a deep copy, arrays included; a shallow copy of a dict would still share its arrays.
+
+| Check | Before | After |
+|---|---|---|
+| `check_ikc` (T5) | `shocks = shocks_fn(T)`, `provider(T, shocks)`, then coverage, exogenous paths and residuals from the same `shocks` | the check's own copy of `shocks_fn(T)`; expected coverage declared from it **before** the provider is called; the provider gets a separate copy; residuals, `exog_*` and the rate rule from the check's copy |
+| `check_werning` (T3) | the caller's `dr` passed to both incidences and reused | the check keeps its own copy; each of the two calls per b gets a fresh copy; reference paths and V1 residuals from the check's copy |
+| `check_tank_limit` (T2) | the caller's `dr` and `chis` passed and reused | the check keeps copies; each eps gets fresh copies; reference paths and the chi loop from the check's copies |
+
+The other checks were searched for objects that a provider receives and the check reads again; none was found.
+
+- `check_rank_limit` (T1) and `check_aiyagari` (T4) pass only numbers (eps, T, sd, ρ). The lists `eps_list`, `sd_list` and `rho_list` are not passed to the provider.
+- `check_differencing` (T6) calls no provider; it reads provider output only.
+- `suite.run_t6` builds its `shocks` inline and does not read them after the call.
+- Keyword arguments (`**kw`) are passed through to the provider and never read by the checks.
+- The checks change no provider output in place.
+
+No computation of the reference provider changed. For it the copies hold the same values as before, so its results are the same; the outputs are listed in 11.6.
+
+### 11.3 `ge_target` outside the convention (follow-up item)
+
+A reported `ge_target` that is not a string (a number, a list, bytes) used to raise: a `TypeError` under `v0_3` → `errors`, or, for a list, outside the guard, which stopped the whole check. It is now treated like an unknown string: V1 does not apply at that setting, the reason is recorded, and the value is recorded as `repr(...) (not a string)` under `v0_3` → `ge_target`. `interface.py` says so ("any other value, another string or a value that is not a string").
+
+### 11.4 New tests
+
+Seven tests in `tests/test_v0_3_0_checker.py`. All of them failed on `ee16305` (before the fix), as shown in the third column, and pass after it.
+
+| Test | What it checks | At `ee16305` |
+|---|---|---|
+| `test_request_t5_provider_drops_an_experiment` | the six path quantities of the dropped experiment are incomplete; the caller's stored `shocks` are unchanged | did not skip (all passed); the caller's dict lost the experiment |
+| `test_request_t5_provider_doubles_paths_in_place` | IKC still holds, but `exog_G`, `exog_r`, `exog_rshock` and the rate rule fail; the caller's arrays are unchanged | did not fail |
+| `test_request_t3_provider_doubles_dr_in_place` | V1 direct fails; the reference uses the requested path; the countercyclical call gets its own copy; the caller's `dr` is unchanged | the caller's `dr` was four times its value |
+| `test_request_t2_provider_changes_dr_and_chis` | the caller's `dr` and `chis` are unchanged; the reference uses the requested path | `KeyError` (the provider appended to `chis`) |
+| `test_r4_non_string_target_not_applicable[3, ['asset_mkt'], b'asset_mkt']` | no error; V1 skipped as not applicable, with the reason | `TypeError` (recorded, or raised outside the guard for the list) |
+
+Full pytest after the fix: **114 passed, 4 xfailed** (F1, F2, V6a, V6b). That is 77 tests of groups T1–T6, D and V, unchanged, and 37 checker tests (30 + 7).
+
+### 11.5 Wording (P3)
+
+- Section 5, notes on the table: the T5 path `goods_market` b_max is 3.115563e-13 in both threshold runs (3.12e-13, as in the plan). The "3.11e-13" written there came from a trial run that was not kept. The same mix-up is corrected in the observations of section 5; it was not named in the check but has the same cause. No threshold changes.
+- Section 10.7: "every caught mutant" is narrowed to "every mutant caught by V". In (ii) V catches 13 of the 19 caught mutants.
+
+### 11.6 Re-run of designs (ii) and (iii) at the fix commit
+
+**Registered before the run.** This subsection up to "Results" was committed and pushed with the fix, before the re-run was started.
+
+- **Design.** Designs (ii) and (iii) and two baselines (53 runs) on the commit of the fix, with `scripts/mutation_v0_3_0.py` unchanged (`--v03-ref <fix commit> --design ii iii`). The output goes to a scratch directory. It is compared with commit C (`out/mutation_v0_3_0_rerun.json`) run by run, on:
+  - every test outcome;
+  - every group verdict and set of changed tests;
+  - every summarised number, the v0.1 part and the v0.3 quantities.
+
+  The comparison script, `scripts/rerun_v0_3_0_F_compare.py`, is committed with the fix, before the run.
+- **Prediction.** The reference provider and the mutants do not change the objects they are given, so everything is predicted to be as at commit C:
+  - every test outcome and every group cell is the same in all 53 runs. The 7 new checker tests are new; they belong to no group and pass in every run;
+  - in both baselines, all 276 v0.1 numbers equal v0.1 run B0;
+  - every summarised number equals its commit-C value in the same run, except T5 goods-market path residuals that vary at rounding level from run to run (sections 5 and 10.4), and the known two-valued v0.1 number.
+- **Rule for the outputs, fixed now.**
+  - "Same" means: identical test outcomes and group cells, and identical summaries apart from the two exceptions just named.
+  - If so, the raw outputs (about 6 MB) are not committed. `out/rerun_v0_3_0_F_compare.json` holds the comparison: every differing number with both values, and the execution record (commit, time, runner blob, environment, SHA-256 of the raw files).
+  - If any test outcome, group cell or other summarised number differs, the raw outputs are committed as `out/mutation_v0_3_0_rerun_F.{json,csv}`, and every differing cell is reported here.
+  - `out/mutation_v0_3_0_rerun.*` (commit C) are not overwritten in either case.
+
+**Results.** *(added after the run)*
+
