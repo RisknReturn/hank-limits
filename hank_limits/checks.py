@@ -20,12 +20,21 @@ def _tolist(x):
 
 
 # ---------------------------------------------------------------------------
-# v0.3 checks (docs/CHECKS_PLAN_v0_3.md): steady-state residuals (V2), income normalisation
-# (V3) and specification pins (V4), computed here from primitive quantities the provider
-# reports in the optional fields `ss_detail`, `J_A`, `policy` and the paths. They are stored
-# under res['v0_3'] (one list entry per setting of the check), so the v0.1 part of every
-# result is unchanged. A missing field skips the quantities that need it; the reason is
-# recorded in res['v0_3']['skipped'].
+# v0.3 checks (docs/CHECKS_PLAN_v0_3.md; revised for v0.3.0, docs/CHECKS_v0_3_0_AMENDMENT.md):
+# GE target residual of T3 (V1), steady-state residuals (V2), income normalisation (V3) and
+# specification pins (V4), computed here from primitive quantities the provider reports in the
+# optional fields (`hank_limits.interface`) and from the inputs the caller passed. They are
+# stored under res['v0_3'] (one list entry per setting of the check), so the v0.1 part of every
+# result is unchanged.
+#
+# v0.3.0: coverage is declared by the check, not inferred from what the provider returned. At
+# each setting the expected quantities get a placeholder None, replaced when the quantity is
+# computed; res['v0_3']['at'][q] holds the setting of each value of q and
+# res['v0_3']['status'][q] the coverage of q. Each quantity is computed from the fields its own
+# equation needs; if one is missing, the placeholder stays and the reason is recorded in
+# res['v0_3']['skipped']. `v03_verdict` turns the values into the verdict of a test: a
+# non-finite, negative or too large value fails whatever else is missing, and a missing value
+# without failure is "incomplete", never a pass.
 # ---------------------------------------------------------------------------
 
 def stationary_marginal(Pi):
@@ -39,15 +48,30 @@ def stationary_marginal(Pi):
     return np.linalg.solve(A, b)
 
 
+def _pi_row_sum_err(Pi):
+    return float(np.max(np.abs(Pi.sum(1) - 1)))
+
+
+def _pi_negative(Pi):
+    return float(max(0.0, -Pi.min()))
+
+
+def _mean_e_err(pi, e):
+    return float(abs(pi @ np.asarray(e, float) - 1))
+
+
+def _agg_income_err(pi, y, Y_ref):
+    return float(abs(pi @ np.asarray(y, float) - Y_ref) / abs(Y_ref))
+
+
 def income_report(e, Pi, y=None, Y_ref=None):
     """V3: Pi row-stochastic, E_pi[e] = 1 and, if y is given, sum_e pi_e y_e = Y_ref."""
     Pi = np.asarray(Pi, float)
     pi = stationary_marginal(Pi)
-    out = dict(pi_row_sum_err=float(np.max(np.abs(Pi.sum(1) - 1))),
-               pi_negative=float(max(0.0, -Pi.min())),
-               mean_e_err=float(abs(pi @ np.asarray(e, float) - 1)))
+    out = dict(pi_row_sum_err=_pi_row_sum_err(Pi), pi_negative=_pi_negative(Pi),
+               mean_e_err=_mean_e_err(pi, e))
     if y is not None and Y_ref is not None:
-        out['agg_income_err'] = float(abs(pi @ np.asarray(y, float) - Y_ref) / abs(Y_ref))
+        out['agg_income_err'] = _agg_income_err(pi, y, Y_ref)
     return out, pi
 
 
@@ -83,8 +107,30 @@ def euler_errors(Pi, a_grid, a_pol, c_pol, D, r, beta, eis, bind_tol=1e-10, mass
         if np.any(binding & has_mass) else 0.0)
 
 
+# --- records: settings, placeholders, values, skips ------------------------------------------
+
 def _new_v03():
-    return dict(skipped=[])
+    return dict(skipped=[], settings=[], at={})
+
+
+def _expect(v, keys, where):
+    """Declare that each quantity in `keys` is expected at setting `where` (placeholder None)."""
+    at = v.setdefault('at', {})
+    for k in keys:
+        v.setdefault(k, []).append(None)
+        at.setdefault(k, []).append(where)
+
+
+def _put(v, key, value, where):
+    """Record a value at setting `where`: it replaces the placeholder of a quantity declared
+    there, and is appended with its setting otherwise."""
+    x = None if value is None else float(value)
+    vals, at = v.setdefault(key, []), v.setdefault('at', {}).setdefault(key, [])
+    if at and at[-1] == where and vals[-1] is None:
+        vals[-1] = x
+    else:
+        vals.append(x)
+        at.append(where)
 
 
 def _guard(v, fn, *args):
@@ -96,171 +142,392 @@ def _guard(v, fn, *args):
         v.setdefault('errors', []).append(f'{fn.__name__}: {type(exc).__name__}: {exc}'[:300])
 
 
-def _put(v, key, value):
-    v.setdefault(key, []).append(None if value is None else float(value))
-
-
 def _skip(v, what, missing):
     msg = f"{what}: provider does not report {', '.join(missing)}"
     if msg not in v['skipped']:
         v['skipped'].append(msg)
 
 
-def _need(d, keys):
-    return [k for k in keys if d is None or k not in d]
+class _Fields:
+    """The fields of one provider result that the V checks read: `f[name]` is the value,
+    `f.missing(names)` names the fields not reported (e.g. "ss_detail['y']"). `top` are
+    top-level fields; keyword arguments name a nested field and its keys
+    (`ss_detail=('Y', 'C')`, `policy=('a', 'c')`)."""
+
+    def __init__(self, out, top=(), **nested):
+        self.val, self.lab = {}, {}
+        for k in top:
+            self.lab[k] = k
+            if k in out:
+                self.val[k] = out[k]
+        for field, keys in nested.items():
+            d = out.get(field)
+            for k in keys:
+                self.lab[k] = f"{field}['{k}']" if isinstance(d, dict) else field
+                if isinstance(d, dict) and k in d:
+                    self.val[k] = d[k]
+
+    def __getitem__(self, k):
+        return self.val[k]
+
+    def missing(self, names):
+        return list(dict.fromkeys(self.lab[n] for n in names if n not in self.val))
 
 
-def _pin(v, key, value, ref, rel=False):
-    _put(v, key, abs(value - ref) / (abs(ref) if rel else 1.0))
+def _eq(v, key, where, tag, f, names, fn):
+    """Compute one quantity if the provider reports every field its equation needs (R2: fields
+    per equation); otherwise keep the placeholder and record the missing fields."""
+    miss = f.missing(names)
+    if miss:
+        return _skip(v, f'{key} ({tag})', miss)
+    _put(v, key, fn(), where)
 
 
-def _income(v, suffix, e, Pi, y, Y_ref):
-    inc, pi = income_report(e, Pi, y, Y_ref)
-    for k, x in inc.items():
-        _put(v, k + suffix, x)
+def _dev(x, ref, rel=False):
+    return abs(x - ref) / (abs(ref) if rel else 1.0)
+
+
+def _pin(v, key, where, tag, f, name, ref, rel=False):
+    _eq(v, key, where, tag, f, [name], lambda: _dev(f[name], ref, rel))
+
+
+def _income(v, sfx, where, tag, f, e, Pi, y, ref_names, ref):
+    """V3 for one income chain (field names e, Pi, y in f; the aggregate-income reference ref()
+    needs the fields ref_names). Returns the stationary distribution of Pi, or None."""
+    pi = None if f.missing([Pi]) else stationary_marginal(f[Pi])
+    _eq(v, 'pi_row_sum_err' + sfx, where, tag, f, [Pi],
+        lambda: _pi_row_sum_err(np.asarray(f[Pi], float)))
+    _eq(v, 'pi_negative' + sfx, where, tag, f, [Pi], lambda: _pi_negative(np.asarray(f[Pi], float)))
+    _eq(v, 'mean_e_err' + sfx, where, tag, f, [e, Pi], lambda: _mean_e_err(pi, f[e]))
+    _eq(v, 'agg_income_err' + sfx, where, tag, f, [y, Pi, *ref_names],
+        lambda: _agg_income_err(pi, f[y], ref()))
     return pi
 
 
-def _v03_rank(v, out, spec):
-    d = out.get('ss_detail')
-    miss = _need(d, ('Y', 'C', 'A', 'r', 'eis', 'a_min', 'e_grid', 'Pi', 'y'))
-    if miss:
-        return _skip(v, 'V2/V3/V4 (T1)', miss)
-    pi = _income(v, '', d['e_grid'], d['Pi'], d['y'], d['Y'])
-    _put(v, 'hh_budget', household_budget_resid(d['C'], d['A'], d['r'], d['y'], pi))
-    if spec:
-        _pin(v, 'spec_r', d['r'], spec['r'])
-        _pin(v, 'spec_eis', d['eis'], spec['eis'])
-        _pin(v, 'spec_A', d['A'], spec['A'], rel=True)
-        nbl = -spec['nbl_frac'] * spec['Y'] * np.min(d['e_grid']) / spec['r']
-        _pin(v, 'spec_a_min', d['a_min'], nbl, rel=True)
+def _coverage(at, vals):
+    missing = [w for w, x in zip(at, vals) if x is None]
+    nonfinite = [w for w, x in zip(at, vals) if x is not None and not np.isfinite(x)]
+    n = len(vals) - len(missing)
+    state = ('nonfinite' if nonfinite else 'not_reported' if n == 0 else
+             'incomplete' if missing else 'complete')
+    return dict(state=state, n_expected=len(vals), n_reported=n, missing=missing,
+                nonfinite=nonfinite)
 
 
-def _v03_tank(v, out, spec):
-    d = out.get('ss_detail')
-    keys = ['lam', 'r', 'eis', 'Y', 'Y_H', 'Y_S'] + [f'{k}_{t}' for t in 'HS' for k in
-                                                    ('C', 'A', 'beta', 'a_min', 'e_grid', 'Pi', 'y')]
-    miss = _need(d, keys)
-    if miss:
-        return _skip(v, 'V2/V3/V4 (T2)', miss)
-    lam = d['lam']
-    _put(v, 'ss_goods', abs(d['Y'] - lam * d['C_H'] - (1 - lam) * d['C_S']) / d['Y'])
-    _put(v, 'ss_assets', abs(lam * d['A_H'] + (1 - lam) * d['A_S']) / d['Y'])
-    for t in 'HS':
-        pi = _income(v, f'_{t}', d[f'e_grid_{t}'], d[f'Pi_{t}'], d[f'y_{t}'], d[f'Y_{t}'])
-        _put(v, f'hh_budget_{t}', household_budget_resid(d[f'C_{t}'], d[f'A_{t}'], d['r'],
-                                                         d[f'y_{t}'], pi))
-    _put(v, 'incidence_err', abs(lam * d['Y_H'] + (1 - lam) * d['Y_S'] - d['Y']) / d['Y'])
-    if spec:
-        _pin(v, 'spec_lam', lam, spec['lam'])
-        _pin(v, 'spec_beta_H', d['beta_H'], spec['beta_H'])
-        _pin(v, 'spec_r', d['r'], spec['r'])
-        _pin(v, 'spec_eis', d['eis'], spec['eis'])
-        _pin(v, 'spec_a_min_H', d['a_min_H'], spec['a_min_H'])
-        nbl = -spec['nbl_frac'] * spec['Y'] * np.min(d['e_grid_S']) / spec['r']
-        _pin(v, 'spec_a_min_S', d['a_min_S'], nbl, rel=True)
+def _finish(v):
+    """Coverage summary per quantity, res['v0_3']['status'] (T5 paths: 'paths.<label>.<q>').
+    Thresholds are applied by the tests (`v03_verdict`)."""
+    st = {k: _coverage(at, v[k]) for k, at in v.get('at', {}).items()}
+    for lab, p in v.get('paths', {}).items():
+        st.update({f'paths.{lab}.{k}': _coverage(at, p[k]) for k, at in p.get('at', {}).items()})
+    v['status'] = st
 
 
-def _v03_werning(v, out, b, dr, cyc, spec):
-    tag = 'cyc' if cyc else 'acyc'
-    gt = out.get('diag', {}).get('ge_target_resid')
-    _put(v, f'ge_target_resid_reported_{tag}', None if gt is None else gt / b)
-    JA = out.get('J_A')
-    if JA is None:
-        _skip(v, 'V1(b)', ['J_A'])
+# --- verdict of one V test -----------------------------------------------------------------------
+
+def _entries(v, key, paths):
+    """(setting, value) pairs of quantity `key`, or None if `v` has no record of it. Without
+    coverage records (no 'at'), each list entry is one setting."""
+    def pairs(d, prefix=''):
+        at = d.get('at', {}).get(key) or [f'#{i}' for i in range(len(d[key]))]
+        return [(prefix + str(w), x) for w, x in zip(at, d[key])]
+    if not paths:
+        return pairs(v) if key in v else None
+    found = [(lab, p) for lab, p in (v.get('paths') or {}).items() if key in p]
+    return [e for lab, p in found for e in pairs(p, f'{lab}, ')] if found else None
+
+
+def _value_ok(x, threshold):
+    try:
+        x = float(x)
+    except (TypeError, ValueError):
+        return False
+    return bool(np.isfinite(x) and 0.0 <= x < threshold)
+
+
+def v03_verdict(v, keys, thresholds, paths=False):
+    """Verdict of one V test on the quantities `keys` of a v0.3 record `v` (res['v0_3']), with
+    thresholds {quantity: threshold}; `paths=True` for T5 path quantities (all shock labels).
+
+    'failed'     a v0.3 computation raised, or a recorded value is non-finite, negative (every V
+                 quantity is an absolute value) or not below its threshold, whatever else is
+                 missing;
+    'skipped'    otherwise, if no quantity of the test has a value: the provider does not report
+                 what the test needs (reasons in 'skipped');
+    'incomplete' otherwise, if an expected value is missing (never a pass);
+    'passed'     otherwise.
+    A quantity the check declared at no setting does not apply ('n/a'); in a record without
+    coverage records (no 'at'), every listed quantity is expected."""
+    covered = 'at' in v
+    per = {}
+    for k in keys:
+        e = _entries(v, k, paths)
+        if e is None and covered:
+            per[k] = dict(status='n/a')
+            continue
+        e = e or []
+        th = thresholds[k]
+        bad = [(w, x) for w, x in e if x is not None and not _value_ok(x, th)]
+        missing = [w for w, x in e if x is None]
+        n = len(e) - len(missing)
+        status = 'failed' if bad else 'skipped' if n == 0 else 'incomplete' if missing else 'passed'
+        per[k] = dict(status=status, threshold=th, failed=bad, missing=missing,
+                      worst=max((float(x) for _, x in e if _value_ok(x, np.inf)), default=None))
+    errors = list(v.get('errors') or [])
+    st = [p['status'] for p in per.values() if p['status'] != 'n/a']
+    if errors or 'failed' in st:
+        status = 'failed'
+    elif all(s == 'skipped' for s in st):
+        status = 'skipped'
+    elif any(s in ('skipped', 'incomplete') for s in st):
+        status = 'incomplete'
     else:
-        _put(v, f'ge_target_resid_direct_{tag}',
-             np.max(np.abs(np.asarray(JA['Y']) @ out['dY'] + np.asarray(JA['r']) @ dr)) / b)
-    d = out.get('ss_detail')
-    miss = _need(d, ('Y', 'C', 'A', 'r', 'a_min', 'y'))
-    if miss:
-        return _skip(v, 'V2/V3/V4 (T3)', miss)
-    e, Pi, zeta = (np.asarray(out[k], float) for k in ('e_grid', 'Pi', 'zeta'))
-    _put(v, f'ss_assets_{tag}', abs(d['A']) / b)
-    _put(v, f'ss_goods_{tag}', abs(d['C'] - d['Y']) / d['Y'])
-    pi = _income(v, f'_{tag}', e, Pi, d['y'], d['Y'])
-    _put(v, f'hh_budget_{tag}', household_budget_resid(d['C'], d['A'], d['r'], d['y'], pi))
-    if cyc:
-        _put(v, 'incidence_err_cyc', abs(pi @ (e * zeta)))
+        status = 'passed'
+    return dict(status=status, quantities=per, errors=errors, skipped=list(v.get('skipped', [])))
+
+
+# --- quantities per model ----------------------------------------------------------------------
+
+_V3 = ('pi_row_sum_err', 'pi_negative', 'mean_e_err', 'agg_income_err')
+
+
+def _keys_rank(spec):
+    return ['hh_budget', *_V3] + (['spec_r', 'spec_eis', 'spec_A', 'spec_a_min'] if spec else [])
+
+
+def _v03_rank(v, out, spec, where):
+    f = _Fields(out, ss_detail=('Y', 'C', 'A', 'r', 'eis', 'a_min', 'e_grid', 'Pi', 'y'))
+    pi = _income(v, '', where, 'T1', f, 'e_grid', 'Pi', 'y', ['Y'], lambda: f['Y'])
+    _eq(v, 'hh_budget', where, 'T1', f, ['C', 'A', 'r', 'y', 'Pi'],
+        lambda: household_budget_resid(f['C'], f['A'], f['r'], f['y'], pi))
     if spec:
-        _pin(v, f'spec_eis_{tag}', out['eis'], spec['eis'])
-        _pin(v, f'spec_a_min_{tag}', d['a_min'], -b, rel=True)
-        if cyc:
-            _pin(v, 'spec_zeta_low_cyc', zeta[0], spec['zeta_low_cyc'])
+        _pin(v, 'spec_r', where, 'T1', f, 'r', spec['r'])
+        _pin(v, 'spec_eis', where, 'T1', f, 'eis', spec['eis'])
+        _pin(v, 'spec_A', where, 'T1', f, 'A', spec['A'], rel=True)
+        _eq(v, 'spec_a_min', where, 'T1', f, ['a_min', 'e_grid'], lambda: _dev(
+            f['a_min'], -spec['nbl_frac'] * spec['Y'] * np.min(f['e_grid']) / spec['r'], True))
+
+
+def _keys_tank(spec):
+    ks = ['ss_goods', 'ss_assets', 'incidence_err'] + \
+        [f'{k}_{t}' for t in 'HS' for k in (*_V3, 'hh_budget')]
+    if spec:
+        ks += ['spec_lam', 'spec_beta_H', 'spec_r', 'spec_eis', 'spec_a_min_H', 'spec_a_min_S']
+    return ks
+
+
+def _v03_tank(v, out, spec, where):
+    f = _Fields(out, ss_detail=['lam', 'r', 'eis', 'Y', 'Y_H', 'Y_S'] +
+                [f'{k}_{t}' for t in 'HS' for k in ('C', 'A', 'beta', 'a_min', 'e_grid', 'Pi', 'y')])
+    _eq(v, 'ss_goods', where, 'T2', f, ['Y', 'lam', 'C_H', 'C_S'],
+        lambda: abs(f['Y'] - f['lam'] * f['C_H'] - (1 - f['lam']) * f['C_S']) / f['Y'])
+    _eq(v, 'ss_assets', where, 'T2', f, ['lam', 'A_H', 'A_S', 'Y'],
+        lambda: abs(f['lam'] * f['A_H'] + (1 - f['lam']) * f['A_S']) / f['Y'])
+    for t in 'HS':
+        pi = _income(v, f'_{t}', where, 'T2', f, f'e_grid_{t}', f'Pi_{t}', f'y_{t}', [f'Y_{t}'],
+                     lambda: f[f'Y_{t}'])
+        _eq(v, f'hh_budget_{t}', where, 'T2', f, [f'C_{t}', f'A_{t}', 'r', f'y_{t}', f'Pi_{t}'],
+            lambda: household_budget_resid(f[f'C_{t}'], f[f'A_{t}'], f['r'], f[f'y_{t}'], pi))
+    _eq(v, 'incidence_err', where, 'T2', f, ['lam', 'Y_H', 'Y_S', 'Y'],
+        lambda: abs(f['lam'] * f['Y_H'] + (1 - f['lam']) * f['Y_S'] - f['Y']) / f['Y'])
+    if spec:
+        _pin(v, 'spec_lam', where, 'T2', f, 'lam', spec['lam'])
+        _pin(v, 'spec_beta_H', where, 'T2', f, 'beta_H', spec['beta_H'])
+        _pin(v, 'spec_r', where, 'T2', f, 'r', spec['r'])
+        _pin(v, 'spec_eis', where, 'T2', f, 'eis', spec['eis'])
+        _pin(v, 'spec_a_min_H', where, 'T2', f, 'a_min_H', spec['a_min_H'])
+        _eq(v, 'spec_a_min_S', where, 'T2', f, ['a_min_S', 'e_grid_S'], lambda: _dev(
+            f['a_min_S'], -spec['nbl_frac'] * spec['Y'] * np.min(f['e_grid_S']) / spec['r'], True))
+
+
+# V1 (R4): quantity names by the GE target the T3 provider reports
+_V1 = {'asset_mkt': ('ge_target_resid_reported_{}', 'ge_target_resid_direct_{}'),
+       'goods_mkt': ('ge_target_resid_reported_goods_{}', 'ge_target_resid_direct_goods_{}')}
+
+
+def _ge_target(out):
+    """(target, assumed): the GE target a T3 provider reports; 'asset_mkt' if it reports none."""
+    t = out.get('ge_target')
+    return ('asset_mkt', True) if t is None else (t, False)
+
+
+def _keys_werning(out, cyc, spec):
+    tag = 'cyc' if cyc else 'acyc'
+    # an unknown target keeps the asset-market placeholders missing (V1 not applicable there)
+    ks = [k.format(tag) for k in _V1.get(_ge_target(out)[0], _V1['asset_mkt'])]
+    ks += [f'{k}_{tag}' for k in ('ss_assets', 'ss_goods', 'hh_budget', *_V3)]
+    if cyc:
+        ks.append('incidence_err_cyc')
+    if spec:
+        ks += [f'spec_eis_{tag}', f'spec_a_min_{tag}', f'spec_rstar_{tag}',
+               'spec_zeta_low_cyc' if cyc else 'spec_zeta_acyc']
+    return ks
+
+
+def _v03_werning(v, out, b, dr, cyc, spec, where):
+    tag = 'cyc' if cyc else 'acyc'
+    T = f'T3 {tag}'
+    target, assumed = _ge_target(out)
+    v.setdefault('ge_target', {}).setdefault(tag, []).append(target + (' (assumed)' if assumed else ''))
+    if target not in _V1:
+        msg = (f"V1 ({T}, {where}): applicability condition not met: GE target {target!r} is "
+               f"neither 'asset_mkt' nor 'goods_mkt'")
+        if msg not in v['skipped']:
+            v['skipped'].append(msg)
+    else:
+        # V1(a): the residual of its target the provider reports; V1(b): the same residual
+        # computed here from the reported Jacobians and the rate path the check passed
+        reported, direct = (k.format(tag) for k in _V1[target])
+        gt = out.get('diag', {}).get('ge_target_resid')
+        if gt is None:
+            _skip(v, f'{reported} ({T})', ["diag['ge_target_resid']"])
         else:
-            _put(v, 'spec_zeta_acyc', np.max(np.abs(zeta)))
-        _pin(v, f'spec_rstar_{tag}', zero_liquidity_rstar(out['beta'], out['eis'], e, Pi),
-             spec['r_star'])
+            _put(v, reported, gt / b, where)
+        resid = dict(
+            asset_mkt=('J_A', lambda J: np.asarray(J['Y']) @ out['dY'] + np.asarray(J['r']) @ dr),
+            goods_mkt=('J_C', lambda J: out['dY'] - np.asarray(J['Y']) @ out['dY']
+                       - np.asarray(J['r']) @ dr))
+        for market, (field, fn) in resid.items():
+            J = out.get(field)
+            if market == target:
+                if J is None:
+                    _skip(v, f'{direct} ({T})', [field])
+                else:
+                    _put(v, direct, np.max(np.abs(fn(J))) / b, where)
+            elif J is not None:      # the other market: diagnostic, no threshold
+                _put(v.setdefault('diagnostics', {}), f'{market}_resid_direct_{tag}',
+                     np.max(np.abs(fn(J))) / b, where)
+    f = _Fields(out, top=('e_grid', 'Pi', 'zeta', 'eis'),
+                ss_detail=('Y', 'C', 'A', 'r', 'a_min', 'y', 'beta'))
+    _eq(v, f'ss_assets_{tag}', where, T, f, ['A'], lambda: abs(f['A']) / b)
+    _eq(v, f'ss_goods_{tag}', where, T, f, ['C', 'Y'], lambda: abs(f['C'] - f['Y']) / f['Y'])
+    pi = _income(v, f'_{tag}', where, T, f, 'e_grid', 'Pi', 'y', ['Y'], lambda: f['Y'])
+    _eq(v, f'hh_budget_{tag}', where, T, f, ['C', 'A', 'r', 'y', 'Pi'],
+        lambda: household_budget_resid(f['C'], f['A'], f['r'], f['y'], pi))
+    e = lambda: np.asarray(f['e_grid'], float)
+    zeta = lambda: np.asarray(f['zeta'], float)
+    if cyc:
+        _eq(v, 'incidence_err_cyc', where, T, f, ['e_grid', 'Pi', 'zeta'],
+            lambda: abs(pi @ (e() * zeta())))
+    if spec:
+        _pin(v, f'spec_eis_{tag}', where, T, f, 'eis', spec['eis'])
+        _eq(v, f'spec_a_min_{tag}', where, T, f, ['a_min'], lambda: _dev(f['a_min'], -b, True))
+        if cyc:
+            _eq(v, 'spec_zeta_low_cyc', where, T, f, ['zeta'],
+                lambda: _dev(zeta()[0], spec['zeta_low_cyc']))
+        else:
+            _eq(v, 'spec_zeta_acyc', where, T, f, ['zeta'], lambda: np.max(np.abs(zeta())))
+        # R2: beta from ss_detail, as documented
+        _eq(v, f'spec_rstar_{tag}', where, T, f, ['beta', 'eis', 'e_grid', 'Pi'], lambda: _dev(
+            zero_liquidity_rstar(f['beta'], f['eis'], e(), np.asarray(f['Pi'], float)),
+            spec['r_star']))
 
 
-def _v03_aiyagari(v, out, spec):
-    d = out.get('ss_detail')
-    miss = _need(d, ('r', 'w', 'K', 'A', 'C', 'beta', 'eis', 'a_min', 'e_grid', 'Pi', 'y'))
-    if miss:
-        return _skip(v, 'V2/V3/V4 (T4)', miss)
+def _keys_aiyagari(spec):
+    ks = ['ss_capital', 'hh_budget', *_V3]
+    if spec:
+        ks += ['foc_r', 'foc_w', 'ss_goods', 'spec_beta', 'spec_eis', 'spec_a_min',
+               'spec_euler_err_mean_weighted', 'spec_euler_err_max_with_mass',
+               'spec_kkt_violation_max_with_mass']
+    return ks
+
+
+def _v03_aiyagari(v, out, spec, where):
+    f = _Fields(out, ss_detail=('r', 'w', 'K', 'A', 'C', 'beta', 'eis', 'a_min', 'e_grid', 'Pi', 'y'),
+                policy=('a_grid', 'a', 'c', 'D'))
     L_doc = spec['L'] if spec else 1.0
-    pi = _income(v, '', d['e_grid'], d['Pi'], d['y'], d['w'] * L_doc)
-    _put(v, 'ss_capital', abs(d['A'] - d['K']) / d['K'])
-    _put(v, 'hh_budget', household_budget_resid(d['C'], d['A'], d['r'], d['y'], pi))
+    pi = _income(v, '', where, 'T4', f, 'e_grid', 'Pi', 'y', ['w'], lambda: f['w'] * L_doc)
+    _eq(v, 'ss_capital', where, 'T4', f, ['A', 'K'], lambda: abs(f['A'] - f['K']) / f['K'])
+    _eq(v, 'hh_budget', where, 'T4', f, ['C', 'A', 'r', 'y', 'Pi'],
+        lambda: household_budget_resid(f['C'], f['A'], f['r'], f['y'], pi))
     if not spec:
         return
     al, de = spec['alpha'], spec['delta']
-    L = float(pi @ np.asarray(d['e_grid'], float))
-    KL = d['K'] / L
-    _put(v, 'foc_r', abs(d['r'] + de - al * KL ** (al - 1)))
-    _put(v, 'foc_w', abs(d['w'] - (1 - al) * KL ** al) / d['w'])
-    Y = d['K'] ** al * L ** (1 - al)
-    _put(v, 'ss_goods', abs(Y - d['C'] - de * d['K']) / Y)
-    _pin(v, 'spec_beta', d['beta'], spec['beta'])
-    _pin(v, 'spec_eis', d['eis'], spec['eis'])
-    _pin(v, 'spec_a_min', d['a_min'], spec['a_min'])
-    pol = out.get('policy')
-    miss = _need(pol, ('a_grid', 'a', 'c', 'D'))
+    L = lambda: float(pi @ np.asarray(f['e_grid'], float))      # labour = mean of the income states
+    Y = lambda: f['K'] ** al * L() ** (1 - al)
+    _eq(v, 'foc_r', where, 'T4', f, ['r', 'K', 'e_grid', 'Pi'],
+        lambda: abs(f['r'] + de - al * (f['K'] / L()) ** (al - 1)))
+    _eq(v, 'foc_w', where, 'T4', f, ['w', 'K', 'e_grid', 'Pi'],
+        lambda: abs(f['w'] - (1 - al) * (f['K'] / L()) ** al) / f['w'])
+    _eq(v, 'ss_goods', where, 'T4', f, ['K', 'C', 'e_grid', 'Pi'],
+        lambda: abs(Y() - f['C'] - de * f['K']) / Y())
+    _pin(v, 'spec_beta', where, 'T4', f, 'beta', spec['beta'])
+    _pin(v, 'spec_eis', where, 'T4', f, 'eis', spec['eis'])
+    _pin(v, 'spec_a_min', where, 'T4', f, 'a_min', spec['a_min'])
+    miss = f.missing(['a_grid', 'a', 'c', 'D', 'Pi', 'r'])
     if miss:
         return _skip(v, 'V4(b) Euler (T4)', miss)
-    for k, x in euler_errors(d['Pi'], pol['a_grid'], pol['a'], pol['c'], pol['D'], d['r'],
+    for k, x in euler_errors(f['Pi'], f['a_grid'], f['a'], f['c'], f['D'], f['r'],
                              spec['beta'], spec['eis']).items():
-        _put(v, 'spec_' + k, x)
+        _put(v, 'spec_' + k, x, where)
 
 
 def _lag(x):
     return np.concatenate([[0.0], np.asarray(x, float)[:-1]])
 
 
-def _v03_fiscal(v, out, shocks, spec):
-    d = out.get('ss_detail')
-    miss = _need(d, ('Y', 'C', 'A', 'B', 'G', 'Tax', 'r', 'eis', 'phi_B', 'a_min', 'e_grid',
-                     'Pi', 'y'))
-    if miss:
-        _skip(v, 'V2/V3/V4(a) (T5)', miss)
-    else:
-        _put(v, 'ss_government_budget', abs(d['Tax'] - d['G'] - d['r'] * d['B']) / d['Y'])
-        _put(v, 'ss_goods', abs(d['Y'] - d['C'] - d['G']) / d['Y'])
-        _put(v, 'ss_assets', abs(d['A'] - d['B']) / d['B'])
-        pi = _income(v, '', d['e_grid'], d['Pi'], d['y'], d['Y'] - d['Tax'])
-        _put(v, 'hh_budget', household_budget_resid(d['C'], d['A'], d['r'], d['y'], pi))
-        if spec:
-            for k in ('r', 'eis', 'B', 'G', 'phi_B', 'a_min'):
-                _pin(v, f'spec_{k}', d[k], spec[k])
+def _keys_fiscal(spec):
+    ks = ['ss_government_budget', 'ss_goods', 'ss_assets', 'hh_budget', *_V3]
+    if spec:
+        ks += [f'spec_{k}' for k in ('r', 'eis', 'B', 'G', 'phi_B', 'a_min')]
+    return ks
+
+
+# T5 path quantities and the irfs fields each needs (R2); the caller's inputs give the requested
+# exogenous paths (R3): G, r (fixed-rate experiments) and rshock, zero where not requested
+_PATH_FIELDS = {'fiscal_rule': ('dB', 'dTax'), 'government_budget': ('dB', 'dTax', 'dr', 'dG'),
+                'goods_market': ('dY', 'dC', 'dG'), 'rate_rule': ('dr', 'dY'),
+                'exog_G': ('dG',), 'exog_r': ('dr',), 'exog_rshock': ('drshock',)}
+
+
+def _path_keys(kind):
+    """Path quantities expected in an experiment of this kind ('fixed_r' or 'r_rule')."""
+    return ['fiscal_rule', 'government_budget', 'goods_market', 'exog_G', 'exog_rshock',
+            'rate_rule' if kind == 'r_rule' else 'exog_r']
+
+
+def _v03_fiscal(v, out, shocks, spec, where):
+    f = _Fields(out, ss_detail=('Y', 'C', 'A', 'B', 'G', 'Tax', 'r', 'eis', 'phi_B', 'a_min',
+                                'e_grid', 'Pi', 'y'))
+    _eq(v, 'ss_government_budget', where, 'T5', f, ['Tax', 'G', 'r', 'B', 'Y'],
+        lambda: abs(f['Tax'] - f['G'] - f['r'] * f['B']) / f['Y'])
+    _eq(v, 'ss_goods', where, 'T5', f, ['Y', 'C', 'G'], lambda: abs(f['Y'] - f['C'] - f['G']) / f['Y'])
+    _eq(v, 'ss_assets', where, 'T5', f, ['A', 'B'], lambda: abs(f['A'] - f['B']) / f['B'])
+    pi = _income(v, '', where, 'T5', f, 'e_grid', 'Pi', 'y', ['Y', 'Tax'], lambda: f['Y'] - f['Tax'])
+    _eq(v, 'hh_budget', where, 'T5', f, ['C', 'A', 'r', 'y', 'Pi'],
+        lambda: household_budget_resid(f['C'], f['A'], f['r'], f['y'], pi))
     if not spec:
         return
+    for k in ('r', 'eis', 'B', 'G', 'phi_B', 'a_min'):
+        _pin(v, f'spec_{k}', where, 'T5', f, k, spec[k])
     paths = v.setdefault('paths', {})
-    for label, irf in out['irfs'].items():
-        kind, inputs = shocks[label]
-        s = max(float(np.max(np.abs(p))) for p in inputs.values())
+    for label, (kind, inputs) in shocks.items():        # every experiment the caller requested
         p = paths.setdefault(label, {})
-        dB, dTax = np.asarray(irf['dB'], float), np.asarray(irf['dTax'], float)
-        _put(p, 'fiscal_rule', np.max(np.abs(dTax - spec['phi_B'] * _lag(dB))) / s)
-        _put(p, 'government_budget',
-             np.max(np.abs(dB - (1 + spec['r']) * _lag(dB) - spec['B'] * irf['dr'] - irf['dG']
-                           + dTax)) / s)
-        _put(p, 'goods_market', np.max(np.abs(irf['dY'] - irf['dC'] - irf['dG'])) / s)
-        if kind == 'r_rule':
-            if 'drshock' not in irf:
-                _skip(v, 'V4(b) rate rule (T5)', ['irfs[label][drshock]'])
+        irf = out['irfs'].get(label)
+        if irf is None:
+            _skip(v, f'V4(b) paths (T5, {label})', [f"irfs['{label}']"])
+            continue
+        n = len(next(iter(inputs.values())))
+        req = {k: np.asarray(inputs[k], float) if k in inputs else np.zeros(n)
+               for k in ('G', 'r', 'rshock')}
+        s = max(float(np.max(np.abs(x))) for x in inputs.values())
+        x = {k: np.asarray(irf[k], float) for k in ('dY', 'dC', 'dG', 'dTax', 'dr', 'dB', 'drshock')
+             if k in irf}
+        resid = dict(
+            fiscal_rule=lambda: x['dTax'] - spec['phi_B'] * _lag(x['dB']),
+            government_budget=lambda: (x['dB'] - (1 + spec['r']) * _lag(x['dB']) - spec['B'] * x['dr']
+                                       - x['dG'] + x['dTax']),
+            goods_market=lambda: x['dY'] - x['dC'] - x['dG'],
+            rate_rule=lambda: x['dr'] - spec['phi_y'] * x['dY'] - req['rshock'],
+            exog_G=lambda: x['dG'] - req['G'],
+            exog_r=lambda: x['dr'] - req['r'],
+            exog_rshock=lambda: x['drshock'] - req['rshock'])
+        for key in _path_keys(kind):
+            miss = [f"irfs['{label}']['{k}']" for k in _PATH_FIELDS[key] if k not in x]
+            if miss:
+                _skip(v, f'{key} (T5 path {label})', miss)
             else:
-                _put(p, 'rate_rule',
-                     np.max(np.abs(irf['dr'] - spec['phi_y'] * irf['dY'] - irf['drshock'])) / s)
+                _put(p, key, np.max(np.abs(resid[key]())) / s, where)
 
 
 # ---------------------------------------------------------------------------
@@ -286,7 +553,10 @@ def check_rank_limit(provider, eps_list, T, T_sub=(50, 100), spec=None, **kw):
     v03 = _new_v03()
     for eps in eps_list:
         out = provider(eps, T, **kw)
-        _guard(v03, _v03_rank, out, spec)
+        where = f'eps={eps:g}'
+        v03['settings'].append(where)
+        _expect(v03, _keys_rank(spec), where)
+        _guard(v03, _v03_rank, out, spec, where)
         s = out['ss']
         M_ra, Jr_ra = ra_jacobians(T, s['r'], s['eis'], s['C'], s['A'])
         M, Jr = out['J']['C']['Y'], out['J']['C']['r']
@@ -312,6 +582,7 @@ def check_rank_limit(provider, eps_list, T, T_sub=(50, 100), spec=None, **kw):
         res[f'fitted_rate_{key}'] = fitted_rate(eps_pos, vals)
     res['err_M_by_window'] = res['err_M_by_T']
     res['err_Jr_by_window'] = res['err_Jr_by_T']
+    _finish(v03)
     res['v0_3'] = v03
     res['T'] = T
     res['runtime_s'] = time.time() - t0
@@ -339,7 +610,10 @@ def check_tank_limit(provider, eps_list, T, dr, chis=(1.0, 1.5), spec=None, **kw
     v03 = _new_v03()
     for eps in eps_list:
         out = provider(eps, T, dr, chis=chis, **kw)
-        _guard(v03, _v03_tank, out, spec)
+        where = f'eps={eps:g}'
+        v03['settings'].append(where)
+        _expect(v03, _keys_tank(spec), where)
+        _guard(v03, _v03_tank, out, spec, where)
         lam, s = out['lam'], out['ss']
         M_ra, _ = ra_jacobians(T, s['r'], s['eis'], s['C_S'], s['A_S'])
         M_agg = lam * out['M_H'] + (1 - lam) * out['M_S']
@@ -373,6 +647,7 @@ def check_tank_limit(provider, eps_list, T, dr, chis=(1.0, 1.5), spec=None, **kw
     res['amplification_factor'] = {str(c): (1 - lam) / (1 - lam * c) / ((1 - lam) / (1 - lam * chis[0]))
                                    for c in chis}
     res['lam'] = lam
+    _finish(v03)
     res['v0_3'] = v03
     res['T'] = T
     res['runtime_s'] = time.time() - t0
@@ -397,8 +672,11 @@ def check_werning(provider, b_list, T, dr, asymptotic_from=1e-3, spec=None, **kw
     for b in b_list:
         a = provider(b, T, dr, cyclical=False, **kw)
         c = provider(b, T, dr, cyclical=True, **kw)
-        _guard(v03, _v03_werning, a, b, dr, False, spec)
-        _guard(v03, _v03_werning, c, b, dr, True, spec)
+        where = f'b={b:g}'
+        v03['settings'].append(where)
+        for out, cyc in ((a, False), (c, True)):
+            _expect(v03, _keys_werning(out, cyc, spec), where)
+            _guard(v03, _v03_werning, out, b, dr, cyc, spec, where)
         rank_a = ra_output_fixed_real_rate(dr, a['r_ss'], a['eis'])
         rank_c = ra_output_fixed_real_rate(dr, c['r_ss'], c['eis'])
         zl_c, info_cyc = zero_liquidity_output(dr, c['r_ss'], c['eis'], c['e_grid'], c['Pi'],
@@ -418,6 +696,7 @@ def check_werning(provider, b_list, T, dr, asymptotic_from=1e-3, spec=None, **kw
         res[f'rates_{key}'] = pairwise_rates(res['b'], res[key])
         res[f'fitted_rate_{key}_asymptotic'] = fitted_rate(bs, [res[key][k] for k in asym])
     res['asymptotic_from'] = asymptotic_from
+    _finish(v03)
     res['v0_3'] = v03
     res['zero_liquidity_cyc'] = {k: (float(v) if not isinstance(v, int) else v)
                                  for k, v in info_cyc.items()}
@@ -445,7 +724,10 @@ def check_aiyagari(provider, eps_list, rho_limit, sd_list, rho_list, sd_for_rho,
     v03 = _new_v03()
     for eps in eps_list:
         out = provider(eps, rho_limit, **kw)
-        _guard(v03, _v03_aiyagari, out, spec)
+        where = f'eps={eps:g}'
+        v03['settings'].append(where)
+        _expect(v03, _keys_aiyagari(spec), where)
+        _guard(v03, _v03_aiyagari, out, spec, where)
         res['eps'].append(float(eps))
         res['r'].append(out['r'])
         res['gap'].append(out['rho_disc'] - out['r'])
@@ -471,6 +753,7 @@ def check_aiyagari(provider, eps_list, rho_limit, sd_list, rho_list, sd_for_rho,
     res['all_below_rho_is_mechanical'] = True     # SSJ provider: root bracket below 1/beta - 1
     res['monotone_in_sd'] = bool(np.all(np.diff(res['r_by_sd']['r']) < 0))
     res['monotone_in_rho'] = bool(np.all(np.diff(res['r_by_rho']['r']) < 0))
+    _finish(v03)
     res['v0_3'] = v03
     res['runtime_s'] = time.time() - t0
     return res
@@ -497,7 +780,13 @@ def check_ikc(provider, T_list, shocks_fn, spec=None, **kw):
     for T in T_list:
         shocks = shocks_fn(T)
         out = provider(T, shocks, **kw)
-        _guard(v03, _v03_fiscal, out, shocks, spec)
+        where = f'T={T}'
+        v03['settings'].append(where)
+        _expect(v03, _keys_fiscal(spec), where)
+        if spec:      # path quantities: every experiment the caller requested
+            for label, (kind, _) in shocks.items():
+                _expect(v03.setdefault('paths', {}).setdefault(label, {}), _path_keys(kind), where)
+        _guard(v03, _v03_fiscal, out, shocks, spec, where)
         res['T'].append(int(T))
         for label, irf in out['irfs'].items():
             rhs, _ = ikc_rhs(out['J'], irf['dG'], irf['dTax'], irf['dr'])
@@ -505,6 +794,7 @@ def check_ikc(provider, T_list, shocks_fn, spec=None, **kw):
             res['walras_asset_mkt'].setdefault(label, []).append(
                 float(np.max(np.abs(irf['asset_mkt']))))
     res['max_err'] = float(max(max(v) for v in res['err'].values()))
+    _finish(v03)
     res['v0_3'] = v03
     res['runtime_s'] = time.time() - t0
     return res

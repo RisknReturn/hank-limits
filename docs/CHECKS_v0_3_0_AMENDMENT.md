@@ -165,7 +165,35 @@ Patch anchors (checked against the plan's patch lists):
 
 Rule and τ classes: plan, section 4. The table is filled in by commit B from two unmodified runs of the B candidate: the full suite for the T5 quantities, and `suite.run_t3(ge_target='goods_mkt')` for the goods-market quantities.
 
-*(filled in by commit B)*
+**Filled in by commit B.** b_max from two runs of `scripts/thresholds_v0_3_0.py` on the B candidate (2026-10-22, 14:46 and 14:47 UTC). The candidate is a local commit, `e9fd7e1`, with the same `hank_limits/`, `tests/` and `pytest.ini` trees as B; B adds this table and the two run files `out/thresholds_v0_3_0_run{1,2}.json`. The script calls the check functions exactly as the pytest fixtures do. Environment as in v0.2: Python 3.13.16, sequence-jacobian 1.0.0, numpy 2.5.3 (scipy-openblas 0.3.34), scipy 1.18.1, numba 0.68.0. The two runs gave identical numbers. Path quantities are the largest over the four shocks and three horizons; T3 quantities the largest over the seven b.
+
+| Model | Quantity | b_max (run 1, run 2) | τ (source) | Threshold |
+|---|---|---|---|---|
+| T3, goods-market target | `ge_target_resid_reported_goods_acyc` | 8.67e-14, 8.67e-14 | 1e-14 (exact up to rounding (linear solve)) | 9e-12 |
+| T3, goods-market target | `ge_target_resid_reported_goods_cyc` | 1.39e-13, 1.39e-13 | 1e-14 (exact up to rounding (linear solve)) | 2e-11 |
+| T3, goods-market target | `ge_target_resid_direct_goods_acyc` | 8.75e-14, 8.75e-14 | 1e-14 (exact up to rounding (linear solve)) | 9e-12 |
+| T3, goods-market target | `ge_target_resid_direct_goods_cyc` | 1.27e-13, 1.27e-13 | 1e-14 (exact up to rounding (linear solve)) | 2e-11 |
+| T5 | `exog_G` (path, max over labels) | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T5 | `exog_r` (path, fixed-rate labels) | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+| T5 | `exog_rshock` (path, max over labels) | 0, 0 | 1e-14 (exact up to rounding) | 1e-13 |
+
+**Notes on the table**
+
+- **The goods-market quantities are about ten times the asset-market ones** (b_max 1.1e-14 to 1.5e-14 there). Both are rounding-level residuals of a linear solve. Both are largest at b = 1e-4, where the division by b is largest. Before the division, the goods-market residual is about 1e-17 and the asset-market one about 1e-18.
+- **Residuals of the other market,** recorded without threshold. Divided by b and maximised over the seven b:
+  - the asset-market solve of the reference provider leaves a goods-market residual of 1.36e-7 (proportional income) and 2.52e-6 (countercyclical income);
+  - the goods-market solve leaves an asset-market residual of 2.96e-6 and 2.44e-3. These equal, bit for bit, the V1 values with which C03 alarmed in v0.2.
+- **The 88 existing quantities** have, in these runs, the b_max of the plan's table to three significant digits, except the T5 path `goods_market`: 3.11e-13 here, 3.12e-13 in the plan. This is the run-to-run rounding variation described below. Their thresholds are unchanged.
+
+**Observations at B, before any mutant was run**
+
+- **Full pytest on the candidate:** 107 passed, 4 xfailed. That is 77 tests in the suite's groups and the 30 checker tests of `tests/test_v0_3_0_checker.py`; the xfails are F1, F2, V6a and V6b.
+- **The 276 v0.1 numbers.** Two baseline runs of the re-run runner (`scripts/mutation_v0_3_0.py --baseline-only v0.3`; output not kept) gave, in both runs, all 276 v0.1 summary numbers equal to v0.1 run B0. Against v0.1 run B1 only the known two-valued number differs. Test outcomes were identical.
+- **Rounding-level differences between B0 and B1.** The two baselines differed in five T5 goods-market path residuals (dY − dC − dG; values between 1e-15 and 4e-6):
+  - one is in the refined setting that the V tests use: `G_debt_r_rule` at T = 300, 3.11556e-13 in one run and 3.11383e-13 in the other, against a threshold of 4e-11;
+  - the other four are in the two settings that no V test uses; two of them are the quantities that the plan (section 4) already saw vary between runs.
+  - The refined-setting quantity also took the value 3.11383e-13 in the threshold runs, and 3.11556e-13 (the v0.2 value) in a pytest run in the repository. This is the run-to-run rounding variation of dC that the plan describes. No number of the v0.1 summaries and no test outcome is affected.
+- **Effect on the predictions.** Prediction P1 ("B0 and B1 identical in every summarised number") and prediction P4 ("equal to the v0.2 value", where the refined setting is not exempted) are therefore expected to fail at rounding level for these quantities. The predictions stay as registered, and the outcome is reported in section 10.
 
 ## 6. Re-run design
 

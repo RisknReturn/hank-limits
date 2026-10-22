@@ -1,0 +1,239 @@
+{
+ "environment": {
+  "utc": "2026-10-22T14:47:24+00:00",
+  "python": "3.13.16",
+  "platform": "Linux-6.18.44-fc-v140-x86_64-with-glibc2.39",
+  "git_head": "e9fd7e115c4d6ac75743d4221cfeaf8e410e0332",
+  "worktree_status": [
+   "?? out/thresholds_v0_3_0_run1.json"
+  ],
+  "runtime_s": 65.04428267478943,
+  "runtime_by_check_s": {
+   "t1": 13.105634927749634,
+   "t2": 19.9805805683136,
+   "t3": 2.7817227840423584,
+   "t4": 12.781930208206177,
+   "t5": 13.807225465774536,
+   "t3_goods": 2.579880952835083
+  },
+  "packages": {
+   "sequence-jacobian": "1.0.0",
+   "numpy": "2.5.3",
+   "scipy": "1.18.1",
+   "numba": "0.68.0",
+   "llvmlite": "0.50.0"
+  }
+ },
+ "results": {
+  "t1": {
+   "b_max": {
+    "hh_budget": 3.095687957175933e-12,
+    "pi_row_sum_err": 2.220446049250313e-16,
+    "pi_negative": 0.0,
+    "mean_e_err": 1.6269208202857044e-12,
+    "agg_income_err": 1.6269208202857044e-12,
+    "spec_r": 0.0,
+    "spec_eis": 0.0,
+    "spec_A": 5.7163244626678986e-08,
+    "spec_a_min": 0.0
+   },
+   "errors": [],
+   "skipped": [],
+   "ge_target": null,
+   "diagnostics_max": {}
+  },
+  "t2": {
+   "b_max": {
+    "ss_goods": 6.589041312565769e-09,
+    "ss_assets": 2.1963421811756763e-07,
+    "incidence_err": 0.0,
+    "pi_row_sum_err_H": 2.220446049250313e-16,
+    "pi_negative_H": 0.0,
+    "mean_e_err_H": 1.6269208202857044e-12,
+    "agg_income_err_H": 1.6269208202857044e-12,
+    "hh_budget_H": 4.3909870612016026e-16,
+    "pi_row_sum_err_S": 2.220446049250313e-16,
+    "pi_negative_S": 0.0,
+    "mean_e_err_S": 1.6269208202857044e-12,
+    "agg_income_err_S": 1.6269208202857044e-12,
+    "hh_budget_S": 4.462628928881731e-16,
+    "spec_lam": 0.0,
+    "spec_beta_H": 0.0,
+    "spec_r": 0.0,
+    "spec_eis": 0.0,
+    "spec_a_min_H": 0.0,
+    "spec_a_min_S": 0.0
+   },
+   "errors": [],
+   "skipped": [],
+   "ge_target": null,
+   "diagnostics_max": {}
+  },
+  "t3": {
+   "b_max": {
+    "ge_target_resid_reported_acyc": 1.0842021724855044e-14,
+    "ge_target_resid_direct_acyc": 1.0842021724855044e-14,
+    "ss_assets_acyc": 1.8068796459047576e-10,
+    "ss_goods_acyc": 3.5904612616377563e-12,
+    "hh_budget_acyc": 7.771561172403963e-16,
+    "pi_row_sum_err_acyc": 2.220446049250313e-16,
+    "pi_negative_acyc": 0.0,
+    "mean_e_err_acyc": 3.5905722839402188e-12,
+    "agg_income_err_acyc": 3.5905722839402188e-12,
+    "spec_eis_acyc": 0.0,
+    "spec_a_min_acyc": 0.0,
+    "spec_rstar_acyc": 2.1337098754514727e-16,
+    "spec_zeta_acyc": 0.0,
+    "ge_target_resid_reported_cyc": 1.5178830414797062e-14,
+    "ge_target_resid_direct_cyc": 1.5178830414797062e-14,
+    "ss_assets_cyc": 1.8068796459047576e-10,
+    "ss_goods_cyc": 3.5904612616377563e-12,
+    "hh_budget_cyc": 7.771561172403963e-16,
+    "pi_row_sum_err_cyc": 2.220446049250313e-16,
+    "pi_negative_cyc": 0.0,
+    "mean_e_err_cyc": 3.5905722839402188e-12,
+    "agg_income_err_cyc": 3.5905722839402188e-12,
+    "incidence_err_cyc": 1.4539843757324911e-11,
+    "spec_eis_cyc": 0.0,
+    "spec_a_min_cyc": 0.0,
+    "spec_rstar_cyc": 2.1337098754514727e-16,
+    "spec_zeta_low_cyc": 0.0
+   },
+   "errors": [],
+   "skipped": [],
+   "ge_target": {
+    "acyc": [
+     "asset_mkt",
+     "asset_mkt",
+     "asset_mkt",
+     "asset_mkt",
+     "asset_mkt",
+     "asset_mkt",
+     "asset_mkt"
+    ],
+    "cyc": [
+     "asset_mkt",
+     "asset_mkt",
+     "asset_mkt",
+     "asset_mkt",
+     "asset_mkt",
+     "asset_mkt",
+     "asset_mkt"
+    ]
+   },
+   "diagnostics_max": {
+    "goods_mkt_resid_direct_acyc": 1.355765152921684e-07,
+    "goods_mkt_resid_direct_cyc": 2.5204327435551788e-06
+   }
+  },
+  "t4": {
+   "b_max": {
+    "ss_capital": 5.177785391100039e-10,
+    "hh_budget": 1.8486760488906665e-15,
+    "pi_row_sum_err": 2.220446049250313e-16,
+    "pi_negative": 0.0,
+    "mean_e_err": 1.7146284392310918e-11,
+    "agg_income_err": 1.714614368896573e-11,
+    "foc_r": 1.1941558852868184e-12,
+    "foc_w": 6.1727674942478025e-12,
+    "ss_goods": 6.377376855023393e-11,
+    "spec_beta": 0.0,
+    "spec_eis": 0.0,
+    "spec_a_min": 0.0,
+    "spec_euler_err_mean_weighted": 4.331310700110914e-08,
+    "spec_euler_err_max_with_mass": 2.499522011589761e-06,
+    "spec_kkt_violation_max_with_mass": 0.0
+   },
+   "errors": [],
+   "skipped": [],
+   "ge_target": null,
+   "diagnostics_max": {}
+  },
+  "t5": {
+   "b_max": {
+    "ss_government_budget": 1.0408340855860843e-17,
+    "ss_goods": 3.758676703213837e-11,
+    "ss_assets": 1.887379141862766e-14,
+    "hh_budget": 5.5511151233865935e-15,
+    "pi_row_sum_err": 2.220446049250313e-16,
+    "pi_negative": 0.0,
+    "mean_e_err": 4.8193449231348495e-11,
+    "agg_income_err": 4.819335813612596e-11,
+    "spec_r": 0.0,
+    "spec_eis": 0.0,
+    "spec_B": 0.0,
+    "spec_G": 0.0,
+    "spec_phi_B": 0.0,
+    "spec_a_min": 0.0,
+    "fiscal_rule": 0.0,
+    "government_budget": 8.673617379884035e-16,
+    "goods_market": 3.1155633628543455e-13,
+    "exog_G": 0.0,
+    "exog_rshock": 0.0,
+    "exog_r": 0.0,
+    "rate_rule": 8.673617379884035e-17
+   },
+   "errors": [],
+   "skipped": [],
+   "ge_target": null,
+   "diagnostics_max": {}
+  },
+  "t3_goods": {
+   "b_max": {
+    "ge_target_resid_reported_goods_acyc": 8.673617379884035e-14,
+    "ge_target_resid_direct_goods_acyc": 8.754932542820448e-14,
+    "ss_assets_acyc": 1.8068796459047576e-10,
+    "ss_goods_acyc": 3.5904612616377563e-12,
+    "hh_budget_acyc": 7.771561172403963e-16,
+    "pi_row_sum_err_acyc": 2.220446049250313e-16,
+    "pi_negative_acyc": 0.0,
+    "mean_e_err_acyc": 3.5905722839402188e-12,
+    "agg_income_err_acyc": 3.5905722839402188e-12,
+    "spec_eis_acyc": 0.0,
+    "spec_a_min_acyc": 0.0,
+    "spec_rstar_acyc": 2.1337098754514727e-16,
+    "spec_zeta_acyc": 0.0,
+    "ge_target_resid_reported_goods_cyc": 1.3877787807814457e-13,
+    "ge_target_resid_direct_goods_cyc": 1.2685165418080402e-13,
+    "ss_assets_cyc": 1.8068796459047576e-10,
+    "ss_goods_cyc": 3.5904612616377563e-12,
+    "hh_budget_cyc": 7.771561172403963e-16,
+    "pi_row_sum_err_cyc": 2.220446049250313e-16,
+    "pi_negative_cyc": 0.0,
+    "mean_e_err_cyc": 3.5905722839402188e-12,
+    "agg_income_err_cyc": 3.5905722839402188e-12,
+    "incidence_err_cyc": 1.4539843757324911e-11,
+    "spec_eis_cyc": 0.0,
+    "spec_a_min_cyc": 0.0,
+    "spec_rstar_cyc": 2.1337098754514727e-16,
+    "spec_zeta_low_cyc": 0.0
+   },
+   "errors": [],
+   "skipped": [],
+   "ge_target": {
+    "acyc": [
+     "goods_mkt",
+     "goods_mkt",
+     "goods_mkt",
+     "goods_mkt",
+     "goods_mkt",
+     "goods_mkt",
+     "goods_mkt"
+    ],
+    "cyc": [
+     "goods_mkt",
+     "goods_mkt",
+     "goods_mkt",
+     "goods_mkt",
+     "goods_mkt",
+     "goods_mkt",
+     "goods_mkt"
+    ]
+   },
+   "diagnostics_max": {
+    "asset_mkt_resid_direct_acyc": 2.959931935718966e-06,
+    "asset_mkt_resid_direct_cyc": 0.002443027003391891
+   }
+  }
+ }
+}
