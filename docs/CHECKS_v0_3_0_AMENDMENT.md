@@ -1,6 +1,6 @@
 # v0.3.0 release candidate: review-driven changes to the v0.3 checks, and their re-run
 
-Status: **design and predictions** (commit A on branch `v0_3_0-rc`). Written and pushed before any code of this amendment and before any re-run. Code, tests and the thresholds of the new quantities follow in commit B (section 5 is filled in there, before any mutant is run); the re-run outputs in commit C; the results in commit D (section 10). Release metadata (version 0.3.0) is commit E.
+Status: **design and predictions** committed as A (`471fc47`) on branch `v0_3_0-rc`, before any code of this amendment and before any re-run (sections 1–9 as committed then). The thresholds of the new quantities (section 5) were filled in by commit B (`a290c75`, code, tests and thresholds), before any mutant was run. The re-run outputs are commit C (`ad1857d`), the results (section 10) commit D. Release metadata (version 0.3.0) is commit E.
 
 Starting point: `main` at `281de19` (v0.3, unreleased; the last release is v0.2.1, concept DOI 10.5281/zenodo.23489176). Pre-registration of v0.3: `docs/CHECKS_PLAN_v0_3.md` ("the plan"); its results: `docs/MUTATION_v0_2.md`.
 
@@ -269,6 +269,108 @@ No other cell is expected to change. R1 to R3 change how missing, non-finite and
 - R1–R3 address failure modes (missing, non-finite and wrongly sized exogenous values) that neither the reference provider nor the mutants produced. Their evidence is the regression tests with fake providers.
 - The thresholds of the new quantities are regression thresholds for this calibration, like the others.
 
-## 10. Results
+## 10. Results (commit D)
 
-*(commit D)*
+Data: `out/mutation_v0_3_0_rerun.json` (every run's outcomes and check summaries) and `out/mutation_v0_3_0_rerun.csv` (one row per design × mutant × group). Comparison with v0.2: `python3 scripts/rerun_v0_3_0_compare.py --json out/rerun_v0_3_0_compare.json`.
+
+**These are results of a re-run of the suite as revised after the review.** The v0.2 results in `docs/MUTATION_v0_2.md` (19 of 20, 25 of 25, the C03 alarm) remain the record for the checks as they were then.
+
+### 10.1 Execution record (2026-10-22, UTC)
+
+| Step | Commit | Time | Content |
+|---|---|---|---|
+| Design and predictions A | `471fc47` | 14:28:46 | this file, sections 1–9; one line in the plan, section 10 |
+| Threshold runs | (candidate `e9fd7e1`) | 14:46, 14:47 | `scripts/thresholds_v0_3_0.py` twice; one baseline-only run of the runner (section 5) |
+| Code, tests, thresholds B | `a290c75` | 14:51:57 | R1–R4, V6 split, thresholds, runner copy |
+| Re-run | – | 14:52:08 start, 1071 s | 53 runs, 4 in parallel, 68–152 s each |
+| Outputs C | `ad1857d` | 15:10:12 | `out/mutation_v0_3_0_rerun.{json,csv}` |
+| Results D | this commit | | this section; corrections in `docs/MUTATION_v0_2.md` |
+
+- The runner record shows HEAD `a290c75` with a clean worktree, and `runner_committed = true` (the copy committed in B).
+- The environment is that of v0.2 (section 5).
+- Re-anchored patches, as registered in section 3.6: M04 and C03, recorded under `reanchored` in the JSON. No other patch changed. Before B, the unmodified v0.2 runner failed on exactly these two patches, and on no other (`--check`).
+- No mutant was run before B was pushed.
+
+### 10.2 Baselines
+
+- Both baselines: 107 passed, 4 xfailed (F1, F2, V6a, V6b).
+- B0 and B1 are identical in every outcome and every summarised number; the runner reports `deterministic = true`.
+- **All 276 numbers of the v0.1 summaries equal v0.1 run B0 bit for bit, in both baselines.** Against v0.1 run B1 only the known two-valued number differs (`t5.ssj_inconsistent_options.walras_max.rshock_r_rule`, relative 1.4e-11).
+
+### 10.3 Changes against v0.2
+
+Cells as in `docs/MUTATION_v0_2.md`, sections 3 and 9: per group, whether the mutant was caught and which tests changed outcome.
+
+| Design | Runs | Cells that differ from v0.2 (detection or the set of changed tests) |
+|---|---|---|
+| (ii) | 23 | **none**. Every mutant and control has the same verdict in every group, and the same changed tests, as in v0.2. |
+| (iii) | 28 | **one**: C03, group V. v0.2: 2/33 (`test_v1_werning_ge_target_resid_reported`, `..._direct`); re-run: 0/37. |
+
+**Suite level.**
+
+- (ii): 19 of 20 mutants caught, N20 missed. Five of them are caught only by V (N04, N05, N07, N10, N18). No control alarms (K01–K03).
+- (iii): 25 of 25 caught, four only by V (M12, M21, M23, M24). No control alarms (C01, C02, C03).
+- Group-V counts are those of v0.2 with 37 in the denominator. For example, in (ii): N02 11/37, N06 9/37, N12 9/37, N19 8/37 (N19: the t3 fixture error, as before), N17 4/37. In (iii): M13 14/37, M08 13/37.
+
+**Per V test** (the table of `docs/MUTATION_v0_2.md`, section 5):
+
+- Each existing V test catches the same mutants as in v0.2, except that C03 no longer appears under the two V1 tests in (iii).
+- The new tests caught nothing: `test_v4_exogenous_G_as_requested`, `..._r_...`, `..._rshock_...` passed and `test_v6a_...`, `test_v6b_...` xfailed in all 53 runs.
+
+**Pre-registered predictions of v0.2, scored by the runner.**
+
+- (ii): 167 of 168 firm cells held. The one miss is N13/T2, as in v0.2.
+- (iii): 222 of 223 held. The one miss is C03/V, predicted "catch (false alarm)" in v0.2, which R4 was designed to change.
+
+### 10.4 Predictions of this amendment (section 7)
+
+| Prediction | Result | Detail |
+|---|---|---|
+| P1 baselines | **held** | 107 passed, 4 xfailed; B0 = B1 in every outcome and summarised number; 276 = v0.1 B0 in both. (The two baselines of the runner check at B differed at rounding level, section 5; these two did not.) |
+| P2 T1–T6, D | **held** | same verdict and same changed tests as v0.2 in all 51 runs |
+| P3 existing V tests | **held** | same outcomes as v0.2 in every run except C03 |
+| P4 values | **failed at rounding level** | see below |
+| P5 new tests | **held** | `exog_G`, `exog_r`, `exog_rshock` exactly 0 in every run; the three tests pass, V6a and V6b xfail, in every run |
+| P6 C03 | **held** | the provider reports `goods_mkt` for both incidences; V1 passes. The four goods-market values equal the threshold runs' b_max bit for bit (8.67e-14, 1.39e-13, 8.75e-14, 1.27e-13 against 9e-12 and 2e-11). The asset-market diagnostic equals the values that alarmed in v0.2 (2.96e-6 and 2.44e-3, divided by b) |
+| P7 suite level | **held** | (ii) 19/20, N20 missed, no alarm on K01–K03; (iii) 25/25, no alarm on C01–C03; original predictions 167/168 and 222/223 (C03/V) |
+| P8 checker self-tests | **held** | the 30 tests of `tests/test_v0_3_0_checker.py` passed in all 53 runs |
+
+**P4 in detail.** Every v0.3 quantity in the v0.2 data was compared with the same run's value in the re-run. Only one kind of quantity differs, the T5 goods-market path residual max_t |dY_t − dC_t − dG_t| / s; there are no differences in any other quantity, and none in the v0.1 summaries apart from the known two-valued number.
+
+- **Runs affected:** 31 of the 53. The baselines differ from v0.2's in five such values, which are the ones seen in section 5.
+- **Settings affected:** all three T5 settings.
+  - In the refined setting that the V tests use: 27 runs, 43 values, absolute differences at most 2.8e-15. The threshold is 4e-11, and the baseline values are near 3e-13.
+  - In the two settings that no V test uses: up to 5.8e-9 in absolute terms, but at most 4.5e-12 relative (M08, whose residuals there are of order 1e3).
+- **Cause.** This is the run-to-run rounding of dC described in the plan (section 4), which also shows in the v0.1 two-valued number. The prediction exempted only the two unused settings, and was wrong for the refined one.
+- **No test outcome changed because of it.** Section 5 had flagged this risk before any mutant was run.
+
+**C03 is not independent evidence.** Its V1 thresholds come from unmodified runs of the same setting (section 3.4), so its pass holds by construction. It shows that the target convention works as built: a goods-market solve is judged on the goods market, and its asset-market residual is kept as a diagnostic.
+
+### 10.5 Contribution of the new quantities
+
+| Quantity | (ii) | (iii) | Note |
+|---|---|---|---|
+| `exog_G`, `exog_r`, `exog_rshock` | 0 catches; value 0 in every run | 0 catches; value 0 in every run | the reference provider takes the exogenous paths from the inputs, and no mutant changes that; the evidence for R3 is the doubled-shock regression test |
+| `ge_target_resid_*_goods_*` | not applicable (asset-market target in every run) | C03 only: passes | the four values equal the threshold runs' |
+| `rate_rule` with the requested rshock | same catches as v0.2 (N04, N16) | same as v0.2 (M05, M20, M25) | the reported drshock equals the requested rshock in every run |
+| R1 verdict (non-finite, missing, incomplete) | no run had a missing or non-finite V value | as (ii) | evidence: regression tests (section 3.1) |
+| R2 per-equation fields | every field reported in every run | as (ii) | evidence: fake providers (section 3.2) |
+| V6a, V6b | xfail in every run | xfail in every run | SSJ code only; no model-side mutant reaches them |
+
+### 10.6 Controls
+
+- No control changed any test outcome in the re-run: K01–K03 in (ii), C01–C03 in (iii).
+- C03 no longer alarms, for the reason in section 10.4. Six controls do not make a false-alarm rate.
+
+### 10.7 Margins
+
+- The margins of the V catches are the same as in v0.2. The values are bit-identical, apart from the rounding-level goods-market path residuals of section 10.4, none of which is a catching value.
+- In (ii), every caught mutant has a failing V test above its threshold by a factor of 9.7e3 or more (N18). By individual failing test, the smallest factor is 526 (N12, TANK goods market).
+- In (iii), the smallest of the largest factors per mutant is 274 (M16). By individual failing test, the smallest factor is 1.3 (M15, V1).
+- These figures correct a statement in `docs/MUTATION_v0_2.md`, section 1; its dated correction is part of this commit.
+
+### 10.8 What this shows
+
+- The revision changed one detection outcome on the two samples, the one it was designed to change (C03). The 19 of 20 and 25 of 25 of v0.2 hold for the revised suite as well.
+- The evidence for R1–R3 is in the regression tests with fake providers: missing, non-finite and wrongly sized exogenous values. Neither the reference provider nor any mutant produced such a case.
+- The statements of `docs/CHECKS_PLAN_v0_3.md`, section 9, and of `docs/MUTATION_v0_2.md`, section 10, hold unchanged: two hand-picked samples, design (iii) not independent, one environment.
