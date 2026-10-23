@@ -1,0 +1,2035 @@
+{
+ "outcomes": [],
+ "tests_only_in_new": {
+  "tests/test_v0_3_0_checker.py::test_request_t5_provider_drops_an_experiment": {
+   "passed": [
+    "v0.3/B0",
+    "v0.3/B1",
+    "v0.3/N01",
+    "v0.3/N02",
+    "v0.3/N03",
+    "v0.3/N04",
+    "v0.3/N05",
+    "v0.3/N06",
+    "v0.3/N07",
+    "v0.3/N08",
+    "v0.3/N09",
+    "v0.3/N10",
+    "v0.3/N11",
+    "v0.3/N12",
+    "v0.3/N13",
+    "v0.3/N14",
+    "v0.3/N15",
+    "v0.3/N16",
+    "v0.3/N17",
+    "v0.3/N18",
+    "v0.3/N19",
+    "v0.3/N20",
+    "v0.3/K01",
+    "v0.3/K02",
+    "v0.3/K03",
+    "v0.3/M01",
+    "v0.3/M02",
+    "v0.3/M03",
+    "v0.3/M04",
+    "v0.3/M05",
+    "v0.3/M06",
+    "v0.3/M07",
+    "v0.3/M08",
+    "v0.3/M09",
+    "v0.3/M10",
+    "v0.3/M11",
+    "v0.3/M12",
+    "v0.3/M13",
+    "v0.3/M14",
+    "v0.3/M15",
+    "v0.3/M16",
+    "v0.3/M17",
+    "v0.3/M18",
+    "v0.3/M19",
+    "v0.3/M20",
+    "v0.3/M21",
+    "v0.3/M22",
+    "v0.3/M23",
+    "v0.3/M24",
+    "v0.3/M25",
+    "v0.3/C01",
+    "v0.3/C02",
+    "v0.3/C03"
+   ]
+  },
+  "tests/test_v0_3_0_checker.py::test_request_t2_provider_changes_dr_and_chis": {
+   "passed": [
+    "v0.3/B0",
+    "v0.3/B1",
+    "v0.3/N01",
+    "v0.3/N02",
+    "v0.3/N03",
+    "v0.3/N04",
+    "v0.3/N05",
+    "v0.3/N06",
+    "v0.3/N07",
+    "v0.3/N08",
+    "v0.3/N09",
+    "v0.3/N10",
+    "v0.3/N11",
+    "v0.3/N12",
+    "v0.3/N13",
+    "v0.3/N14",
+    "v0.3/N15",
+    "v0.3/N16",
+    "v0.3/N17",
+    "v0.3/N18",
+    "v0.3/N19",
+    "v0.3/N20",
+    "v0.3/K01",
+    "v0.3/K02",
+    "v0.3/K03",
+    "v0.3/M01",
+    "v0.3/M02",
+    "v0.3/M03",
+    "v0.3/M04",
+    "v0.3/M05",
+    "v0.3/M06",
+    "v0.3/M07",
+    "v0.3/M08",
+    "v0.3/M09",
+    "v0.3/M10",
+    "v0.3/M11",
+    "v0.3/M12",
+    "v0.3/M13",
+    "v0.3/M14",
+    "v0.3/M15",
+    "v0.3/M16",
+    "v0.3/M17",
+    "v0.3/M18",
+    "v0.3/M19",
+    "v0.3/M20",
+    "v0.3/M21",
+    "v0.3/M22",
+    "v0.3/M23",
+    "v0.3/M24",
+    "v0.3/M25",
+    "v0.3/C01",
+    "v0.3/C02",
+    "v0.3/C03"
+   ]
+  },
+  "tests/test_v0_3_0_checker.py::test_r4_non_string_target_not_applicable[asset_mkt]": {
+   "passed": [
+    "v0.3/B0",
+    "v0.3/B1",
+    "v0.3/N01",
+    "v0.3/N02",
+    "v0.3/N03",
+    "v0.3/N04",
+    "v0.3/N05",
+    "v0.3/N06",
+    "v0.3/N07",
+    "v0.3/N08",
+    "v0.3/N09",
+    "v0.3/N10",
+    "v0.3/N11",
+    "v0.3/N12",
+    "v0.3/N13",
+    "v0.3/N14",
+    "v0.3/N15",
+    "v0.3/N16",
+    "v0.3/N17",
+    "v0.3/N18",
+    "v0.3/N19",
+    "v0.3/N20",
+    "v0.3/K01",
+    "v0.3/K02",
+    "v0.3/K03",
+    "v0.3/M01",
+    "v0.3/M02",
+    "v0.3/M03",
+    "v0.3/M04",
+    "v0.3/M05",
+    "v0.3/M06",
+    "v0.3/M07",
+    "v0.3/M08",
+    "v0.3/M09",
+    "v0.3/M10",
+    "v0.3/M11",
+    "v0.3/M12",
+    "v0.3/M13",
+    "v0.3/M14",
+    "v0.3/M15",
+    "v0.3/M16",
+    "v0.3/M17",
+    "v0.3/M18",
+    "v0.3/M19",
+    "v0.3/M20",
+    "v0.3/M21",
+    "v0.3/M22",
+    "v0.3/M23",
+    "v0.3/M24",
+    "v0.3/M25",
+    "v0.3/C01",
+    "v0.3/C02",
+    "v0.3/C03"
+   ]
+  },
+  "tests/test_v0_3_0_checker.py::test_r4_non_string_target_not_applicable[bad1]": {
+   "passed": [
+    "v0.3/B0",
+    "v0.3/B1",
+    "v0.3/N01",
+    "v0.3/N02",
+    "v0.3/N03",
+    "v0.3/N04",
+    "v0.3/N05",
+    "v0.3/N06",
+    "v0.3/N07",
+    "v0.3/N08",
+    "v0.3/N09",
+    "v0.3/N10",
+    "v0.3/N11",
+    "v0.3/N12",
+    "v0.3/N13",
+    "v0.3/N14",
+    "v0.3/N15",
+    "v0.3/N16",
+    "v0.3/N17",
+    "v0.3/N18",
+    "v0.3/N19",
+    "v0.3/N20",
+    "v0.3/K01",
+    "v0.3/K02",
+    "v0.3/K03",
+    "v0.3/M01",
+    "v0.3/M02",
+    "v0.3/M03",
+    "v0.3/M04",
+    "v0.3/M05",
+    "v0.3/M06",
+    "v0.3/M07",
+    "v0.3/M08",
+    "v0.3/M09",
+    "v0.3/M10",
+    "v0.3/M11",
+    "v0.3/M12",
+    "v0.3/M13",
+    "v0.3/M14",
+    "v0.3/M15",
+    "v0.3/M16",
+    "v0.3/M17",
+    "v0.3/M18",
+    "v0.3/M19",
+    "v0.3/M20",
+    "v0.3/M21",
+    "v0.3/M22",
+    "v0.3/M23",
+    "v0.3/M24",
+    "v0.3/M25",
+    "v0.3/C01",
+    "v0.3/C02",
+    "v0.3/C03"
+   ]
+  },
+  "tests/test_v0_3_0_checker.py::test_request_t5_provider_doubles_paths_in_place": {
+   "passed": [
+    "v0.3/B0",
+    "v0.3/B1",
+    "v0.3/N01",
+    "v0.3/N02",
+    "v0.3/N03",
+    "v0.3/N04",
+    "v0.3/N05",
+    "v0.3/N06",
+    "v0.3/N07",
+    "v0.3/N08",
+    "v0.3/N09",
+    "v0.3/N10",
+    "v0.3/N11",
+    "v0.3/N12",
+    "v0.3/N13",
+    "v0.3/N14",
+    "v0.3/N15",
+    "v0.3/N16",
+    "v0.3/N17",
+    "v0.3/N18",
+    "v0.3/N19",
+    "v0.3/N20",
+    "v0.3/K01",
+    "v0.3/K02",
+    "v0.3/K03",
+    "v0.3/M01",
+    "v0.3/M02",
+    "v0.3/M03",
+    "v0.3/M04",
+    "v0.3/M05",
+    "v0.3/M06",
+    "v0.3/M07",
+    "v0.3/M08",
+    "v0.3/M09",
+    "v0.3/M10",
+    "v0.3/M11",
+    "v0.3/M12",
+    "v0.3/M13",
+    "v0.3/M14",
+    "v0.3/M15",
+    "v0.3/M16",
+    "v0.3/M17",
+    "v0.3/M18",
+    "v0.3/M19",
+    "v0.3/M20",
+    "v0.3/M21",
+    "v0.3/M22",
+    "v0.3/M23",
+    "v0.3/M24",
+    "v0.3/M25",
+    "v0.3/C01",
+    "v0.3/C02",
+    "v0.3/C03"
+   ]
+  },
+  "tests/test_v0_3_0_checker.py::test_r4_non_string_target_not_applicable[3]": {
+   "passed": [
+    "v0.3/B0",
+    "v0.3/B1",
+    "v0.3/N01",
+    "v0.3/N02",
+    "v0.3/N03",
+    "v0.3/N04",
+    "v0.3/N05",
+    "v0.3/N06",
+    "v0.3/N07",
+    "v0.3/N08",
+    "v0.3/N09",
+    "v0.3/N10",
+    "v0.3/N11",
+    "v0.3/N12",
+    "v0.3/N13",
+    "v0.3/N14",
+    "v0.3/N15",
+    "v0.3/N16",
+    "v0.3/N17",
+    "v0.3/N18",
+    "v0.3/N19",
+    "v0.3/N20",
+    "v0.3/K01",
+    "v0.3/K02",
+    "v0.3/K03",
+    "v0.3/M01",
+    "v0.3/M02",
+    "v0.3/M03",
+    "v0.3/M04",
+    "v0.3/M05",
+    "v0.3/M06",
+    "v0.3/M07",
+    "v0.3/M08",
+    "v0.3/M09",
+    "v0.3/M10",
+    "v0.3/M11",
+    "v0.3/M12",
+    "v0.3/M13",
+    "v0.3/M14",
+    "v0.3/M15",
+    "v0.3/M16",
+    "v0.3/M17",
+    "v0.3/M18",
+    "v0.3/M19",
+    "v0.3/M20",
+    "v0.3/M21",
+    "v0.3/M22",
+    "v0.3/M23",
+    "v0.3/M24",
+    "v0.3/M25",
+    "v0.3/C01",
+    "v0.3/C02",
+    "v0.3/C03"
+   ]
+  },
+  "tests/test_v0_3_0_checker.py::test_request_t3_provider_doubles_dr_in_place": {
+   "passed": [
+    "v0.3/B0",
+    "v0.3/B1",
+    "v0.3/N01",
+    "v0.3/N02",
+    "v0.3/N03",
+    "v0.3/N04",
+    "v0.3/N05",
+    "v0.3/N06",
+    "v0.3/N07",
+    "v0.3/N08",
+    "v0.3/N09",
+    "v0.3/N10",
+    "v0.3/N11",
+    "v0.3/N12",
+    "v0.3/N13",
+    "v0.3/N14",
+    "v0.3/N15",
+    "v0.3/N16",
+    "v0.3/N17",
+    "v0.3/N18",
+    "v0.3/N19",
+    "v0.3/N20",
+    "v0.3/K01",
+    "v0.3/K02",
+    "v0.3/K03",
+    "v0.3/M01",
+    "v0.3/M02",
+    "v0.3/M03",
+    "v0.3/M04",
+    "v0.3/M05",
+    "v0.3/M06",
+    "v0.3/M07",
+    "v0.3/M08",
+    "v0.3/M09",
+    "v0.3/M10",
+    "v0.3/M11",
+    "v0.3/M12",
+    "v0.3/M13",
+    "v0.3/M14",
+    "v0.3/M15",
+    "v0.3/M16",
+    "v0.3/M17",
+    "v0.3/M18",
+    "v0.3/M19",
+    "v0.3/M20",
+    "v0.3/M21",
+    "v0.3/M22",
+    "v0.3/M23",
+    "v0.3/M24",
+    "v0.3/M25",
+    "v0.3/C01",
+    "v0.3/C02",
+    "v0.3/C03"
+   ]
+  }
+ },
+ "tests_only_in_ref": {},
+ "cells": [],
+ "numbers": [
+  {
+   "run": "v0.3/B0",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 2.4662423862495397e-07,
+   "new": 2.466242386214845e-07
+  },
+  {
+   "run": "v0.3/B0",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 2.8189256484623115e-13,
+   "new": 2.8171909249863347e-13
+  },
+  {
+   "run": "v0.3/B0",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.21921922427784e-15,
+   "new": 1.2193886308672908e-15
+  },
+  {
+   "run": "v0.3/B0",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.1138286393783687e-13,
+   "new": 3.1155633628543455e-13
+  },
+  {
+   "run": "v0.3/B0",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 2.2896049483270586e-14,
+   "new": 2.28960495039501e-14
+  },
+  {
+   "run": "v0.3/B1",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 2.8189256484623115e-13,
+   "new": 2.8171909249863347e-13
+  },
+  {
+   "run": "v0.3/B1",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.21921922427784e-15,
+   "new": 1.2195580374567416e-15
+  },
+  {
+   "run": "v0.3/B1",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.1138286393783687e-13,
+   "new": 3.1155633628543455e-13
+  },
+  {
+   "run": "v0.3/B1",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 2.2896049483270586e-14,
+   "new": 2.28960495039501e-14
+  },
+  {
+   "run": "v0.3/B1",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.646822432923358e-06,
+   "new": 3.6468224327498855e-06
+  },
+  {
+   "run": "v0.3/N05",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 2.4662423862495397e-07,
+   "new": 2.466242386214845e-07
+  },
+  {
+   "run": "v0.3/N05",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.2195580374567416e-15,
+   "new": 1.2193886308672908e-15
+  },
+  {
+   "run": "v0.3/N05",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.6468224327498855e-06,
+   "new": 3.646822432923358e-06
+  },
+  {
+   "run": "v0.3/N09",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 2.8189256484623115e-13,
+   "new": 2.8171909249863347e-13
+  },
+  {
+   "run": "v0.3/N09",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.21921922427784e-15,
+   "new": 1.2195580374567416e-15
+  },
+  {
+   "run": "v0.3/N09",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.1138286393783687e-13,
+   "new": 3.1155633628543455e-13
+  },
+  {
+   "run": "v0.3/N09",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 2.2896049483270586e-14,
+   "new": 2.28960495039501e-14
+  },
+  {
+   "run": "v0.3/N09",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.646822432923358e-06,
+   "new": 3.6468224327498855e-06
+  },
+  {
+   "run": "v0.3/N10",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 2.4662423862495397e-07,
+   "new": 2.466242386214845e-07
+  },
+  {
+   "run": "v0.3/N10",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 2.8189256484623115e-13,
+   "new": 2.8171909249863347e-13
+  },
+  {
+   "run": "v0.3/N10",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.21921922427784e-15,
+   "new": 1.2193886308672908e-15
+  },
+  {
+   "run": "v0.3/N10",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.1138286393783687e-13,
+   "new": 3.1155633628543455e-13
+  },
+  {
+   "run": "v0.3/N10",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 2.2896049483270586e-14,
+   "new": 2.28960495039501e-14
+  },
+  {
+   "run": "v0.3/N12",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 0.02447484565445632,
+   "new": 0.024474845654456328
+  },
+  {
+   "run": "v0.3/N12",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.9651164376299768e-15,
+   "new": 1.9664716903455837e-15
+  },
+  {
+   "run": "v0.3/N12",
+   "key": "t5.v0_3.ssj_consistent.paths.G_debt_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 6.692615950413515e-10,
+   "new": 6.692616004623623e-10
+  },
+  {
+   "run": "v0.3/N12",
+   "key": "t5.v0_3.ssj_consistent.paths.G_debt_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 3.1797430073590697e-13,
+   "new": 3.1797294548319137e-13
+  },
+  {
+   "run": "v0.3/N12",
+   "key": "t5.ssj_consistent_refined.walras_max.G_debt_r_rule",
+   "kind": "other",
+   "ref": 0.017159814263976565,
+   "new": 0.01715981426397657
+  },
+  {
+   "run": "v0.3/N12",
+   "key": "t5.v0_3.ssj_consistent.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 2.891784506731804e-07,
+   "new": 2.8917845071654846e-07
+  },
+  {
+   "run": "v0.3/N12",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 1.3173056395698879e-14,
+   "new": 1.3183898417423734e-14
+  },
+  {
+   "run": "v0.3/N12",
+   "key": "t5.ssj_consistent_refined.walras_max.rshock_r_rule",
+   "kind": "other",
+   "ref": 0.024474946534987562,
+   "new": 0.02447494653498757
+  },
+  {
+   "run": "v0.3/N12",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 3.469446951953614e-16,
+   "new": 3.0357660829594124e-16
+  },
+  {
+   "run": "v0.3/N13",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 2.4662423862495397e-07,
+   "new": 2.466242386214845e-07
+  },
+  {
+   "run": "v0.3/N13",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.2195580374567416e-15,
+   "new": 1.2193886308672908e-15
+  },
+  {
+   "run": "v0.3/N13",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.6468224327498855e-06,
+   "new": 3.646822432923358e-06
+  },
+  {
+   "run": "v0.3/N14",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 2.8189256484623115e-13,
+   "new": 2.8171909249863347e-13
+  },
+  {
+   "run": "v0.3/N14",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.21921922427784e-15,
+   "new": 1.2195580374567416e-15
+  },
+  {
+   "run": "v0.3/N14",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.1138286393783687e-13,
+   "new": 3.1155633628543455e-13
+  },
+  {
+   "run": "v0.3/N14",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 2.2896049483270586e-14,
+   "new": 2.28960495039501e-14
+  },
+  {
+   "run": "v0.3/N14",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.646822432923358e-06,
+   "new": 3.6468224327498855e-06
+  },
+  {
+   "run": "v0.3/N16",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 2.466242386214845e-07,
+   "new": 2.4662423862495397e-07
+  },
+  {
+   "run": "v0.3/N16",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 2.8171909249863347e-13,
+   "new": 2.8189256484623115e-13
+  },
+  {
+   "run": "v0.3/N16",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.2193886308672908e-15,
+   "new": 1.21921922427784e-15
+  },
+  {
+   "run": "v0.3/N16",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.1155633628543455e-13,
+   "new": 3.1138286393783687e-13
+  },
+  {
+   "run": "v0.3/N16",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 2.28960495039501e-14,
+   "new": 2.2896049483270586e-14
+  },
+  {
+   "run": "v0.3/N19",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 1.5337158574304e-14,
+   "new": 1.533715865702206e-14
+  },
+  {
+   "run": "v0.3/N19",
+   "key": "t5.ssj_inconsistent_options.walras_max.r_fixed_r",
+   "kind": "other",
+   "ref": 5.887444962292265e-06,
+   "new": 5.887444962288796e-06
+  },
+  {
+   "run": "v0.3/N19",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 2.6280044221511922e-15,
+   "new": 2.6276656089722905e-15
+  },
+  {
+   "run": "v0.3/N19",
+   "key": "t5.ssj_inconsistent_options.walras_max.G_debt_r_rule",
+   "kind": "other",
+   "ref": 2.8239361905685323e-06,
+   "new": 2.823936190575471e-06
+  },
+  {
+   "run": "v0.3/N19",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 2.0816681711721685e-15,
+   "new": 2.7755575615628914e-15
+  },
+  {
+   "run": "v0.3/N19",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.rshock_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 7.563394355258879e-14,
+   "new": 7.528699885739343e-14
+  },
+  {
+   "run": "v0.3/N19",
+   "key": "t5.ssj_consistent.walras_max.G_debt_r_rule",
+   "kind": "other",
+   "ref": 2.865639074907541e-10,
+   "new": 2.8656390749075406e-10
+  },
+  {
+   "run": "v0.3/N20",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 2.4662423862495397e-07,
+   "new": 2.466242386214845e-07
+  },
+  {
+   "run": "v0.3/N20",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.2195580374567416e-15,
+   "new": 1.2193886308672908e-15
+  },
+  {
+   "run": "v0.3/N20",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.6468224327498855e-06,
+   "new": 3.646822432923358e-06
+  },
+  {
+   "run": "v0.3/K01",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 2.4662423862495397e-07,
+   "new": 2.466242386214845e-07
+  },
+  {
+   "run": "v0.3/K01",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 2.8189256484623115e-13,
+   "new": 2.8171909249863347e-13
+  },
+  {
+   "run": "v0.3/K01",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.21921922427784e-15,
+   "new": 1.2193886308672908e-15
+  },
+  {
+   "run": "v0.3/K01",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.1138286393783687e-13,
+   "new": 3.1155633628543455e-13
+  },
+  {
+   "run": "v0.3/K01",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 2.2896049483270586e-14,
+   "new": 2.28960495039501e-14
+  },
+  {
+   "run": "v0.3/K02",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 2.466242386214845e-07,
+   "new": 2.4662423862495397e-07
+  },
+  {
+   "run": "v0.3/K02",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.2193886308672908e-15,
+   "new": 1.2195580374567416e-15
+  },
+  {
+   "run": "v0.3/K02",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.646822432923358e-06,
+   "new": 3.6468224327498855e-06
+  },
+  {
+   "run": "v0.3/K03",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 2.466247744810357e-07,
+   "new": 2.4662477447756626e-07
+  },
+  {
+   "run": "v0.3/K03",
+   "key": "t5.ssj_inconsistent_options.walras_max.r_fixed_r",
+   "kind": "other",
+   "ref": 1.0107083643629e-07,
+   "new": 1.0107083643975945e-07
+  },
+  {
+   "run": "v0.3/K03",
+   "key": "t5.v0_3.ssj_consistent.paths.G_debt_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 2.0600044543577935e-09,
+   "new": 2.0600044543551466e-09
+  },
+  {
+   "run": "v0.3/K03",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.4450246554886803e-13,
+   "new": 1.4432899320127035e-13
+  },
+  {
+   "run": "v0.3/K03",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.r_fixed_r.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 2.1684043449710089e-16,
+   "new": 1.734723475976807e-16
+  },
+  {
+   "run": "v0.3/K03",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 1.446759378964657e-13,
+   "new": 1.448494102440634e-13
+  },
+  {
+   "run": "v0.3/K03",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 1.734723475976807e-16,
+   "new": 2.6020852139652106e-16
+  },
+  {
+   "run": "v0.3/K03",
+   "key": "t5.ssj_consistent.walras_max.rshock_r_rule",
+   "kind": "other",
+   "ref": 2.7478887970940452e-08,
+   "new": 2.747888797094045e-08
+  },
+  {
+   "run": "v0.3/K03",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 6.853398730493737e-10,
+   "new": 6.853398730520207e-10
+  },
+  {
+   "run": "v0.3/M01",
+   "key": "t5.ssj_consistent_refined.walras_max.r_fixed_r",
+   "kind": "other",
+   "ref": 6.400573897381803e-10,
+   "new": 6.400573897381804e-10
+  },
+  {
+   "run": "v0.3/M01",
+   "key": "t5.ssj_inconsistent_options.walras_max.r_fixed_r",
+   "kind": "other",
+   "ref": 1.0495463611398526e-07,
+   "new": 1.049546361174547e-07
+  },
+  {
+   "run": "v0.3/M01",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 2.631138444056033e-15,
+   "new": 2.6310537407613077e-15
+  },
+  {
+   "run": "v0.3/M01",
+   "key": "t5.ssj_consistent_refined.walras_max.G_debt_r_rule",
+   "kind": "other",
+   "ref": 8.24418372190452e-10,
+   "new": 8.244183721904519e-10
+  },
+  {
+   "run": "v0.3/M01",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.4606371667724716e-13,
+   "new": 1.4623718902484484e-13
+  },
+  {
+   "run": "v0.3/M01",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 1.6882140125029246e-14,
+   "new": 1.688214011468949e-14
+  },
+  {
+   "run": "v0.3/M01",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 3.169331113175855e-06,
+   "new": 3.169331113262591e-06
+  },
+  {
+   "run": "v0.3/M02",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 0.6160501488455994,
+   "new": 0.6160501488455996
+  },
+  {
+   "run": "v0.3/M02",
+   "key": "t5.ssj_inconsistent_options.walras_max.G_debt_r_rule",
+   "kind": "other",
+   "ref": 0.43138179563826373,
+   "new": 0.4313817956382636
+  },
+  {
+   "run": "v0.3/M02",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 0.00027574233136956616,
+   "new": 0.00027574233137095394
+  },
+  {
+   "run": "v0.3/M02",
+   "key": "t5.v0_3.ssj_consistent.paths.G_debt_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 1.3040310122353657e-09,
+   "new": 1.3040311857077133e-09
+  },
+  {
+   "run": "v0.3/M02",
+   "key": "t5.ssj_consistent_refined.walras_max.G_debt_r_rule",
+   "kind": "other",
+   "ref": 0.431394998918809,
+   "new": 0.4313949989188089
+  },
+  {
+   "run": "v0.3/M02",
+   "key": "t5.ssj_consistent.walras_max.G_debt_r_rule",
+   "kind": "other",
+   "ref": 0.43139502033458554,
+   "new": 0.43139502033458543
+  },
+  {
+   "run": "v0.3/M05",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.983721809040162e-06,
+   "new": 1.983721631404478e-06
+  },
+  {
+   "run": "v0.3/M05",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 4.213547739436763,
+   "new": 4.213547739442447
+  },
+  {
+   "run": "v0.3/M05",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 16372471.356582642,
+   "new": 16372471.356773376
+  },
+  {
+   "run": "v0.3/M05",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 2.528282294520068,
+   "new": 2.52828229452291
+  },
+  {
+   "run": "v0.3/M05",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 2.446160284625208,
+   "new": 2.4461602846280504
+  },
+  {
+   "run": "v0.3/M05",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.G_debt_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 27284421.702194214,
+   "new": 27284421.701812744
+  },
+  {
+   "run": "v0.3/M05",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 36.33350436066394,
+   "new": 36.33350436030014
+  },
+  {
+   "run": "v0.3/M05",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 1.467824897481762,
+   "new": 1.467824897480341
+  },
+  {
+   "run": "v0.3/M05",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.rshock_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 1.4678331983191129,
+   "new": 1.4678331983176918
+  },
+  {
+   "run": "v0.3/M06",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 2.466242386214845e-07,
+   "new": 2.4662423862495397e-07
+  },
+  {
+   "run": "v0.3/M06",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.2193886308672908e-15,
+   "new": 1.2195580374567416e-15
+  },
+  {
+   "run": "v0.3/M06",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.646822432923358e-06,
+   "new": 3.6468224327498855e-06
+  },
+  {
+   "run": "v0.3/M07",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 2.466242386214845e-07,
+   "new": 2.4662423862495397e-07
+  },
+  {
+   "run": "v0.3/M07",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 2.8171909249863347e-13,
+   "new": 2.8189256484623115e-13
+  },
+  {
+   "run": "v0.3/M07",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.2193886308672908e-15,
+   "new": 1.21921922427784e-15
+  },
+  {
+   "run": "v0.3/M07",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.1155633628543455e-13,
+   "new": 3.1138286393783687e-13
+  },
+  {
+   "run": "v0.3/M07",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 2.28960495039501e-14,
+   "new": 2.2896049483270586e-14
+  },
+  {
+   "run": "v0.3/M09",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 5.506546018295422e-07,
+   "new": 5.506546018278075e-07
+  },
+  {
+   "run": "v0.3/M09",
+   "key": "t5.ssj_consistent_refined.walras_max.r_fixed_r",
+   "kind": "other",
+   "ref": 6.469846213913444e-07,
+   "new": 6.469846213878749e-07
+  },
+  {
+   "run": "v0.3/M09",
+   "key": "t5.ssj_inconsistent_options.walras_max.r_fixed_r",
+   "kind": "other",
+   "ref": 6.226184727214229e-07,
+   "new": 6.226184727196882e-07
+  },
+  {
+   "run": "v0.3/M09",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 0.0001339748962388143,
+   "new": 0.00013397489623898778
+  },
+  {
+   "run": "v0.3/M09",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 6.43393800590919e-05,
+   "new": 6.433938005917864e-05
+  },
+  {
+   "run": "v0.3/M09",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 5.1423196581815156e-05,
+   "new": 5.1423196581641684e-05
+  },
+  {
+   "run": "v0.3/M09",
+   "key": "t5.ssj_consistent.walras_max.r_fixed_r",
+   "kind": "other",
+   "ref": 6.46984621380936e-07,
+   "new": 6.469846213774666e-07
+  },
+  {
+   "run": "v0.3/M09",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 6.433938005961232e-05,
+   "new": 6.433938005969905e-05
+  },
+  {
+   "run": "v0.3/M09",
+   "key": "t5.ssj_consistent.walras_max.rshock_r_rule",
+   "kind": "other",
+   "ref": 5.142324937812415e-07,
+   "new": 5.142324937829762e-07
+  },
+  {
+   "run": "v0.3/M11",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 0.01281544408880721,
+   "new": 0.012815444088807203
+  },
+  {
+   "run": "v0.3/M11",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.r_fixed_r.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 0.4747683358732081,
+   "new": 0.47476833587320827
+  },
+  {
+   "run": "v0.3/M11",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 0.1833419151777807,
+   "new": 0.18334191517778067
+  },
+  {
+   "run": "v0.3/M11",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 0.19256688694594976,
+   "new": 0.19256688694594973
+  },
+  {
+   "run": "v0.3/M11",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 0.1833098142989719,
+   "new": 0.18330981429897192
+  },
+  {
+   "run": "v0.3/M11",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.rshock_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 0.1925668869459519,
+   "new": 0.19256688694595187
+  },
+  {
+   "run": "v0.3/M11",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 0.19254418025832992,
+   "new": 0.1925441802583299
+  },
+  {
+   "run": "v0.3/M12",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 2.4662423862495397e-07,
+   "new": 2.466242386214845e-07
+  },
+  {
+   "run": "v0.3/M12",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 2.8189256484623115e-13,
+   "new": 2.8171909249863347e-13
+  },
+  {
+   "run": "v0.3/M12",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.21921922427784e-15,
+   "new": 1.2193886308672908e-15
+  },
+  {
+   "run": "v0.3/M12",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.1138286393783687e-13,
+   "new": 3.1155633628543455e-13
+  },
+  {
+   "run": "v0.3/M12",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 2.2896049483270586e-14,
+   "new": 2.28960495039501e-14
+  },
+  {
+   "run": "v0.3/M14",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 2.466242386214845e-07,
+   "new": 2.4662423862495397e-07
+  },
+  {
+   "run": "v0.3/M14",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 2.8171909249863347e-13,
+   "new": 2.8189256484623115e-13
+  },
+  {
+   "run": "v0.3/M14",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.2193886308672908e-15,
+   "new": 1.21921922427784e-15
+  },
+  {
+   "run": "v0.3/M14",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.1155633628543455e-13,
+   "new": 3.1138286393783687e-13
+  },
+  {
+   "run": "v0.3/M14",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 2.28960495039501e-14,
+   "new": 2.2896049483270586e-14
+  },
+  {
+   "run": "v0.3/M15",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 2.4662423862495397e-07,
+   "new": 2.466242386214845e-07
+  },
+  {
+   "run": "v0.3/M15",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.2195580374567416e-15,
+   "new": 1.2193886308672908e-15
+  },
+  {
+   "run": "v0.3/M15",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.6468224327498855e-06,
+   "new": 3.646822432923358e-06
+  },
+  {
+   "run": "v0.3/M16",
+   "key": "t5.ssj_inconsistent_options.walras_max.r_fixed_r",
+   "kind": "other",
+   "ref": 4.0315500738144494e-07,
+   "new": 4.031550073779755e-07
+  },
+  {
+   "run": "v0.3/M16",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.783639628680743e-15,
+   "new": 1.7836819803281057e-15
+  },
+  {
+   "run": "v0.3/M16",
+   "key": "t5.v0_3.ssj_consistent.paths.G_debt_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 1.0249494417494558e-09,
+   "new": 1.0249494417521028e-09
+  },
+  {
+   "run": "v0.3/M16",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 5.668295261114509e-06,
+   "new": 5.668295261071141e-06
+  },
+  {
+   "run": "v0.3/M16",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 1.193380120495871e-05,
+   "new": 1.1933801204871974e-05
+  },
+  {
+   "run": "v0.3/M16",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 1.9092712152278933e-10,
+   "new": 1.9092712152411282e-10
+  },
+  {
+   "run": "v0.3/M16",
+   "key": "t5.ssj_consistent.walras_max.G_debt_r_rule",
+   "kind": "other",
+   "ref": 1.1411154889873779e-08,
+   "new": 1.1411154889873778e-08
+  },
+  {
+   "run": "v0.3/M17",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 2.4662423862495397e-07,
+   "new": 2.466242386214845e-07
+  },
+  {
+   "run": "v0.3/M17",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 2.8189256484623115e-13,
+   "new": 2.8171909249863347e-13
+  },
+  {
+   "run": "v0.3/M17",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.21921922427784e-15,
+   "new": 1.2193886308672908e-15
+  },
+  {
+   "run": "v0.3/M17",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.1138286393783687e-13,
+   "new": 3.1155633628543455e-13
+  },
+  {
+   "run": "v0.3/M17",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 2.2896049483270586e-14,
+   "new": 2.28960495039501e-14
+  },
+  {
+   "run": "v0.3/M20",
+   "key": "t5.v0_3.ssj_consistent.paths.G_debt_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 4.262605915229367e-07,
+   "new": 4.2626059429849424e-07
+  },
+  {
+   "run": "v0.3/M20",
+   "key": "t5.v0_3.ssj_consistent.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 0.0004822855544260704,
+   "new": 0.00048228554874172854
+  },
+  {
+   "run": "v0.3/M20",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 4.2626059984960937e-07,
+   "new": 4.2626060262516693e-07
+  },
+  {
+   "run": "v0.3/M21",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 2.146550894931848e-15,
+   "new": 2.1467203015212988e-15
+  },
+  {
+   "run": "v0.3/M21",
+   "key": "t5.v0_3.ssj_consistent.paths.G_debt_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 3.165870343657673e-13,
+   "new": 3.164135620181696e-13
+  },
+  {
+   "run": "v0.3/M21",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.rshock_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 7.511352650979575e-14,
+   "new": 7.528699885739343e-14
+  },
+  {
+   "run": "v0.3/M21",
+   "key": "t5.v0_3.ssj_consistent.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 4.5336796115071506e-07,
+   "new": 4.5336796115071517e-07
+  },
+  {
+   "run": "v0.3/M21",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 2.5865305695487366e-14,
+   "new": 2.586530567480785e-14
+  },
+  {
+   "run": "v0.3/M21",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.789993392032926e-07,
+   "new": 3.7899933920329254e-07
+  },
+  {
+   "run": "v0.3/M21",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 9.027803820216979e-06,
+   "new": 9.027803820303715e-06
+  },
+  {
+   "run": "v0.3/M21",
+   "key": "t5.ssj_consistent_refined.walras_max.rshock_r_rule",
+   "kind": "other",
+   "ref": 8.063750057456926e-10,
+   "new": 8.063750057456922e-10
+  },
+  {
+   "run": "v0.3/M21",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 7.646234653585805e-10,
+   "new": 7.646234653559336e-10
+  },
+  {
+   "run": "v0.3/M21",
+   "key": "t5.ssj_consistent.walras_max.G_debt_r_rule",
+   "kind": "other",
+   "ref": 3.9018059621811825e-08,
+   "new": 3.901805962181182e-08
+  },
+  {
+   "run": "v0.3/M22",
+   "key": "t5.ssj_inconsistent_options.walras_max.rshock_r_rule",
+   "kind": "two_valued",
+   "ref": 2.4662423862495397e-07,
+   "new": 2.466242386214845e-07
+  },
+  {
+   "run": "v0.3/M22",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 2.8189256484623115e-13,
+   "new": 2.8171909249863347e-13
+  },
+  {
+   "run": "v0.3/M22",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.21921922427784e-15,
+   "new": 1.2193886308672908e-15
+  },
+  {
+   "run": "v0.3/M22",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.1138286393783687e-13,
+   "new": 3.1155633628543455e-13
+  },
+  {
+   "run": "v0.3/M22",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 2.2896049483270586e-14,
+   "new": 2.28960495039501e-14
+  },
+  {
+   "run": "v0.3/M25",
+   "key": "t5.ssj_consistent_refined.walras_max.r_fixed_r",
+   "kind": "other",
+   "ref": 51.850159358348236,
+   "new": 51.85015935834823
+  },
+  {
+   "run": "v0.3/M25",
+   "key": "t5.ssj_inconsistent_options.walras_max.G_debt_r_rule",
+   "kind": "other",
+   "ref": 61117303.809981145,
+   "new": 61117303.80998116
+  },
+  {
+   "run": "v0.3/M25",
+   "key": "t5.v0_3.ssj_consistent.paths.G_debt_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 8.787082959496612e-07,
+   "new": 8.787082737452007e-07
+  },
+  {
+   "run": "v0.3/M25",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 0.006581824131143832,
+   "new": 0.006581824131144005
+  },
+  {
+   "run": "v0.3/M25",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 7.025857641292532,
+   "new": 7.025857641201583
+  },
+  {
+   "run": "v0.3/M25",
+   "key": "t5.v0_3.ssj_consistent.paths.G_debt_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 5.827804731850517e-09,
+   "new": 5.827804905322864e-09
+  },
+  {
+   "run": "v0.3/M25",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.rshock_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.7741966056028513e-08,
+   "new": 1.7741965709083818e-08
+  },
+  {
+   "run": "v0.3/M25",
+   "key": "t5.v0_3.ssj_consistent.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 0.00658182413114574,
+   "new": 0.006581824131145914
+  },
+  {
+   "run": "v0.3/M25",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 0.020030102881068122,
+   "new": 0.020030102881068816
+  },
+  {
+   "run": "v0.3/M25",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.r_fixed_r.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 4.440892098500626e-13,
+   "new": 5.329070518200751e-13
+  },
+  {
+   "run": "v0.3/M25",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 19833.2513095811,
+   "new": 19833.251309767365
+  },
+  {
+   "run": "v0.3/M25",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 0.0004886432159345588,
+   "new": 0.0004886432159456611
+  },
+  {
+   "run": "v0.3/M25",
+   "key": "t5.ssj_consistent.walras_max.r_fixed_r",
+   "kind": "other",
+   "ref": 51.85015935834673,
+   "new": 51.85015935834672
+  },
+  {
+   "run": "v0.3/M25",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 4.9960036108132044e-14,
+   "new": 5.551115123125783e-14
+  },
+  {
+   "run": "v0.3/M25",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 2.6741249881112594e-06,
+   "new": 2.674124965906799e-06
+  },
+  {
+   "run": "v0.3/M25",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.rshock_r_rule.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 2.674125143542483e-06,
+   "new": 2.674125099133562e-06
+  },
+  {
+   "run": "v0.3/C01",
+   "key": "t5.v0_3.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 2.8189256484623115e-13,
+   "new": 2.8171909249863347e-13
+  },
+  {
+   "run": "v0.3/C01",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.0",
+   "kind": "goods_market_path",
+   "ref": 1.21921922427784e-15,
+   "new": 1.2195580374567416e-15
+  },
+  {
+   "run": "v0.3/C01",
+   "key": "t5.v0_3.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.1138286393783687e-13,
+   "new": 3.1155633628543455e-13
+  },
+  {
+   "run": "v0.3/C01",
+   "key": "t5.v0_3.ssj_consistent.paths.r_fixed_r.goods_market.1",
+   "kind": "goods_market_path",
+   "ref": 2.2896049483270586e-14,
+   "new": 2.28960495039501e-14
+  },
+  {
+   "run": "v0.3/C01",
+   "key": "t5.v0_3.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+   "kind": "goods_market_path",
+   "ref": 3.646822432923358e-06,
+   "new": 3.6468224327498855e-06
+  }
+ ],
+ "missing_numbers": [],
+ "number_differences_by_kind": {
+  "two_valued": 20,
+  "goods_market_path": 138,
+  "other": 24
+ },
+ "runs_with_number_differences": [
+  "v0.3/B0",
+  "v0.3/B1",
+  "v0.3/C01",
+  "v0.3/K01",
+  "v0.3/K02",
+  "v0.3/K03",
+  "v0.3/M01",
+  "v0.3/M02",
+  "v0.3/M05",
+  "v0.3/M06",
+  "v0.3/M07",
+  "v0.3/M09",
+  "v0.3/M11",
+  "v0.3/M12",
+  "v0.3/M14",
+  "v0.3/M15",
+  "v0.3/M16",
+  "v0.3/M17",
+  "v0.3/M20",
+  "v0.3/M21",
+  "v0.3/M22",
+  "v0.3/M25",
+  "v0.3/N05",
+  "v0.3/N09",
+  "v0.3/N10",
+  "v0.3/N12",
+  "v0.3/N13",
+  "v0.3/N14",
+  "v0.3/N16",
+  "v0.3/N19",
+  "v0.3/N20"
+ ],
+ "same": false,
+ "execution_record": {
+  "environment": {
+   "platform": "Linux-6.18.44-fc-v140-x86_64-with-glibc2.39",
+   "machine": "x86_64",
+   "python": "3.13.16",
+   "packages": {
+    "sequence-jacobian": "1.0.0",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "numba": "0.68.0",
+    "llvmlite": "0.50.0",
+    "pytest": "9.1.1"
+   },
+   "numpy_blas": {
+    "name": "scipy-openblas",
+    "found": true,
+    "version": "0.3.34.106.0",
+    "detection method": "pkgconfig",
+    "include directory": "/opt/_internal/cpython-3.13.14/lib/python3.13/site-packages/scipy_openblas64/include",
+    "lib directory": "/opt/_internal/cpython-3.13.14/lib/python3.13/site-packages/scipy_openblas64/lib",
+    "openblas configuration": "OpenBLAS 0.3.34.106.0  USE64BITINT DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=64",
+    "pc file directory": "/project/.openblas"
+   },
+   "cpu_count": 4,
+   "git_head": "361143c740e68f7f79a20456228c436fd34e9991",
+   "runner_blob": "67dea61eb98152f302a6bd4c9eea59a0d1727a07",
+   "runner_blob_at_head": "67dea61eb98152f302a6bd4c9eea59a0d1727a07",
+   "runner_committed": true,
+   "worktree_status": [],
+   "threads_per_run": 1,
+   "utc": "2026-10-22T23:21:14+00:00"
+  },
+  "suites": {
+   "v0.3": {
+    "ref": "361143c",
+    "commit": "361143c740e68f7f79a20456228c436fd34e9991",
+    "trees": {
+     "hank_limits": "95940be5017c73cd89e0d4276ed4ee77af1b0c90",
+     "tests": "d5f3de5c818fab3d82973251b6ce56fa53aad26e",
+     "pytest.ini": "d1647541fe49d97c93ded166b68aad27a4ce7454"
+    }
+   }
+  },
+  "settings": {
+   "check": false,
+   "table": false,
+   "design": [
+    "ii",
+    "iii"
+   ],
+   "baseline_only": null,
+   "compare_v01": true,
+   "v03_ref": "361143c",
+   "only": null,
+   "jobs": 4,
+   "fixture_timeout": 300,
+   "run_timeout": 3600,
+   "workdir": null,
+   "out": "/tmp/claude-0/-home-user-hank-limits/84a903bb-f9cf-5bf3-9ed3-3c6a8b9cb8d8/scratchpad/rerunF/mutation_v0_3_0_rerun_F"
+  },
+  "reanchored": [
+   "v0.3/C03",
+   "v0.3/M04"
+  ],
+  "pytest_summaries": {
+   "v0.3/B0": "114 passed, 4 xfailed in 69.55s (0:01:09)",
+   "v0.3/B1": "114 passed, 4 xfailed in 71.70s (0:01:11)",
+   "v0.3/N01": "1 failed, 113 passed, 4 xfailed in 70.12s (0:01:10)",
+   "v0.3/N02": "20 failed, 95 passed, 3 xfailed in 69.59s (0:01:09)",
+   "v0.3/N03": "1 failed, 113 passed, 4 xfailed in 71.00s (0:01:10)",
+   "v0.3/N04": "1 failed, 113 passed, 4 xfailed in 70.98s (0:01:10)",
+   "v0.3/N05": "1 failed, 113 passed, 4 xfailed in 70.88s (0:01:10)",
+   "v0.3/N06": "10 failed, 104 passed, 4 xfailed in 70.77s (0:01:10)",
+   "v0.3/N07": "2 failed, 112 passed, 4 xfailed in 74.95s (0:01:14)",
+   "v0.3/N08": "1 failed, 113 passed, 4 xfailed in 70.22s (0:01:10)",
+   "v0.3/N09": "1 failed, 113 passed, 4 xfailed in 70.94s (0:01:10)",
+   "v0.3/N10": "2 failed, 112 passed, 4 xfailed in 70.91s (0:01:10)",
+   "v0.3/N11": "2 failed, 112 passed, 4 xfailed in 69.97s (0:01:09)",
+   "v0.3/N12": "13 failed, 101 passed, 4 xfailed in 73.65s (0:01:13)",
+   "v0.3/N13": "4 failed, 110 passed, 4 xfailed in 70.45s (0:01:10)",
+   "v0.3/N14": "2 failed, 112 passed, 4 xfailed in 70.06s (0:01:10)",
+   "v0.3/N15": "8 failed, 106 passed, 4 xfailed in 69.04s (0:01:09)",
+   "v0.3/N16": "5 failed, 109 passed, 4 xfailed in 70.17s (0:01:10)",
+   "v0.3/N17": "7 failed, 107 passed, 4 xfailed in 64.60s (0:01:04)",
+   "v0.3/N18": "2 failed, 112 passed, 4 xfailed in 69.72s (0:01:09)",
+   "v0.3/N19": "14 failed, 92 passed, 3 xfailed, 1 warning, 9 errors in 69.97s (0:01:09)",
+   "v0.3/N20": "114 passed, 4 xfailed in 70.71s (0:01:10)",
+   "v0.3/K01": "114 passed, 4 xfailed in 69.61s (0:01:09)",
+   "v0.3/K02": "114 passed, 4 xfailed in 70.10s (0:01:10)",
+   "v0.3/K03": "114 passed, 4 xfailed in 74.82s (0:01:14)",
+   "v0.3/M01": "9 failed, 105 passed, 4 xfailed in 68.71s (0:01:08)",
+   "v0.3/M02": "2 failed, 112 passed, 4 xfailed in 70.14s (0:01:10)",
+   "v0.3/M03": "2 failed, 112 passed, 4 xfailed in 69.69s (0:01:09)",
+   "v0.3/M04": "5 failed, 109 passed, 4 xfailed in 68.89s (0:01:08)",
+   "v0.3/M05": "9 failed, 107 passed, 2 xfailed, 5 warnings in 70.31s (0:01:10)",
+   "v0.3/M06": "1 failed, 113 passed, 4 xfailed in 70.00s (0:01:09)",
+   "v0.3/M07": "4 failed, 110 passed, 4 xfailed in 70.91s (0:01:10)",
+   "v0.3/M08": "19 failed, 96 passed, 3 xfailed in 70.20s (0:01:10)",
+   "v0.3/M09": "8 failed, 106 passed, 4 xfailed, 2 warnings in 71.44s (0:01:11)",
+   "v0.3/M10": "1 failed, 113 passed, 4 xfailed in 70.21s (0:01:10)",
+   "v0.3/M11": "11 failed, 103 passed, 4 xfailed in 70.26s (0:01:10)",
+   "v0.3/M12": "2 failed, 112 passed, 4 xfailed in 68.41s (0:01:08)",
+   "v0.3/M13": "21 failed, 93 passed, 4 xfailed in 136.81s (0:02:16)",
+   "v0.3/M14": "1 failed, 113 passed, 4 xfailed in 70.08s (0:01:10)",
+   "v0.3/M15": "7 failed, 107 passed, 4 xfailed in 69.24s (0:01:09)",
+   "v0.3/M16": "2 failed, 112 passed, 4 xfailed in 68.27s (0:01:08)",
+   "v0.3/M17": "4 failed, 110 passed, 4 xfailed in 75.25s (0:01:15)",
+   "v0.3/M18": "8 failed, 106 passed, 4 xfailed in 69.81s (0:01:09)",
+   "v0.3/M19": "2 failed, 112 passed, 4 xfailed in 68.19s (0:01:08)",
+   "v0.3/M20": "7 failed, 108 passed, 3 xfailed in 67.32s (0:01:07)",
+   "v0.3/M21": "2 failed, 112 passed, 4 xfailed in 67.77s (0:01:07)",
+   "v0.3/M22": "2 failed, 112 passed, 4 xfailed in 68.01s (0:01:08)",
+   "v0.3/M23": "2 failed, 112 passed, 4 xfailed in 67.46s (0:01:07)",
+   "v0.3/M24": "1 failed, 113 passed, 4 xfailed in 67.67s (0:01:07)",
+   "v0.3/M25": "8 failed, 107 passed, 3 xfailed in 69.83s (0:01:09)",
+   "v0.3/C01": "114 passed, 4 xfailed in 74.24s (0:01:14)",
+   "v0.3/C02": "114 passed, 4 xfailed in 61.35s (0:01:01)",
+   "v0.3/C03": "114 passed, 4 xfailed in 66.89s (0:01:06)"
+  },
+  "wall_s": {
+   "v0.3/B0": 72.65316891670227,
+   "v0.3/B1": 74.88375067710876,
+   "v0.3/N01": 73.1474199295044,
+   "v0.3/N02": 72.75975823402405,
+   "v0.3/N03": 73.66536283493042,
+   "v0.3/N04": 73.44966173171997,
+   "v0.3/N05": 73.43244123458862,
+   "v0.3/N06": 73.50436115264893,
+   "v0.3/N07": 77.42949080467224,
+   "v0.3/N08": 72.86504411697388,
+   "v0.3/N09": 73.48381352424622,
+   "v0.3/N10": 73.51619172096252,
+   "v0.3/N11": 72.5712559223175,
+   "v0.3/N12": 76.34424304962158,
+   "v0.3/N13": 72.99127769470215,
+   "v0.3/N14": 72.56442856788635,
+   "v0.3/N15": 71.51713752746582,
+   "v0.3/N16": 72.70772004127502,
+   "v0.3/N17": 67.04760909080505,
+   "v0.3/N18": 72.21371459960938,
+   "v0.3/N19": 72.63962531089783,
+   "v0.3/N20": 73.40347528457642,
+   "v0.3/K01": 72.3689877986908,
+   "v0.3/K02": 72.57415175437927,
+   "v0.3/K03": 77.40055894851685,
+   "v0.3/M01": 71.45065450668335,
+   "v0.3/M02": 72.72447609901428,
+   "v0.3/M03": 72.30158972740173,
+   "v0.3/M04": 71.48219966888428,
+   "v0.3/M05": 72.93559765815735,
+   "v0.3/M06": 72.50128293037415,
+   "v0.3/M07": 73.46512818336487,
+   "v0.3/M08": 72.71228313446045,
+   "v0.3/M09": 74.08848142623901,
+   "v0.3/M10": 72.86119222640991,
+   "v0.3/M11": 72.85563397407532,
+   "v0.3/M12": 70.91711735725403,
+   "v0.3/M13": 139.3147509098053,
+   "v0.3/M14": 72.63615703582764,
+   "v0.3/M15": 71.67831802368164,
+   "v0.3/M16": 70.74432420730591,
+   "v0.3/M17": 77.6733911037445,
+   "v0.3/M18": 72.42250919342041,
+   "v0.3/M19": 70.7642731666565,
+   "v0.3/M20": 69.81676077842712,
+   "v0.3/M21": 70.13272070884705,
+   "v0.3/M22": 70.35469269752502,
+   "v0.3/M23": 69.94766497612,
+   "v0.3/M24": 70.31179594993591,
+   "v0.3/M25": 72.22333598136902,
+   "v0.3/C01": 76.56189584732056,
+   "v0.3/C02": 63.71576690673828,
+   "v0.3/C03": 69.27612042427063
+  },
+  "baselines": {
+   "v0.3": {
+    "deterministic": false,
+    "B0": "114 passed, 4 xfailed in 69.55s (0:01:09)",
+    "B1": "114 passed, 4 xfailed in 71.70s (0:01:11)",
+    "B1_vs_B0_max_rel_change": {
+     "T1": 0.0,
+     "T2": 0.0,
+     "T3": 0.0,
+     "T4": 0.0,
+     "T5": 1.4067745211688107e-11,
+     "T6": 0.0,
+     "D": 0.0,
+     "V": 0.0001389274798555154
+    },
+    "vs_v01": {
+     "B0": {
+      "B0": {
+       "n_compared": 276,
+       "n_different": 1,
+       "max_rel_diff": 1.4067745211490206e-11,
+       "different_keys": [
+        "t5.ssj_inconsistent_options.walras_max.rshock_r_rule"
+       ],
+       "missing": []
+      },
+      "B1": {
+       "n_compared": 276,
+       "n_different": 0,
+       "max_rel_diff": 0.0,
+       "different_keys": [],
+       "missing": []
+      }
+     },
+     "B1": {
+      "B0": {
+       "n_compared": 276,
+       "n_different": 0,
+       "max_rel_diff": 0.0,
+       "different_keys": [],
+       "missing": []
+      },
+      "B1": {
+       "n_compared": 276,
+       "n_different": 1,
+       "max_rel_diff": 1.4067745211688107e-11,
+       "different_keys": [
+        "t5.ssj_inconsistent_options.walras_max.rshock_r_rule"
+       ],
+       "missing": []
+      }
+     }
+    }
+   }
+  },
+  "suite_results": {
+   "ii": {
+    "caught": 19,
+    "of": 20,
+    "missed": [
+     "N20"
+    ],
+    "caught_by_T1_T4": 8,
+    "caught_by_T5_T6": 9,
+    "caught_by_old_groups": 14,
+    "caught_only_by_V": [
+     "N04",
+     "N05",
+     "N07",
+     "N10",
+     "N18"
+    ]
+   },
+   "iii": {
+    "caught": 25,
+    "of": 25,
+    "missed": [],
+    "caught_by_T1_T4": 14,
+    "caught_by_T5_T6": 11,
+    "caught_by_old_groups": 21,
+    "caught_only_by_V": [
+     "M12",
+     "M21",
+     "M23",
+     "M24"
+    ]
+   }
+  },
+  "controls": {
+   "ii": {
+    "K01": {
+     "false_alarm": false,
+     "groups": [],
+     "tests": []
+    },
+    "K02": {
+     "false_alarm": false,
+     "groups": [],
+     "tests": []
+    },
+    "K03": {
+     "false_alarm": false,
+     "groups": [],
+     "tests": []
+    }
+   },
+   "iii": {
+    "C01": {
+     "false_alarm": false,
+     "groups": [],
+     "tests": []
+    },
+    "C02": {
+     "false_alarm": false,
+     "groups": [],
+     "tests": []
+    },
+    "C03": {
+     "false_alarm": false,
+     "groups": [],
+     "tests": []
+    }
+   }
+  },
+  "raw_files": {
+   "mutation_v0_3_0_rerun_F.json": {
+    "sha256": "3d97e3a8034dc32e7cd23bcf8bca463190430f165109f4d8157cda1cb297af33",
+    "bytes": 6378917
+   },
+   "mutation_v0_3_0_rerun_F.csv": {
+    "sha256": "a8f15a4562dd18ebb9b61869e481cda3973b88353a57efbbd8503d091c272b41",
+    "bytes": 112160
+   }
+  },
+  "reference": {
+   "file": "out/mutation_v0_3_0_rerun.json",
+   "sha256": "0cb2e59a7e34aa427d0a17202bfddc99b79a37b635a5cbf97ee277e5f257c452"
+  }
+ }
+}

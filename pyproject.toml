@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hank-limits"
-version = "0.2.1"
+version = "0.3.0"
 description = "Analytic-limit and aggregate-identity tests for HANK codes, with a reference implementation on sequence-jacobian 1.0.0"
 readme = "README.md"
 license = "MIT"

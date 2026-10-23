@@ -1,0 +1,2182 @@
+{
+ "v0.2/ii": {
+  "per_mutant": {
+   "N02": {
+    "largest": [
+     251226094768.83856,
+     "test_v2_household_budget[t5]",
+     "hh_budget"
+    ],
+    "smallest": [
+     529.0157348025737,
+     "test_v2_tank_ss_goods_market",
+     "ss_goods"
+    ],
+    "n": 11
+   },
+   "N04": {
+    "largest": [
+     3217172653754.9023,
+     "test_v4_real_rate_rule_on_path",
+     "rate_rule"
+    ],
+    "smallest": [
+     3217172653754.9023,
+     "test_v4_real_rate_rule_on_path",
+     "rate_rule"
+    ],
+    "n": 1
+   },
+   "N05": {
+    "largest": [
+     62388162.408269346,
+     "test_v3_income_normalisation[t3]",
+     "incidence_err_cyc"
+    ],
+    "smallest": [
+     62388162.408269346,
+     "test_v3_income_normalisation[t3]",
+     "incidence_err_cyc"
+    ],
+    "n": 1
+   },
+   "N06": {
+    "largest": [
+     13920809944.920416,
+     "test_v2_household_budget[t3]",
+     "hh_budget_acyc"
+    ],
+    "smallest": [
+     576.5991120494045,
+     "test_v2_tank_ss_goods_market",
+     "ss_goods"
+    ],
+    "n": 9
+   },
+   "N07": {
+    "largest": [
+     583861964080.379,
+     "test_v4_government_budget_on_path",
+     "government_budget"
+    ],
+    "smallest": [
+     150000000000.0,
+     "test_v4_spec_parameters[t5]",
+     "spec_r"
+    ],
+    "n": 2
+   },
+   "N10": {
+    "largest": [
+     164580383.3819591,
+     "test_v1_werning_ge_target_resid_reported",
+     "ge_target_resid_reported_cyc"
+    ],
+    "smallest": [
+     5373189.4242119165,
+     "test_v1_werning_ge_target_resid_direct",
+     "ge_target_resid_direct_cyc"
+    ],
+    "n": 2
+   },
+   "N12": {
+    "largest": [
+     12398282574.090107,
+     "test_v2_household_budget[t3]",
+     "hh_budget_acyc"
+    ],
+    "smallest": [
+     526.0254279047607,
+     "test_v2_tank_ss_goods_market",
+     "ss_goods"
+    ],
+    "n": 9
+   },
+   "N13": {
+    "largest": [
+     18739.00284450135,
+     "test_v4_spec_parameters[t1]",
+     "spec_A"
+    ],
+    "smallest": [
+     11404.87364992904,
+     "test_v2_tank_ss_asset_market",
+     "ss_assets"
+    ],
+    "n": 3
+   },
+   "N15": {
+    "largest": [
+     675633.9886908672,
+     "test_v4_goods_market_on_path",
+     "goods_market"
+    ],
+    "smallest": [
+     675633.9886908672,
+     "test_v4_goods_market_on_path",
+     "goods_market"
+    ],
+    "n": 1
+   },
+   "N16": {
+    "largest": [
+     10000000000000.0,
+     "test_v4_real_rate_rule_on_path",
+     "rate_rule"
+    ],
+    "smallest": [
+     10655120402.53823,
+     "test_v4_goods_market_on_path",
+     "goods_market"
+    ],
+    "n": 3
+   },
+   "N17": {
+    "largest": [
+     10000000000000.0,
+     "test_v4_spec_parameters[t2]",
+     "spec_a_min_S"
+    ],
+    "smallest": [
+     254036.13944609265,
+     "test_v2_tank_ss_asset_market",
+     "ss_assets"
+    ],
+    "n": 4
+   },
+   "N18": {
+    "largest": [
+     9741.715410669847,
+     "test_v2_tank_ss_goods_market",
+     "ss_goods"
+    ],
+    "smallest": [
+     7576.889765661502,
+     "test_v2_tank_ss_asset_market",
+     "ss_assets"
+    ],
+    "n": 2
+   },
+   "N19": {
+    "largest": [
+     2059610325.3605058,
+     "test_v4_aiyagari_euler_at_spec_beta",
+     "spec_kkt_violation_max_with_mass"
+    ],
+    "smallest": [
+     2059610325.3605058,
+     "test_v4_aiyagari_euler_at_spec_beta",
+     "spec_kkt_violation_max_with_mass"
+    ],
+    "n": 1
+   }
+  },
+  "smallest_tests": [
+   [
+    526.0254279047607,
+    "N12",
+    "test_v2_tank_ss_goods_market",
+    "ss_goods"
+   ],
+   [
+    529.0157348025737,
+    "N02",
+    "test_v2_tank_ss_goods_market",
+    "ss_goods"
+   ],
+   [
+    576.5991120494045,
+    "N06",
+    "test_v2_tank_ss_goods_market",
+    "ss_goods"
+   ],
+   [
+    7576.889765661502,
+    "N18",
+    "test_v2_tank_ss_asset_market",
+    "ss_assets"
+   ],
+   [
+    9741.715410669847,
+    "N18",
+    "test_v2_tank_ss_goods_market",
+    "ss_goods"
+   ],
+   [
+    11404.87364992904,
+    "N13",
+    "test_v2_tank_ss_asset_market",
+    "ss_assets"
+   ],
+   [
+    14663.408978501222,
+    "N13",
+    "test_v2_tank_ss_goods_market",
+    "ss_goods"
+   ],
+   [
+    18739.00284450135,
+    "N13",
+    "test_v4_spec_parameters[t1]",
+    "spec_A"
+   ]
+  ]
+ },
+ "v0.2/iii": {
+  "per_mutant": {
+   "M02": {
+    "largest": [
+     10000000000000.0,
+     "test_v4_government_budget_on_path",
+     "government_budget"
+    ],
+    "smallest": [
+     10000000000000.0,
+     "test_v4_government_budget_on_path",
+     "government_budget"
+    ],
+    "n": 1
+   },
+   "M03": {
+    "largest": [
+     1207868574341.478,
+     "test_v4_fiscal_rule_on_path",
+     "fiscal_rule"
+    ],
+    "smallest": [
+     1207868574341.478,
+     "test_v4_fiscal_rule_on_path",
+     "fiscal_rule"
+    ],
+    "n": 1
+   },
+   "M04": {
+    "largest": [
+     2497596550118.23,
+     "test_v1_werning_ge_target_resid_direct",
+     "ge_target_resid_direct_acyc"
+    ],
+    "smallest": [
+     2497596550118.23,
+     "test_v1_werning_ge_target_resid_direct",
+     "ge_target_resid_direct_acyc"
+    ],
+    "n": 1
+   },
+   "M05": {
+    "largest": [
+     4.76883365200231e+223,
+     "test_v4_government_budget_on_path",
+     "government_budget"
+    ],
+    "smallest": [
+     427.1974071841845,
+     "test_v4_real_rate_rule_on_path",
+     "rate_rule"
+    ],
+    "n": 3
+   },
+   "M07": {
+    "largest": [
+     300000000.0030159,
+     "test_v2_aiyagari_ss_firm_focs",
+     "foc_r"
+    ],
+    "smallest": [
+     115.3454447279157,
+     "test_v2_household_budget[t4]",
+     "hh_budget"
+    ],
+    "n": 3
+   },
+   "M08": {
+    "largest": [
+     114197657.6101622,
+     "test_v2_werning_ss_goods_market",
+     "ss_goods_acyc"
+    ],
+    "smallest": [
+     1.6489032361732825,
+     "test_v2_fiscal_ss_asset_market",
+     "ss_assets"
+    ],
+    "n": 13
+   },
+   "M09": {
+    "largest": [
+     3349373.0489672986,
+     "test_v4_goods_market_on_path",
+     "goods_market"
+    ],
+    "smallest": [
+     3349373.0489672986,
+     "test_v4_goods_market_on_path",
+     "goods_market"
+    ],
+    "n": 1
+   },
+   "M11": {
+    "largest": [
+     61680892987.743355,
+     "test_v4_goods_market_on_path",
+     "goods_market"
+    ],
+    "smallest": [
+     61680892987.743355,
+     "test_v4_goods_market_on_path",
+     "goods_market"
+    ],
+    "n": 1
+   },
+   "M12": {
+    "largest": [
+     946030687.7066491,
+     "test_v1_werning_ge_target_resid_reported",
+     "ge_target_resid_reported_acyc"
+    ],
+    "smallest": [
+     728864614.7783976,
+     "test_v1_werning_ge_target_resid_direct",
+     "ge_target_resid_direct_cyc"
+    ],
+    "n": 2
+   },
+   "M13": {
+    "largest": [
+     48774288170.347244,
+     "test_v2_household_budget[t4]",
+     "hh_budget"
+    ],
+    "smallest": [
+     987.2848019596199,
+     "test_v2_tank_ss_asset_market",
+     "ss_assets"
+    ],
+    "n": 14
+   },
+   "M15": {
+    "largest": [
+     950000000000.002,
+     "test_v3_income_normalisation[t3]",
+     "pi_row_sum_err_acyc"
+    ],
+    "smallest": [
+     1.3248950547772864,
+     "test_v1_werning_ge_target_resid_direct",
+     "ge_target_resid_direct_cyc"
+    ],
+    "n": 5
+   },
+   "M16": {
+    "largest": [
+     273.9689626288374,
+     "test_v4_aiyagari_euler_at_spec_beta",
+     "spec_euler_err_max_with_mass"
+    ],
+    "smallest": [
+     273.9689626288374,
+     "test_v4_aiyagari_euler_at_spec_beta",
+     "spec_euler_err_max_with_mass"
+    ],
+    "n": 1
+   },
+   "M17": {
+    "largest": [
+     35069919924.95761,
+     "test_v2_household_budget[t4]",
+     "hh_budget"
+    ],
+    "smallest": [
+     734383.3483834462,
+     "test_v2_aiyagari_ss_goods_market",
+     "ss_goods"
+    ],
+    "n": 2
+   },
+   "M18": {
+    "largest": [
+     50000000000.00017,
+     "test_v4_goods_market_on_path",
+     "goods_market"
+    ],
+    "smallest": [
+     5.329070518200751,
+     "test_v4_government_budget_on_path",
+     "government_budget"
+    ],
+    "n": 2
+   },
+   "M20": {
+    "largest": [
+     1.1176958679771858e+21,
+     "test_v4_government_budget_on_path",
+     "government_budget"
+    ],
+    "smallest": [
+     1.6139061738043297,
+     "test_v4_real_rate_rule_on_path",
+     "rate_rule"
+    ],
+    "n": 3
+   },
+   "M21": {
+    "largest": [
+     200000000000.0,
+     "test_v2_fiscal_ss_government_budget",
+     "ss_government_budget"
+    ],
+    "smallest": [
+     4999999.990362367,
+     "test_v2_fiscal_ss_goods_market",
+     "ss_goods"
+    ],
+    "n": 2
+   },
+   "M23": {
+    "largest": [
+     1461.2573312655643,
+     "test_v2_tank_ss_goods_market",
+     "ss_goods"
+    ],
+    "smallest": [
+     1136.5334816804943,
+     "test_v2_tank_ss_asset_market",
+     "ss_assets"
+    ],
+    "n": 2
+   },
+   "M24": {
+    "largest": [
+     10000000000000.0,
+     "test_v4_spec_parameters[t4]",
+     "spec_a_min"
+    ],
+    "smallest": [
+     10000000000000.0,
+     "test_v4_spec_parameters[t4]",
+     "spec_a_min"
+    ],
+    "n": 1
+   },
+   "M25": {
+    "largest": [
+     1500000000000.2039,
+     "test_v2_fiscal_ss_asset_market",
+     "ss_assets"
+    ],
+    "smallest": [
+     1.6139061738043297,
+     "test_v4_real_rate_rule_on_path",
+     "rate_rule"
+    ],
+    "n": 6
+   },
+   "C03": {
+    "largest": [
+     1221513501.6959455,
+     "test_v1_werning_ge_target_resid_reported",
+     "ge_target_resid_reported_cyc"
+    ],
+    "smallest": [
+     1221513501.6959455,
+     "test_v1_werning_ge_target_resid_direct",
+     "ge_target_resid_direct_cyc"
+    ],
+    "n": 2
+   }
+  },
+  "smallest_tests": [
+   [
+    1.3248950547772864,
+    "M15",
+    "test_v1_werning_ge_target_resid_direct",
+    "ge_target_resid_direct_cyc"
+   ],
+   [
+    1.3248950547772864,
+    "M15",
+    "test_v1_werning_ge_target_resid_reported",
+    "ge_target_resid_reported_cyc"
+   ],
+   [
+    1.6139061738043297,
+    "M20",
+    "test_v4_real_rate_rule_on_path",
+    "rate_rule"
+   ],
+   [
+    1.6139061738043297,
+    "M25",
+    "test_v4_real_rate_rule_on_path",
+    "rate_rule"
+   ],
+   [
+    1.6489032361732825,
+    "M08",
+    "test_v2_fiscal_ss_asset_market",
+    "ss_assets"
+   ],
+   [
+    5.329070518200751,
+    "M18",
+    "test_v4_government_budget_on_path",
+    "government_budget"
+   ],
+   [
+    115.3454447279157,
+    "M07",
+    "test_v2_household_budget[t4]",
+    "hh_budget"
+   ],
+   [
+    273.9689626288374,
+    "M16",
+    "test_v4_aiyagari_euler_at_spec_beta",
+    "spec_euler_err_max_with_mass"
+   ]
+  ]
+ },
+ "rerun/ii": {
+  "per_mutant": {
+   "N02": {
+    "largest": [
+     251226094768.83856,
+     "test_v2_household_budget[t5]",
+     "hh_budget"
+    ],
+    "smallest": [
+     529.0157348025737,
+     "test_v2_tank_ss_goods_market",
+     "ss_goods"
+    ],
+    "n": 11
+   },
+   "N04": {
+    "largest": [
+     3217172653754.9023,
+     "test_v4_real_rate_rule_on_path",
+     "rate_rule"
+    ],
+    "smallest": [
+     3217172653754.9023,
+     "test_v4_real_rate_rule_on_path",
+     "rate_rule"
+    ],
+    "n": 1
+   },
+   "N05": {
+    "largest": [
+     62388162.408269346,
+     "test_v3_income_normalisation[t3]",
+     "incidence_err_cyc"
+    ],
+    "smallest": [
+     62388162.408269346,
+     "test_v3_income_normalisation[t3]",
+     "incidence_err_cyc"
+    ],
+    "n": 1
+   },
+   "N06": {
+    "largest": [
+     13920809944.920416,
+     "test_v2_household_budget[t3]",
+     "hh_budget_acyc"
+    ],
+    "smallest": [
+     576.5991120494045,
+     "test_v2_tank_ss_goods_market",
+     "ss_goods"
+    ],
+    "n": 9
+   },
+   "N07": {
+    "largest": [
+     583861964080.379,
+     "test_v4_government_budget_on_path",
+     "government_budget"
+    ],
+    "smallest": [
+     150000000000.0,
+     "test_v4_spec_parameters[t5]",
+     "spec_r"
+    ],
+    "n": 2
+   },
+   "N10": {
+    "largest": [
+     164580383.3819591,
+     "test_v1_werning_ge_target_resid_reported",
+     "ge_target_resid_reported_cyc"
+    ],
+    "smallest": [
+     5373189.4242119165,
+     "test_v1_werning_ge_target_resid_direct",
+     "ge_target_resid_direct_cyc"
+    ],
+    "n": 2
+   },
+   "N12": {
+    "largest": [
+     12398282574.090107,
+     "test_v2_household_budget[t3]",
+     "hh_budget_acyc"
+    ],
+    "smallest": [
+     526.0254279047607,
+     "test_v2_tank_ss_goods_market",
+     "ss_goods"
+    ],
+    "n": 9
+   },
+   "N13": {
+    "largest": [
+     18739.00284450135,
+     "test_v4_spec_parameters[t1]",
+     "spec_A"
+    ],
+    "smallest": [
+     11404.87364992904,
+     "test_v2_tank_ss_asset_market",
+     "ss_assets"
+    ],
+    "n": 3
+   },
+   "N15": {
+    "largest": [
+     675633.988695204,
+     "test_v4_goods_market_on_path",
+     "goods_market"
+    ],
+    "smallest": [
+     675633.988695204,
+     "test_v4_goods_market_on_path",
+     "goods_market"
+    ],
+    "n": 1
+   },
+   "N16": {
+    "largest": [
+     10000000000000.0,
+     "test_v4_real_rate_rule_on_path",
+     "rate_rule"
+    ],
+    "smallest": [
+     10655120402.53823,
+     "test_v4_goods_market_on_path",
+     "goods_market"
+    ],
+    "n": 3
+   },
+   "N17": {
+    "largest": [
+     10000000000000.0,
+     "test_v4_spec_parameters[t2]",
+     "spec_a_min_S"
+    ],
+    "smallest": [
+     254036.13944609265,
+     "test_v2_tank_ss_asset_market",
+     "ss_assets"
+    ],
+    "n": 4
+   },
+   "N18": {
+    "largest": [
+     9741.715410669847,
+     "test_v2_tank_ss_goods_market",
+     "ss_goods"
+    ],
+    "smallest": [
+     7576.889765661502,
+     "test_v2_tank_ss_asset_market",
+     "ss_assets"
+    ],
+    "n": 2
+   },
+   "N19": {
+    "largest": [
+     2059610325.3605058,
+     "test_v4_aiyagari_euler_at_spec_beta",
+     "spec_kkt_violation_max_with_mass"
+    ],
+    "smallest": [
+     2059610325.3605058,
+     "test_v4_aiyagari_euler_at_spec_beta",
+     "spec_kkt_violation_max_with_mass"
+    ],
+    "n": 1
+   }
+  },
+  "smallest_tests": [
+   [
+    526.0254279047607,
+    "N12",
+    "test_v2_tank_ss_goods_market",
+    "ss_goods"
+   ],
+   [
+    529.0157348025737,
+    "N02",
+    "test_v2_tank_ss_goods_market",
+    "ss_goods"
+   ],
+   [
+    576.5991120494045,
+    "N06",
+    "test_v2_tank_ss_goods_market",
+    "ss_goods"
+   ],
+   [
+    7576.889765661502,
+    "N18",
+    "test_v2_tank_ss_asset_market",
+    "ss_assets"
+   ],
+   [
+    9741.715410669847,
+    "N18",
+    "test_v2_tank_ss_goods_market",
+    "ss_goods"
+   ],
+   [
+    11404.87364992904,
+    "N13",
+    "test_v2_tank_ss_asset_market",
+    "ss_assets"
+   ],
+   [
+    14663.408978501222,
+    "N13",
+    "test_v2_tank_ss_goods_market",
+    "ss_goods"
+   ],
+   [
+    18739.00284450135,
+    "N13",
+    "test_v4_spec_parameters[t1]",
+    "spec_A"
+   ]
+  ]
+ },
+ "rerun/iii": {
+  "per_mutant": {
+   "M02": {
+    "largest": [
+     10000000000000.0,
+     "test_v4_government_budget_on_path",
+     "government_budget"
+    ],
+    "smallest": [
+     10000000000000.0,
+     "test_v4_government_budget_on_path",
+     "government_budget"
+    ],
+    "n": 1
+   },
+   "M03": {
+    "largest": [
+     1207868574341.478,
+     "test_v4_fiscal_rule_on_path",
+     "fiscal_rule"
+    ],
+    "smallest": [
+     1207868574341.478,
+     "test_v4_fiscal_rule_on_path",
+     "fiscal_rule"
+    ],
+    "n": 1
+   },
+   "M04": {
+    "largest": [
+     2497596550118.23,
+     "test_v1_werning_ge_target_resid_direct",
+     "ge_target_resid_direct_acyc"
+    ],
+    "smallest": [
+     2497596550118.23,
+     "test_v1_werning_ge_target_resid_direct",
+     "ge_target_resid_direct_acyc"
+    ],
+    "n": 1
+   },
+   "M05": {
+    "largest": [
+     4.76883365200231e+223,
+     "test_v4_government_budget_on_path",
+     "government_budget"
+    ],
+    "smallest": [
+     427.1974071841845,
+     "test_v4_real_rate_rule_on_path",
+     "rate_rule"
+    ],
+    "n": 3
+   },
+   "M07": {
+    "largest": [
+     300000000.0030159,
+     "test_v2_aiyagari_ss_firm_focs",
+     "foc_r"
+    ],
+    "smallest": [
+     115.3454447279157,
+     "test_v2_household_budget[t4]",
+     "hh_budget"
+    ],
+    "n": 3
+   },
+   "M08": {
+    "largest": [
+     114197657.6101622,
+     "test_v2_werning_ss_goods_market",
+     "ss_goods_acyc"
+    ],
+    "smallest": [
+     1.6489032361732825,
+     "test_v2_fiscal_ss_asset_market",
+     "ss_assets"
+    ],
+    "n": 13
+   },
+   "M09": {
+    "largest": [
+     3349373.0489672986,
+     "test_v4_goods_market_on_path",
+     "goods_market"
+    ],
+    "smallest": [
+     3349373.0489672986,
+     "test_v4_goods_market_on_path",
+     "goods_market"
+    ],
+    "n": 1
+   },
+   "M11": {
+    "largest": [
+     61680892987.743355,
+     "test_v4_goods_market_on_path",
+     "goods_market"
+    ],
+    "smallest": [
+     61680892987.743355,
+     "test_v4_goods_market_on_path",
+     "goods_market"
+    ],
+    "n": 1
+   },
+   "M12": {
+    "largest": [
+     946030687.7066491,
+     "test_v1_werning_ge_target_resid_reported",
+     "ge_target_resid_reported_acyc"
+    ],
+    "smallest": [
+     728864614.7783976,
+     "test_v1_werning_ge_target_resid_direct",
+     "ge_target_resid_direct_cyc"
+    ],
+    "n": 2
+   },
+   "M13": {
+    "largest": [
+     48774288170.347244,
+     "test_v2_household_budget[t4]",
+     "hh_budget"
+    ],
+    "smallest": [
+     987.2848019596199,
+     "test_v2_tank_ss_asset_market",
+     "ss_assets"
+    ],
+    "n": 14
+   },
+   "M15": {
+    "largest": [
+     950000000000.002,
+     "test_v3_income_normalisation[t3]",
+     "pi_row_sum_err_acyc"
+    ],
+    "smallest": [
+     1.3248950547772864,
+     "test_v1_werning_ge_target_resid_direct",
+     "ge_target_resid_direct_cyc"
+    ],
+    "n": 5
+   },
+   "M16": {
+    "largest": [
+     273.9689626288374,
+     "test_v4_aiyagari_euler_at_spec_beta",
+     "spec_euler_err_max_with_mass"
+    ],
+    "smallest": [
+     273.9689626288374,
+     "test_v4_aiyagari_euler_at_spec_beta",
+     "spec_euler_err_max_with_mass"
+    ],
+    "n": 1
+   },
+   "M17": {
+    "largest": [
+     35069919924.95761,
+     "test_v2_household_budget[t4]",
+     "hh_budget"
+    ],
+    "smallest": [
+     734383.3483834462,
+     "test_v2_aiyagari_ss_goods_market",
+     "ss_goods"
+    ],
+    "n": 2
+   },
+   "M18": {
+    "largest": [
+     50000000000.00017,
+     "test_v4_goods_market_on_path",
+     "goods_market"
+    ],
+    "smallest": [
+     5.329070518200751,
+     "test_v4_government_budget_on_path",
+     "government_budget"
+    ],
+    "n": 2
+   },
+   "M20": {
+    "largest": [
+     1.1176958679771858e+21,
+     "test_v4_government_budget_on_path",
+     "government_budget"
+    ],
+    "smallest": [
+     1.6139061738043297,
+     "test_v4_real_rate_rule_on_path",
+     "rate_rule"
+    ],
+    "n": 3
+   },
+   "M21": {
+    "largest": [
+     200000000000.0,
+     "test_v2_fiscal_ss_government_budget",
+     "ss_government_budget"
+    ],
+    "smallest": [
+     4999999.990362367,
+     "test_v2_fiscal_ss_goods_market",
+     "ss_goods"
+    ],
+    "n": 2
+   },
+   "M23": {
+    "largest": [
+     1461.2573312655643,
+     "test_v2_tank_ss_goods_market",
+     "ss_goods"
+    ],
+    "smallest": [
+     1136.5334816804943,
+     "test_v2_tank_ss_asset_market",
+     "ss_assets"
+    ],
+    "n": 2
+   },
+   "M24": {
+    "largest": [
+     10000000000000.0,
+     "test_v4_spec_parameters[t4]",
+     "spec_a_min"
+    ],
+    "smallest": [
+     10000000000000.0,
+     "test_v4_spec_parameters[t4]",
+     "spec_a_min"
+    ],
+    "n": 1
+   },
+   "M25": {
+    "largest": [
+     1500000000000.2039,
+     "test_v2_fiscal_ss_asset_market",
+     "ss_assets"
+    ],
+    "smallest": [
+     1.6139061738043297,
+     "test_v4_real_rate_rule_on_path",
+     "rate_rule"
+    ],
+    "n": 6
+   }
+  },
+  "smallest_tests": [
+   [
+    1.3248950547772864,
+    "M15",
+    "test_v1_werning_ge_target_resid_direct",
+    "ge_target_resid_direct_cyc"
+   ],
+   [
+    1.3248950547772864,
+    "M15",
+    "test_v1_werning_ge_target_resid_reported",
+    "ge_target_resid_reported_cyc"
+   ],
+   [
+    1.6139061738043297,
+    "M20",
+    "test_v4_real_rate_rule_on_path",
+    "rate_rule"
+   ],
+   [
+    1.6139061738043297,
+    "M25",
+    "test_v4_real_rate_rule_on_path",
+    "rate_rule"
+   ],
+   [
+    1.6489032361732825,
+    "M08",
+    "test_v2_fiscal_ss_asset_market",
+    "ss_assets"
+   ],
+   [
+    5.329070518200751,
+    "M18",
+    "test_v4_government_budget_on_path",
+    "government_budget"
+   ],
+   [
+    115.3454447279157,
+    "M07",
+    "test_v2_household_budget[t4]",
+    "hh_budget"
+   ],
+   [
+    273.9689626288374,
+    "M16",
+    "test_v4_aiyagari_euler_at_spec_beta",
+    "spec_euler_err_max_with_mass"
+   ]
+  ]
+ },
+ "changes/ii": [],
+ "changes/iii": [
+  {
+   "id": "C03",
+   "group": "V",
+   "v02": [
+    "test_v1_werning_ge_target_resid_direct",
+    "test_v1_werning_ge_target_resid_reported"
+   ],
+   "rerun": [],
+   "v02_n": "2/33",
+   "rerun_n": "0/37"
+  }
+ ],
+ "value_diffs": {
+  "v0.3/B0": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.2195580374567416e-15,
+    1.21921922427784e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    2.28960495039501e-14,
+    2.2896049483270586e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+    2.8171909249863347e-13,
+    2.8189256484623115e-13
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+    3.1155633628543455e-13,
+    3.1138286393783687e-13
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+    3.6468224327498855e-06,
+    3.646822432923358e-06
+   ]
+  ],
+  "v0.3/B1": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.2195580374567416e-15,
+    1.21921922427784e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    2.28960495039501e-14,
+    2.2896049483270586e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+    2.8171909249863347e-13,
+    2.8189256484623115e-13
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+    3.1155633628543455e-13,
+    3.1138286393783687e-13
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+    3.6468224327498855e-06,
+    3.646822432923358e-06
+   ]
+  ],
+  "v0.3/N01": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.21921922427784e-15,
+    1.2193886308672908e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    2.2896049483270586e-14,
+    2.28960495039501e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+    2.8189256484623115e-13,
+    2.8171909249863347e-13
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+    3.1138286393783687e-13,
+    3.1155633628543455e-13
+   ]
+  ],
+  "v0.3/N04": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.21921922427784e-15,
+    1.2193886308672908e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    2.2896049483270586e-14,
+    2.28960495039501e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.G_debt_r_rule.goods_market.0",
+    2.876171523169546e-13,
+    2.877906246645523e-13
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.1",
+    3.301226337973488e-10,
+    3.3012263379602533e-10
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.rshock_r_rule.goods_market.0",
+    2.8640284588377085e-13,
+    2.86316109709972e-13
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.1",
+    5.4263004136030635e-06,
+    5.426300413516327e-06
+   ]
+  ],
+  "v0.3/N06": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    2.610216730258852e-15,
+    2.607506224827638e-15
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.r_fixed_r.goods_market.1",
+    2.6020852139652106e-16,
+    3.0357660829594124e-16
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.rshock_r_rule.goods_market.1",
+    9.423885283244005e-14,
+    9.426053687588976e-14
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.r_fixed_r.goods_market.0",
+    6.513721888864316e-06,
+    6.513721888777579e-06
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.G_debt_r_rule.goods_market.2",
+    1.6245243837469114e-05,
+    1.6245243837295642e-05
+   ]
+  ],
+  "v0.3/N09": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.2195580374567416e-15,
+    1.21921922427784e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    2.28960495039501e-14,
+    2.2896049483270586e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+    2.8171909249863347e-13,
+    2.8189256484623115e-13
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+    3.1155633628543455e-13,
+    3.1138286393783687e-13
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+    3.6468224327498855e-06,
+    3.646822432923358e-06
+   ]
+  ],
+  "v0.3/N10": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.2193886308672908e-15,
+    1.21921922427784e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    2.28960495039501e-14,
+    2.2896049483270586e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+    2.8171909249863347e-13,
+    2.8189256484623115e-13
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+    3.1155633628543455e-13,
+    3.1138286393783687e-13
+   ]
+  ],
+  "v0.3/N11": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.2193886308672908e-15,
+    1.21921922427784e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    2.28960495039501e-14,
+    2.2896049483270586e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+    2.8171909249863347e-13,
+    2.8189256484623115e-13
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+    3.1155633628543455e-13,
+    3.1138286393783687e-13
+   ]
+  ],
+  "v0.3/N12": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.9664716903455837e-15,
+    1.9651164376299768e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    1.3183898417423734e-14,
+    1.3173056395698879e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.G_debt_r_rule.goods_market.0",
+    3.1797294548319137e-13,
+    3.1797430073590697e-13
+   ],
+   [
+    "t5.ssj_consistent.paths.G_debt_r_rule.goods_market.1",
+    6.692616004623623e-10,
+    6.692615950413515e-10
+   ],
+   [
+    "t5.ssj_consistent.paths.G_debt_r_rule.goods_market.2",
+    2.8917845071654846e-07,
+    2.891784506731804e-07
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.r_fixed_r.goods_market.1",
+    3.0357660829594124e-16,
+    3.469446951953614e-16
+   ]
+  ],
+  "v0.3/N13": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.2193886308672908e-15,
+    1.2195580374567416e-15
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+    3.646822432923358e-06,
+    3.6468224327498855e-06
+   ]
+  ],
+  "v0.3/N14": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.2193886308672908e-15,
+    1.21921922427784e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    2.28960495039501e-14,
+    2.2896049483270586e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+    2.8171909249863347e-13,
+    2.8189256484623115e-13
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+    3.1155633628543455e-13,
+    3.1138286393783687e-13
+   ]
+  ],
+  "v0.3/N15": [
+   [
+    "t5.ssj_consistent_refined.paths.r_fixed_r.goods_market.0",
+    3.025192795748366e-06,
+    3.02519279566163e-06
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.0",
+    2.7025359547634686e-05,
+    2.702535954780816e-05
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+    2.702535405532669e-05,
+    2.702535405550016e-05
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.r_fixed_r.goods_market.1",
+    1.7883913594377477e-14,
+    1.7883913511659416e-14
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.G_debt_r_rule.goods_market.1",
+    3.9789263695113927e-10,
+    3.978926369498158e-10
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.0",
+    1.0075273948473296e-12,
+    1.0073539224997319e-12
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.1",
+    4.3069331851608285e-10,
+    4.306933185187298e-10
+   ]
+  ],
+  "v0.3/N16": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.21921922427784e-15,
+    1.2193886308672908e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    2.2896049483270586e-14,
+    2.28960495039501e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+    2.8189256484623115e-13,
+    2.8171909249863347e-13
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+    3.1138286393783687e-13,
+    3.1155633628543455e-13
+   ]
+  ],
+  "v0.3/N18": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.21921922427784e-15,
+    1.2195580374567416e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    2.2896049483270586e-14,
+    2.28960495039501e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+    2.8189256484623115e-13,
+    2.8171909249863347e-13
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+    3.1138286393783687e-13,
+    3.1155633628543455e-13
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+    3.646822432923358e-06,
+    3.6468224327498855e-06
+   ]
+  ],
+  "v0.3/N19": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    2.6276656089722905e-15,
+    2.6280044221511922e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    1.533715865702206e-14,
+    1.5337158574304e-14
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.r_fixed_r.goods_market.1",
+    2.7755575615628914e-15,
+    2.0816681711721685e-15
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.rshock_r_rule.goods_market.0",
+    7.528699885739343e-14,
+    7.563394355258879e-14
+   ]
+  ],
+  "v0.3/K01": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.2193886308672908e-15,
+    1.21921922427784e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    2.28960495039501e-14,
+    2.2896049483270586e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+    2.8171909249863347e-13,
+    2.8189256484623115e-13
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+    3.1155633628543455e-13,
+    3.1138286393783687e-13
+   ]
+  ],
+  "v0.3/K03": [
+   [
+    "t5.ssj_consistent.paths.G_debt_r_rule.goods_market.1",
+    2.0600044543551466e-09,
+    2.0600044543577935e-09
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.1",
+    6.853398730520207e-10,
+    6.853398730493737e-10
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.r_fixed_r.goods_market.1",
+    2.6020852139652106e-16,
+    1.734723475976807e-16
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.r_fixed_r.goods_market.2",
+    1.734723475976807e-16,
+    2.1684043449710089e-16
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.0",
+    1.4432899320127035e-13,
+    1.4450246554886803e-13
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.1",
+    1.448494102440634e-13,
+    1.446759378964657e-13
+   ]
+  ],
+  "v0.3/M01": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    2.6312231473507586e-15,
+    2.631138444056033e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    1.6882140135369004e-14,
+    1.6882140125029246e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.G_debt_r_rule.goods_market.1",
+    4.810918619499672e-10,
+    4.810918619473202e-10
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.1",
+    3.227088345463269e-10,
+    3.2270883454897387e-10
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.r_fixed_r.goods_market.2",
+    3.903127820947816e-16,
+    3.469446951953614e-16
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.G_debt_r_rule.goods_market.0",
+    2.4076811367367e-05,
+    2.4076811367540474e-05
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+    8.169841169032577e-06,
+    8.169841168859104e-06
+   ]
+  ],
+  "v0.3/M03": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    2.0332178865892225e-15,
+    2.033302589883948e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    1.0970800015031382e-14,
+    1.0970800097749444e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.2",
+    1.6213765056913965e-13,
+    1.6213765057043212e-13
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.1",
+    3.3598619000781973e-10,
+    3.359861900025258e-10
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.2",
+    2.6383808127886944e-07,
+    2.638380812788694e-07
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.r_fixed_r.goods_market.1",
+    1.734723475976807e-16,
+    2.1684043449710089e-16
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.r_fixed_r.goods_market.2",
+    2.6020852139652106e-16,
+    3.469446951953614e-16
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.1",
+    3.1450536619459513e-13,
+    3.1433189384699745e-13
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.rshock_r_rule.goods_market.0",
+    2.7998436902265667e-13,
+    2.79810896675059e-13
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.rshock_r_rule.goods_market.1",
+    2.7929047963226594e-13,
+    2.794639519798636e-13
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.1",
+    4.169730910205671e-06,
+    4.1697309103791436e-06
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+    4.169730909511782e-06,
+    4.169730909685254e-06
+   ]
+  ],
+  "v0.3/M06": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.2195580374567416e-15,
+    1.2193886308672908e-15
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+    3.6468224327498855e-06,
+    3.646822432923358e-06
+   ]
+  ],
+  "v0.3/M08": [
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.1",
+    1.2315965296216813e-07,
+    1.2315965313564048e-07
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.2",
+    7.829996171073578e-05,
+    7.82999617105623e-05
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.0",
+    9.348613896897895e-10,
+    9.348610427450943e-10
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.rshock_r_rule.goods_market.0",
+    6.713541181313509e-10,
+    6.713542048675247e-10
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.G_debt_r_rule.goods_market.1",
+    2.78940201203568,
+    2.7894020120470486
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.G_debt_r_rule.goods_market.2",
+    1785.9166010690387,
+    1785.9166010748595
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.0",
+    0.0254938345159772,
+    0.025493834516066016
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+    1282.5404568691738,
+    1282.540456863353
+   ]
+  ],
+  "v0.3/M11": [
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.2",
+    0.19256688694594973,
+    0.19256688694594976
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.r_fixed_r.goods_market.0",
+    0.18334191517778067,
+    0.1833419151777807
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.rshock_r_rule.goods_market.2",
+    0.19256688694595187,
+    0.1925668869459519
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.r_fixed_r.goods_market.0",
+    0.18330981429897192,
+    0.1833098142989719
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.r_fixed_r.goods_market.2",
+    0.47476833587320827,
+    0.4747683358732081
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+    0.1925441802583299,
+    0.19254418025832992
+   ]
+  ],
+  "v0.3/M14": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.21921922427784e-15,
+    1.2193886308672908e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    2.2896049483270586e-14,
+    2.28960495039501e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+    2.8189256484623115e-13,
+    2.8171909249863347e-13
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+    3.1138286393783687e-13,
+    3.1155633628543455e-13
+   ]
+  ],
+  "v0.3/M15": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.21921922427784e-15,
+    1.2195580374567416e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    2.2896049483270586e-14,
+    2.28960495039501e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+    2.8189256484623115e-13,
+    2.8171909249863347e-13
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+    3.1138286393783687e-13,
+    3.1155633628543455e-13
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+    3.646822432923358e-06,
+    3.6468224327498855e-06
+   ]
+  ],
+  "v0.3/M16": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.7836819803281057e-15,
+    1.783639628680743e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.G_debt_r_rule.goods_market.1",
+    1.0249494417521028e-09,
+    1.0249494417494558e-09
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.1",
+    1.9092712152411282e-10,
+    1.9092712152278933e-10
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.r_fixed_r.goods_market.1",
+    1.1933801204871974e-05,
+    1.193380120495871e-05
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.1",
+    5.668295261071141e-06,
+    5.668295261114509e-06
+   ]
+  ],
+  "v0.3/M18": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.21921922427784e-15,
+    1.2195580374567416e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    2.2896049483270586e-14,
+    2.28960495039501e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+    2.8189256484623115e-13,
+    2.8171909249863347e-13
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.0",
+    1.9999999999939155,
+    1.9999999999939153
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.G_debt_r_rule.goods_market.1",
+    1.999921285448361,
+    1.9999212854483615
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+    3.646822432923358e-06,
+    3.6468224327498855e-06
+   ]
+  ],
+  "v0.3/M20": [
+   [
+    "t5.ssj_consistent.paths.G_debt_r_rule.goods_market.1",
+    4.2626059429849424e-07,
+    4.262605915229367e-07
+   ],
+   [
+    "t5.ssj_consistent.paths.G_debt_r_rule.goods_market.2",
+    0.00048228554874172854,
+    0.0004822855544260704
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.1",
+    4.2626060262516693e-07,
+    4.2626059984960937e-07
+   ]
+  ],
+  "v0.3/M21": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    2.1467203015212988e-15,
+    2.146550894931848e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    2.586530567480785e-14,
+    2.5865305695487366e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.G_debt_r_rule.goods_market.0",
+    3.164135620181696e-13,
+    3.165870343657673e-13
+   ],
+   [
+    "t5.ssj_consistent.paths.G_debt_r_rule.goods_market.2",
+    4.5336796115071517e-07,
+    4.5336796115071506e-07
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.1",
+    7.646234653559336e-10,
+    7.646234653585805e-10
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.2",
+    3.7899933920329254e-07,
+    3.789993392032926e-07
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.rshock_r_rule.goods_market.0",
+    7.528699885739343e-14,
+    7.511352650979575e-14
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.r_fixed_r.goods_market.0",
+    9.027803820303715e-06,
+    9.027803820216979e-06
+   ]
+  ],
+  "v0.3/M23": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.2193886308672908e-15,
+    1.21921922427784e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    2.28960495039501e-14,
+    2.2896049483270586e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.0",
+    2.8171909249863347e-13,
+    2.8189256484623115e-13
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.2",
+    3.1155633628543455e-13,
+    3.1138286393783687e-13
+   ]
+  ],
+  "v0.3/C02": [
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    2.8370521535335536e-15,
+    2.837009801886191e-15
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.1",
+    1.2218578808010473e-14,
+    1.2218578477138228e-14
+   ],
+   [
+    "t5.ssj_consistent.paths.rshock_r_rule.goods_market.1",
+    2.3412469087030073e-10,
+    2.3412469086897724e-10
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.r_fixed_r.goods_market.1",
+    3.469446951953614e-16,
+    4.3368086899420177e-16
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.G_debt_r_rule.goods_market.0",
+    5.412337245047638e-13,
+    5.414071968523615e-13
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.rshock_r_rule.goods_market.0",
+    4.4620340408640935e-14,
+    4.4576972321741515e-14
+   ],
+   [
+    "t5.ssj_consistent_refined.paths.rshock_r_rule.goods_market.2",
+    4.4815496799688326e-14,
+    4.4837180843138036e-14
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.0",
+    3.646816874522396e-06,
+    3.6468168746958685e-06
+   ]
+  ],
+  "v0.3/C03": [
+   [
+    "t3.ge_target_resid_reported_acyc.0",
+    1.9354953757837117e-07,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_reported_acyc.1",
+    1.2068854552867557e-08,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_reported_acyc.2",
+    8.163689806012425e-10,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_reported_acyc.3",
+    1.1416802002890752e-09,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_reported_acyc.4",
+    5.913902447011616e-08,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_reported_acyc.5",
+    5.477198242556821e-07,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_reported_acyc.6",
+    2.959931935718966e-06,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_direct_acyc.0",
+    1.9354953757837117e-07,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_direct_acyc.1",
+    1.2068854552867557e-08,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_direct_acyc.2",
+    8.163689806012425e-10,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_direct_acyc.3",
+    1.1416802002890752e-09,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_direct_acyc.4",
+    5.913902447011616e-08,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_direct_acyc.5",
+    5.477198242556821e-07,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_direct_acyc.6",
+    2.959931935718966e-06,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_reported_cyc.0",
+    0.0011247497156501383,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_reported_cyc.1",
+    0.002443027003391891,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_reported_cyc.2",
+    0.001072378115269128,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_reported_cyc.3",
+    0.00012593062922688285,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_reported_cyc.4",
+    6.92119408389557e-05,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_reported_cyc.5",
+    5.540604473015024e-05,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_reported_cyc.6",
+    5.4232169660487575e-05,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_direct_cyc.0",
+    0.0011247497156501383,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_direct_cyc.1",
+    0.002443027003391891,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_direct_cyc.2",
+    0.001072378115269128,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_direct_cyc.3",
+    0.00012593062922688285,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_direct_cyc.4",
+    6.92119408389557e-05,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_direct_cyc.5",
+    5.540604473015024e-05,
+    "missing"
+   ],
+   [
+    "t3.ge_target_resid_direct_cyc.6",
+    5.4232169660487575e-05,
+    "missing"
+   ],
+   [
+    "t5.ssj_consistent.paths.r_fixed_r.goods_market.0",
+    1.2195580374567416e-15,
+    1.2193886308672908e-15
+   ],
+   [
+    "t5.ssj_inconsistent_options.paths.rshock_r_rule.goods_market.2",
+    3.6468224327498855e-06,
+    3.646822432923358e-06
+   ]
+  ]
+ },
+ "new_quantities/ii": {
+  "exog_G": [
+   0.0,
+   "N01"
+  ],
+  "exog_r": [
+   0.0,
+   "N01"
+  ],
+  "exog_rshock": [
+   0.0,
+   "N01"
+  ],
+  "ge_target_resid_direct_goods_acyc": null,
+  "ge_target_resid_direct_goods_cyc": null,
+  "ge_target_resid_reported_goods_acyc": null,
+  "ge_target_resid_reported_goods_cyc": null
+ },
+ "new_quantities/iii": {
+  "exog_G": [
+   0.0,
+   "M01"
+  ],
+  "exog_r": [
+   0.0,
+   "M01"
+  ],
+  "exog_rshock": [
+   0.0,
+   "M01"
+  ],
+  "ge_target_resid_direct_goods_acyc": [
+   8.754932542820448e-14,
+   "C03"
+  ],
+  "ge_target_resid_direct_goods_cyc": [
+   1.2685165418080402e-13,
+   "C03"
+  ],
+  "ge_target_resid_reported_goods_acyc": [
+   8.673617379884035e-14,
+   "C03"
+  ],
+  "ge_target_resid_reported_goods_cyc": [
+   1.3877787807814457e-13,
+   "C03"
+  ]
+ },
+ "baselines": {
+  "deterministic": true,
+  "B0": "107 passed, 4 xfailed in 75.80s (0:01:15)",
+  "B1": "107 passed, 4 xfailed in 75.89s (0:01:15)",
+  "B1_vs_B0_max_rel_change": {
+   "T1": 0.0,
+   "T2": 0.0,
+   "T3": 0.0,
+   "T4": 0.0,
+   "T5": 0.0,
+   "T6": 0.0,
+   "D": 0.0,
+   "V": 0.0
+  },
+  "vs_v01": {
+   "B0": {
+    "B0": {
+     "n_compared": 276,
+     "n_different": 0,
+     "max_rel_diff": 0.0,
+     "different_keys": [],
+     "missing": []
+    },
+    "B1": {
+     "n_compared": 276,
+     "n_different": 1,
+     "max_rel_diff": 1.4067745211688107e-11,
+     "different_keys": [
+      "t5.ssj_inconsistent_options.walras_max.rshock_r_rule"
+     ],
+     "missing": []
+    }
+   },
+   "B1": {
+    "B0": {
+     "n_compared": 276,
+     "n_different": 0,
+     "max_rel_diff": 0.0,
+     "different_keys": [],
+     "missing": []
+    },
+    "B1": {
+     "n_compared": 276,
+     "n_different": 1,
+     "max_rel_diff": 1.4067745211688107e-11,
+     "different_keys": [
+      "t5.ssj_inconsistent_options.walras_max.rshock_r_rule"
+     ],
+     "missing": []
+    }
+   }
+  }
+ }
+}

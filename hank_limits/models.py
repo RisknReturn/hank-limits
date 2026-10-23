@@ -306,12 +306,15 @@ def werning_model(b, cyclical=False, **kw):
     return dict(model=model, block=blk, ss=ss, prim=prim, diag=diag)
 
 
-def ssj_werning_provider(b, T, dr, cyclical=False, **kw):
-    """Interface `WerningProvider`: GE output path for a real-rate path dr (goods market)."""
+def ssj_werning_provider(b, T, dr, cyclical=False, ge_target='asset_mkt', **kw):
+    """Interface `WerningProvider`: GE output path for a real-rate path dr. The GE target is the
+    asset market (A = 0, bonds in zero net supply) unless `ge_target='goods_mkt'`; the target
+    passed to the solve is the one reported (`ge_target`, `diag['ge_target_resid']`)."""
     m = werning_model(b, cyclical, **kw)
     ss = m['ss']
     J = m['block'].jacobian(ss, ['Y', 'r'], ['C', 'A'], T=T, twosided=True, h=1e-3 * b)
-    irf = m['model'].solve_impulse_linear(ss, ['Y'], ['asset_mkt'], {'r': dr}, Js={'hh': J},
+    targets = [ge_target]
+    irf = m['model'].solve_impulse_linear(ss, ['Y'], targets, {'r': dr}, Js={'hh': J},
                                           options=_het_opts(['hh'], h=1e-3 * b))
     prim = m['prim']
     return dict(dY=np.asarray(irf['Y']), r_ss=float(ss['r']), eis=prim['eis'],
@@ -319,8 +322,10 @@ def ssj_werning_provider(b, T, dr, cyclical=False, **kw):
                 ss_detail=dict(_household_detail(ss), b=float(b), Y=float(ss['Y']),
                                r=float(ss['r']), eis=float(ss['eis'])),
                 J_A={'Y': np.asarray(J['A']['Y']), 'r': np.asarray(J['A']['r'])},
+                J_C={'Y': np.asarray(J['C']['Y']), 'r': np.asarray(J['C']['r'])},
+                ge_target=targets[0],
                 diag={**m['diag'],
-                      'ge_target_resid': float(np.max(np.abs(irf['asset_mkt'])))})
+                      'ge_target_resid': float(np.max(np.abs(irf[targets[0]])))})
 
 
 # ---------------------------------------------------------------------------

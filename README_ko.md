@@ -1,10 +1,8 @@
-# HANK 해석적 극한·집계 항등식 검증 세트 v0.2.1 (analytic-limit and aggregate-identity test suite)
-
-**이 브랜치: v0.3 (unreleased)**, 릴리스 v0.2.1 위의 변경입니다. 아래 "v0.3 (unreleased)" 를 보십시오.
+# HANK 해석적 극한·집계 항등식 검증 세트 v0.3.0 (analytic-limit and aggregate-identity test suite)
 
 [![DOI](https://zenodo.org/badge/1426447298.svg)](https://doi.org/10.5281/zenodo.23489176)
 
-모든 판을 인용할 때는 concept DOI [10.5281/zenodo.23489176](https://doi.org/10.5281/zenodo.23489176), 이 판(v0.2.1)은 [10.5281/zenodo.23489177](https://doi.org/10.5281/zenodo.23489177) 입니다. GitHub 의 "Cite this repository" 버튼은 `CITATION.cff` 를 씁니다.
+모든 판을 인용할 때는 concept DOI [10.5281/zenodo.23489176](https://doi.org/10.5281/zenodo.23489176) 를 씁니다. 이 릴리스(v0.3.0)의 DOI 는 Zenodo 보관 뒤 여기와 `CITATION.cff` 에 추가합니다. 이전 릴리스 v0.2.1 은 [10.5281/zenodo.23489177](https://doi.org/10.5281/zenodo.23489177) 입니다. GitHub 의 "Cite this repository" 버튼은 `CITATION.cff` 를 씁니다.
 
 이 저장소는 이질적 경제주체 뉴케인지언 모형(heterogeneous-agent New Keynesian, HANK) 코드가 답이 알려진 극한(limit)과 집계 항등식(aggregate identity)에서 통과해야 하는 시험 모음입니다. 공개 패키지 `sequence-jacobian`(이하 SSJ) 1.0.0 위에서 구현했고, 각 시험은 한 지점의 통과/실패(pass/fail)만이 아니라 **극한 모수가 극한으로 갈 때의 오차와 관찰된 수렴 차수(observed order of convergence)** 를 함께 보고합니다.
 
@@ -27,24 +25,30 @@
 
 **v0.2 → v0.2.1 (R4 후속 검토 반영):** ① 구성상 항상 0 이던 진단 필드 `normalisation_err_last_sweep` 삭제, ② Aiyagari 둘째 셀을 "미재현·원인 미해결"로 고치고 원문 Table I 의 수준 CV·자기상관 대조와 격자 감사를 추가, ③ F2 의 실무 영향 서술을 이 예제로 한정, ④ T1 계산 시계 무관성을 고정 정상상태의 선형 가계 야코비안으로 한정, ⑤ SSJ 이슈 초안 문구 수정. 시험 결과는 같습니다.
 
-### v0.3 (unreleased): 정상상태·소득 정규화·명세 검사
+### v0.2.1 → v0.3.0 변경: 정상상태·소득 정규화·명세 검사
 
-릴리스하지 않은 판입니다. `pyproject.toml` 의 버전, 태그, 인용 메타데이터는 v0.2.1 그대로입니다. 계획과 사전 등록은 `docs/CHECKS_PLAN_v0_3.md`, 오류 주입 시험(mutation testing)은 `docs/MUTATION_v0_1.md`(v0.2.1 묶음)와 `docs/MUTATION_v0_2.md`(독립 생성 변형으로 v0.2.1 과 v0.3 비교)에 있습니다.
+계획과 사전 등록은 `docs/CHECKS_PLAN_v0_3.md`, 릴리스 전 검토 뒤의 수정과 그 재실행은 `docs/CHECKS_v0_3_0_AMENDMENT.md`, 오류 주입 시험(mutation testing)은 `docs/MUTATION_v0_1.md`(v0.2.1 묶음)와 `docs/MUTATION_v0_2.md`(독립 생성 변형으로 v0.2.1 과 v0.3 비교)에 있습니다.
 
-| 항목 | v0.3 변경 |
+| 항목 | v0.3.0 변경 |
 |---|---|
-| V1 | T3 의 일반균형 목표(자산시장) 잔차를 기록하고 시험합니다. 풀이기가 보고한 값과, 보고된 야코비안으로 직접 계산한 값을 모두 봅니다. V1 은 T3 를 자산시장 목표로 푼다고 전제합니다. 임계값(잔차를 b 로 나눈 값에 대해 2e-12)은 자산시장 풀이 자신의 잔차에서 나왔습니다. 정확한 산술에서는 같은 해를 주는 재화시장 목표로 풀면, 자산시장 잔차가 이보다 훨씬 큽니다. 비례 소득에서는 F3 와 무관하게 최대 3.0e-6·b, 경기역행 소득에서는 F3 의 O(h) 오차가 더해져 최대 2.4e-3·b 입니다. 따라서 V1 은 그런 풀이에 경보를 냅니다(대조군 C03; `docs/MUTATION_v0_2.md` 8절). |
+| V1 | 공급자가 `ge_target` 으로 보고한 T3 일반균형 목표(`'asset_mkt'` 또는 `'goods_mkt'`; 없으면 `'asset_mkt'` 로 보고 "assumed" 로 기록)의 잔차를 b 로 나눠 기록하고 시험합니다. 풀이기가 보고한 값과, 보고된 야코비안과 검사가 넘긴 금리 경로로 직접 계산한 값을 모두 봅니다(자산시장은 `J_A` 로 J^{A,Y} dY + J^{A,r} dr, 재화시장은 `J_C` 로 dY − J^{C,Y} dY − J^{C,r} dr). 임계값: 자산시장은 자산시장 풀이 자신의 잔차에서 나온 2e-12(그대로), 재화시장은 참조 공급자를 재화시장 목표로 푼 실행에서 나온 9e-12(비례 소득)와 2e-11(경기역행 소득)입니다(v0.3.0). 다른 시장의 잔차는 임계값 없이 기록만 합니다. 적용 범위: 두 시장 가운데 하나로 푼 T3 에만 적용하고, 다른 목표가 보고되면 적용 조건 미충족으로 skip 합니다. v0.3.0 전에는 V1 이 자산시장 목표를 전제했으므로, 정확한 산술에서는 같은 해를 주는 재화시장 풀이(대조군 C03)에 경보를 냈습니다. 그 풀이의 자산시장 잔차는 비례 소득에서 F3 와 무관하게 최대 3.0e-6·b, 경기역행 소득에서 F3 의 O(h) 오차가 더해져 최대 2.4e-3·b 입니다(`docs/MUTATION_v0_2.md` 8절, `docs/CHECKS_v0_3_0_AMENDMENT.md`). |
 | V2 | 공급자(provider)가 보고한 기본 수량으로 검사 쪽에서 직접 계산하는 정상상태 잔차: 정부 예산, 재화·자산시장(재정 HANK, TANK, Huggett), 자본시장·기업 1계 조건·재화시장(Aiyagari), 모든 모형의 집계 가계 예산. |
-| V3 | 소득 정규화: Π 의 행 합이 1, 보고된 Π 의 정상분포에서 E[e] = 1, 총소득 = Y(재정 모형은 Y − Tax), 경기역행 귀착에서 Σ π e ζ = 0. |
-| V4 | `hank_limits/spec.py` 의 문서화된 값으로 명세 고정(specification pins). `models.py` 에서 읽지 않습니다. 보고된 모수, 문서화된 β·EIS 에서의 Aiyagari 오일러 식, T5 경로에서의 재정 준칙·정부 예산·실질금리 준칙·재화시장을 확인합니다. |
+| V3 | 소득 정규화: Π 의 행 합이 1, 보고된 Π 의 정상분포에서 E[e] = 1, 총소득 Σ π y 가 모형별 기준과 같음. 기준은 Y(T1, T3), 유형별 소득 Y_H·Y_S 와 그 가중 합 λ Y_H + (1 − λ) Y_S = Y(T2), 문서화된 노동 L = 1 에서의 w L(T4), Y − Tax(T5)입니다. 경기역행 귀착(T3)에서는 Σ π e ζ = 0. |
+| V4 | `hank_limits/spec.py` 의 문서화된 값으로 명세 고정(specification pins). `models.py` 에서 읽지 않습니다. 보고된 모수, 문서화된 β·EIS 에서의 Aiyagari 오일러 식, T5 경로에서의 재정 준칙·정부 예산·실질금리 준칙·재화시장을 확인합니다. v0.3.0: 공급자가 실제로 푼 외생 경로를 요청한 경로와 대조하고(`exog_G`, `exog_r`, `exog_rshock`), 실질금리 준칙 잔차에는 요청한 금리 충격을 씁니다. |
 | V5 | `test_rank_benchmark_is_ricardian` 에는 RA 닫힌 해 assert 만 남기고, HA 조건은 `test_ha_multiplier_exceeds_one` 으로 나눴습니다. |
-| V6 | F3 고정 시험(strict xfail, SSJ 코드만). F1·F2 고정과 같은 형식입니다. |
-| 공급자 | **선택** 필드 `ss_detail`, `J_A`, `policy`, `irfs[...]['drshock']` 추가(`hank_limits/interface.py`). 필드가 없으면 해당 검사를 skip 하고 이유를 결과에 남깁니다. `models.py`·`core.py` 의 계산은 바꾸지 않았으므로 기존 검사의 요약 수치는 v0.2.1 과 비트 단위로 같습니다. |
+| V6 | F3 고정 시험(strict xfail, SSJ 코드만). F1·F2 고정과 같은 형식입니다. v0.3.0: V6a(hetinput 이 항상 한쪽 차분)와 V6b(`twosided=True` 를 요청해도 hetoutput 이 한쪽 차분)로 나눠, 상류에서 한쪽만 고쳐져도 그 시험만 XPASS 로 알립니다. |
+| 공급자 | **선택** 필드 `ss_detail`, `J_A`, `J_C`, `ge_target`, `policy`, `irfs[...]` 의 `dC`·`dB`·`drshock` 추가. `hank_limits/interface.py` 에 공급자별로 검사가 읽는 모든 필드와 필수·선택 구분을 적었습니다. V 수량은 각자 자기 식에 필요한 필드로만 계산하고, 필드가 없으면 그 수량만 빠진 것으로 두고 이유를 남깁니다. `models.py`·`core.py` 의 계산은 바꾸지 않았고, Werning 공급자에 기본값이 기존 동작과 같은 선택 인자 `ge_target` 만 더했습니다. 오류 주입 보고서의 기준 실행(v0.2 의 4회, v0.3.0 재실행의 2회)에서 기존 검사의 요약값 276개가 v0.1 실행 B0 과 정확히 같았습니다. |
+| 판정 | v0.3.0. V 시험은 값 하나라도 유한하지 않거나 음수이거나 임계값 이상이면, 다른 값이 빠져 있어도 실패합니다. 실패가 없는데 기대한 값이 빠져 있으면 **incomplete** 로 skip 하고(통과로 보지 않음), 공급자가 그 시험의 수량을 하나도 보고하지 않으면 이유와 함께 skip 합니다. 기대하는 값은 검사가 설정·소득 유형·요청한 충격별로 미리 정해 둡니다(`res['v0_3']` → `status`, `checks.v03_verdict`). |
+| 검토 | 2026-10-22 릴리스 전 검토(P0·P1 결함 없음)를 반영했습니다. 위의 판정(R1), 문서와 코드의 필드 규약 일치(식 단위 필드, T3 β 는 `ss_detail` 에서 읽음; R2), 실제로 푼 외생 경로와 요청 경로의 대조(R3), 보고된 일반균형 목표로 V1 판정(R4), V6 나누기. 가짜 공급자(fake provider)로 검사기 자체를 시험하는 회귀 시험은 `tests/test_v0_3_0_checker.py` 에 있습니다. 설계·예측·임계값·재실행은 `docs/CHECKS_v0_3_0_AMENDMENT.md` 에 있습니다. 2026-10-23 병합 전 확인 뒤에는, 검사가 요청한 객체의 사본을 따로 보존하고 공급자에게는 다른 사본을 넘기도록 고쳤습니다. 그래서 공급자가 받은 인수를 직접 바꿔도 비교 기준은 바뀌지 않습니다(같은 문서 11절). |
 | T4·T6 | 오류 주입 시험 v0.1 에서 나온 두 가지 설명: T4 의 오류 검출력은 진단에서 나오고(7·9절), T6 행렬 항등식은 선형대수 검사입니다. |
 
-v0.3 의 pytest 전체: **74 passed, 3 xfailed** (F1, F2, F3).
+v0.3.0 의 pytest 전체: **114 passed, 4 xfailed** (F1, F2, V6a, V6b). 통과한 114개는 T1–T6, D, V 묶음의 시험 77개와 검사기 회귀 시험 37개입니다. 출력은 `out/pytest_output_v0_3_0.txt` 에 있습니다.
 
 오류 주입 시험 v0.2(`docs/MUTATION_v0_2.md`): 새 검사를 모르는 별도 에이전트가 만든 변형 20개 가운데 v0.2.1 묶음은 14개, v0.3 묶음은 19개를 잡았습니다. 대조군 3개에서는 두 묶음 모두 경보를 내지 않았습니다. 두 묶음 모두 놓친 N20 은 어떤 시험도 엄격히 확인하지 않는 진단 값의 오류입니다. v0.1 변형 25개는 v0.3 묶음이 모두 잡지만, 그 검사들은 v0.1 결과를 본 뒤 설계했으므로 독립 결과가 아닙니다.
+
+릴리스 전 검토 뒤의 재실행(`docs/CHECKS_v0_3_0_AMENDMENT.md` 10절): v0.3.0 으로 수정한 묶음을 같은 변형으로 설계 (ii)·(iii)에서 다시 돌렸습니다. (ii)는 결과가 바뀌지 않았습니다(20개 가운데 19개를 잡고 N20 을 놓침, 대조군 경보 없음). (iii)에서는 대조군 C03 만 바뀌어 더는 경보를 내지 않습니다. V1 이 이제 공급자가 보고한 일반균형 목표로 판정하기 때문이며, 설계상 그렇게 되는 결과이므로 독립 증거가 아닙니다. 위의 v0.2 결과는 당시 검사에 대한 기록으로 그대로 둡니다.
+
+오류 주입 시험은 보고서(`docs/MUTATION_v0_1.md`, `docs/MUTATION_v0_2.md`, `docs/CHECKS_v0_3_0_AMENDMENT.md`)와, 설계 × 변형 × 시험 묶음마다 한 행인 CSV(`out/mutation_v0_1.csv`, `out/mutation_v0_2.csv`, `out/mutation_v0_3_0_rerun.csv`)부터 읽기를 권합니다. JSON 파일 `out/mutation_v0_*.json` 에는 모든 실행의 시험 결과와 검사 요약이 들어 있습니다.
 
 ---
 
@@ -65,7 +69,7 @@ v0.3 의 pytest 전체: **74 passed, 3 xfailed** (F1, F2, F3).
 
 **허용치의 지위.** 시험 허용치는 이 보정의 **회귀 검사(regression check) 기준**입니다. 다른 구현에 같은 수렴 기울기나 같은 1e-10 기준을 요구하는 규격(conformance specification)이 아닙니다.
 
-pytest 전체: **41 passed, 2 xfailed, 약 65 ~ 75초** (11절). 보고서 스크립트 약 110초, 진단 스크립트 약 80초.
+이 요약을 쓴 v0.2.1 의 pytest 전체: **41 passed, 2 xfailed, 약 65 ~ 75초** (11절). 위 T1–T6 결과는 v0.3.0 에서도 같고, v0.3.0 의 pytest 전체는 114 passed, 4 xfailed, 약 75초입니다(`out/pytest_output_v0_3_0.txt`). 보고서 스크립트 약 110초, 진단 스크립트 약 80초.
 
 ### 주요 발견 (key findings)
 
@@ -83,8 +87,8 @@ pytest 전체: **41 passed, 2 xfailed, 약 65 ~ 75초** (11절). 보고서 스�
 
 ```bash
 pip install --break-system-packages sequence-jacobian==1.0.0 pytest matplotlib   # numpy, scipy, numba 필요
-cd hank_tests
-python3 -m pytest                          # 약 74초; 요약 출력은 python3 -m pytest -s
+cd hank-limits
+python3 -m pytest                          # 약 75초; 요약 출력은 python3 -m pytest -s
 python3 scripts/convergence_report.py      # 약 110초: out/convergence_v0_2.json, PNG 6장, out/tables_v0_2/*.csv
 python3 scripts/diagnostics_v0_2.py        # 약 80초: out/diagnostics_v0_2.json (12절)
 python3 scripts/aiyagari_table2_v0_2.py    # 약 20초: out/aiyagari_table2_v0_2.json (7절)
@@ -92,6 +96,7 @@ python3 scripts/repro_F1_v0_2.py           # SSJ 코드만 사용: out/repro_F1_
 python3 scripts/repro_F2_v0_2.py           # SSJ 코드만 사용: out/repro_F2_v0_2.json, out/F2_HU_T300_v0_2.npz
 python3 scripts/repro_F3_v0_1.py           # v0.3, SSJ 코드만 사용: hetinput 미분 (14절)
 python3 scripts/repro_F3_hetblock_v0_1.py  # v0.3, SSJ 코드만 사용: HetBlock.jacobian 의 hetinput·hetoutput
+python3 scripts/mutation_v0_3_0.py --v03-ref <커밋> --design ii iii   # 약 18분: 오류 주입 재실행 (v0.3.0)
 ```
 
 - 모든 진입점에서 스레드를 1개로 제한합니다(`OMP_NUM_THREADS=1` 등).
@@ -111,9 +116,12 @@ hank_limits/
   metrics.py      오차 척도, 수렴 차수, 절대·상대 혼합 허용치
   suite.py        표준 설정 (tests 와 스크립트가 공유)
   spec.py         v0.3: V 검사에 쓰는 문서화된 명세 값
-tests/            test_t1 ... test_t6, test_diagnostics_v0_2, test_v0_3_checks (v0.3)
+tests/            test_t1 ... test_t6, test_diagnostics_v0_2, test_v0_3_checks (v0.3),
+                  test_v0_3_0_checker (v0.3.0: 가짜 공급자로 검사기 시험)
 scripts/          convergence_report.py, diagnostics_v0_2.py, aiyagari_table2_v0_2.py,
-                  repro_F1_v0_2.py, repro_F2_v0_2.py, a1_markov_checks_v0_2.py (설계 노트용, 13절)
+                  repro_F1_v0_2.py, repro_F2_v0_2.py, repro_F3_*.py, a1_markov_checks_v0_2.py (설계 노트용, 13절),
+                  mutation_v0_1.py, mutation_v0_2.py, mutation_v0_3_0.py (오류 주입 실행기), thresholds_v0_3_0.py,
+                  rerun_v0_3_0_compare.py
 out/              JSON, PNG, tables_v0_2/*.csv, pytest 출력
 ```
 
@@ -360,7 +368,7 @@ Euler 오차는 단위 없는(unit-free) c_impl/c − 1 이고, c(e', ·) 는 �
 | `check_aiyagari` | `f(sd, rho)` | `r, rho_disc`, 선택 `diag` (잔차) |
 | `check_ikc`, `check_differencing` | `f(T, shocks)` | `J`, `ss`, `irfs` |
 
-v0.3: 공급자는 선택 필드 `ss_detail`, `J_A`, `policy`, `irfs[label]['drshock']` 도 보고할 수 있습니다(`hank_limits/interface.py`). V 검사는 이 값들로 정상상태 잔차, 소득 정규화, 명세 고정을 계산하고 `spec=` 로 받은 값과 비교합니다(이 세트는 `hank_limits/spec.py` 를 넘깁니다. 다른 보정이면 그 보정의 값을 넘기십시오). 필드가 없으면 해당 검사를 skip 하고, 이유를 `v0_3` → `skipped` 에 남깁니다.
+v0.3.0: 공급자는 선택 필드 `ss_detail`, `J_A`, `J_C`, `ge_target`, `policy`, `irfs[label]` 의 `dC`·`dB`·`drshock` 도 보고할 수 있습니다. `hank_limits/interface.py` 에 공급자별로 검사가 읽는 모든 필드와, 선택 필드마다 쓰이는 V 수량을 적었습니다. V 검사는 이 값들로 정상상태 잔차, 소득 정규화, 명세 고정을 계산해 `spec=` 로 받은 값과 비교하고(이 세트는 `hank_limits/spec.py` 를 넘깁니다. 다른 보정이면 그 보정의 값을 넘기십시오), 공급자가 실제로 푼 외생 경로를 요청한 경로와 대조합니다. V 수량은 자기 식에 필요한 필드로만 계산하므로, 필드가 없으면 그 수량만 빠지고 이유는 `v0_3` → `skipped` 에 남습니다. V 시험은 유한하지 않거나 음수이거나 임계값을 넘는 값이 하나라도 있으면 실패하고, 실패 없이 값이 빠져 있으면 incomplete 로 skip 하며, 공급자가 그 시험의 수량을 하나도 보고하지 않으면 이유와 함께 skip 합니다(`checks.v03_verdict`). T3 에서는 풀이가 청산을 부과한 시장을 `ge_target` 으로 보고하십시오(`'asset_mkt'` 또는 `'goods_mkt'`). 각 검사는 요청한 경로와 실험의 사본을 공급자에게 넘기고, 비교는 따로 보존한 자기 사본으로 합니다.
 
 권장 사항: T1·T4 는 단일 유형 가계 블록 단위 시험으로, T2 는 유형 수를 일반화한 형태로, T5·T6 은 자신의 일반균형 풀이기의 회귀 시험으로 쓰십시오. 숫자 허용치는 이 보정의 값이므로 자신의 보정에 맞춰 다시 정하십시오. 시점 규약이나 단위가 다르면 대부분 eps = 0 정확도 시험(T1, 1e-9 수준)에서 바로 드러납니다.
 
@@ -368,7 +376,7 @@ v0.3: 공급자는 선택 필드 `ss_detail`, `J_A`, `policy`, `irfs[label]['drs
 
 ## 11. pytest 출력 요약 (actual pytest output)
 
-전체 출력은 `out/pytest_output_v0_2_1.txt` 에 있습니다.
+아래는 기록한 그대로 둔 v0.2.1 의 출력(41 passed, 2 xfailed)이고, 전체 출력은 `out/pytest_output_v0_2_1.txt` 에 있습니다. T1–T6, D 시험과 그 결과는 그 뒤로 같습니다. 현재 판 v0.3.0 의 출력(114 passed, 4 xfailed: 이 시험들, V 검사, 검사기 회귀 시험)은 `out/pytest_output_v0_3_0.txt` 에 있습니다.
 
 ```
 tests/test_t5_ikc.py::test_ikc_identity_ssj_solver_rule_long_horizon XFAIL
