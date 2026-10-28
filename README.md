@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/1426447298.svg)](https://doi.org/10.5281/zenodo.23489176)
 
-Cite all versions with the concept DOI [10.5281/zenodo.23489176](https://doi.org/10.5281/zenodo.23489176). The DOI of this release (v0.3.0) will be added here and in `CITATION.cff` after it is archived on Zenodo. The previous release, v0.2.1, is [10.5281/zenodo.23489177](https://doi.org/10.5281/zenodo.23489177). GitHub's "Cite this repository" button uses `CITATION.cff`.
+Cite all versions with the concept DOI [10.5281/zenodo.23489176](https://doi.org/10.5281/zenodo.23489176). This release, v0.3.0, is [10.5281/zenodo.23725219](https://doi.org/10.5281/zenodo.23725219). The previous release, v0.2.1, is [10.5281/zenodo.23489177](https://doi.org/10.5281/zenodo.23489177). GitHub's "Cite this repository" button uses `CITATION.cff`.
 
 This repository collects tests that a heterogeneous-agent New Keynesian (HANK) code should pass at limits with known answers and at exact aggregate identities. It is implemented on the public package `sequence-jacobian` (SSJ) 1.0.0. Each test reports not only pass/fail at one point but **the error as the limit parameter goes to its limit and the observed order of convergence**.
 
