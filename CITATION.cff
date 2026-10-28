@@ -9,6 +9,9 @@ identifiers:
   - type: doi
     value: 10.5281/zenodo.23489176
     description: "Concept DOI (all versions)"
+  - type: doi
+    value: 10.5281/zenodo.23725219
+    description: "Version DOI (v0.3.0)"
 type: software
 authors:
   - family-names: "Han"
