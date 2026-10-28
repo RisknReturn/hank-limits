@@ -1,9 +1,9 @@
 ============================= test session starts ==============================
-platform linux -- Python 3.13.16, pytest-9.1.1, pluggy-1.7.0 -- /usr/bin/python3
-rootdir: /home/user/hank-limits
+platform linux -- Python 3.13.16, pytest-9.1.1, pluggy-1.7.0 -- /home/claude/hl-venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/claude/hank-limits
 configfile: pytest.ini
 testpaths: tests
-plugins: anyio-4.15.1
 collecting ... collected 118 items
 
 tests/test_diagnostics_v0_2.py::test_inverse_iteration_report[audit_t4] PASSED [  0%]
@@ -130,4 +130,4 @@ XFAIL tests/test_t5_ikc.py::test_ikc_identity_ssj_solver_rule_long_horizon - Fin
 XFAIL tests/test_t5_ikc.py::test_ikc_identity_with_mismatched_options - Finding F1 (SSJ 1.0.0): HetBlock linear impulses recompute Jacobians despite supplied Js (own options, default one-sided h=1e-4); with two-sided Js the r-shock IKC holds only to ~1e-4.
 XFAIL tests/test_v0_3_checks.py::test_v6a_f3_hetinput_two_sided - Finding F3 (SSJ 1.0.0): DifferentiableCombinedExtendedFunction.diff defaults to twosided=False instead of None, so the stored setting is ignored when the caller omits it. V6a: HetBlock differentiates hetinputs one-sided although it asks for two-sided differences.
 XFAIL tests/test_v0_3_checks.py::test_v6b_f3_hetoutput_two_sided - Finding F3 (SSJ 1.0.0): DifferentiableCombinedExtendedFunction.diff defaults to twosided=False instead of None, so the stored setting is ignored when the caller omits it. V6b: hetoutputs are differentiated one-sided even with jacobian(..., twosided=True).
-================== 114 passed, 4 xfailed in 70.04s (0:01:10) ===================
+================== 114 passed, 4 xfailed in 91.76s (0:01:31) ===================

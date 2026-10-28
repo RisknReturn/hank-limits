@@ -25,6 +25,9 @@ abstract: >-
   solve, steady-state market-clearing and budget residuals, income normalisation, the documented specification along
   equilibrium paths, and the solved exogenous paths against the requested ones), with a verdict that missing or
   non-finite values cannot hide, and mutation tests of the suite on hand-made and independently generated errors.
+  A numerical audit before the release found no negative mass in the stationary solver and no effect of its
+  absolute value or weight clip on the results; it led to one change, a fixed backward-iteration seed in the
+  permanent-income calibration.
   Reference implementation on sequence-jacobian 1.0.0, with minimal reproductions of three observations about that
   library (F1, F2, F3). Developed with extensive assistance
   from Claude Opus 5.5 (Anthropic) and reviewed with GPT 6.1 Sol (OpenAI); the author directed and reviewed

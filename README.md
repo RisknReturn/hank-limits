@@ -9,7 +9,6 @@ This repository collects tests that a heterogeneous-agent New Keynesian (HANK) c
 - Licence: MIT (`LICENSE`). Archived on Zenodo (concept DOI [10.5281/zenodo.23489176](https://doi.org/10.5281/zenodo.23489176)). **Not peer reviewed.**
 - Model-independent check functions (`hank_limits/checks.py`) are separated from the SSJ reference implementation (`hank_limits/models.py`), so the checks can be reused as a validation harness for other HANK codes.
 - **What this suite does and does not show.** A pass is numerical evidence that a specific, limited statement holds in this implementation. It is not a statistical significance test, and it does not certify the predictive performance of HANK models or the accuracy of every HANK code.
-- Korean version of this README: `README_ko.md`.
 
 ### Changes v0.1 → v0.2 (review R4 by GPT 6.1 Sol; see section 17)
 
@@ -38,12 +37,13 @@ Plan and pre-registration: `docs/CHECKS_PLAN_v0_3.md`. Changes after the pre-rel
 | V4 | Specification pins against the documented values in `hank_limits/spec.py` (not read from `models.py`): reported parameters, the Aiyagari Euler equation at the documented β and EIS, and the fiscal rule, government budget, real-rate rule and goods market along the T5 paths. v0.3.0: the solved exogenous paths are compared with the requested ones (`exog_G`, `exog_r`, `exog_rshock`), and the real-rate rule uses the requested rate shock. |
 | V5 | `test_rank_benchmark_is_ricardian` now holds only the closed-form RA assertion; the HA assertion is `test_ha_multiplier_exceeds_one`. |
 | V6 | F3 pins (strict xfail, SSJ code only), in the same form as the F1 and F2 pins. v0.3.0: two tests, V6a (hetinputs differentiated one-sided) and V6b (hetoutputs one-sided even with `twosided=True`), so that an upstream fix of one part shows as XPASS of that test only. |
-| Providers | New **optional** fields `ss_detail`, `J_A`, `J_C`, `ge_target`, `policy` and `irfs[...]` `dC`, `dB`, `drshock`; `hank_limits/interface.py` lists, per provider, every field the checks read and whether it is required or optional. Each V quantity is computed from the fields of its own equation; a missing field leaves that quantity missing, with the reason recorded. No computation in `models.py` or `core.py` changed; the Werning provider gained an optional argument `ge_target` whose default is the previous behaviour. In the baseline runs of the mutation reports (four in v0.2, two in the v0.3.0 re-run), the 276 summary numbers of the existing checks were exactly equal to those of v0.1 run B0. |
+| Providers | New **optional** fields `ss_detail`, `J_A`, `J_C`, `ge_target`, `policy` and `irfs[...]` `dC`, `dB`, `drshock`; `hank_limits/interface.py` lists, per provider, every field the checks read and whether it is required or optional. Each V quantity is computed from the fields of its own equation; a missing field leaves that quantity missing, with the reason recorded. For the V checks no computation in `models.py` or `core.py` changed; the Werning provider gained an optional argument `ge_target` whose default is the previous behaviour. In the baseline runs of the mutation reports (four in v0.2, two in the v0.3.0 re-run), the 276 summary numbers of the existing checks were exactly equal to those of v0.1 run B0. Those runs predate the calibration-seed change below. |
 | Verdict | v0.3.0. A V test fails if any value is non-finite, negative or not below its threshold, whatever else is missing. Without a failure, it is skipped as **incomplete** (never passed) if expected values are missing, and skipped with the reason if the provider reports none of its quantities. The check declares the expected values per setting, income type and requested shock (`res['v0_3']` → `status`; `checks.v03_verdict`). |
 | Review | Pre-release review of 2026-10-22 (no P0 or P1 findings): the verdict above (R1); one field convention in documentation and code, with fields per equation and T3 β read from `ss_detail` (R2); solved against requested exogenous paths (R3); V1 judged on the reported GE target (R4); V6 split. Regression tests of the checker with fake providers: `tests/test_v0_3_0_checker.py`. Design, predictions, thresholds and re-run: `docs/CHECKS_v0_3_0_AMENDMENT.md`. Pre-merge check of 2026-10-23: each check now keeps its own copy of what it requests and gives the provider another, so a provider that changes its arguments in place cannot change the comparison (amendment, section 11). |
 | T4, T6 | Two clarifications from mutation testing v0.1: T4's error-detection value lies in its diagnostics (sections 7 and 9); the T6 matrix identity is a linear-algebra check. |
+| Calibration seed | Numerical audit of 2026-10-28 (`docs/NUMERICAL_AUDIT_v0_3_0.md`). The PIH calibration (T1, and the savers of T2) reused the backward-iteration seed of the previous root-search trial, so the calibrated steady state depended on the search path, and T2's displayed IRF error depended on the root bracket (1.05e-3 or 1.03e-3). Each trial and the final recomputation now start from the same cold seed (`models.pih_household`). This is the one computational change in v0.3.0. Displayed results: the T2 IRF error moves from 1.05e-3 to 1.04e-3 at eps = 0.0125 and from 3.46e-3 to 3.45e-3 at eps = 0.025, with its grid study (section 5); two T1 diagnostics in section 12 change in the last digit; the T1 asset-target residual falls from 5.7e-8 to 7.1e-11. The other displayed T1–T6 values are unchanged. The audit found no negative inverse-iteration mass and no effect of the absolute value or the weight clip on any displayed result (section 12). |
 
-Full pytest run with v0.3.0: **114 passed, 4 xfailed** (F1, F2, V6a, V6b). The 114 passed are 77 tests of groups T1–T6, D and V and the 37 checker regression tests. Output: `out/pytest_output_v0_3_0.txt`.
+Full pytest run with v0.3.0, after the calibration-seed change: **114 passed, 4 xfailed** (F1, F2, V6a, V6b). The 114 passed are 77 tests of groups T1–T6, D and V and the 37 checker regression tests. Output: `out/pytest_output_v0_3_0.txt`.
 
 Mutation testing v0.2 (`docs/MUTATION_v0_2.md`): on 20 mutants generated by a separate agent without knowledge of the new checks, the v0.2.1 suite caught 14 and the v0.3 suite 19; neither suite alarmed on the 3 controls. Both missed N20, an error in a diagnostic that no test asserts tightly. On the 25 v0.1 mutants the v0.3 suite catches all 25, but those checks were designed after the v0.1 results, so that is not an independent result.
 
@@ -60,7 +60,7 @@ The error metric is the **relative max-entry error** `max|x − ref| / max|ref|`
 | Test | Statement (scope) | Limit parameter | Error at the tightest setting | Observed order (theory) | Status |
 |---|---|---|---|---|---|
 | T1 PIH household-block limit | HA household Jacobians dC/dY, dC/dr → permanent-income closed form (partial equilibrium) | income risk eps → 0 (β recalibrated along the path) | dC/dY 9.5e-4, dC/dr 4.0e-4 (eps = 0.0125); 1.7e-9 at eps = 0 | 1.95 / 2.03 (2) | pass |
-| T2 TANK benchmark, imposed incidence | aggregate iMPC = λχ I + (1−λχ) M_RA; GE output = (1−λ)/(1−λχ) × RANK | eps → 0 (both types) | aggregate iMPC 8.0e-5, IRF (χ = 1.5) 1.05e-3 | savers 1.95, IRF 1.79 (2) | pass |
+| T2 TANK benchmark, imposed incidence | aggregate iMPC = λχ I + (1−λχ) M_RA; GE output = (1−λ)/(1−λχ) × RANK | eps → 0 (both types) | aggregate iMPC 8.0e-5, IRF (χ = 1.5) 1.04e-3 | savers 1.95, IRF 1.79 (2) | pass |
 | T3 Werning vanishing liquidity | with proportional income, the output response to a real-rate path = RANK; generalised Euler relation when income elasticities vary | borrowing limit b → 0 | proportional 4.3e-4; countercyclical 6.0e-4 (deviation 0.319, closed form 0.320) | 0.99 / 0.99 (1) | pass |
 | T4 Aiyagari steady state | r → 1/β − 1 (idiosyncratic risk → 0); monotone in risk size and persistence in this calibration (regression check) | log-income sd eps → 0 | gap 6.2e-5 (eps = 0.025) | 1.93 (2) | pass |
 | T5 IKC consistency | SSJ general equilibrium dY = (I − M)^{-1} dC_partial (consistency test built from the same block Jacobians) | identity (T = 100, 200, 300) | refined solve 9.8e-12; SSJ default solve 5.9e-7 | n/a | pass + 2 expected failures (F1, F2) |
@@ -70,7 +70,7 @@ The error metric is the **relative max-entry error** `max|x − ref| / max|ref|`
 
 **Status of the tolerances.** Test tolerances are **regression-check thresholds for this calibration**. They are not a conformance specification requiring other implementations to show the same slopes or the same 1e-10 threshold.
 
-Full pytest run of v0.2.1, for which this summary was written: **41 passed, 2 xfailed, about 65–75 s** (section 11). The T1–T6 results above are unchanged in v0.3.0, whose full run gives 114 passed, 4 xfailed, about 75 s (`out/pytest_output_v0_3_0.txt`). Report script about 110 s, diagnostics script about 80 s.
+Full pytest run of v0.2.1, for which this summary was written: **41 passed, 2 xfailed, about 65–75 s** (section 11). The T1–T6 results above are those of v0.3.0; the only displayed change from v0.2.1 is T2's IRF error, 1.05e-3 → 1.04e-3, from the calibration-seed change (section 12). The v0.3.0 full run gives 114 passed, 4 xfailed, about 90 s (`out/pytest_output_v0_3_0.txt`). Report script about 110–160 s, diagnostics script about 80–110 s.
 
 ### Key findings
 
@@ -209,10 +209,10 @@ The same holds at eps = 0.1 (`out/diagnostics_v0_2.json` C). Terminal-horizon ef
 | type H: M_H vs I | 0.596 | 0.342 | 3.9e-13 | 1.7e-13 | 3.9e-13 |
 | type S: M_S vs M_RA | 0.275 | 7.29e-2 | 1.85e-2 | 4.76e-3 | **1.26e-3** |
 | aggregate iMPC (χ = 1) vs λ I + (1−λ) M_RA | 0.556 | 0.320 | 1.18e-3 | 3.03e-4 | **8.02e-5** |
-| GE IRF vs (1−λ)/(1−λχ) × RANK (χ = 1.5) | 0.131 | 5.44e-2 | 1.24e-2 | 3.46e-3 | **1.05e-3** |
+| GE IRF vs (1−λ)/(1−λχ) × RANK (χ = 1.5) | 0.131 | 5.44e-2 | 1.24e-2 | 3.45e-3 | **1.04e-3** |
 | HA amplification (χ = 1.5 / χ = 1) | 1.150 | 1.209 | 1.27273 | 1.27273 | 1.27273 |
 
-At χ = 1.5 the difference between λχ M_H + (1−λχ) M_S and λχ I + (1−λχ) M_RA is 4.3e-5 at eps = 0.0125 (`err_Magg_lamchi_vs_TANK_chi1.5` in `out/tables_v0_2/`). Type H becomes exactly hand-to-mouth once eps falls below a finite threshold. Grid convergence (eps = 0.0125 IRF): 2400 points 1.50e-3, 4800 points 1.05e-3, 9600 points 8.70e-4.
+At χ = 1.5 the difference between λχ M_H + (1−λχ) M_S and λχ I + (1−λχ) M_RA is 4.3e-5 at eps = 0.0125 (`err_Magg_lamchi_vs_TANK_chi1.5` in `out/tables_v0_2/`). Type H becomes exactly hand-to-mouth once eps falls below a finite threshold. Grid convergence (eps = 0.0125 IRF): 2400 points 1.49e-3, 4800 points 1.04e-3, 9600 points 8.65e-4. Before the v0.3.0 calibration-seed change these were 1.50e-3, 1.05e-3 and 8.70e-4, and the eps = 0.025 IRF error 3.46e-3 (section 12).
 
 **Known limitations.** χ is a reduced form. With zero net bond supply the wealth-effect term in dC/dr is not tested here (it is tested in T1). Fitting a slope to the aggregate iMPC alone is not meaningful, so only neighbour orders are reported.
 
@@ -398,20 +398,23 @@ XFAIL tests/test_t5_ikc.py::test_ikc_identity_with_mismatched_options - Finding 
 
 ---
 
-## 12. FastHetBlock distribution audit (v0.2)
+## 12. FastHetBlock distribution audit (v0.2; values as of v0.3.0)
 
 `scripts/diagnostics_v0_2.py` part A, `out/diagnostics_v0_2.json`. Baseline is the default setting (τ = 1e-10, at most 20 sweeps, 5 polishing steps).
 
 | Model (mixing speed) | inverse iterations | negative mass | L1 residual | change in mean assets for τ 1e-12 to 1e-6 | SSJ forward iteration, tol 1e-10: iterations / mean-asset difference | tol 1e-12 |
 |---|---|---|---|---|---|---|
-| T1 PIH eps = 0.1 (slow) | 3 | 0 | 1.2e-16 | ≤ 1.1e-14 | 37,910 / **1.7e-3** | 54,590 / 1.7e-5 |
-| T1 PIH eps = 0.0125 (very slow) | 4 | 0 | 1.0e-16 | ≤ 1.1e-12 | does not stop within 600,000 | — |
+| T1 PIH eps = 0.1 (slow) | 3 | 0 | 1.2e-16 | ≤ 1.2e-14 | 37,910 / **1.7e-3** | 54,590 / 1.7e-5 |
+| T1 PIH eps = 0.0125 (very slow) | 4 | 0 | 9.3e-17 | ≤ 5.8e-13 | does not stop within 600,000 | — |
 | T4 sd = 0.2 (fast) | 3 | 0 | 1.8e-16 | ≤ 1.1e-15 | 3,010 / 1.1e-6 | 3,730 / 1.1e-8 |
 | T5 fiscal HANK (fast) | 3 | 0 | 2.0e-16 | ≤ 2.2e-16 | 210 / 4.9e-9 | 250 / 7.5e-11 |
 
 - With a single inverse iteration and no polishing, mean assets at T1 eps = 0.0125 differ by 6.8e-4; with 2 iterations by 2.0e-8; with 3 by 5.4e-13. The default iterates until the stopping rule (1e-15) is met.
 - SSJ's forward iteration converges to the inverse-iteration solution as the tolerance is tightened. SSJ's stopping rule (difference between successive iterates) is not an accuracy bound under slow mixing, so care is needed when β is calibrated to an asset target in near-RA calibrations. This is an observation about usage, not a report of an SSJ defect.
 - A replica loop that follows SSJ's stopping rule and counts iterations was checked to agree with SSJ entry by entry.
+- In v0.2.1 the two T1 rows read ≤ 1.1e-14, and 1.0e-16 and ≤ 1.1e-12; they changed with the calibration seed below.
+
+**Numerical audit of v0.3.0 (2026-10-28, `docs/NUMERICAL_AUDIT_v0_3_0.md`).** FastHetBlock's direct stationary solver clips policies to the asset grid when it builds the lottery transition and normalises the absolute value of the sparse inverse-iteration iterate. In the audit no inverse iterate had negative mass, and replacing the absolute value with zero truncation or signed normalisation, or removing the weight clip, left every displayed result and test outcome unchanged. The audit also found that the PIH calibration reused the previous trial's backward-iteration seed, so T2's displayed error and fitted order depended on the root-finding bracket in the third significant digit. Since v0.3.0 every calibration trial and the final recomputation start from the same cold seed, which removed this dependence in the audit's comparison of two brackets. Trial states visited during root finding can carry substantial off-grid mass, so trial and final diagnostics, and clipped-chain and SSJ forward residuals, are reported separately. None of these checks is a general error bound.
 
 ---
 
@@ -466,7 +469,7 @@ Reports to the SSJ maintainers: F1 [shade-econ/sequence-jacobian#39](https://git
 
 ## 15. Figures and tables
 
-- Figures: `out/t1_rank_limit.png` … `out/t6_decomposition.png` (log axes, limit to the right).
+- Figures: `out/t1_rank_limit.png` … `out/t6_decomposition.png` (log axes, limit to the right). They were drawn before the v0.3.0 calibration-seed change and were not redrawn: the values they plot changed by less than 1% (T2) or 1e-7 (T1), below plot resolution. The JSON and CSV files below were regenerated with the v0.3.0 code.
 - Machine-readable tables: `out/tables_v0_2/suite_results_long_v0_2.csv` (columns: test, limit_param, limit_value, n_a, a_max, fd_h, fd_twosided, window, horizon_T, solver, metric, value), `out/convergence_v0_2.json`, `out/diagnostics_v0_2.json`, `out/aiyagari_table2_v0_2.json`, `out/repro_F1_v0_2.json`, `out/repro_F2_v0_2.json`.
 
 ## 16. References

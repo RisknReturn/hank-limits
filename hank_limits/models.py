@@ -119,6 +119,9 @@ def pih_household(eps, **kw):
         kappa = 0.0
     else:
         def resid(lk):
+            # cold backward seed at every trial: the warm start made the calibrated state
+            # depend on the root-search path (v0.3.0 numerical audit)
+            blk.__dict__.pop('_va_cache', None)
             ss = blk.steady_state({**calib, 'beta': beta_ra * (1 - np.exp(lk))}, **SS_OPTS)
             return ss['A'] - A_t
         lo, hi = np.log(1e-3 * eps ** 2), np.log(10 * eps ** 2)
@@ -129,6 +132,7 @@ def pih_household(eps, **kw):
         lk = brentq(resid, lo, hi, xtol=1e-13, rtol=1e-13)
         kappa = float(np.exp(lk))
     calib['beta'] = beta_ra * (1 - kappa)
+    blk.__dict__.pop('_va_cache', None)  # final state from the same cold seed
     ss = blk.steady_state(calib, **SS_OPTS)
     diag = dict(blk._ss_diag)
     diag['mass_constrained'] = mass_at_constraint(ss, a_grid, blk.name)
@@ -292,7 +296,8 @@ def werning_model(b, cyclical=False, **kw):
     f = lambda r: blk.steady_state({**calib, 'r': r}, **opts)['A'] / b
     r_star = p['r_star']
     # A(r) < 0 for r < r* (nobody wants to save); r(b) - r* is O(b) (about 2.1 b here), so
-    # [r* - b/2, r* + 5b] brackets the root while keeping trial savers inside the b-scaled grid
+    # [r* - b/2, r* + 5b] brackets the root; some trial states can have off-grid policies,
+    # so trial-state and final-state diagnostics must be distinguished (v0.3.0 numerical audit)
     lo, hi = r_star - 0.5 * b, min(r_star + 5 * b, 1 / prim['beta'] - 1 - 1e-6)
     r_ss = brentq(f, lo, hi, xtol=1e-15)
     model = sj.create_model([blk, huggett_clearing], name='Huggett-vanishing-liquidity')
