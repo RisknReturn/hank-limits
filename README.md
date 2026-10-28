@@ -491,7 +491,7 @@ Reports to the SSJ maintainers: F1 [shade-econ/sequence-jacobian#39](https://git
 
 ## 17. AI usage disclosure
 
-Generative AI tools were used extensively in this project. Claude (Anthropic; Claude Opus 5.5, October 2026) wrote most of the code, tests, numerical experiments and documentation, and derived and checked the closed-form benchmarks, working from the author's instructions. GPT 6.1 Sol (OpenAI) reviewed the code and documents in two rounds; the changes made in response are listed at the top of this README. The author chose the research questions and the tests to include, directed and reviewed the work, decided which findings to report and how to word them, and takes full responsibility for the accuracy, originality and licensing of all submitted material.
+Generative AI tools were used extensively in this project. Claude (Anthropic; Claude Opus 5.5, October 2026) wrote most of the code, tests, numerical experiments and documentation, and derived and checked the closed-form benchmarks, working from the author's instructions. GPT 6.1 Sol (OpenAI) reviewed the code, documentation and numerical results at several stages, including pre-release reviews and audits; the changes made in response are recorded at the top of this README and in `docs/`. The author chose the research questions and the tests to include, directed and reviewed the work, decided which findings to report and how to word them, and takes full responsibility for the accuracy, originality and licensing of all submitted material.
 
 ## 18. Licence
 
